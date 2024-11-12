@@ -31,7 +31,7 @@ function getImageUrl(imageName) {
         <div class="card-back">
           <p>{{ props.fullProject.description }}</p>
           <RouterLink
-            :to="{ name: props.fullProject.ruteName, params: { id: props.fullProject.id } }"
+            :to="{ name: props.fullProject.routeName, params: { id: props.fullProject.id } }"
             class="btn-link"
           >
             Ver Aplicación
@@ -140,7 +140,7 @@ section .row {
   transform-style: preserve-3d;
   transition: ease all 2.3s;
   z-index: 3;
-  font-size: 3rem;
+  font-size: 2rem;
   transform: translateZ(0px);
 }
 .cover span {

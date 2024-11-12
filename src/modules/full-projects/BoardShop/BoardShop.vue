@@ -22,11 +22,18 @@ const saveCartToLocalStorage = () => {
   localStorage.setItem('cart', JSON.stringify(cart.value))
 }
 
-watch(cart, saveCartToLocalStorage, { deep: true })
+watch(
+  cart,
+  () => {
+    saveCartToLocalStorage()
+  },
+  {
+    deep: true
+  }
+)
 
 const toggleCart = () => {
   cartVisible.value = !cartVisible.value
-  console.log('oulsado')
 }
 
 const addCart = (table) => {

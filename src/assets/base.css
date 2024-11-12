@@ -31,7 +31,7 @@ html {
 body {
   min-height: 100vh;
   font-family: var(--primary-font);
-  background-color: #f1f1f1f1;
+  background-color: #fff;
   font-size: 1.6rem;
   line-height: 1.6;
   color: #231557;

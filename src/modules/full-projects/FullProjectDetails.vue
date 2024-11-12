@@ -2,9 +2,11 @@
 import { computed } from 'vue'
 import { useRoute } from 'vue-router'
 import BoardShop from './BoardShop/BoardShop.vue'
+import InventoryManager from './InventoryManager/InventoryManager.vue'
 
 const utilitiesComponent = {
-  1: BoardShop
+  1: BoardShop,
+  2: InventoryManager
 }
 
 const route = useRoute()

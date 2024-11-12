@@ -13,6 +13,7 @@
     "format": "prettier --write src/"
   },
   "dependencies": {
+    "@formkit/drag-and-drop": "^0.2.5",
     "@vitest/coverage-v8": "^1.6.0",
     "pinia": "^2.1.7",
     "swiper": "^11.1.14",

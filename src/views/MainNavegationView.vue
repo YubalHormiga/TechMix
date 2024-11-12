@@ -19,7 +19,7 @@ const isActive = (item) => {
 </script>
 
 <template>
-  <nav class="flex items-center justify-between flex-wrap p-2 bg-[#f8f8fa]">
+  <nav class="flex items-center justify-between flex-wrap p-2 bg-[#fff]">
     <h1 class="animate-charcter">TechMix</h1>
 
     <!-- Botón hamburguesa solo se muestra en pantallas pequeñas -->
