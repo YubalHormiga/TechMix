@@ -61,7 +61,7 @@ section .row {
   height: 400px;
   width: 100%;
   margin: 10px 0;
-  transition: ease all 2.3s;
+  transition: ease all 1.3s;
   perspective: 1200px;
 }
 
@@ -98,7 +98,7 @@ section .row {
   height: 100%;
   width: 100%;
   transform-style: preserve-3d;
-  transition: ease all 2.3s;
+  transition: ease all 1.3s;
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
@@ -114,7 +114,7 @@ section .row {
   right: 20px;
   bottom: 20px;
   z-index: 2;
-  transition: ease all 2.3s;
+  transition: ease all 1.3s;
   transform-style: preserve-3d;
   transform: translateZ(0px);
 }
@@ -138,7 +138,7 @@ section .row {
   left: 13%;
   color: white;
   transform-style: preserve-3d;
-  transition: ease all 2.3s;
+  transition: ease all 1.3s;
   z-index: 3;
   font-size: 2rem;
   transform: translateZ(0px);
@@ -150,7 +150,7 @@ section .row {
   right: 60px;
   color: white;
   transform-style: preserve-3d;
-  transition: ease all 2.3s;
+  transition: ease all 1.3s;
   z-index: 3;
   font-size: 2em;
   transform: translateZ(0px);
@@ -162,7 +162,7 @@ section .row {
   width: 100%;
   background: #0b0f08;
   transform-style: preserve-3d;
-  transition: ease all 2.3s;
+  transition: ease all 1.3s;
   transform: translateZ(-1px);
   display: flex;
   flex-direction: column; /* Para alinear verticalmente */
@@ -174,7 +174,7 @@ section .row {
 .card-back p {
   transform-style: preserve-3d;
   transition:
-    ease transform 2.3s,
+    ease transform 1.3s,
     ease background 0.5s;
   transform: translateZ(-1px) rotateY(-180deg);
   background: transparent;
@@ -189,7 +189,7 @@ section .row {
 .btn-link {
   transform-style: preserve-3d;
   transition:
-    ease transform 2.3s,
+    ease transform 1.3s,
     ease background 0.5s;
   transform: translateZ(-1px) rotateY(-180deg);
   background: transparent;

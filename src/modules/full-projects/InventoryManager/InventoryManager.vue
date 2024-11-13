@@ -12,8 +12,8 @@ const [parent, components] = useDragAndDrop([
   { name: 'section_1', component: markRaw(ProductForm) },
   { name: 'section_2', component: markRaw(InventoryDashboard) },
   { name: 'section_3', component: markRaw(LowStockAlert) },
-  { name: 'section_4', component: markRaw(ProductList) },
-  { name: 'section_5', component: markRaw(ProductDetails) }
+  { name: 'section_4', component: markRaw(ProductDetails) },
+  { name: 'section_5', component: markRaw(ProductList) }
 ])
 </script>
 
@@ -24,13 +24,14 @@ const [parent, components] = useDragAndDrop([
     </div>
   </header>
 
-  <main>
+  <main class="p-4">
     <!-- Contenedor de la cuadrícula con auto-flow -->
     <div ref="parent" class="custom-grid-container">
       <div
         v-for="component in components"
         :key="component.name"
-        :class="`draggable-item ${component.name}`"
+        :class="` ${component.name}`"
+        class="rounded-lg border border-[#d8dfdf] shadow-2xl cursor-move"
       >
         <component :is="component.component" />
       </div>
@@ -39,20 +40,14 @@ const [parent, components] = useDragAndDrop([
 </template>
 
 <style scoped>
-.custom-grid-container {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-auto-flow: dense;
-  gap: 1rem;
-}
-
-.draggable-item {
-  padding: 1rem;
-  margin: 0.5rem;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  background-color: white;
-  cursor: move;
+@media (min-width: 720px) {
+  /* Cuadrícula visible solo en pantallas grandes */
+  .custom-grid-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-flow: dense;
+    gap: 1rem;
+  }
 }
 
 /* Ajustes de tamaño específicos para cada componente */

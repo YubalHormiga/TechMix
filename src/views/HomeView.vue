@@ -19,17 +19,8 @@
       <p class="text-gray-700">
         En esta sección, presentaré <strong>proyectos completos</strong> que muestran aplicaciones
         más robustas y funcionales. Estos proyectos se centrarán en resolver problemas del mundo
-        real y proporcionarán una experiencia más completa al usuario. Algunos ejemplos de proyectos
-        que tengo planeados son:
+        real y proporcionarán una experiencia más completa al usuario.
       </p>
-      <ul class="list-disc list-inside text-gray-700">
-        <li>
-          <strong>Tienda en Línea:</strong> Una aplicación de comercio electrónico con carrito de
-          compras, gestión de productos y pagos.
-        </li>
-        <li></li>
-        <li></li>
-      </ul>
     </section>
 
     <section class="mb-6">
@@ -37,17 +28,8 @@
       <p class="text-gray-700">
         En esta sección, se incluirán diversas <strong>utilidades</strong> que abordarán problemas
         comunes en la programación. Estas herramientas están diseñadas para ser prácticas y fáciles
-        de usar, permitiendo a los usuarios llevar a cabo tareas específicas con eficiencia. Algunas
-        de las utilidades que implementaré son:
+        de usar, permitiendo a los usuarios llevar a cabo tareas específicas con eficiencia.
       </p>
-      <ul class="list-disc list-inside text-gray-700">
-        <li>
-          <strong>Generador de Contraseñas:</strong> Una herramienta que permite crear contraseñas
-          aleatorias y seguras.
-        </li>
-        <li></li>
-        <li></li>
-      </ul>
     </section>
 
     <section class="mb-6">

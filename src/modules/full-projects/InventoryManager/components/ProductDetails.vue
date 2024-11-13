@@ -1,6 +1,6 @@
 <script setup></script>
 
 <template>
-  <h1>ProductDetails</h1>
+  <h1>Product dEtails</h1>
 </template>
 <style scoped></style>
