@@ -1,8 +1,8 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, inject } from 'vue'
 
 const passwordBox = ref('')
-
+const toast = inject('toast')
 const createPassword = () => {
   passwordBox.value = crypto.randomUUID()
 }
@@ -10,7 +10,11 @@ const createPassword = () => {
 const copyPassword = async () => {
   try {
     await navigator.clipboard.writeText(passwordBox.value)
-    alert('Contraseña copiada al portapapeles')
+
+    toast.open({
+      message: 'Contraseña copiada al portapapeles',
+      type: 'info'
+    })
   } catch (err) {
     console.error('Error al copiar la contraseña: ', err)
   }

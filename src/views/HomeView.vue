@@ -19,7 +19,9 @@
       <p class="text-gray-700">
         En esta sección, presentaré <strong>proyectos completos</strong> que muestran aplicaciones
         más robustas y funcionales. Estos proyectos se centrarán en resolver problemas del mundo
-        real y proporcionarán una experiencia más completa al usuario.
+        real y proporcionarán una experiencia más completa al usuario. Aquí podré presentar
+        desarrollos más complejos, que van más allá de simples demostraciones, y en los que se
+        pondrán a prueba mis habilidades y conocimientos en programación a gran escala.
       </p>
     </section>
 
@@ -28,7 +30,9 @@
       <p class="text-gray-700">
         En esta sección, se incluirán diversas <strong>utilidades</strong> que abordarán problemas
         comunes en la programación. Estas herramientas están diseñadas para ser prácticas y fáciles
-        de usar, permitiendo a los usuarios llevar a cabo tareas específicas con eficiencia.
+        de usar, permitiendo a los usuarios llevar a cabo tareas específicas con eficiencia. Al
+        igual que las pruebas técnicas, estas utilidades también permitirán mejorar la productividad
+        en tareas diarias de programación.
       </p>
     </section>
 

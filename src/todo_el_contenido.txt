@@ -1,0 +1,2594 @@
+
+
+--- File: App.vue ---
+
+<script setup>
+import { RouterView } from 'vue-router'
+import MainNavegation from './views/MainNavegationView.vue'
+import FooterView from './views/FooterView.vue'
+</script>
+
+<template>
+  <div class="app-container">
+    <MainNavegation />
+    <div class="content-container">
+      <RouterView />
+    </div>
+    <FooterView />
+  </div>
+</template>
+
+<style scoped>
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.content-container {
+  flex: 1;
+}
+
+footer {
+  width: 100%;
+}
+
+.animate-charcter {
+  text-transform: uppercase;
+  background-image: linear-gradient(-225deg, #231557 0%, #44107a 29%, #ff1361 67%, #fff800 100%);
+  background-size: auto auto;
+  background-clip: border-box;
+  background-size: 200% auto;
+  color: #fff;
+  background-clip: text;
+  /* text-fill-color: transparent; */
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: textclip 2s linear infinite;
+  display: inline-block;
+  font-size: 6rem;
+}
+
+@keyframes textclip {
+  to {
+    background-position: 200% center;
+  }
+}
+</style>
+
+
+
+--- File: assets\base.css ---
+(Skipped (non-matching extension))
+
+
+--- File: assets\hamburguer.css ---
+(Skipped (non-matching extension))
+
+
+--- File: assets\images\TechMixLogo-Photoroom.png ---
+(Skipped (non-matching extension))
+
+
+--- File: assets\images\TechMixLogo.svg ---
+(Skipped (non-matching extension))
+
+
+--- File: assets\main.css ---
+(Skipped (non-matching extension))
+
+
+--- File: components\ProjectCard.vue ---
+
+<script setup>
+import { defineProps } from 'vue'
+
+// Define props
+const props = defineProps({
+  fullProject: {
+    type: Object,
+    required: true
+  },
+  imageBasePath: {
+    type: String,
+    required: true
+  }
+})
+
+// Función para obtener la URL de la imagen
+function getImageUrl(imageName) {
+  return `${props.imageBasePath}/${imageName}`
+}
+</script>
+
+<template>
+  <section>
+    <div class="card">
+      <div
+        class="cover item"
+        :style="{ backgroundImage: `url(${getImageUrl(props.fullProject.image)})` }"
+      >
+        <h1>{{ props.fullProject.name }}</h1>
+        <span class="price">Project {{ props.fullProject.id }}</span>
+        <div class="card-back">
+          <p>{{ props.fullProject.description }}</p>
+          <RouterLink
+            :to="{ name: props.fullProject.routeName, params: { id: props.fullProject.id } }"
+            class="btn-link"
+          >
+            Ver Aplicación
+          </RouterLink>
+          <a :href="props.fullProject.github" target="_blank" class="text-lg mt-1 btn-link">
+            GitHub
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</template>
+
+<style scoped>
+section {
+  width: 25rem;
+  margin: 0 auto;
+}
+
+section .row {
+  align-items: center;
+  height: 100vh;
+}
+
+.card {
+  position: relative;
+  height: 400px;
+  width: 100%;
+  margin: 10px 0;
+  transition: ease all 1.3s;
+  perspective: 1200px;
+}
+
+.card:hover .cover {
+  transform: rotateX(0deg) rotateY(-180deg);
+}
+
+.card:hover .cover:before {
+  transform: translateZ(30px);
+}
+
+.card:hover .cover:after {
+  background-color: black;
+}
+
+.card:hover .cover h1 {
+  transform: translateZ(100px);
+}
+
+.card:hover .cover span {
+  transform: translateZ(100px);
+}
+
+.card:hover .cover p {
+  transform: translateZ(-60px) rotateY(-180deg);
+}
+
+.card:hover .cover .btn-link {
+  transform: translateZ(-60px) rotateY(-180deg);
+}
+
+.cover {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  transform-style: preserve-3d;
+  transition: ease all 1.3s;
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+
+.cover:before {
+  content: '';
+  position: absolute;
+  border: 5px solid rgba(255, 255, 255, 0.5);
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.3);
+  top: 20px;
+  left: 20px;
+  right: 20px;
+  bottom: 20px;
+  z-index: 2;
+  transition: ease all 1.3s;
+  transform-style: preserve-3d;
+  transform: translateZ(0px);
+}
+
+.cover:after {
+  content: '';
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  z-index: 2;
+  transition: ease all 1.3s;
+  background: rgba(0, 0, 0, 0.4);
+}
+
+.cover h1 {
+  font-weight: 600;
+  position: absolute;
+  bottom: 55px;
+  left: 13%;
+  color: white;
+  transform-style: preserve-3d;
+  transition: ease all 1.3s;
+  z-index: 3;
+  font-size: 2rem;
+  transform: translateZ(0px);
+}
+.cover span {
+  font-weight: 600;
+  position: absolute;
+  top: 55px;
+  right: 60px;
+  color: white;
+  transform-style: preserve-3d;
+  transition: ease all 1.3s;
+  z-index: 3;
+  font-size: 2em;
+  transform: translateZ(0px);
+}
+
+.card-back {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background: #0b0f08;
+  transform-style: preserve-3d;
+  transition: ease all 1.3s;
+  transform: translateZ(-1px);
+  display: flex;
+  flex-direction: column; /* Para alinear verticalmente */
+  align-items: center;
+  justify-content: center;
+  padding: 20px; /* Añade padding para que el contenido no quede pegado a los bordes */
+  text-align: justify; /* Para centrar el texto dentro del contenedor */
+}
+.card-back p {
+  transform-style: preserve-3d;
+  transition:
+    ease transform 1.3s,
+    ease background 0.5s;
+  transform: translateZ(-1px) rotateY(-180deg);
+  background: transparent;
+  font-weight: 200;
+  font-size: small;
+  color: white;
+  padding: 4px 8px;
+  outline: none;
+  text-decoration: none;
+}
+
+.btn-link {
+  transform-style: preserve-3d;
+  transition:
+    ease transform 1.3s,
+    ease background 0.5s;
+  transform: translateZ(-1px) rotateY(-180deg);
+  background: transparent;
+  border: 1px solid white;
+  font-weight: 200;
+  font-size: small;
+  color: white;
+  padding: 4px 8px;
+  outline: none;
+  text-decoration: none;
+  margin-top: 5px;
+}
+
+.btn-link:hover {
+  background-color: rgb(255, 255, 255);
+  color: #0b0f08;
+}
+</style>
+
+
+
+--- File: components\ProjectDescription.vue ---
+
+
+
+<template>
+  <div class="m-5 p-6 bg-[#ad8bea] rounded-lg  shadow-lg hover:shadow-xl transition-shadow duration-300">
+    <p class="text-lg  text-[#ffffff] text-center"><slot></slot></p>
+  </div>
+</template>
+
+
+
+
+
+
+--- File: components\ProjectLinks.vue ---
+
+<script setup>
+const props = defineProps({
+  githubLink: {
+    type: String,
+    required: true
+  },
+  vitestLink: {
+    type: String,
+    required: true
+  }
+})
+</script>
+
+<template>
+  <div class="mt-4 text-[#fafdfe] ">
+    <p class="text-lg">
+      Puedes ver el código fuente del proyecto en:
+      <a :href="props.githubLink" target="_blank" class="text-[#030b0f] underline"> GitHub</a>.
+    </p>
+    <p class="text-lg">
+      Para ver el testing en:
+      <a :href="props.vitestLink" target="_blank" class="text-[#030b0f] underline">
+        Testing con Vitest</a
+      >.
+    </p>
+  </div>
+</template>
+
+<style scoped>
+/* Estilos opcionales para el componente */
+</style>
+
+
+
+--- File: components\UnderConstruction .vue ---
+
+<template>
+  <div class="flex items-center justify-center min-h-screen bg-gray-100">
+    <div class="text-center p-8 bg-white shadow-lg rounded-lg">
+      <span class="text-4xl text-yellow-500">🚧</span>
+      <h2 class="mt-4 text-2xl font-semibold text-gray-800">Esta sección está en construcción</h2>
+      <p class="mt-2 text-gray-600">Estamos trabajando en ello, vuelve pronto.</p>
+    </div>
+  </div>
+</template>
+
+
+
+--- File: data\full-projets\full-project.js ---
+
+export const fullProjects = [
+  {
+    id: 1,
+    name: 'BoardShop',
+    routeName: 'full-projects-detail',
+    image: 'image_01.webp',
+    github: 'https://github.com/YubalHormiga/TechMix/tree/main/src/modules/full-projects/BoardShop',
+    description:
+      'BoardShop es una tienda en línea de skateboards construida con **Vue.js**. El proyecto permite a los usuarios explorar una variedad de tablas de skate, agregarlas a su carrito de compras y gestionar su compra en un flujo sencillo. El carrito se guarda en el almacenamiento local del navegador, permitiendo que los productos persistan incluso después de recargar la página. Además, incluye un carrusel de imágenes interactivo'
+  },
+  {
+    id: 2,
+    name: 'InventoryManager',
+    routeName: 'full-projects-detail',
+    image: 'image_02.webp',
+    github: 'https://github.com/TuUsuario/InventoryManager',
+    description:
+      'InventoryManager es una app para gestionar el inventario de tu negocio. Agrega, edita y elimina productos fácilmente. Registra detalles como cantidad, proveedor y precio. Filtra productos y recibe alertas de bajo stock. Visualiza tus datos con gráficos intuitivos gracias a Chart.js. Guarda tu información de forma segura en Local Storage. Perfecta para pequeñas tiendas y almacenes.'
+  }
+]
+
+
+
+--- File: data\utilities\Utilities.js ---
+
+export const technicalTests = [
+  {
+    id: 1,
+    name: 'Random Password',
+    routeName: 'utility-detail',
+    image: 'password.jpg',
+    github:
+      'https://github.com/YubalHormiga/TechMix/tree/main/src/modules/utilities/GenerateRandomPassword',
+    description:
+      'Este proyecto permite al usuario generar contraseñas aleatorias utilizando la API de crypto. Incluye funcionalidad para copiar la contraseña generada al portapapeles para mayor comodidad. El diseño se centra en una interfaz limpia con un botón para crear la contraseña y una opción para copiarla, todo dentro de un diseño de tarjeta estructurada.'
+  }
+]
+
+
+
+--- File: main.js ---
+
+import './assets/main.css'
+
+import { createApp } from 'vue'
+import { createPinia } from 'pinia'
+import { useToast } from 'vue-toast-notification'
+import VueChartkick from 'vue-chartkick'
+
+import App from './App.vue'
+import router from './router'
+import 'vue-toast-notification/dist/theme-sugar.css'
+import 'chartkick/chart.js'
+
+const $toast = useToast({
+  position: 'top',
+  timeout: 2500,
+  closeOnClick: true,
+  pauseOnFocusLoss: true,
+  pauseOnHover: true,
+  draggable: true,
+  draggablePercent: 0.6,
+  showCloseButtonOnHover: false,
+  hideProgressBar: true,
+  closeButton: 'button',
+  icon: true,
+  rtl: false
+})
+
+const app = createApp(App)
+app.provide('toast', $toast)
+app.use(VueChartkick)
+app.use(createPinia())
+app.use(router)
+
+app.mount('#app')
+
+
+
+--- File: modules\full-projects\BoardShop\assets\icons\add.svg ---
+(Skipped (non-matching extension))
+
+
+--- File: modules\full-projects\BoardShop\assets\icons\cart.png ---
+(Skipped (non-matching extension))
+
+
+--- File: modules\full-projects\BoardShop\assets\icons\cart.webp ---
+(Skipped (non-matching extension))
+
+
+--- File: modules\full-projects\BoardShop\assets\icons\subtract.svg ---
+(Skipped (non-matching extension))
+
+
+--- File: modules\full-projects\BoardShop\assets\images\carrito.png ---
+(Skipped (non-matching extension))
+
+
+--- File: modules\full-projects\BoardShop\assets\images\image_01.webp ---
+(Skipped (non-matching extension))
+
+
+--- File: modules\full-projects\BoardShop\assets\images\image_02.webp ---
+(Skipped (non-matching extension))
+
+
+--- File: modules\full-projects\BoardShop\assets\images\image_03.webp ---
+(Skipped (non-matching extension))
+
+
+--- File: modules\full-projects\BoardShop\assets\images\image_04.webp ---
+(Skipped (non-matching extension))
+
+
+--- File: modules\full-projects\BoardShop\assets\images\image_05.webp ---
+(Skipped (non-matching extension))
+
+
+--- File: modules\full-projects\BoardShop\assets\images\skate_01.jpg ---
+(Skipped (non-matching extension))
+
+
+--- File: modules\full-projects\BoardShop\assets\images\skate_02.jpg ---
+(Skipped (non-matching extension))
+
+
+--- File: modules\full-projects\BoardShop\assets\images\skate_03.jpg ---
+(Skipped (non-matching extension))
+
+
+--- File: modules\full-projects\BoardShop\assets\images\skate_04.jpg ---
+(Skipped (non-matching extension))
+
+
+--- File: modules\full-projects\BoardShop\assets\images\skate_05.jpg ---
+(Skipped (non-matching extension))
+
+
+--- File: modules\full-projects\BoardShop\assets\images\skate_06.jpg ---
+(Skipped (non-matching extension))
+
+
+--- File: modules\full-projects\BoardShop\assets\images\skate_07.jpg ---
+(Skipped (non-matching extension))
+
+
+--- File: modules\full-projects\BoardShop\assets\images\skate_08.jpg ---
+(Skipped (non-matching extension))
+
+
+--- File: modules\full-projects\BoardShop\assets\images\skate_09.jpg ---
+(Skipped (non-matching extension))
+
+
+--- File: modules\full-projects\BoardShop\assets\images\skate_10.jpg ---
+(Skipped (non-matching extension))
+
+
+--- File: modules\full-projects\BoardShop\assets\images\skate_11.jpg ---
+(Skipped (non-matching extension))
+
+
+--- File: modules\full-projects\BoardShop\assets\images\skate_12.jpg ---
+(Skipped (non-matching extension))
+
+
+--- File: modules\full-projects\BoardShop\assets\vectors\delete.svg ---
+(Skipped (non-matching extension))
+
+
+--- File: modules\full-projects\BoardShop\BoardShop.vue ---
+
+<!-- App.vue -->
+<script setup>
+import { computed, onMounted, ref, watch, inject } from 'vue'
+import { db } from './data/skates.js'
+import ShoppingCart from './components/ShoppingCart.vue'
+import ProductCard from './components/ProductCard.vue'
+import AutoCarrousel from './components/AutoCarrousel.vue'
+
+const toast = inject('toast')
+const tables = ref([])
+const cart = ref([])
+const cartVisible = ref(false)
+
+onMounted(() => {
+  const cartStorage = localStorage.getItem('cart')
+  if (cartStorage) {
+    cart.value = JSON.parse(cartStorage)
+  }
+  tables.value = db
+})
+
+const saveCartToLocalStorage = () => {
+  localStorage.setItem('cart', JSON.stringify(cart.value))
+}
+
+watch(
+  cart,
+  () => {
+    saveCartToLocalStorage()
+  },
+  {
+    deep: true
+  }
+)
+
+const toggleCart = () => {
+  cartVisible.value = !cartVisible.value
+}
+
+const addCart = (table) => {
+  const tableExist = cart.value.findIndex((product) => product.id === table.id)
+  if (tableExist >= 0) {
+    cart.value[tableExist].amount++
+    toast.open({
+      message: 'Cantidad del artículo incrementada en el carrito',
+      type: 'success'
+    })
+  } else {
+    cart.value.push({ ...table, amount: 1 })
+    toast.open({
+      message: 'Artículo añadido al carrito',
+      type: 'success'
+    })
+  }
+}
+
+const incrementAmount = (table) => {
+  const tableExists = cart.value.findIndex((product) => product.id === table.id)
+  if (cart.value[tableExists].amount >= 5) return
+  cart.value[tableExists].amount++
+}
+
+const decrementAmount = (table) => {
+  const tableExists = cart.value.findIndex((product) => product.id === table.id)
+  if (cart.value[tableExists].amount <= 1) return
+  cart.value[tableExists].amount--
+}
+
+const deleteTable = (id) => {
+  cart.value = cart.value.filter((product) => product.id !== id)
+}
+
+const totalCart = computed(() =>
+  cart.value.reduce((acc, product) => acc + product.amount * product.price, 0)
+)
+
+const totalItemsInCart = computed(() => cart.value.reduce((acc, item) => acc + item.amount, 0))
+</script>
+
+<template>
+  <header class="w-full relative overflow-hidden">
+    <div class="flex gap-10">
+      <h1 class="font-black text-5xl p-5 text-fuchsia-600">
+        Board<span class="text-pink-500">Shop</span>
+      </h1>
+      <div @click="toggleCart" class="cursor-pointer h-20 w-20 relative">
+        <img src="../BoardShop/assets/icons/cart.webp" alt="carrito" />
+        <span
+          v-if="totalItemsInCart > 0"
+          class="absolute top-0 right-4 bg-red-500 text-white text-base opacity-90 rounded-full w-10 h-10 flex items-center justify-center"
+        >
+          {{ totalItemsInCart }}
+        </span>
+      </div>
+    </div>
+  </header>
+
+  <section class="flex relative w-full">
+    <div
+      :class="{ 'w-2/3': cartVisible, 'w-full': !cartVisible }"
+      class="transition-all duration-500 ease-in-out flex-grow"
+    >
+      <AutoCarrousel />
+      <div class="flex flex-wrap justify-center items-center gap-3 mt-4">
+        <div v-for="table in tables" :key="table.id">
+          <ProductCard :table="table" @add-cart="addCart" />
+        </div>
+      </div>
+    </div>
+
+    <div
+      v-if="cartVisible"
+      class="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50"
+    >
+      <div class="bg-white rounded-lg shadow-lg p-4 w-11/12 max-w-xl max-h-[90%] overflow-y-auto">
+        <div class="flex justify-center flex-col items-center">
+          <template v-if="cart.length === 0">
+            <p class="text-center text-lg font-semibold mb-4">¡Tu carrito está vacío!</p>
+            <p class="text-center mb-4">Explora nuestros productos y añade algo al carrito.</p>
+            <button
+              @click="toggleCart"
+              type="button"
+              class="bg-indigo-600 text-white font-medium px-4 py-2 rounded hover:bg-indigo-700"
+            >
+              Continuar Comprando
+            </button>
+          </template>
+          <template v-else>
+            <ShoppingCart
+              :cart="cart"
+              :totalCart="totalCart"
+              @toggle-cart="toggleCart"
+              @increment-amount="incrementAmount"
+              @decrement-amount="decrementAmount"
+              @delete-table="deleteTable"
+            />
+          </template>
+        </div>
+      </div>
+    </div>
+  </section>
+</template>
+
+<style scoped></style>
+
+
+
+--- File: modules\full-projects\BoardShop\components\AutoCarrousel.vue ---
+
+<script setup>
+import { Swiper, SwiperSlide } from 'swiper/vue'
+// Import Swiper styles
+import 'swiper/css'
+import 'swiper/css/pagination'
+import 'swiper/css/navigation'
+// import required modules
+import { Autoplay, Pagination } from 'swiper/modules'
+
+const modules = [Autoplay, Pagination]
+</script>
+
+<template>
+  <swiper
+    :spaceBetween="30"
+    :centeredSlides="true"
+    :autoplay="{
+      delay: 4000,
+      disableOnInteraction: false
+    }"
+    :pagination="{
+      clickable: true
+    }"
+    :modules="modules"
+    class="max-h-[45rem] w-full"
+  >
+    <swiper-slide>
+      <img src="../assets/images/image_01.webp" alt="image skate" class="w-full min-h-[30rem]" />
+    </swiper-slide>
+    <swiper-slide>
+      <img src="../assets/images/image_02.webp" alt="image skate" class="w-full min-h-[30rem]" />
+    </swiper-slide>
+    <swiper-slide>
+      <img src="../assets/images/image_03.webp" alt="image skate" class="w-full min-h-[30rem]" />
+    </swiper-slide>
+    <swiper-slide>
+      <img src="../assets/images/image_04.webp" alt="image skate" class="w-full min-h-[30rem]" />
+    </swiper-slide>
+    <swiper-slide>
+      <img src="../assets/images/image_05.webp" alt="image skate" class="w-full min-h-[30rem]" />
+    </swiper-slide>
+  </swiper>
+</template>
+
+<style scoped>
+/* Añade estilos si es necesario */
+</style>
+
+
+
+--- File: modules\full-projects\BoardShop\components\ProductCard.vue ---
+
+<script setup>
+const props = defineProps({
+  table: {
+    type: Object,
+    required: true
+  }
+})
+
+defineEmits(['add-cart'])
+
+// Función para obtener la URL de la imagen en tiempo de ejecución
+function getImageUrl(imageName) {
+  return new URL(`../assets/images/${imageName}.jpg`, import.meta.url).href
+}
+</script>
+
+<template>
+  <div class="max-w-[720px] mx-auto">
+    <!-- Centering wrapper -->
+    <div
+      class="relative flex flex-col text-gray-900 bg-white shadow-md bg-clip-border rounded-xl w-96"
+    >
+      <div
+        class="relative mx-4 mt-4 overflow-hidden text-gray-900 bg-white bg-clip-border rounded-xl h-96"
+      >
+        <img
+          :src="getImageUrl(props.table.image)"
+          alt="card-image"
+          class="object-cover w-full h-full"
+        />
+      </div>
+      <div class="p-6">
+        <div class="flex items-center justify-between mb-2">
+          <p
+            class="block font-sans text-base antialiased font-medium leading-relaxed text-blue-gray-900"
+          >
+            {{ props.table.name }}
+          </p>
+          <p
+            class="block font-sans text-base antialiased font-medium leading-relaxed text-blue-gray-900"
+          >
+            {{ props.table.price }} EUR
+          </p>
+        </div>
+        <p
+          class="block font-sans text-sm antialiased font-normal leading-normal text-gray-900 opacity-75"
+        >
+          {{ props.table.description }}
+        </p>
+      </div>
+      <div class="p-6 pt-0">
+        <button
+          @click="$emit('add-cart', props.table)"
+          class="align-middle select-none font-sans font-bold text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-lg py-3 px-6 rounded-lg shadow-gray-900/10 hover:shadow-gray-900/20 focus:opacity-[0.85] active:opacity-[0.85] active:shadow-none block w-full bg-blue-gray-900/10 text-blue-gray-900 shadow-none hover:scale-105 hover:shadow-none focus:scale-105 focus:shadow-none active:scale-100"
+          type="button"
+        >
+          Add to Cart
+        </button>
+      </div>
+    </div>
+  </div>
+</template>
+<style scoped></style>
+
+
+
+--- File: modules\full-projects\BoardShop\components\ShoppingCart.vue ---
+
+<script setup>
+const props = defineProps({
+  cart: {
+    type: Object,
+    required: true
+  },
+  totalCart: {
+    type: Number,
+    required: true
+  }
+})
+defineEmits(['increment-amount', 'decrement-amount', 'delete-table', 'toggle-cart'])
+</script>
+
+<template>
+  <div class="relative">
+    <button
+      type="button"
+      @click="$emit('toggle-cart')"
+      class="absolute -top-3 -right-3 p-3 text-gray-400 hover:text-gray-500"
+    >
+      <svg
+        class="h-9 w-9"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="1.5"
+        stroke="currentColor"
+        aria-hidden="true"
+      >
+        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+      </svg>
+    </button>
+  </div>
+  <div class="flex flex-col mt-2">
+    <div class="table_component rounded-lg">
+      <table>
+        <thead class="text-center">
+          <tr>
+            <th>Producto</th>
+            <th>Nombre</th>
+            <th>Precio</th>
+            <th>Cantidad</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody class="text-center">
+          <tr v-for="table in props.cart" :key="table.id">
+            <td>
+              <img
+                :src="`/src/modules/full-projects/BoardShop/assets/images/${table.image}.jpg`"
+                alt="imagen"
+                class="table-image"
+              />
+            </td>
+            <td>{{ table.name }}</td>
+            <td>{{ table.price }} EUR</td>
+            <td class="f my-auto">
+              <button
+                class="cursor-pointer"
+                @click="$emit('increment-amount', table)"
+                type="button"
+              >
+                <img src="../assets//icons/add.svg" alt="" />
+              </button>
+              <p>{{ table.amount }}</p>
+              <button
+                class="cursor-pointer"
+                @click="$emit('decrement-amount', table)"
+                type="button"
+              >
+                <img src="../assets//icons/subtract.svg" alt="" />
+              </button>
+            </td>
+            <td>
+              <button @click="$emit('delete-table', table.id)" class="h-10 w-10">
+                <img class="" src="../assets/vectors/delete.svg" alt="trash can" />
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="border-t border-gray-200 px-4 py-6 sm:px-6">
+    <div class="flex justify-between text-base font-medium text-gray-900">
+      <p>Total</p>
+      <p>{{ totalCart }} EUR</p>
+    </div>
+    <p class="mt-0.5 text-sm text-gray-500">Envío e impuestos calculados al finalizar la compra.</p>
+    <div class="mt-6">
+      <a
+        href="#"
+        class="flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700"
+        >Finalizar compra</a
+      >
+    </div>
+    <div class="mt-6 flex justify-center text-center text-sm text-gray-500">
+      <p>
+        o
+        <button
+          @click="$emit('toggle-cart')"
+          type="button"
+          class="font-medium text-indigo-600 hover:text-indigo-500"
+        >
+          Continue Comprando
+          <span aria-hidden="true"> &rarr;</span>
+        </button>
+      </p>
+    </div>
+  </div>
+</template>
+
+<style scoped>
+.table_component {
+  overflow-x: hidden; /* Evita scroll horizontal */
+  width: 100%; /* Usa el 100% del ancho */
+  font-size: small;
+}
+
+.table_component table {
+  width: 100%; /* Asegura que la tabla use todo el ancho disponible */
+  border-collapse: collapse;
+  text-align: center;
+}
+
+.table_component th,
+.table_component td {
+  padding: 10px;
+}
+</style>
+
+
+
+--- File: modules\full-projects\BoardShop\data\skates.js ---
+
+export const db = [
+  {
+    id: 1,
+    name: 'Thunderbolt',
+    image: 'skate_01',
+    description:
+      'Una tabla ágil con un diseño aerodinámico ideal para trucos rápidos y maniobras técnicas.',
+    price: 159
+  },
+  {
+    id: 2,
+    name: 'Street King',
+    image: 'skate_02',
+    description:
+      'Perfecta para dominar las calles, ofrece durabilidad y un excelente pop para saltos.',
+    price: 179
+  },
+  {
+    id: 3,
+    name: 'Wave Rider',
+    image: 'skate_03',
+    description:
+      'Diseñada para surfear el asfalto con fluidez, perfecta para paseos largos y trucos suaves.',
+    price: 169
+  },
+  {
+    id: 4,
+    name: 'Grind Master',
+    image: 'skate_04',
+    description:
+      'Construida para los rieles y bordillos, esta tabla es robusta y resistente a impactos.',
+    price: 189
+  },
+  {
+    id: 5,
+    name: 'Airborne',
+    image: 'skate_05',
+    description:
+      'Una tabla ligera que te permitirá alcanzar grandes alturas con facilidad y estabilidad.',
+    price: 199
+  },
+  {
+    id: 6,
+    name: 'Shadow Walker',
+    image: 'skate_06',
+    description: 'Diseño oscuro y elegante, perfecta para quienes buscan estilo y rendimiento.',
+    price: 189
+  },
+  {
+    id: 7,
+    name: 'Lightning Strike',
+    image: 'skate_07',
+    description: 'Tabla de alta velocidad con gran respuesta en curvas y giros rápidos.',
+    price: 179
+  },
+  {
+    id: 8,
+    name: 'Breeze',
+    image: 'skate_08',
+    description: 'Perfecta para paseos relajados, con una forma más amplia para mayor control.',
+    price: 169
+  },
+  {
+    id: 9,
+    name: 'Rocket',
+    image: 'skate_09',
+    description:
+      'Rendimiento explosivo para los más atrevidos, diseñada para velocidad y precisión.',
+    price: 199
+  },
+  {
+    id: 10,
+    name: 'Skyline',
+    image: 'skate_10',
+    description: 'Ideal para el skatepark, con un diseño que maximiza el control en los aires.',
+    price: 189
+  },
+  {
+    id: 11,
+    name: 'Urban Legend',
+    image: 'skate_11',
+    description: 'La mejor opción para conquistar el entorno urbano con estilo y resistencia.',
+    price: 179
+  },
+  {
+    id: 12,
+    name: 'Night Owl',
+    image: 'skate_12',
+    description:
+      'Hecha para los que prefieren patinar de noche, con un diseño que brilla en la oscuridad.',
+    price: 189
+  }
+]
+
+
+
+--- File: modules\full-projects\BoardShop\README.MD ---
+(Skipped (non-matching extension))
+
+
+--- File: modules\full-projects\BoardShop\todo_el_contenido.txt ---
+(Skipped (non-matching extension))
+
+
+--- File: modules\full-projects\FullProjectDetails.vue ---
+
+<script setup>
+import { computed } from 'vue'
+import { useRoute } from 'vue-router'
+import BoardShop from './BoardShop/BoardShop.vue'
+import InventoryManager from './InventoryManager/InventoryManager.vue'
+
+const utilitiesComponent = {
+  1: BoardShop,
+  2: InventoryManager
+}
+
+const route = useRoute()
+const projectId = computed(() => parseInt(route.params.id))
+
+const CurrentFullProjectComponent = computed(() => utilitiesComponent[projectId.value] || null)
+</script>
+
+<template>
+  <div>
+    <!-- Pasar la descripción al componente dinámico -->
+    <component :is="CurrentFullProjectComponent" />
+  </div>
+</template>
+
+<style scoped></style>
+
+
+
+--- File: modules\full-projects\FullProjectView.vue ---
+
+<script setup>
+import ProjectCard from '@/components/ProjectCard.vue'
+import { fullProjects } from '../../data/full-projets/full-project'
+
+const imageBasePath = '/images/full-projects'
+</script>
+
+<template>
+  <div class="flex gap-3 flex-wrap justify-center mt-3">
+    <div v-for="fullProject in fullProjects" :key="fullProject.id" class="router-link">
+      <ProjectCard :fullProject="fullProject" :imageBasePath="imageBasePath" />
+    </div>
+  </div>
+</template>
+
+
+
+--- File: modules\full-projects\InventoryManager\assets\icons\info-svgrepo-com.svg ---
+(Skipped (non-matching extension))
+
+
+--- File: modules\full-projects\InventoryManager\assets\images\header.webp ---
+(Skipped (non-matching extension))
+
+
+--- File: modules\full-projects\InventoryManager\assets\images\smartphone.png ---
+(Skipped (non-matching extension))
+
+
+--- File: modules\full-projects\InventoryManager\assets\images\tablet.png ---
+(Skipped (non-matching extension))
+
+
+--- File: modules\full-projects\InventoryManager\components\InventoryDashboard.vue ---
+
+<script setup>
+import { computed } from 'vue'
+import { ref } from 'vue'
+import { watch } from 'vue'
+
+const props = defineProps({
+  products: {
+    type: Array,
+    required: true
+  }
+})
+
+const chartData = ref(props.products)
+const totalQuantity = computed(() => {
+  return props.products.reduce((sum, product) => sum + product.quantity, 0)
+})
+
+// Crear los datos del gráfico con porcentajes
+const updateChartData = computed(() => {
+  return props.products.map((product) => [
+    product.category,
+    totalQuantity.value > 0
+      ? ((product.quantity / totalQuantity.value) * 100).toFixed(2) // Calcular el porcentaje
+      : 0
+  ])
+})
+watch(chartData, () => {
+  updateChartData()
+})
+</script>
+
+<template>
+  <pie-chart :data="updateChartData" suffix="%" :donut="true"></pie-chart>
+</template>
+
+<style scoped></style>
+
+
+
+--- File: modules\full-projects\InventoryManager\components\ProductDetails.vue ---
+
+<script setup>
+defineProps({
+  product: {
+    type: Object,
+    required: true
+  }
+})
+
+function getImageUrl(imageName) {
+  return new URL(`../assets/images/${imageName}.png`, import.meta.url).href
+}
+</script>
+
+<template>
+  <div class="h-[37rem] p-10">
+    <div v-if="product.name" class="flex flex-col items-center">
+      <div class="">
+        <img
+          :src="getImageUrl(product.image)"
+          :alt="product.name"
+          class="w-60 h-60 object-cover bg-no-repeat"
+        />
+      </div>
+
+      <div class="w p-4">
+        <div class="flex flex-col">
+          <p class="text-lg text-gray-700 opacity-75">
+            <span class="font-bold">ID:</span> {{ product.id }}
+          </p>
+          <p class="text-lg text-gray-700 opacity-75">
+            <span class="font-bold">Producto:</span> {{ product.name }}
+          </p>
+        </div>
+        <p class="text-lg text-gray-700 opacity-75">
+          <span class="font-bold">Cantidad:</span> {{ product.quantity }} unidades
+        </p>
+        <p class="text-lg text-gray-700 opacity-75">
+          <span class="font-bold">Precio de Compra: </span>{{ product.purchasePrice }} EUR
+        </p>
+        <p class="text-lg text-gray-700 opacity-75">
+          <span class="font-bold">Precio de Venta:</span>{{ product.salePrice }} EUR
+        </p>
+        <p class="text-lg text-gray-700 opacity-75">
+          <span class="font-bold">Nivel Mínimo Stock:</span>{{ product.minStock }}
+        </p>
+        <p class="text-lg text-gray-700 opacity-75">
+          <span class="font-bold">Estado:</span> {{ product.status }}
+        </p>
+        <p class="text-lg text-gray-700 opacity-75">
+          <span class="font-bold">Descripción:</span> {{ product.description }}
+        </p>
+      </div>
+      <!-- Mostrar mensaje si no hay producto seleccionado -->
+    </div>
+    <div v-else class="text-center">
+      <p class="">No se ha seleccionado un producto</p>
+    </div>
+  </div>
+</template>
+
+
+
+--- File: modules\full-projects\InventoryManager\components\ProductForm.vue ---
+
+<script setup>
+import { onMounted, ref, reactive, computed } from 'vue'
+import { db } from '../data/products.js'
+
+const emit = defineEmits(['submitProduct'])
+const categories = ref(db)
+onMounted(() => {
+  categories
+})
+
+const product = reactive({
+  category: '',
+  name: '',
+  quantity: '',
+  purchasePrice: '',
+  salePrice: '',
+  entryDate: '',
+  minStock: '',
+  status: 'active',
+  id: null
+})
+
+const handleSubmit = () => {
+  emit('submitProduct', { ...product })
+}
+const handleCategoryChange = () => {
+  product.name = ''
+}
+
+const categoryItems = computed(() => {
+  const category = categories.value.find((cat) => cat.name === product.category)
+
+  return category ? category.items.map((item) => item.name) : []
+})
+</script>
+
+<template>
+  <div class="flex flex-col p-4 text-[#0b2a34]">
+    <div class="p-4 text-center font-bold uppercase">
+      <h2 class="text-[#527986]">Añade o modifica el Producto</h2>
+    </div>
+
+    <form class="flex flex-col gap-4" @submit.prevent="handleSubmit">
+      <div class="flex flex-col">
+        <label class="font-bold" for="sku">SKU (Stock Keeping Unit)</label>
+        <input v-model="product.sku" class="p-2" type="text" id="sku" placeholder="SKU" />
+      </div>
+
+      <div class="flex flex-col">
+        <label class="font-bold" for="category">Categoría del Producto</label>
+        <select v-model="product.category" @change="handleCategoryChange" class="p-2" id="category">
+          <option value="" disabled>Selecciona una categoría</option>
+          <option v-for="cat in categories" :key="cat.name" :value="cat.name">
+            {{ cat.name }}
+          </option>
+        </select>
+      </div>
+
+      <div v-if="product.category" class="flex flex-col">
+        <label class="font-bold" for="name">Producto</label>
+        <select v-model="product.name" class="p-2" id="name">
+          <option value="" disabled>Selecciona un producto</option>
+          <option v-for="item in categoryItems" :key="item" :value="item">{{ item }}</option>
+        </select>
+      </div>
+
+      <div class="flex flex-col">
+        <label class="font-bold" for="quantity">Cantidad del Producto</label>
+        <input
+          v-model="product.quantity"
+          class="border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md"
+          type="number"
+          id="quantity"
+          placeholder="Cantidad de Producto"
+        />
+      </div>
+
+      <div class="flex flex-col">
+        <label class="font-bold" for="purchasePrice">Precio de compra</label>
+        <input
+          v-model="product.purchasePrice"
+          class="p-2"
+          type="number"
+          id="purchasePrice"
+          placeholder="Precio de compra del Producto"
+        />
+      </div>
+
+      <div class="flex flex-col">
+        <label class="font-bold" for="salePrice">Precio de Venta</label>
+        <input
+          v-model="product.salePrice"
+          class="p-2"
+          type="number"
+          id="salePrice"
+          placeholder="Precio de venta del Producto"
+        />
+      </div>
+
+      <div class="flex flex-col">
+        <label class="font-bold" for="entryDate">Fecha de Entrada</label>
+        <input
+          v-model="product.entryDate"
+          class="p-2"
+          type="date"
+          id="entryDate"
+          placeholder="Fecha de entrada del Producto"
+        />
+      </div>
+
+      <div class="flex flex-col">
+        <label class="font-bold" for="minStock">Nivel mínimo en Stock</label>
+        <input
+          v-model="product.minStock"
+          class="p-2"
+          type="number"
+          id="minStock"
+          placeholder="Nivel mínimo en stock"
+        />
+      </div>
+
+      <div class="flex flex-col">
+        <label class="font-bold p-2">Estado de disponibilidad</label>
+        <div class="flex items-center p-2">
+          <input
+            type="radio"
+            id="status-active"
+            value="active"
+            v-model="product.status"
+            class="mr-2"
+          />
+          <label for="status-active" class="mr-4">Activo</label>
+
+          <input
+            type="radio"
+            id="status-inactive"
+            value="inactive"
+            v-model="product.status"
+            class="mr-2"
+          />
+          <label for="status-inactive">Inactivo</label>
+        </div>
+      </div>
+
+      <input
+        type="submit"
+        class="bg-[#42cdc7] rounded-md mt-8 p-2 w-full text-white uppercase font-bold hover:bg-[#42b5af] cursor-pointer transition-colors"
+        value="Registrar producto"
+      />
+    </form>
+  </div>
+</template>
+
+<style scoped></style>
+
+
+
+--- File: modules\full-projects\InventoryManager\components\ProductListView.vue ---
+
+<script setup>
+import { ref, computed, onMounted, inject, watch } from 'vue'
+import { db } from '../data/products.js'
+
+onMounted(() => {
+  categories
+})
+
+const toast = inject('toast')
+
+const categories = ref(db)
+const props = defineProps({
+  products: {
+    type: Array,
+    required: true
+  }
+})
+defineEmits(['selectedProduct'])
+const categorieSelected = ref('')
+const productSelected = ref('')
+
+const categoryItems = computed(() => {
+  const category = categories.value.find((cat) => cat.name === categorieSelected.value)
+  return category ? category.items.map((item) => item.name) : []
+})
+
+const productsToDisplay = computed(() => {
+  let filteredProducts = props.products
+
+  if (categorieSelected.value) {
+    filteredProducts = filteredProducts.filter(
+      (product) => product.category === categorieSelected.value
+    )
+  }
+
+  if (productSelected.value) {
+    filteredProducts = filteredProducts.filter((product) => product.name === productSelected.value)
+  }
+
+  return filteredProducts
+})
+
+const handleCategoryChange = () => {
+  productSelected.value = ''
+}
+
+watch(productsToDisplay, (newValue) => {
+  if (newValue.length === 0) {
+    toast.open({
+      message: 'No se encontraron productos.',
+      type: 'info'
+    })
+  }
+})
+</script>
+
+<template>
+  <div class="p-2">
+    <div class="flex flex-col">
+      <label class="font-bold" for="category">Categoría del Producto</label>
+      <select v-model="categorieSelected" @change="handleCategoryChange" class="p-2" id="category">
+        <option value="" disabled>Selecciona una categoría</option>
+        <option v-for="cat in categories" :key="cat.name" :value="cat.name">
+          {{ cat.name }}
+        </option>
+      </select>
+    </div>
+
+    <div class="flex flex-col">
+      <label class="font-bold" for="name">Producto</label>
+      <select v-model="productSelected" class="p-2" id="name">
+        <option value="" disabled>Selecciona un producto</option>
+        <option v-for="item in categoryItems" :key="item" :value="item">{{ item }}</option>
+      </select>
+    </div>
+
+    <div v-if="productsToDisplay.length > 0">
+      <div v-for="product in productsToDisplay" :key="product.id">
+        <div
+          class="flex items-center justify-between gap-4 p-4 mb-4 rounded-lg border border-[#d8dfdf] shadow-lg"
+        >
+          <div class="flex flex-col justify-between">
+            <div class="flex items-center gap-3">
+              <p class="font-bold">{{ product.name }}</p>
+              <button @click="$emit('selectedProduct', product.id)">
+                <img src="../assets//icons/info-svgrepo-com.svg" alt="inf" class="h-8" />
+              </button>
+            </div>
+            <p><span class="font-semibold">Cantidad:</span> {{ product.quantity }}</p>
+          </div>
+
+          <div class="flex flex-col justify-between text-center">
+            <p><span class="font-semibold">PreComp:</span> {{ product.purchasePrice }}</p>
+            <p><span class="font-semibold">PreVenta:</span> {{ product.salePrice }}</p>
+            <p><span class="font-semibold">MinStock:</span> {{ product.minStock }}</p>
+          </div>
+
+          <div class="flex flex-col justify-between text-center">
+            <p><span class="font-bold">Estado:</span> {{ product.status }}</p>
+          </div>
+
+          <div class="flex flex-col gap-2 justify-center">
+            <button type="button" class="p-2 bg-blue-500 text-white rounded">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                width="16"
+                height="16"
+                stroke-width="2"
+              >
+                <path d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1"></path>
+                <path
+                  d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z"
+                ></path>
+                <path d="M16 5l3 3"></path>
+              </svg>
+            </button>
+            <button type="button" class="p-2 bg-red-500 text-white rounded">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                width="16"
+                height="16"
+                stroke-width="2"
+              >
+                <path d="M4 7l16 0"></path>
+                <path d="M10 11l0 6"></path>
+                <path d="M14 11l0 6"></path>
+                <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12"></path>
+                <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3"></path>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<style scoped></style>
+
+
+
+--- File: modules\full-projects\InventoryManager\data\products.js ---
+
+export const db = [
+  {
+    name: 'Electrónica',
+    items: [
+      {
+        name: 'Smartphone',
+        image: 'smartphone',
+        description: 'Un teléfono inteligente con pantalla táctil y múltiples funciones.'
+      },
+      {
+        name: 'Tablet',
+        image: 'tablet',
+        description: 'Dispositivo portátil ideal para trabajo y entretenimiento.'
+      },
+      {
+        name: 'Laptop',
+        image: 'laptop',
+        description: 'Ordenador portátil ligero y de alto rendimiento.'
+      },
+      {
+        name: 'Auriculares',
+        image: 'auriculares',
+        description: 'Auriculares cómodos con sonido de alta calidad.'
+      },
+      {
+        name: 'Cargador USB',
+        image: 'cargador_usb',
+        description: 'Cargador compacto compatible con múltiples dispositivos USB.'
+      }
+    ]
+  },
+  {
+    name: 'Alimentos y Bebidas',
+    items: [
+      {
+        name: 'Agua Mineral',
+        image: 'agua_mineral',
+        description: 'Agua pura y refrescante para hidratarte.'
+      },
+      {
+        name: 'Snacks',
+        image: 'snacks',
+        description: 'Bocadillos ideales para disfrutar en cualquier momento.'
+      },
+      {
+        name: 'Café',
+        image: 'cafe',
+        description: 'Café molido de alta calidad para los amantes del café.'
+      },
+      {
+        name: 'Té',
+        image: 'te',
+        description: 'Té aromático perfecto para relajarte.'
+      },
+      {
+        name: 'Jugo',
+        image: 'jugo',
+        description: 'Jugo natural lleno de sabor y vitaminas.'
+      }
+    ]
+  },
+  {
+    name: 'Hogar y Cocina',
+    items: [
+      {
+        name: 'Platos',
+        image: 'platos',
+        description: 'Platos resistentes y elegantes para tu mesa.'
+      },
+      {
+        name: 'Vasos',
+        image: 'vasos',
+        description: 'Vasos de vidrio perfectos para cualquier bebida.'
+      },
+      {
+        name: 'Cubiertos',
+        image: 'cubiertos',
+        description: 'Cubiertos de acero inoxidable de alta calidad.'
+      },
+      {
+        name: 'Sartenes',
+        image: 'sartenes',
+        description: 'Sartenes antiadherentes ideales para cocinar sin esfuerzo.'
+      },
+      {
+        name: 'Cafetera',
+        image: 'cafetera',
+        description: 'Cafetera moderna para preparar café delicioso en casa.'
+      }
+    ]
+  },
+  {
+    name: 'Ropa y Accesorios',
+    items: [
+      {
+        name: 'Camiseta',
+        image: 'camiseta',
+        description: 'Camiseta de algodón cómoda y casual.'
+      },
+      {
+        name: 'Jeans',
+        image: 'jeans',
+        description: 'Jeans duraderos con un ajuste moderno.'
+      },
+      {
+        name: 'Gorra',
+        image: 'gorra',
+        description: 'Gorra ajustable con diseño elegante.'
+      },
+      {
+        name: 'Bufanda',
+        image: 'bufanda',
+        description: 'Bufanda suave y cálida para el invierno.'
+      },
+      {
+        name: 'Calcetines',
+        image: 'calcetines',
+        description: 'Calcetines cómodos y transpirables.'
+      }
+    ]
+  },
+  {
+    name: 'Limpieza',
+    items: [
+      {
+        name: 'Detergente',
+        image: 'detergente',
+        description: 'Detergente eficaz para ropa limpia y fresca.'
+      },
+      {
+        name: 'Escoba',
+        image: 'escoba',
+        description: 'Escoba resistente para barrer cualquier superficie.'
+      },
+      {
+        name: 'Desinfectante',
+        image: 'desinfectante',
+        description: 'Desinfectante poderoso para mantener tu hogar libre de gérmenes.'
+      },
+      {
+        name: 'Trapos',
+        image: 'trapos',
+        description: 'Trapos absorbentes ideales para limpieza general.'
+      },
+      {
+        name: 'Guantes',
+        image: 'guantes',
+        description: 'Guantes protectores para tareas de limpieza.'
+      }
+    ]
+  }
+]
+
+
+
+--- File: modules\full-projects\InventoryManager\InventoryManager.vue ---
+
+<script setup>
+import { markRaw, ref, reactive } from 'vue'
+import { useDragAndDrop } from '@formkit/drag-and-drop/vue'
+import InventoryDashboard from './components/InventoryDashboard.vue'
+import ProductForm from './components/ProductForm.vue'
+import ProductListView from './components/ProductListView.vue'
+import ProductDetails from './components/ProductDetails.vue'
+import { db } from './data/products'
+
+const products = ref([])
+const productState = reactive({})
+const submitProduct = (product) => {
+  const exist = products.value.findIndex((item) => item.id === product.id)
+  const selectedCategory = db.find((cat) => cat.name === product.category)
+  const selectedItem = selectedCategory?.items.find((item) => item.name === product.name)
+  if (exist >= 0) {
+    products.value[exist].quantity++
+  } else {
+    products.value.push({
+      ...product,
+      description: selectedItem ? selectedItem.description : 'Descripción no encontrada',
+      image: selectedItem ? selectedItem.image : 'Iamgen no encontrada',
+      id: crypto.randomUUID()
+    })
+  }
+}
+
+const selectedProduct = (id) => {
+  const product = products.value.find((item) => item.id === id) || {}
+  Object.assign(productState, product)
+}
+console.log('Producto seleccionado:', productState)
+const [parent, components] = useDragAndDrop([
+  {
+    name: 'section_1',
+    component: markRaw(ProductForm),
+    props: {},
+    emit: { submitProduct }
+  },
+  {
+    name: 'section_2',
+    component: markRaw(ProductListView),
+    props: { products: products.value },
+    emit: { selectedProduct }
+  },
+  {
+    name: 'section_3',
+    component: markRaw(InventoryDashboard),
+    props: { products: products.value }
+  },
+  {
+    name: 'section_4',
+    component: markRaw(ProductDetails),
+    props: { product: productState }
+  }
+])
+</script>
+
+<template>
+  <header>
+    <div class="mt-3">
+      <img class="w-full max-h-[40rem]" src="./assets/images/header.webp" alt="header image" />
+    </div>
+  </header>
+
+  <main class="p-4">
+    <div ref="parent" class="custom-grid-container">
+      <div
+        v-for="component in components"
+        :key="component.name"
+        :class="` ${component.name}`"
+        class="rounded-lg border border-[#d8dfdf] shadow-lg cursor-move"
+      >
+        <component :is="component.component" v-bind="component.props" v-on="component.emit || {}" />
+      </div>
+    </div>
+  </main>
+</template>
+
+<style scoped>
+@media (min-width: 720px) {
+  .custom-grid-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-flow: dense;
+    gap: 1rem;
+  }
+}
+
+.section_1 {
+  grid-column: span 1 / span 1;
+  grid-row: span 4;
+  max-height: 75rem;
+  overflow-y: auto;
+}
+.section_2 {
+  grid-column: span 1;
+  grid-row: span 4;
+  max-height: 75rem;
+  overflow-y: auto;
+}
+.section_3 {
+  grid-column: span 1;
+  grid-row: span 2;
+  height: 37rem;
+}
+.section_4 {
+  grid-column: span 1;
+  grid-row: span 2;
+  height: 37rem;
+}
+</style>
+
+
+
+--- File: modules\full-projects\InventoryManager\todo_el_contenido.txt ---
+(Skipped (non-matching extension))
+
+
+--- File: modules\logic-exercises\LogicExercisesView.vue ---
+
+<script setup>
+import UnderConstruction from '@/components/UnderConstruction .vue'
+</script>
+
+<template>
+  <UnderConstruction />
+</template>
+
+
+
+--- File: modules\tecnichals-test\TecnicalTestView.vue ---
+
+<script setup>
+import UnderConstruction from '@/components/UnderConstruction .vue'
+</script>
+
+<template>
+  <UnderConstruction />
+</template>
+
+
+
+--- File: modules\utilities\GenerateRandomPassword\assets\images\password.jpg ---
+(Skipped (non-matching extension))
+
+
+--- File: modules\utilities\GenerateRandomPassword\assets\vectors\lightning.svg ---
+(Skipped (non-matching extension))
+
+
+--- File: modules\utilities\GenerateRandomPassword\RandomPassword.vue ---
+
+<script setup>
+import { ref, inject } from 'vue'
+
+const passwordBox = ref('')
+const toast = inject('toast')
+const createPassword = () => {
+  passwordBox.value = crypto.randomUUID()
+}
+
+const copyPassword = async () => {
+  try {
+    await navigator.clipboard.writeText(passwordBox.value)
+
+    toast.open({
+      message: 'Contraseña copiada al portapapeles',
+      type: 'info'
+    })
+  } catch (err) {
+    console.error('Error al copiar la contraseña: ', err)
+  }
+}
+</script>
+
+<template>
+  <div class="flex flex-col justify-center items-center mt-10">
+    <div
+      class="flex flex-col items-center justify-center w-[50rem] h-60 rounded-xl text-[#1b933b] bg-[#060a07]"
+    >
+      <div class="mb-3">
+        <h2 class="text-4xl text-[#eff1ef]">Crear Contraseña Aleatoria</h2>
+      </div>
+      <div class="flex justify-center gap-3 items-center w-full h-15">
+        <div>
+          <input type="text" :value="passwordBox" class="p-1 w-[33rem] text-center" readonly />
+        </div>
+        <div>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="40"
+            height="40"
+            viewBox="0 0 24 24"
+            @click="copyPassword"
+            class="cursor-pointer"
+          >
+            <g
+              fill="none"
+              stroke="#eab308"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+            >
+              <path d="M16 3H4v13" />
+              <path d="M8 7h12v12a2 2 0 0 1-2 2h-8a2 2 0 0 1-2-2z" />
+            </g>
+          </svg>
+        </div>
+      </div>
+      <button @click="createPassword" class="p-3 mt-3 text-[#1e2733] bg-[#95daa7] rounded-lg">
+        Generar Contraseña
+      </button>
+    </div>
+  </div>
+</template>
+
+<style scoped></style>
+
+
+
+--- File: modules\utilities\UtilitieDetails.vue ---
+
+<script setup>
+import { computed } from 'vue'
+import { useRoute } from 'vue-router'
+
+import RandomPassword from './GenerateRandomPassword/RandomPassword.vue'
+
+const utilitiesComponent = {
+  1: RandomPassword
+}
+
+const route = useRoute()
+const projectId = computed(() => parseInt(route.params.id))
+
+const CurrentUtilitiesComponent = computed(() => utilitiesComponent[projectId.value] || null)
+</script>
+
+<template>
+  <div>
+    <!-- Pasar la descripción al componente dinámico -->
+    <component :is="CurrentUtilitiesComponent" :utilitieDescription="utilitieDescription" />
+  </div>
+</template>
+
+<style scoped></style>
+
+
+
+--- File: modules\utilities\UtilitieViews.vue ---
+
+<script setup>
+import ProjectCard from '@/components/ProjectCard.vue'
+import { technicalTests } from '@/data/utilities/Utilities.js'
+
+// Define la ruta base de las imágenes
+const imageBasePath = '/images/utilities'
+</script>
+
+<template>
+  <div class="flex gap-3 flex-wrap justify-center mt-3">
+    <div v-for="fullProject in technicalTests" :key="fullProject.id" class="router-link">
+      <ProjectCard :fullProject="fullProject" :imageBasePath="imageBasePath" />
+    </div>
+  </div>
+</template>
+
+
+
+--- File: router\index.js ---
+
+import { createRouter, createWebHistory } from 'vue-router'
+import HomeView from '../views/HomeView.vue'
+
+const router = createRouter({
+  history: createWebHistory(import.meta.env.BASE_URL),
+  routes: [
+    {
+      path: '/',
+      name: 'home',
+      component: HomeView
+    },
+    {
+      path: '/projects',
+      name: 'full-projects',
+      component: () => import('../../src/modules/full-projects/FullProjectView.vue')
+    },
+    {
+      path: '/projects/:id',
+      name: "full-projects-detail",
+      component: () => import('../../src/modules/full-projects/FullProjectDetails.vue'),
+      props: true
+    },
+    {
+      path: '/logic-exercises',
+      name: 'logic-exercises',
+      component: () => import('../../src/modules/logic-exercises/LogicExercisesView.vue')
+    },
+    {
+      path: '/technical-tests',
+      name: 'technical-tests',
+      component: () => import('../../src/modules/tecnichals-test/TecnicalTestView.vue')
+    },
+    {
+      path: '/utilities',
+      name: 'utilities',
+      component: () => import('../modules/utilities/UtilitieViews.vue')
+    },
+    {
+      path: '/utilities/:id',
+      name: 'utility-detail',
+      component: () => import('../modules/utilities/UtilitieDetails.vue'),
+      props: true
+    },
+    {
+      path: '/privacy-policy',
+      name: 'privacy-policy',
+      component: () => import('../views/PrivacyPolicyView.vue')
+    }
+  ]
+})
+
+export default router
+
+
+
+--- File: test\demo.test.js ---
+
+import {describe, it, expect} from 'vitest'
+
+describe('testing', () => {
+    it('should be true', () => {
+      expect(true).toBe(true);
+    });
+  });
+  
+
+
+--- File: test\modules\GenerateRAndomPassword\RandomPassword.test.js ---
+
+import { describe, it, expect, vi } from 'vitest'
+import RandomPassword from '@/modules/GenerateRandomPassword/RandomPassword.vue'
+import { mount } from '@vue/test-utils'
+
+//Component Rendering Text
+describe('RandomPassword', () => {
+  const wrapper = mount(RandomPassword)
+  it('matches the snapshot', () => {
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+  it('reders correctly', () => {
+    expect(wrapper.find('h2').text()).toContain('Crear Contraseña Aleatoria')
+    expect(wrapper.find('button').text()).toBe('Generar Contraseña')
+  })
+})
+
+// Password Generation Test
+
+describe('Password Generator', () => {
+  const wrapper = mount(RandomPassword)
+
+  it('generates a password when clicking the button', async () => {
+    const button = wrapper.find('button')
+    await button.trigger('click')
+    const input = wrapper.find('input')
+    expect(input.element.value).toHaveLength(36)
+  })
+})
+
+//Clipboard Copy Test
+
+describe('PasswordGenerator', () => {
+  it('Copies de password to the clipboard', async () => {
+    const wrapper = mount(RandomPassword)
+
+    const button = wrapper.find('button')
+    await button.trigger('click')
+
+    Object.assign(navigator, {
+      clipboard: {
+        writeText: vi.fn(() => Promise.resolve())
+      }
+    })
+    const copyIcon = wrapper.find('svg')
+    await copyIcon.trigger('click')
+    expect(navigator.clipboard.writeText).toHaveBeenCalledWith(wrapper.vm.passwordBox)
+  })
+})
+
+describe('PasswordGenerator', () => {
+    it('shows an error if unable to copy password', async () => {
+      const wrapper = mount(RandomPassword)
+  
+      Object.assign(navigator, {
+        clipboard: {
+          writeText: vi.fn(() => Promise.reject('Copy Error')) 
+        }
+      })
+  
+      const consoleSpy = vi.spyOn(console, 'error')
+  
+      const button = wrapper.find('button')
+      await button.trigger('click')
+  
+      const copyIcon = wrapper.find('svg')
+      await copyIcon.trigger('click')
+  
+      expect(consoleSpy).toHaveBeenCalledWith('Error al copiar la contraseña: ', 'Copy Error')
+  
+      consoleSpy.mockRestore()
+    })
+  })
+  
+
+
+--- File: test\modules\GenerateRAndomPassword\__snapshots__\RandomPassword.test.js.snap ---
+(Skipped (non-matching extension))
+
+
+--- File: todo_el_contenido.txt ---
+(Skipped (non-matching extension))
+
+
+--- File: views\FooterView.vue ---
+
+<script setup>
+import { RouterLink } from "vue-router";
+const socialLinks = [
+  {
+    href: "https://www.linkedin.com/in/yubal-hormiga/",
+    iconClass: "fa-linkedin",
+    alt: "LinkedIn",
+  },
+  {
+    href: "https://github.com/YubalHormiga",
+    iconClass: "fa-github",
+    alt: "GitHub",
+  },
+];
+</script>
+
+<template>
+  <footer class="footer-container">
+    <div itemscope itemtype="http://schema.org/WPFooter" class="media">
+      <div>
+        <p class="footer-text" itemprop="copyrightHolder">
+          &copy; 2024 <span itemprop="name">Yubal Hormiga</span>
+        </p>
+      </div>
+      <div align="center" class="socialbtns">
+        <ul>
+          <li v-for="link in socialLinks" :key="link.alt">
+            <a
+              :href="link.href"
+              class="fa fa-lg"
+              :class="link.iconClass"
+              :alt="link.alt"
+              target="_blank"
+            >
+              <!-- Enlace visible para accesibilidad -->
+              <span class="sr-only">{{ link.alt }}</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-links">
+      <div class="links">
+        <a href="mailto:yubalhh@yahoo.es" itemprop="url">Contact</a>
+      </div>
+      <div>
+        <RouterLink :to="{ name: 'privacy-policy' }" itemprop="url"
+          >Privacy Policy</RouterLink
+        >
+      </div>
+    </div>
+  </footer>
+</template>
+
+<style scoped>
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+.media {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.footer-container {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+}
+
+.footer-text {
+  margin: 0;
+  text-align: center;
+  color: var(--text-200);
+}
+
+.footer-links {
+  list-style-type: none;
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.footer-links a {
+  text-decoration: none;
+  color: var(--text-100);
+}
+
+.footer-links a:hover {
+  border-bottom: 2px solid var(--accent-100);
+}
+
+/*Social */
+
+a,
+a:hover {
+  color: #000;
+  text-decoration: none;
+  padding: 5px;
+}
+
+.socialbtnsbtnsbtns,
+.socialbtnsbtnsbtns ul,
+.socialbtnsbtnsbtns li {
+  margin: 0;
+  padding: 5px;
+}
+
+.socialbtnsbtnsbtns li {
+  list-style: none outside none;
+  display: inline-block;
+}
+
+.socialbtns li {
+  list-style: none outside none;
+  display: inline-block;
+}
+
+.socialbtns .fa {
+  color: #fff;
+  text-shadow: 1px 1px 0px #000, 1px -1px 0px #000, -1px 1px 0px #000,
+    -1px -1px 0px #000;
+  -webkit-text-shadow: 1px 1px 0px #000, 1px -1px 0px #000, -1px 1px 0px #000,
+    -1px -1px 0px #000;
+  -moz-text-shadow: 1px 1px 0px #000, 1px -1px 0px #000, -1px 1px 0px #000,
+    -1px -1px 0px #000;
+  -o-text-shadow: 1px 1px 0px #000, 1px -1px 0px #000, -1px 1px 0px #000,
+    -1px -1px 0px #000;
+  transition: all ease-out 0.5s;
+  -moz-transition: all ease-out 0.5s;
+  -webkit-transition: all ease-out 0.5s;
+  -o-transition: all ease-out 0.5s;
+}
+
+.socialbtns .fa:hover {
+  color: #000;
+  text-shadow: 1px 1px 0px #fff, 1px -1px 0px #fff, -1px 1px 0px #fff,
+    -1px -1px 0px #fff;
+  -webkit-text-shadow: 1px 1px 0px #fff, 1px -1px 0px #fff, -1px 1px 0px #fff,
+    -1px -1px 0px #fff;
+  -moz-text-shadow: 1px 1px 0px #fff, 1px -1px 0px #fff, -1px 1px 0px #fff,
+    -1px -1px 0px #fff;
+  -o-text-shadow: 1px 1px 0px #fff, 1px -1px 0px #fff, -1px 1px 0px #fff,
+    -1px -1px 0px #fff;
+  transition: all ease 0.5s;
+  -moz-transition: all ease-in 0.5s;
+  -webkit-transition: all ease-in 0.5s;
+  -o-transition: all ease-in 0.5s;
+}
+</style>
+
+
+
+--- File: views\HomeView.vue ---
+
+<template>
+  <div class="max-w-7xl mx-auto px-4 py-8">
+    <h1 class="text-3xl font-bold mb-6 text-center">Descripción de la Aplicación</h1>
+
+    <section class="mb-6">
+      <h2 class="font-semibold mb-4">Inicio</h2>
+      <p class="text-gray-700">
+        Esta aplicación se está desarrollando como un <strong>ejercicio de práctica</strong> para
+        mejorar mis habilidades de programación. El objetivo principal es
+        <strong>mostrar pequeñas aplicaciones</strong> que ilustran conceptos clave de programación
+        utilizando <strong>Vue 3</strong> con la sintaxis de <strong>&lt;script setup&gt;</strong>.
+        Cada aplicación es un ejemplo práctico que me ayudará a comprender mejor la lógica de
+        programación y las mejores prácticas en el desarrollo de software.
+      </p>
+    </section>
+
+    <section class="mb-6">
+      <h2 class="font-semibold mb-4">Proyectos Completos</h2>
+      <p class="text-gray-700">
+        En esta sección, presentaré <strong>proyectos completos</strong> que muestran aplicaciones
+        más robustas y funcionales. Estos proyectos se centrarán en resolver problemas del mundo
+        real y proporcionarán una experiencia más completa al usuario.
+      </p>
+    </section>
+
+    <section class="mb-6">
+      <h2 class="font-semibold mb-4">Utilidades</h2>
+      <p class="text-gray-700">
+        En esta sección, se incluirán diversas <strong>utilidades</strong> que abordarán problemas
+        comunes en la programación. Estas herramientas están diseñadas para ser prácticas y fáciles
+        de usar, permitiendo a los usuarios llevar a cabo tareas específicas con eficiencia.
+      </p>
+    </section>
+
+    <section class="mb-6">
+      <h2 class="font-semibold mb-4">Pruebas Técnicas</h2>
+      <p class="text-gray-700">
+        Además de las pequeñas aplicaciones, también incluiré <strong>pruebas técnicas</strong> que
+        simulan ejercicios comunes que se encuentran en entrevistas de trabajo para el puesto de
+        programador. Estas pruebas están diseñadas para:
+      </p>
+      <ul class="list-disc list-inside text-gray-700">
+        <li>
+          <strong>Desafiar mi lógica de programación</strong>: Cada prueba presenta un problema que
+          debo resolver, lo que me ayudará a afinar mis habilidades de pensamiento crítico y
+          resolución de problemas.
+        </li>
+        <li>
+          <strong>Prepararme para entrevistas</strong>: Las pruebas son similares a las que podrías
+          encontrar en entrevistas reales, lo que me brinda una ventaja al momento de enfrentar
+          futuros reclutadores.
+        </li>
+        <li>
+          <strong>Fomentar la práctica continua</strong>: Con una variedad de ejercicios
+          disponibles, puedo practicar y mejorar continuamente mis habilidades a mi propio ritmo.
+        </li>
+      </ul>
+    </section>
+
+    <section class="mb-6">
+      <h2 class="font-semibold mb-4">Ejercicios de Lógica</h2>
+      <p class="text-gray-700">
+        La sección de <strong>ejercicios de lógica</strong> estará dedicada a una serie de desafíos
+        diseñados para fortalecer mis habilidades de resolución de problemas. Estos ejercicios me
+        permitirán practicar y aplicar los conceptos aprendidos a través de las pequeñas
+        aplicaciones y las pruebas técnicas. Algunos de los tipos de ejercicios incluirán:
+      </p>
+      <ul class="list-disc list-inside text-gray-700">
+        <li>
+          <strong>Problemas de Algoritmos:</strong> Desafíos centrados en la creación de algoritmos
+          eficientes.
+        </li>
+        <li>
+          <strong>Desafíos de Programación:</strong> Ejercicios que involucran la implementación de
+          soluciones a problemas específicos.
+        </li>
+        <li>
+          <strong>Puzzles Lógicos:</strong> Retos diseñados para ejercitar el pensamiento crítico y
+          la creatividad.
+        </li>
+      </ul>
+    </section>
+
+    <section>
+      <h2 class="font-semibold mb-4">Conclusión</h2>
+      <p class="text-gray-700">
+        En resumen, esta aplicación es un entorno ideal para quienes desean
+        <strong>entrenar su lógica de programación</strong> y prepararse para el competitivo mundo
+        de las entrevistas de trabajo en tecnología. A través de pequeñas aplicaciones, proyectos
+        completos, pruebas técnicas y ejercicios de lógica, puedo desarrollarme y avanzar en mi
+        carrera como programador.
+      </p>
+    </section>
+  </div>
+</template>
+
+<style scoped>
+/* Opcional: estilos adicionales si es necesario */
+</style>
+
+
+
+--- File: views\MainNavegationView.vue ---
+
+<script setup>
+import { ref } from 'vue'
+import { RouterLink, useRoute } from 'vue-router'
+
+const navItems = [
+  { text: 'Inicio', to: '/' },
+  { text: 'Proyectos Completos', to: { name: 'full-projects' } },
+  { text: 'Utilidades', to: { name: 'utilities' } },
+  { text: 'Pruebas Técnicas', to: { name: 'technical-tests' } },
+  { text: 'Ejercicios de Lógica', to: { name: 'logic-exercises' } }
+]
+
+const showContent = ref(false)
+const route = useRoute()
+
+const isActive = (item) => {
+  return item.to.name === route.name || (route.path === '/' && item.text === 'Inicio')
+}
+</script>
+
+<template>
+  <nav class="flex items-center justify-between flex-wrap p-2 bg-[#fff]">
+    <h1 class="animate-charcter">TechMix</h1>
+
+    <!-- Botón hamburguesa solo se muestra en pantallas pequeñas -->
+    <div class="block lg:hidden">
+      <button
+        :class="['hamburger', 'hamburger--spring', { 'is-active': showContent }]"
+        @click="showContent = !showContent"
+        type="button"
+      >
+        <span class="hamburger-box">
+          <span class="hamburger-inner"></span>
+        </span>
+      </button>
+    </div>
+
+    <!-- Contenedor de enlaces -->
+    <div :class="['w-full lg:flex lg:justify-evenly lg:items-center', { hidden: !showContent }]">
+      <RouterLink
+        v-for="(item, index) in navItems"
+        :key="index"
+        :to="item.to"
+        :class="{ 'active-link': isActive(item) }"
+        class="flex mt-4 lg:inline-block font-semibold lg:mt-0 text-[#44107a] hover:text-[#ff1361] mr-4"
+      >
+        {{ item.text }}
+      </RouterLink>
+    </div>
+  </nav>
+</template>
+
+<style scoped>
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Poppins:wght@400;700&display=swap');
+
+nav a {
+  transition: color 0.3s ease;
+  font-family: 'Poppins', sans-serif;
+}
+
+.active-link {
+  font-weight: bold;
+  color: #ff1361;
+}
+
+.animate-charcter {
+  font-family: 'Poppins', sans-serif;
+  font-weight: bold;
+  text-transform: uppercase;
+  background-image: linear-gradient(-225deg, #231557 0%, #44107a 29%, #ff1361 67%, #fff800 100%);
+  background-size: 200% auto;
+  color: #fff;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: textclip 5s linear infinite;
+  display: inline-block;
+  font-size: 5.5rem;
+}
+
+@keyframes textclip {
+  to {
+    background-position: 200% center;
+  }
+}
+</style>
+
+
+
+--- File: views\PrivacyPolicyView.vue ---
+
+
+<template >
+  <header>
+    <h1>Política de Privacidad</h1>
+  </header>
+  <main>
+    <section>
+      <h2>1. Introducción</h2>
+      <p>
+        En CannineConnect, valoramos tu privacidad y estamos
+        comprometidos a proteger tus datos personales. Esta política de
+        privacidad describe cómo recopilamos, usamos y protegemos tu información
+        de acuerdo con el Reglamento General de Protección de Datos (RGPD).
+      </p>
+    </section>
+    <section>
+      <h2>2. Responsable del Tratamiento</h2>
+      <p>
+        El responsable del tratamiento de tus datos es CannineConnect, con domicilio en [Dirección completa] y correo
+        electrónico [email@example.com].
+      </p>
+    </section>
+    <section>
+      <h2>3. Información que Recopilamos</h2>
+      <p>Podemos recopilar los siguientes tipos de información:</p>
+      <ul>
+        <li>
+          Información personal, como nombre y correo electrónico, cuando te
+          registras en nuestro sitio o suscribes a nuestro boletín.
+        </li>
+        <li>
+          Información de uso, como las páginas que visitas y el tiempo que pasas
+          en nuestro sitio.
+        </li>
+        <li>
+          Datos técnicos, como tu dirección IP, tipo de navegador y sistema
+          operativo.
+        </li>
+      </ul>
+    </section>
+    <section>
+      <h2>4. Finalidades del Tratamiento</h2>
+      <p>Utilizamos la información recopilada para:</p>
+      <ul>
+        <li>Proporcionar y mejorar nuestros servicios.</li>
+        <li>Personalizar tu experiencia en nuestro sitio.</li>
+        <li>
+          Enviar comunicaciones y actualizaciones sobre nuestros servicios.
+        </li>
+        <li>Analizar el uso del sitio y mejorar nuestro contenido y diseño.</li>
+      </ul>
+    </section>
+    <section>
+      <h2>5. Legitimación para el Tratamiento de Datos</h2>
+      <p>
+        La base legal para el tratamiento de tus datos es el consentimiento que
+        nos otorgas al aceptar esta política de privacidad y al proporcionarnos
+        tu información personal.
+      </p>
+    </section>
+    <section>
+      <h2>6. Compartir tu Información</h2>
+      <p>
+        No vendemos, intercambiamos ni transferimos a terceros tu información
+        personal sin tu consentimiento, excepto en los siguientes casos:
+      </p>
+      <ul>
+        <li>
+          Proveedores de servicios que nos ayudan a operar nuestro sitio y
+          servicios.
+        </li>
+        <li>En cumplimiento de la ley o en respuesta a una orden judicial.</li>
+      </ul>
+    </section>
+    <section>
+      <h2>7. Seguridad de tu Información</h2>
+      <p>
+        Implementamos medidas de seguridad para proteger tu información personal
+        contra el acceso no autorizado, alteración, divulgación o destrucción.
+      </p>
+    </section>
+    <section>
+      <h2>8. Tus Derechos</h2>
+      <p>En virtud del RGPD, tienes derecho a:</p>
+      <ul>
+        <li>Acceder a tus datos personales.</li>
+        <li>Solicitar la rectificación de datos inexactos.</li>
+        <li>
+          Solicitar la supresión de tus datos cuando, entre otros motivos, los
+          datos ya no sean necesarios para los fines que fueron recogidos.
+        </li>
+        <li>
+          Solicitar la limitación del tratamiento de tus datos, en cuyo caso
+          solo los conservaremos para el ejercicio o la defensa de
+          reclamaciones.
+        </li>
+        <li>
+          Oponerte al tratamiento de tus datos. Dejaremos de tratar los datos en
+          la forma que nos indiques, salvo que por motivos legítimos imperiosos
+          o el ejercicio o la defensa de posibles reclamaciones se deban seguir
+          tratando.
+        </li>
+        <li>Solicitar la portabilidad de tus datos.</li>
+      </ul>
+      <p>
+        Puedes ejercer estos derechos enviando una solicitud a
+        [email@example.com].
+      </p>
+    </section>
+    <section>
+      <h2>9. Cambios en esta Política de Privacidad</h2>
+      <p>
+        Nos reservamos el derecho de actualizar esta política de privacidad en
+        cualquier momento. Te notificaremos sobre cualquier cambio publicando la
+        nueva política en nuestro sitio.
+      </p>
+    </section>
+    <section>
+      <h2>10. Contacto</h2>
+      <p>
+        Si tienes preguntas sobre esta política de privacidad, contáctanos a
+        través de [email@example.com] o en [dirección completa].
+      </p>
+    </section>
+  </main>
+</template>
+

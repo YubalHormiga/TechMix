@@ -1,13 +1,14 @@
 <script setup>
-import { computed, onMounted, reactive, ref } from 'vue'
+import { onMounted, ref, reactive, computed } from 'vue'
 import { db } from '../data/products.js'
 
+const emit = defineEmits(['submitProduct'])
 const categories = ref(db)
 onMounted(() => {
   categories
 })
+
 const product = reactive({
-  sku: '',
   category: '',
   name: '',
   quantity: '',
@@ -15,23 +16,22 @@ const product = reactive({
   salePrice: '',
   entryDate: '',
   minStock: '',
-  status: 'active'
+  status: 'active',
+  id: null
 })
 
-const products = ref([])
-
+const handleSubmit = () => {
+  emit('submitProduct', { ...product })
+}
 const handleCategoryChange = () => {
   product.name = ''
 }
 
 const categoryItems = computed(() => {
   const category = categories.value.find((cat) => cat.name === product.category)
-  return category ? category.items : []
-})
 
-const handleSubmit = () => {
-  products.value.push({ ...product })
-}
+  return category ? category.items.map((item) => item.name) : []
+})
 </script>
 
 <template>

@@ -1,12 +1,7 @@
 <script setup>
-
+import UnderConstruction from '@/components/UnderConstruction .vue'
 </script>
 
 <template>
-<h1>Ejerccios de logica</h1>
+  <UnderConstruction />
 </template>
-<style scoped>
-
-</style>
-
-
