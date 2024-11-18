@@ -9,7 +9,7 @@ BoardShop es una tienda en línea de skateboards construida con **Vue.js**. El p
 - **Exploración de productos**: Los usuarios pueden ver los productos (skateboards) disponibles con detalles como nombre, precio y descripción.
 - **Carrito de compras**: Los usuarios pueden agregar productos al carrito, incrementar o disminuir la cantidad de productos en el carrito y eliminar artículos.
 - **Persistencia del carrito**: Los productos añadidos al carrito se guardan en el almacenamiento local del navegador, lo que permite mantener el estado incluso después de recargar la página.
-- **Carrusel de imágenes**: Un carrusel interactivo de imágenes de los productos con autoplay y paginación, utilizando **Swiper.js**.
+- **Carrusel de imágenes**: Un carrusel interactivo de imágenes con autoplay y paginación, utilizando **Swiper.js**.
 
 ## Tecnologías utilizadas
 
@@ -64,9 +64,9 @@ Para ejecutar este proyecto en tu máquina local, sigue estos pasos:
 - Los usuarios pueden ver las tablas de skate, con su imagen, nombre, descripción y precio.
 - Al hacer clic en "Agregar al carrito", el producto se añade al carrito de compras.
 
-### **Carrusel de Productos**:
+### **Carrusel**:
 
-- Ubn conjunto de imágenes se muestran de forma atractiva en un carrusel que cambia automáticamente cada 4 segundos.
+- Un conjunto de imágenes se muestran de forma atractiva en un carrusel que cambia automáticamente cada 4 segundos.
 - Los usuarios pueden navegar manualmente a través de las imágenes si lo desean.
 
 ## Mejoras futuras
@@ -87,5 +87,6 @@ Si deseas contribuir a este proyecto, ¡estoy abierto a tus sugerencias y cambio
 Si tienes alguna pregunta sobre el proyecto o sobre mi experiencia como desarrollador, no dudes en contactarme:
 
 - **Correo electrónico**: yubalhh@yahoo.es
-- **LinkedIn**: [Tu perfil de LinkedIn](https://www.linkedin.com/in/yubal-hormiga/)
-- **GitHub**: [Tu perfil de GitHub](https://github.com/YubalHormiga)
+- **LinkedIn**: (https://www.linkedin.com/in/yubal-hormiga/)
+- **GitHub**: (https://github.com/YubalHormiga)
+ 
