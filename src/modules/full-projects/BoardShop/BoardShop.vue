@@ -1,11 +1,12 @@
 <!-- App.vue -->
 <script setup>
-import { computed, onMounted, ref, watch } from 'vue'
+import { computed, onMounted, ref, watch, inject } from 'vue'
 import { db } from './data/skates.js'
 import ShoppingCart from './components/ShoppingCart.vue'
 import ProductCard from './components/ProductCard.vue'
 import AutoCarrousel from './components/AutoCarrousel.vue'
 
+const toast = inject('toast')
 const tables = ref([])
 const cart = ref([])
 const cartVisible = ref(false)
@@ -40,8 +41,16 @@ const addCart = (table) => {
   const tableExist = cart.value.findIndex((product) => product.id === table.id)
   if (tableExist >= 0) {
     cart.value[tableExist].amount++
+    toast.open({
+      message: 'Cantidad del artículo incrementada en el carrito',
+      type: 'success'
+    })
   } else {
     cart.value.push({ ...table, amount: 1 })
+    toast.open({
+      message: 'Artículo añadido al carrito',
+      type: 'success'
+    })
   }
 }
 

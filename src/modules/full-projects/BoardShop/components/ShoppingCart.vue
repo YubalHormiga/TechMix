@@ -54,10 +54,22 @@ defineEmits(['increment-amount', 'decrement-amount', 'delete-table', 'toggle-car
             </td>
             <td>{{ table.name }}</td>
             <td>{{ table.price }} EUR</td>
-            <td>
-              <button type="button" @click="$emit('decrement-amount', table)">-</button
-              >{{ table.amount
-              }}<button @click="$emit('increment-amount', table)" type="button">+</button>
+            <td class="f my-auto">
+              <button
+                class="cursor-pointer"
+                @click="$emit('increment-amount', table)"
+                type="button"
+              >
+                <img src="../assets//icons/add.svg" alt="" />
+              </button>
+              <p>{{ table.amount }}</p>
+              <button
+                class="cursor-pointer"
+                @click="$emit('decrement-amount', table)"
+                type="button"
+              >
+                <img src="../assets//icons/subtract.svg" alt="" />
+              </button>
             </td>
             <td>
               <button @click="$emit('delete-table', table.id)" class="h-10 w-10">
