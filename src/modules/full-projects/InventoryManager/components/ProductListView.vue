@@ -15,21 +15,21 @@ const props = defineProps({
     required: true
   }
 })
-defineEmits(['selectedProduct'])
-const categorieSelected = ref('')
+defineEmits(['selectedProduct', 'editProduct'])
+const categorySelected = ref('')
 const productSelected = ref('')
 
 const categoryItems = computed(() => {
-  const category = categories.value.find((cat) => cat.name === categorieSelected.value)
+  const category = categories.value.find((cat) => cat.name === categorySelected.value)
   return category ? category.items.map((item) => item.name) : []
 })
 
 const productsToDisplay = computed(() => {
   let filteredProducts = props.products
 
-  if (categorieSelected.value) {
+  if (categorySelected.value) {
     filteredProducts = filteredProducts.filter(
-      (product) => product.category === categorieSelected.value
+      (product) => product.category === categorySelected.value
     )
   }
 
@@ -58,7 +58,7 @@ watch(productsToDisplay, (newValue) => {
   <div class="p-2">
     <div class="flex flex-col">
       <label class="font-bold" for="category">Categoría del Producto</label>
-      <select v-model="categorieSelected" @change="handleCategoryChange" class="p-2" id="category">
+      <select v-model="categorySelected" @change="handleCategoryChange" class="p-2" id="category">
         <option value="" disabled>Selecciona una categoría</option>
         <option v-for="cat in categories" :key="cat.name" :value="cat.name">
           {{ cat.name }}
@@ -80,19 +80,19 @@ watch(productsToDisplay, (newValue) => {
           class="flex items-center justify-between gap-4 p-4 mb-4 rounded-lg border border-[#d8dfdf] shadow-lg"
         >
           <div class="flex flex-col justify-between">
-            <div class="flex items-center gap-3">
-              <p class="font-bold">{{ product.name }}</p>
-              <button @click="$emit('selectedProduct', product.id)">
-                <img src="../assets//icons/info-svgrepo-com.svg" alt="inf" class="h-8" />
-              </button>
-            </div>
-            <p><span class="font-semibold">Cantidad:</span> {{ product.quantity }}</p>
+            <!-- <div class="flex items-center gap-3"> -->
+            <button class="flex justify-center my-2" @click="$emit('selectedProduct', product.id)">
+              <img src="../assets//icons/info-svgrepo-com.svg" alt="inf" class="h-8" />
+            </button>
+            <p class="font-bold">{{ product.name }}</p>
+            <!-- </div> -->
+            <p><span class="font-semibold">Cantidad:</span>{{ product.quantity }}</p>
           </div>
 
           <div class="flex flex-col justify-between text-center">
-            <p><span class="font-semibold">PreComp:</span> {{ product.purchasePrice }}</p>
-            <p><span class="font-semibold">PreVenta:</span> {{ product.salePrice }}</p>
-            <p><span class="font-semibold">MinStock:</span> {{ product.minStock }}</p>
+            <p><span class="font-semibold">PreComp:</span>{{ product.purchasePrice }}</p>
+            <p><span class="font-semibold">PreVenta:</span>{{ product.salePrice }}</p>
+            <p><span class="font-semibold">MinStock:</span>{{ product.minStock }}</p>
           </div>
 
           <div class="flex flex-col justify-between text-center">
@@ -100,7 +100,11 @@ watch(productsToDisplay, (newValue) => {
           </div>
 
           <div class="flex flex-col gap-2 justify-center">
-            <button type="button" class="p-2 bg-blue-500 text-white rounded">
+            <button
+              @click="$emit('editProduct', product.id)"
+              type="button"
+              class="p-2 bg-blue-500 text-white rounded"
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"

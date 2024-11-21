@@ -1,4 +1,5 @@
 <script setup>
+import { ref, onMounted } from 'vue'
 import { defineProps } from 'vue'
 
 // Define props
@@ -13,39 +14,59 @@ const props = defineProps({
   }
 })
 
-// Función para obtener la URL de la imagen
+const isVisible = ref(false)
+
 function getImageUrl(imageName) {
   return `${props.imageBasePath}/${imageName}`
 }
+
+onMounted(() => {
+  isVisible.value = true
+})
 </script>
 
 <template>
   <section>
-    <div class="card">
-      <div
-        class="cover item"
-        :style="{ backgroundImage: `url(${getImageUrl(props.fullProject.image)})` }"
-      >
-        <h1>{{ props.fullProject.name }}</h1>
-        <span class="price">Project {{ props.fullProject.id }}</span>
-        <div class="card-back">
-          <p>{{ props.fullProject.description }}</p>
-          <RouterLink
-            :to="{ name: props.fullProject.routeName, params: { id: props.fullProject.id } }"
-            class="btn-link"
-          >
-            Ver Aplicación
-          </RouterLink>
-          <a :href="props.fullProject.github" target="_blank" class="text-lg mt-1 btn-link">
-            GitHub
-          </a>
+    <transition name="fade-in">
+      <div v-if="isVisible" class="card">
+        <div
+          class="cover item"
+          :style="{ backgroundImage: `url(${getImageUrl(props.fullProject.image)})` }"
+        >
+          <h1>{{ props.fullProject.name }}</h1>
+          <span class="price">Project {{ props.fullProject.id }}</span>
+          <div class="card-back">
+            <p>{{ props.fullProject.description }}</p>
+            <RouterLink
+              :to="{ name: props.fullProject.routeName, params: { id: props.fullProject.id } }"
+              class="btn-link"
+            >
+              Ver Aplicación
+            </RouterLink>
+            <a :href="props.fullProject.github" target="_blank" class="text-lg mt-1 btn-link">
+              GitHub
+            </a>
+          </div>
         </div>
       </div>
-    </div>
+    </transition>
   </section>
 </template>
 
 <style scoped>
+/* Transición suave de entrada */
+.fade-in-enter-active,
+.fade-in-leave-active {
+  transition:
+    opacity 0.5s ease,
+    transform 0.5s ease;
+}
+
+.fade-in-enter-from,
+.fade-in-leave-to {
+  opacity: 0;
+  transform: translateY(20px);
+}
 section {
   width: 25rem;
   margin: 0 auto;

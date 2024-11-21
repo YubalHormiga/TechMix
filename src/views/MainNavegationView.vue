@@ -19,10 +19,11 @@ const isActive = (item) => {
 </script>
 
 <template>
-  <nav class="flex items-center justify-between flex-wrap p-2 bg-[#fff]">
-    <h1 class="animate-charcter">TechMix</h1>
+  <nav class="flex items-center justify-between flex-wrap p-2 bg-[#fff] mb-10">
+    <a href="http://localhost:5173/">
+      <h1 class="animate-charcter">TechMix</h1>
+    </a>
 
-    <!-- Botón hamburguesa solo se muestra en pantallas pequeñas -->
     <div class="block lg:hidden">
       <button
         :class="['hamburger', 'hamburger--spring', { 'is-active': showContent }]"
@@ -35,7 +36,6 @@ const isActive = (item) => {
       </button>
     </div>
 
-    <!-- Contenedor de enlaces -->
     <div :class="['w-full lg:flex lg:justify-evenly lg:items-center', { hidden: !showContent }]">
       <RouterLink
         v-for="(item, index) in navItems"

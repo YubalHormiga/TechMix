@@ -87,6 +87,5 @@ Si deseas contribuir a este proyecto, ¡estoy abierto a tus sugerencias y cambio
 Si tienes alguna pregunta sobre el proyecto o sobre mi experiencia como desarrollador, no dudes en contactarme:
 
 - **Correo electrónico**: yubalhh@yahoo.es
-- **LinkedIn**: (https://www.linkedin.com/in/yubal-hormiga/)
-- **GitHub**: (https://github.com/YubalHormiga)
- 
+- **LinkedIn**: https://www.linkedin.com/in/yubal-hormiga/
+- **GitHub**: https://github.com/YubalHormiga

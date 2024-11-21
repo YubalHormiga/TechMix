@@ -1,27 +1,51 @@
 <script setup>
-import { onMounted, ref, reactive, computed } from 'vue'
+import { onMounted, ref, reactive, computed, watch } from 'vue'
 import { db } from '../data/products.js'
 
+const props = defineProps({
+  productState: {
+    type: Object,
+    required: true
+  }
+})
 const emit = defineEmits(['submitProduct'])
 const categories = ref(db)
 onMounted(() => {
   categories
 })
 
+watch(props.productState, (newProductState) => {
+  if (newProductState && Object.keys(newProductState).length > 0) {
+    Object.assign(product, newProductState) // Actualiza el producto con los datos del lote
+  }
+})
 const product = reactive({
   category: '',
   name: '',
-  quantity: '',
-  purchasePrice: '',
-  salePrice: '',
-  entryDate: '',
-  minStock: '',
+  quantity: 0,
+  purchasePrice: 0,
+  profitMargin: 0,
+  salePrice: 0,
+  entryDate: new Date().toISOString().split('T')[0],
+  minStock: 10,
   status: 'active',
   id: null
 })
 
 const handleSubmit = () => {
   emit('submitProduct', { ...product })
+  Object.assign(product, {
+    category: '',
+    name: '',
+    quantity: 0,
+    purchasePrice: 0,
+    profitMargin: 0,
+    salePrice: 0,
+    entryDate: new Date().toISOString().split('T')[0],
+    minStock: 10,
+    status: 'active',
+    id: null
+  })
 }
 const handleCategoryChange = () => {
   product.name = ''
@@ -29,9 +53,19 @@ const handleCategoryChange = () => {
 
 const categoryItems = computed(() => {
   const category = categories.value.find((cat) => cat.name === product.category)
-
   return category ? category.items.map((item) => item.name) : []
 })
+
+const updateSalePrice = () => {
+  const purchasePrice = product.purchasePrice
+  const profitMargin = product.profitMargin
+
+  if (purchasePrice && profitMargin >= 0) {
+    product.salePrice = (purchasePrice * (1 + profitMargin / 100)).toFixed(2)
+  } else {
+    product.salePrice = '0.00'
+  }
+}
 </script>
 
 <template>
@@ -67,7 +101,7 @@ const categoryItems = computed(() => {
       <div class="flex flex-col">
         <label class="font-bold" for="quantity">Cantidad del Producto</label>
         <input
-          v-model="product.quantity"
+          v-model.number="product.quantity"
           class="border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md"
           type="number"
           id="quantity"
@@ -76,9 +110,9 @@ const categoryItems = computed(() => {
       </div>
 
       <div class="flex flex-col">
-        <label class="font-bold" for="purchasePrice">Precio de compra</label>
+        <label class="font-bold" for="purchasePrice">Precio de Compra</label>
         <input
-          v-model="product.purchasePrice"
+          v-model.number="product.purchasePrice"
           class="p-2"
           type="number"
           id="purchasePrice"
@@ -87,13 +121,26 @@ const categoryItems = computed(() => {
       </div>
 
       <div class="flex flex-col">
-        <label class="font-bold" for="salePrice">Precio de Venta</label>
+        <label class="font-bold" for="salePrice">Ganancia en %</label>
+        <input
+          v-model.number="product.profitMargin"
+          @input="updateSalePrice"
+          class="p-2"
+          type="number"
+          id="salePrice"
+          placeholder="Porcentaje de ganancia"
+        />
+      </div>
+
+      <div class="flex flex-col">
+        <label class="font-bold" for="calculatedSalePrice">Precio de Venta Calculado</label>
         <input
           v-model="product.salePrice"
           class="p-2"
           type="number"
-          id="salePrice"
-          placeholder="Precio de venta del Producto"
+          id="calculatedSalePrice"
+          placeholder="Precio de venta calculado"
+          disabled
         />
       </div>
 
