@@ -10,6 +10,9 @@ const props = defineProps({
   }
 })
 defineEmits(['increment-amount', 'decrement-amount', 'delete-table', 'toggle-cart'])
+function getImageUrl(imageName) {
+  return new URL(`../assets/images/${imageName}.jpg`, import.meta.url).href
+}
 </script>
 
 <template>
@@ -47,9 +50,9 @@ defineEmits(['increment-amount', 'decrement-amount', 'delete-table', 'toggle-car
           <tr v-for="table in props.cart" :key="table.id">
             <td>
               <img
-                :src="`/src/modules/full-projects/BoardShop/assets/images/${table.image}.jpg`"
-                alt="imagen"
-                class="table-image"
+                :src="getImageUrl(table.image)"
+                alt="card-image"
+                class="object-cover w-full h-full"
               />
             </td>
             <td>{{ table.name }}</td>
