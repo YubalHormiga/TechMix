@@ -1,0 +1,3444 @@
+
+
+--- File: .eslintrc.cjs ---
+(Skipped (non-matching extension))
+
+
+--- File: .git ---
+(Excluded)
+
+
+--- File: .gitignore ---
+(Excluded)
+
+
+--- File: .prettierrc.json ---
+
+{
+  "$schema": "https://json.schemastore.org/prettierrc",
+  "semi": false,
+  "tabWidth": 2,
+  "singleQuote": true,
+  "printWidth": 100,
+  "trailingComma": "none"
+}
+
+
+--- File: .vscode\extensions.json ---
+
+{
+  "recommendations": [
+    "Vue.volar",
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode"
+  ]
+}
+
+
+
+--- File: .vscode\settings.json ---
+
+{
+  "editor.codeActionsOnSave": {
+    "source.fixAll": "explicit"
+  },
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode"
+}
+
+
+
+--- File: coverage\base.css ---
+(Skipped (non-matching extension))
+
+
+--- File: coverage\block-navigation.js ---
+
+/* eslint-disable */
+var jumpToCode = (function init() {
+    // Classes of code we would like to highlight in the file view
+    var missingCoverageClasses = ['.cbranch-no', '.cstat-no', '.fstat-no'];
+
+    // Elements to highlight in the file listing view
+    var fileListingElements = ['td.pct.low'];
+
+    // We don't want to select elements that are direct descendants of another match
+    var notSelector = ':not(' + missingCoverageClasses.join('):not(') + ') > '; // becomes `:not(a):not(b) > `
+
+    // Selecter that finds elements on the page to which we can jump
+    var selector =
+        fileListingElements.join(', ') +
+        ', ' +
+        notSelector +
+        missingCoverageClasses.join(', ' + notSelector); // becomes `:not(a):not(b) > a, :not(a):not(b) > b`
+
+    // The NodeList of matching elements
+    var missingCoverageElements = document.querySelectorAll(selector);
+
+    var currentIndex;
+
+    function toggleClass(index) {
+        missingCoverageElements
+            .item(currentIndex)
+            .classList.remove('highlighted');
+        missingCoverageElements.item(index).classList.add('highlighted');
+    }
+
+    function makeCurrent(index) {
+        toggleClass(index);
+        currentIndex = index;
+        missingCoverageElements.item(index).scrollIntoView({
+            behavior: 'smooth',
+            block: 'center',
+            inline: 'center'
+        });
+    }
+
+    function goToPrevious() {
+        var nextIndex = 0;
+        if (typeof currentIndex !== 'number' || currentIndex === 0) {
+            nextIndex = missingCoverageElements.length - 1;
+        } else if (missingCoverageElements.length > 1) {
+            nextIndex = currentIndex - 1;
+        }
+
+        makeCurrent(nextIndex);
+    }
+
+    function goToNext() {
+        var nextIndex = 0;
+
+        if (
+            typeof currentIndex === 'number' &&
+            currentIndex < missingCoverageElements.length - 1
+        ) {
+            nextIndex = currentIndex + 1;
+        }
+
+        makeCurrent(nextIndex);
+    }
+
+    return function jump(event) {
+        if (
+            document.getElementById('fileSearch') === document.activeElement &&
+            document.activeElement != null
+        ) {
+            // if we're currently focused on the search input, we don't want to navigate
+            return;
+        }
+
+        switch (event.which) {
+            case 78: // n
+            case 74: // j
+                goToNext();
+                break;
+            case 66: // b
+            case 75: // k
+            case 80: // p
+                goToPrevious();
+                break;
+        }
+    };
+})();
+window.addEventListener('keydown', jumpToCode);
+
+
+
+--- File: coverage\clover.xml ---
+(Skipped (non-matching extension))
+
+
+--- File: coverage\coverage-final.json ---
+
+{"C:\\Users\\yubal\\OneDrive\\Escritorio\\TechMix\\TechMix\\postcss.config.js": {"path":"C:\\Users\\yubal\\OneDrive\\Escritorio\\TechMix\\TechMix\\postcss.config.js","all":true,"statementMap":{"0":{"start":{"line":1,"column":0},"end":{"line":1,"column":16}},"1":{"start":{"line":2,"column":0},"end":{"line":2,"column":12}},"2":{"start":{"line":3,"column":0},"end":{"line":3,"column":20}},"3":{"start":{"line":4,"column":0},"end":{"line":4,"column":21}},"4":{"start":{"line":5,"column":0},"end":{"line":5,"column":4}},"5":{"start":{"line":6,"column":0},"end":{"line":6,"column":1}}},"s":{"0":0,"1":0,"2":0,"3":0,"4":0,"5":0},"branchMap":{"0":{"type":"branch","line":1,"loc":{"start":{"line":1,"column":0},"end":{"line":6,"column":-11}},"locations":[{"start":{"line":1,"column":0},"end":{"line":6,"column":-11}}]}},"b":{"0":[0]},"fnMap":{"0":{"name":"(empty-report)","decl":{"start":{"line":1,"column":0},"end":{"line":6,"column":-11}},"loc":{"start":{"line":1,"column":0},"end":{"line":6,"column":-11}},"line":1}},"f":{"0":0}}
+,"C:\\Users\\yubal\\OneDrive\\Escritorio\\TechMix\\TechMix\\tailwind.config.js": {"path":"C:\\Users\\yubal\\OneDrive\\Escritorio\\TechMix\\TechMix\\tailwind.config.js","all":true,"statementMap":{"0":{"start":{"line":1,"column":0},"end":{"line":1,"column":43}},"1":{"start":{"line":2,"column":0},"end":{"line":2,"column":16}},"2":{"start":{"line":3,"column":0},"end":{"line":3,"column":12}},"3":{"start":{"line":4,"column":0},"end":{"line":4,"column":19}},"4":{"start":{"line":5,"column":0},"end":{"line":5,"column":37}},"5":{"start":{"line":6,"column":0},"end":{"line":6,"column":4}},"6":{"start":{"line":7,"column":0},"end":{"line":7,"column":10}},"7":{"start":{"line":8,"column":0},"end":{"line":8,"column":13}},"8":{"start":{"line":9,"column":0},"end":{"line":9,"column":24}},"9":{"start":{"line":10,"column":0},"end":{"line":10,"column":105}},"10":{"start":{"line":11,"column":0},"end":{"line":11,"column":6}},"11":{"start":{"line":12,"column":0},"end":{"line":12,"column":8}},"12":{"start":{"line":13,"column":0},"end":{"line":13,"column":6}},"13":{"start":{"line":14,"column":0},"end":{"line":14,"column":4}},"14":{"start":{"line":15,"column":0},"end":{"line":15,"column":14}},"15":{"start":{"line":16,"column":0},"end":{"line":16,"column":1}}},"s":{"0":0,"1":0,"2":0,"3":0,"4":0,"5":0,"6":0,"7":0,"8":0,"9":0,"10":0,"11":0,"12":0,"13":0,"14":0,"15":0},"branchMap":{"0":{"type":"branch","line":1,"loc":{"start":{"line":1,"column":0},"end":{"line":16,"column":-13}},"locations":[{"start":{"line":1,"column":0},"end":{"line":16,"column":-13}}]}},"b":{"0":[0]},"fnMap":{"0":{"name":"(empty-report)","decl":{"start":{"line":1,"column":0},"end":{"line":16,"column":-13}},"loc":{"start":{"line":1,"column":0},"end":{"line":16,"column":-13}},"line":1}},"f":{"0":0}}
+,"C:\\Users\\yubal\\OneDrive\\Escritorio\\TechMix\\TechMix\\src\\App.vue": {"path":"C:\\Users\\yubal\\OneDrive\\Escritorio\\TechMix\\TechMix\\src\\App.vue","all":true,"statementMap":{"0":{"start":{"line":1,"column":0},"end":{"line":1,"column":14}},"1":{"start":{"line":2,"column":0},"end":{"line":2,"column":39}},"2":{"start":{"line":3,"column":0},"end":{"line":3,"column":59}},"3":{"start":{"line":4,"column":0},"end":{"line":4,"column":47}},"4":{"start":{"line":5,"column":0},"end":{"line":5,"column":9}},"5":{"start":{"line":6,"column":0},"end":{"line":6,"column":0}},"6":{"start":{"line":7,"column":0},"end":{"line":7,"column":10}},"7":{"start":{"line":8,"column":0},"end":{"line":8,"column":29}},"8":{"start":{"line":9,"column":0},"end":{"line":9,"column":47}},"9":{"start":{"line":10,"column":0},"end":{"line":10,"column":86}},"10":{"start":{"line":11,"column":0},"end":{"line":11,"column":10}},"11":{"start":{"line":12,"column":0},"end":{"line":12,"column":22}},"12":{"start":{"line":13,"column":0},"end":{"line":13,"column":36}},"13":{"start":{"line":14,"column":0},"end":{"line":14,"column":20}},"14":{"start":{"line":15,"column":0},"end":{"line":15,"column":10}},"15":{"start":{"line":16,"column":0},"end":{"line":16,"column":18}},"16":{"start":{"line":17,"column":0},"end":{"line":17,"column":8}},"17":{"start":{"line":18,"column":0},"end":{"line":18,"column":11}},"18":{"start":{"line":19,"column":0},"end":{"line":19,"column":0}},"19":{"start":{"line":20,"column":0},"end":{"line":20,"column":14}},"20":{"start":{"line":21,"column":0},"end":{"line":21,"column":16}},"21":{"start":{"line":22,"column":0},"end":{"line":22,"column":16}},"22":{"start":{"line":23,"column":0},"end":{"line":23,"column":25}},"23":{"start":{"line":24,"column":0},"end":{"line":24,"column":20}},"24":{"start":{"line":25,"column":0},"end":{"line":25,"column":1}},"25":{"start":{"line":26,"column":0},"end":{"line":26,"column":0}},"26":{"start":{"line":27,"column":0},"end":{"line":27,"column":20}},"27":{"start":{"line":28,"column":0},"end":{"line":28,"column":10}},"28":{"start":{"line":29,"column":0},"end":{"line":29,"column":1}},"29":{"start":{"line":30,"column":0},"end":{"line":30,"column":0}},"30":{"start":{"line":31,"column":0},"end":{"line":31,"column":8}},"31":{"start":{"line":32,"column":0},"end":{"line":32,"column":14}},"32":{"start":{"line":33,"column":0},"end":{"line":33,"column":1}},"33":{"start":{"line":34,"column":0},"end":{"line":34,"column":8}}},"s":{"0":0,"1":0,"2":0,"3":0,"4":0,"5":0,"6":0,"7":0,"8":0,"9":0,"10":0,"11":0,"12":0,"13":0,"14":0,"15":0,"16":0,"17":0,"18":0,"19":0,"20":0,"21":0,"22":0,"23":0,"24":0,"25":0,"26":0,"27":0,"28":0,"29":0,"30":0,"31":0,"32":0,"33":0},"branchMap":{"0":{"type":"branch","line":1,"loc":{"start":{"line":1,"column":662},"end":{"line":34,"column":8}},"locations":[{"start":{"line":1,"column":662},"end":{"line":34,"column":8}}]}},"b":{"0":[0]},"fnMap":{"0":{"name":"(empty-report)","decl":{"start":{"line":1,"column":662},"end":{"line":34,"column":8}},"loc":{"start":{"line":1,"column":662},"end":{"line":34,"column":8}},"line":1}},"f":{"0":0}}
+,"C:\\Users\\yubal\\OneDrive\\Escritorio\\TechMix\\TechMix\\src\\main.js": {"path":"C:\\Users\\yubal\\OneDrive\\Escritorio\\TechMix\\TechMix\\src\\main.js","all":true,"statementMap":{"0":{"start":{"line":1,"column":0},"end":{"line":1,"column":26}},"1":{"start":{"line":2,"column":0},"end":{"line":2,"column":0}},"2":{"start":{"line":3,"column":0},"end":{"line":3,"column":31}},"3":{"start":{"line":4,"column":0},"end":{"line":4,"column":35}},"4":{"start":{"line":5,"column":0},"end":{"line":5,"column":0}},"5":{"start":{"line":6,"column":0},"end":{"line":6,"column":27}},"6":{"start":{"line":7,"column":0},"end":{"line":7,"column":29}},"7":{"start":{"line":8,"column":0},"end":{"line":8,"column":0}},"8":{"start":{"line":9,"column":0},"end":{"line":9,"column":26}},"9":{"start":{"line":10,"column":0},"end":{"line":10,"column":0}},"10":{"start":{"line":11,"column":0},"end":{"line":11,"column":22}},"11":{"start":{"line":12,"column":0},"end":{"line":12,"column":15}},"12":{"start":{"line":13,"column":0},"end":{"line":13,"column":0}},"13":{"start":{"line":14,"column":0},"end":{"line":14,"column":17}}},"s":{"0":0,"1":0,"2":0,"3":0,"4":0,"5":0,"6":0,"7":0,"8":0,"9":0,"10":0,"11":0,"12":0,"13":0},"branchMap":{"0":{"type":"branch","line":1,"loc":{"start":{"line":1,"column":241},"end":{"line":14,"column":17}},"locations":[{"start":{"line":1,"column":241},"end":{"line":14,"column":17}}]}},"b":{"0":[0]},"fnMap":{"0":{"name":"(empty-report)","decl":{"start":{"line":1,"column":241},"end":{"line":14,"column":17}},"loc":{"start":{"line":1,"column":241},"end":{"line":14,"column":17}},"line":1}},"f":{"0":0}}
+,"C:\\Users\\yubal\\OneDrive\\Escritorio\\TechMix\\TechMix\\src\\modules\\GenerateRandomPassword\\RandomPassword.vue": {"path":"C:\\Users\\yubal\\OneDrive\\Escritorio\\TechMix\\TechMix\\src\\modules\\GenerateRandomPassword\\RandomPassword.vue","all":false,"statementMap":{"0":{"start":{"line":1,"column":0},"end":{"line":1,"column":14}},"1":{"start":{"line":2,"column":0},"end":{"line":2,"column":25}},"2":{"start":{"line":3,"column":0},"end":{"line":3,"column":0}},"3":{"start":{"line":4,"column":0},"end":{"line":4,"column":27}},"4":{"start":{"line":5,"column":0},"end":{"line":5,"column":0}},"5":{"start":{"line":6,"column":0},"end":{"line":6,"column":30}},"6":{"start":{"line":7,"column":0},"end":{"line":7,"column":41}},"7":{"start":{"line":8,"column":0},"end":{"line":8,"column":1}},"8":{"start":{"line":9,"column":0},"end":{"line":9,"column":0}},"9":{"start":{"line":10,"column":0},"end":{"line":10,"column":34}},"10":{"start":{"line":11,"column":0},"end":{"line":11,"column":7}},"11":{"start":{"line":12,"column":0},"end":{"line":12,"column":58}},"12":{"start":{"line":13,"column":0},"end":{"line":13,"column":47}},"13":{"start":{"line":14,"column":0},"end":{"line":14,"column":17}},"14":{"start":{"line":15,"column":0},"end":{"line":15,"column":57}},"15":{"start":{"line":16,"column":0},"end":{"line":16,"column":3}},"16":{"start":{"line":17,"column":0},"end":{"line":17,"column":1}},"17":{"start":{"line":18,"column":0},"end":{"line":18,"column":9}},"18":{"start":{"line":19,"column":0},"end":{"line":19,"column":0}},"19":{"start":{"line":20,"column":0},"end":{"line":20,"column":10}},"20":{"start":{"line":21,"column":0},"end":{"line":21,"column":63}},"21":{"start":{"line":22,"column":0},"end":{"line":22,"column":8}},"22":{"start":{"line":23,"column":0},"end":{"line":23,"column":109}},"23":{"start":{"line":24,"column":0},"end":{"line":24,"column":6}},"24":{"start":{"line":25,"column":0},"end":{"line":25,"column":24}},"25":{"start":{"line":26,"column":0},"end":{"line":26,"column":75}},"26":{"start":{"line":27,"column":0},"end":{"line":27,"column":12}},"27":{"start":{"line":28,"column":0},"end":{"line":28,"column":71}},"28":{"start":{"line":29,"column":0},"end":{"line":29,"column":113}},"29":{"start":{"line":30,"column":0},"end":{"line":30,"column":13}},"30":{"start":{"line":31,"column":0},"end":{"line":31,"column":114}},"31":{"start":{"line":32,"column":0},"end":{"line":32,"column":34}},"32":{"start":{"line":33,"column":0},"end":{"line":33,"column":14}},"33":{"start":{"line":34,"column":0},"end":{"line":34,"column":25}},"34":{"start":{"line":35,"column":0},"end":{"line":35,"column":30}},"35":{"start":{"line":36,"column":0},"end":{"line":36,"column":36}},"36":{"start":{"line":37,"column":0},"end":{"line":37,"column":37}},"37":{"start":{"line":38,"column":0},"end":{"line":38,"column":30}},"38":{"start":{"line":39,"column":0},"end":{"line":39,"column":13}},"39":{"start":{"line":40,"column":0},"end":{"line":40,"column":37}},"40":{"start":{"line":41,"column":0},"end":{"line":41,"column":69}},"41":{"start":{"line":42,"column":0},"end":{"line":42,"column":16}},"42":{"start":{"line":43,"column":0},"end":{"line":43,"column":16}},"43":{"start":{"line":44,"column":0},"end":{"line":44,"column":14}},"44":{"start":{"line":45,"column":0},"end":{"line":45,"column":12}},"45":{"start":{"line":46,"column":0},"end":{"line":46,"column":121}},"46":{"start":{"line":47,"column":0},"end":{"line":47,"column":10}},"47":{"start":{"line":48,"column":0},"end":{"line":48,"column":8}},"48":{"start":{"line":49,"column":0},"end":{"line":49,"column":11}},"49":{"start":{"line":50,"column":0},"end":{"line":50,"column":0}},"50":{"start":{"line":51,"column":0},"end":{"line":51,"column":22}}},"s":{"0":1,"1":1,"2":1,"3":1,"4":1,"5":1,"6":3,"7":3,"8":1,"9":1,"10":2,"11":2,"12":1,"13":1,"14":1,"15":1,"16":2,"17":1,"18":1,"19":1,"20":1,"21":1,"22":1,"23":1,"24":1,"25":1,"26":1,"27":1,"28":1,"29":1,"30":1,"31":1,"32":1,"33":1,"34":1,"35":1,"36":1,"37":1,"38":1,"39":1,"40":1,"41":1,"42":1,"43":1,"44":1,"45":1,"46":1,"47":1,"48":1,"49":1,"50":1},"branchMap":{"0":{"type":"branch","line":6,"loc":{"start":{"line":6,"column":23},"end":{"line":8,"column":1}},"locations":[{"start":{"line":6,"column":23},"end":{"line":8,"column":1}}]},"1":{"type":"branch","line":10,"loc":{"start":{"line":10,"column":21},"end":{"line":17,"column":1}},"locations":[{"start":{"line":10,"column":21},"end":{"line":17,"column":1}}]},"2":{"type":"branch","line":13,"loc":{"start":{"line":13,"column":-2},"end":{"line":16,"column":3}},"locations":[{"start":{"line":13,"column":-2},"end":{"line":16,"column":3}}]}},"b":{"0":[3],"1":[2],"2":[1]},"fnMap":{"0":{"name":"createPassword","decl":{"start":{"line":6,"column":23},"end":{"line":8,"column":1}},"loc":{"start":{"line":6,"column":23},"end":{"line":8,"column":1}},"line":6},"1":{"name":"copyPassword","decl":{"start":{"line":10,"column":21},"end":{"line":17,"column":1}},"loc":{"start":{"line":10,"column":21},"end":{"line":17,"column":1}},"line":10}},"f":{"0":3,"1":2}}
+,"C:\\Users\\yubal\\OneDrive\\Escritorio\\TechMix\\TechMix\\src\\router\\index.js": {"path":"C:\\Users\\yubal\\OneDrive\\Escritorio\\TechMix\\TechMix\\src\\router\\index.js","all":true,"statementMap":{"0":{"start":{"line":1,"column":0},"end":{"line":1,"column":59}},"1":{"start":{"line":2,"column":0},"end":{"line":2,"column":44}},"2":{"start":{"line":3,"column":0},"end":{"line":3,"column":0}},"3":{"start":{"line":4,"column":0},"end":{"line":4,"column":29}},"4":{"start":{"line":5,"column":0},"end":{"line":5,"column":54}},"5":{"start":{"line":6,"column":0},"end":{"line":6,"column":11}},"6":{"start":{"line":7,"column":0},"end":{"line":7,"column":5}},"7":{"start":{"line":8,"column":0},"end":{"line":8,"column":16}},"8":{"start":{"line":9,"column":0},"end":{"line":9,"column":18}},"9":{"start":{"line":10,"column":0},"end":{"line":10,"column":25}},"10":{"start":{"line":11,"column":0},"end":{"line":11,"column":6}},"11":{"start":{"line":12,"column":0},"end":{"line":12,"column":0}},"12":{"start":{"line":13,"column":0},"end":{"line":13,"column":5}},"13":{"start":{"line":14,"column":0},"end":{"line":14,"column":25}},"14":{"start":{"line":15,"column":0},"end":{"line":15,"column":23}},"15":{"start":{"line":16,"column":0},"end":{"line":16,"column":35}},"16":{"start":{"line":17,"column":0},"end":{"line":17,"column":73}},"17":{"start":{"line":18,"column":0},"end":{"line":18,"column":56}},"18":{"start":{"line":19,"column":0},"end":{"line":19,"column":59}},"19":{"start":{"line":20,"column":0},"end":{"line":20,"column":6}},"20":{"start":{"line":21,"column":0},"end":{"line":21,"column":2}},"21":{"start":{"line":22,"column":0},"end":{"line":22,"column":6}},"22":{"start":{"line":23,"column":0},"end":{"line":23,"column":5}},"23":{"start":{"line":24,"column":0},"end":{"line":24,"column":30}},"24":{"start":{"line":25,"column":0},"end":{"line":25,"column":30}},"25":{"start":{"line":26,"column":0},"end":{"line":26,"column":62}},"26":{"start":{"line":27,"column":0},"end":{"line":27,"column":55}},"27":{"start":{"line":28,"column":0},"end":{"line":28,"column":6}},"28":{"start":{"line":29,"column":0},"end":{"line":29,"column":5}},"29":{"start":{"line":30,"column":0},"end":{"line":30,"column":29}},"30":{"start":{"line":31,"column":0},"end":{"line":31,"column":29}},"31":{"start":{"line":32,"column":0},"end":{"line":32,"column":35}},"32":{"start":{"line":33,"column":0},"end":{"line":33,"column":73}},"33":{"start":{"line":34,"column":0},"end":{"line":34,"column":56}},"34":{"start":{"line":35,"column":0},"end":{"line":35,"column":64}},"35":{"start":{"line":36,"column":0},"end":{"line":36,"column":2}},"36":{"start":{"line":37,"column":0},"end":{"line":37,"column":6}},"37":{"start":{"line":38,"column":0},"end":{"line":38,"column":5}},"38":{"start":{"line":39,"column":0},"end":{"line":39,"column":31}},"39":{"start":{"line":40,"column":0},"end":{"line":40,"column":30}},"40":{"start":{"line":41,"column":0},"end":{"line":41,"column":35}},"41":{"start":{"line":42,"column":0},"end":{"line":42,"column":73}},"42":{"start":{"line":43,"column":0},"end":{"line":43,"column":56}},"43":{"start":{"line":44,"column":0},"end":{"line":44,"column":60}},"44":{"start":{"line":45,"column":0},"end":{"line":45,"column":5}},"45":{"start":{"line":46,"column":0},"end":{"line":46,"column":3}},"46":{"start":{"line":47,"column":0},"end":{"line":47,"column":2}},"47":{"start":{"line":48,"column":0},"end":{"line":48,"column":0}},"48":{"start":{"line":49,"column":0},"end":{"line":49,"column":21}}},"s":{"0":0,"1":0,"2":0,"3":0,"4":0,"5":0,"6":0,"7":0,"8":0,"9":0,"10":0,"11":0,"12":0,"13":0,"14":0,"15":0,"16":0,"17":0,"18":0,"19":0,"20":0,"21":0,"22":0,"23":0,"24":0,"25":0,"26":0,"27":0,"28":0,"29":0,"30":0,"31":0,"32":0,"33":0,"34":0,"35":0,"36":0,"37":0,"38":0,"39":0,"40":0,"41":0,"42":0,"43":0,"44":0,"45":0,"46":0,"47":0,"48":0},"branchMap":{"0":{"type":"branch","line":1,"loc":{"start":{"line":1,"column":0},"end":{"line":49,"column":-263}},"locations":[{"start":{"line":1,"column":0},"end":{"line":49,"column":-263}}]}},"b":{"0":[0]},"fnMap":{"0":{"name":"(empty-report)","decl":{"start":{"line":1,"column":0},"end":{"line":49,"column":-263}},"loc":{"start":{"line":1,"column":0},"end":{"line":49,"column":-263}},"line":1}},"f":{"0":0}}
+,"C:\\Users\\yubal\\OneDrive\\Escritorio\\TechMix\\TechMix\\src\\views\\FooterView.vue": {"path":"C:\\Users\\yubal\\OneDrive\\Escritorio\\TechMix\\TechMix\\src\\views\\FooterView.vue","all":true,"statementMap":{"0":{"start":{"line":1,"column":0},"end":{"line":1,"column":14}},"1":{"start":{"line":2,"column":0},"end":{"line":2,"column":40}},"2":{"start":{"line":3,"column":0},"end":{"line":3,"column":21}},"3":{"start":{"line":4,"column":0},"end":{"line":4,"column":3}},"4":{"start":{"line":5,"column":0},"end":{"line":5,"column":55}},"5":{"start":{"line":6,"column":0},"end":{"line":6,"column":29}},"6":{"start":{"line":7,"column":0},"end":{"line":7,"column":20}},"7":{"start":{"line":8,"column":0},"end":{"line":8,"column":4}},"8":{"start":{"line":9,"column":0},"end":{"line":9,"column":3}},"9":{"start":{"line":10,"column":0},"end":{"line":10,"column":44}},"10":{"start":{"line":11,"column":0},"end":{"line":11,"column":27}},"11":{"start":{"line":12,"column":0},"end":{"line":12,"column":18}},"12":{"start":{"line":13,"column":0},"end":{"line":13,"column":4}},"13":{"start":{"line":14,"column":0},"end":{"line":14,"column":2}},"14":{"start":{"line":15,"column":0},"end":{"line":15,"column":9}},"15":{"start":{"line":16,"column":0},"end":{"line":16,"column":0}},"16":{"start":{"line":17,"column":0},"end":{"line":17,"column":10}},"17":{"start":{"line":18,"column":0},"end":{"line":18,"column":35}},"18":{"start":{"line":19,"column":0},"end":{"line":19,"column":71}},"19":{"start":{"line":20,"column":0},"end":{"line":20,"column":11}},"20":{"start":{"line":21,"column":0},"end":{"line":21,"column":58}},"21":{"start":{"line":22,"column":0},"end":{"line":22,"column":64}},"22":{"start":{"line":23,"column":0},"end":{"line":23,"column":12}},"23":{"start":{"line":24,"column":0},"end":{"line":24,"column":12}},"24":{"start":{"line":25,"column":0},"end":{"line":25,"column":45}},"25":{"start":{"line":26,"column":0},"end":{"line":26,"column":12}},"26":{"start":{"line":27,"column":0},"end":{"line":27,"column":58}},"27":{"start":{"line":28,"column":0},"end":{"line":28,"column":14}},"28":{"start":{"line":29,"column":0},"end":{"line":29,"column":31}},"29":{"start":{"line":30,"column":0},"end":{"line":30,"column":30}},"30":{"start":{"line":31,"column":0},"end":{"line":31,"column":37}},"31":{"start":{"line":32,"column":0},"end":{"line":32,"column":29}},"32":{"start":{"line":33,"column":0},"end":{"line":33,"column":29}},"33":{"start":{"line":34,"column":0},"end":{"line":34,"column":13}},"34":{"start":{"line":35,"column":0},"end":{"line":35,"column":56}},"35":{"start":{"line":36,"column":0},"end":{"line":36,"column":57}},"36":{"start":{"line":37,"column":0},"end":{"line":37,"column":16}},"37":{"start":{"line":38,"column":0},"end":{"line":38,"column":15}},"38":{"start":{"line":39,"column":0},"end":{"line":39,"column":13}},"39":{"start":{"line":40,"column":0},"end":{"line":40,"column":12}},"40":{"start":{"line":41,"column":0},"end":{"line":41,"column":10}},"41":{"start":{"line":42,"column":0},"end":{"line":42,"column":30}},"42":{"start":{"line":43,"column":0},"end":{"line":43,"column":25}},"43":{"start":{"line":44,"column":0},"end":{"line":44,"column":68}},"44":{"start":{"line":45,"column":0},"end":{"line":45,"column":12}},"45":{"start":{"line":46,"column":0},"end":{"line":46,"column":11}},"46":{"start":{"line":47,"column":0},"end":{"line":47,"column":67}},"47":{"start":{"line":48,"column":0},"end":{"line":48,"column":37}},"48":{"start":{"line":49,"column":0},"end":{"line":49,"column":9}},"49":{"start":{"line":50,"column":0},"end":{"line":50,"column":12}},"50":{"start":{"line":51,"column":0},"end":{"line":51,"column":10}},"51":{"start":{"line":52,"column":0},"end":{"line":52,"column":11}},"52":{"start":{"line":53,"column":0},"end":{"line":53,"column":11}},"53":{"start":{"line":54,"column":0},"end":{"line":54,"column":0}},"54":{"start":{"line":55,"column":0},"end":{"line":55,"column":14}},"55":{"start":{"line":56,"column":0},"end":{"line":56,"column":10}},"56":{"start":{"line":57,"column":0},"end":{"line":57,"column":21}},"57":{"start":{"line":58,"column":0},"end":{"line":58,"column":13}},"58":{"start":{"line":59,"column":0},"end":{"line":59,"column":14}},"59":{"start":{"line":60,"column":0},"end":{"line":60,"column":15}},"60":{"start":{"line":61,"column":0},"end":{"line":61,"column":13}},"61":{"start":{"line":62,"column":0},"end":{"line":62,"column":19}},"62":{"start":{"line":63,"column":0},"end":{"line":63,"column":25}},"63":{"start":{"line":64,"column":0},"end":{"line":64,"column":12}},"64":{"start":{"line":65,"column":0},"end":{"line":65,"column":1}},"65":{"start":{"line":66,"column":0},"end":{"line":66,"column":8}},"66":{"start":{"line":67,"column":0},"end":{"line":67,"column":16}},"67":{"start":{"line":68,"column":0},"end":{"line":68,"column":26}},"68":{"start":{"line":69,"column":0},"end":{"line":69,"column":12}},"69":{"start":{"line":70,"column":0},"end":{"line":70,"column":1}},"70":{"start":{"line":71,"column":0},"end":{"line":71,"column":0}},"71":{"start":{"line":72,"column":0},"end":{"line":72,"column":19}},"72":{"start":{"line":73,"column":0},"end":{"line":73,"column":16}},"73":{"start":{"line":74,"column":0},"end":{"line":74,"column":25}},"74":{"start":{"line":75,"column":0},"end":{"line":75,"column":16}},"75":{"start":{"line":76,"column":0},"end":{"line":76,"column":1}},"76":{"start":{"line":77,"column":0},"end":{"line":77,"column":0}},"77":{"start":{"line":78,"column":0},"end":{"line":78,"column":14}},"78":{"start":{"line":79,"column":0},"end":{"line":79,"column":12}},"79":{"start":{"line":80,"column":0},"end":{"line":80,"column":21}},"80":{"start":{"line":81,"column":0},"end":{"line":81,"column":25}},"81":{"start":{"line":82,"column":0},"end":{"line":82,"column":1}},"82":{"start":{"line":83,"column":0},"end":{"line":83,"column":0}},"83":{"start":{"line":84,"column":0},"end":{"line":84,"column":15}},"84":{"start":{"line":85,"column":0},"end":{"line":85,"column":24}},"85":{"start":{"line":86,"column":0},"end":{"line":86,"column":16}},"86":{"start":{"line":87,"column":0},"end":{"line":87,"column":16}},"87":{"start":{"line":88,"column":0},"end":{"line":88,"column":33}},"88":{"start":{"line":89,"column":0},"end":{"line":89,"column":12}},"89":{"start":{"line":90,"column":0},"end":{"line":90,"column":1}},"90":{"start":{"line":91,"column":0},"end":{"line":91,"column":0}},"91":{"start":{"line":92,"column":0},"end":{"line":92,"column":17}},"92":{"start":{"line":93,"column":0},"end":{"line":93,"column":24}},"93":{"start":{"line":94,"column":0},"end":{"line":94,"column":25}},"94":{"start":{"line":95,"column":0},"end":{"line":95,"column":1}},"95":{"start":{"line":96,"column":0},"end":{"line":96,"column":0}},"96":{"start":{"line":97,"column":0},"end":{"line":97,"column":23}},"97":{"start":{"line":98,"column":0},"end":{"line":98,"column":45}},"98":{"start":{"line":99,"column":0},"end":{"line":99,"column":1}},"99":{"start":{"line":100,"column":0},"end":{"line":100,"column":0}},"100":{"start":{"line":101,"column":0},"end":{"line":101,"column":11}},"101":{"start":{"line":102,"column":0},"end":{"line":102,"column":0}},"102":{"start":{"line":103,"column":0},"end":{"line":103,"column":2}},"103":{"start":{"line":104,"column":0},"end":{"line":104,"column":9}},"104":{"start":{"line":105,"column":0},"end":{"line":105,"column":14}},"105":{"start":{"line":106,"column":0},"end":{"line":106,"column":24}},"106":{"start":{"line":107,"column":0},"end":{"line":107,"column":15}},"107":{"start":{"line":108,"column":0},"end":{"line":108,"column":1}},"108":{"start":{"line":109,"column":0},"end":{"line":109,"column":0}},"109":{"start":{"line":110,"column":0},"end":{"line":110,"column":20}},"110":{"start":{"line":111,"column":0},"end":{"line":111,"column":23}},"111":{"start":{"line":112,"column":0},"end":{"line":112,"column":24}},"112":{"start":{"line":113,"column":0},"end":{"line":113,"column":12}},"113":{"start":{"line":114,"column":0},"end":{"line":114,"column":15}},"114":{"start":{"line":115,"column":0},"end":{"line":115,"column":1}},"115":{"start":{"line":116,"column":0},"end":{"line":116,"column":0}},"116":{"start":{"line":117,"column":0},"end":{"line":117,"column":24}},"117":{"start":{"line":118,"column":0},"end":{"line":118,"column":32}},"118":{"start":{"line":119,"column":0},"end":{"line":119,"column":24}},"119":{"start":{"line":120,"column":0},"end":{"line":120,"column":1}},"120":{"start":{"line":121,"column":0},"end":{"line":121,"column":0}},"121":{"start":{"line":122,"column":0},"end":{"line":122,"column":16}},"122":{"start":{"line":123,"column":0},"end":{"line":123,"column":32}},"123":{"start":{"line":124,"column":0},"end":{"line":124,"column":24}},"124":{"start":{"line":125,"column":0},"end":{"line":125,"column":1}},"125":{"start":{"line":126,"column":0},"end":{"line":126,"column":0}},"126":{"start":{"line":127,"column":0},"end":{"line":127,"column":17}},"127":{"start":{"line":128,"column":0},"end":{"line":128,"column":14}},"128":{"start":{"line":129,"column":0},"end":{"line":129,"column":70}},"129":{"start":{"line":130,"column":0},"end":{"line":130,"column":23}},"130":{"start":{"line":131,"column":0},"end":{"line":131,"column":78}},"131":{"start":{"line":132,"column":0},"end":{"line":132,"column":23}},"132":{"start":{"line":133,"column":0},"end":{"line":133,"column":75}},"133":{"start":{"line":134,"column":0},"end":{"line":134,"column":23}},"134":{"start":{"line":135,"column":0},"end":{"line":135,"column":73}},"135":{"start":{"line":136,"column":0},"end":{"line":136,"column":23}},"136":{"start":{"line":137,"column":0},"end":{"line":137,"column":32}},"137":{"start":{"line":138,"column":0},"end":{"line":138,"column":37}},"138":{"start":{"line":139,"column":0},"end":{"line":139,"column":40}},"139":{"start":{"line":140,"column":0},"end":{"line":140,"column":35}},"140":{"start":{"line":141,"column":0},"end":{"line":141,"column":1}},"141":{"start":{"line":142,"column":0},"end":{"line":142,"column":0}},"142":{"start":{"line":143,"column":0},"end":{"line":143,"column":23}},"143":{"start":{"line":144,"column":0},"end":{"line":144,"column":14}},"144":{"start":{"line":145,"column":0},"end":{"line":145,"column":70}},"145":{"start":{"line":146,"column":0},"end":{"line":146,"column":23}},"146":{"start":{"line":147,"column":0},"end":{"line":147,"column":78}},"147":{"start":{"line":148,"column":0},"end":{"line":148,"column":23}},"148":{"start":{"line":149,"column":0},"end":{"line":149,"column":75}},"149":{"start":{"line":150,"column":0},"end":{"line":150,"column":23}},"150":{"start":{"line":151,"column":0},"end":{"line":151,"column":73}},"151":{"start":{"line":152,"column":0},"end":{"line":152,"column":23}},"152":{"start":{"line":153,"column":0},"end":{"line":153,"column":28}},"153":{"start":{"line":154,"column":0},"end":{"line":154,"column":36}},"154":{"start":{"line":155,"column":0},"end":{"line":155,"column":39}},"155":{"start":{"line":156,"column":0},"end":{"line":156,"column":34}},"156":{"start":{"line":157,"column":0},"end":{"line":157,"column":1}},"157":{"start":{"line":158,"column":0},"end":{"line":158,"column":8}}},"s":{"0":0,"1":0,"2":0,"3":0,"4":0,"5":0,"6":0,"7":0,"8":0,"9":0,"10":0,"11":0,"12":0,"13":0,"14":0,"15":0,"16":0,"17":0,"18":0,"19":0,"20":0,"21":0,"22":0,"23":0,"24":0,"25":0,"26":0,"27":0,"28":0,"29":0,"30":0,"31":0,"32":0,"33":0,"34":0,"35":0,"36":0,"37":0,"38":0,"39":0,"40":0,"41":0,"42":0,"43":0,"44":0,"45":0,"46":0,"47":0,"48":0,"49":0,"50":0,"51":0,"52":0,"53":0,"54":0,"55":0,"56":0,"57":0,"58":0,"59":0,"60":0,"61":0,"62":0,"63":0,"64":0,"65":0,"66":0,"67":0,"68":0,"69":0,"70":0,"71":0,"72":0,"73":0,"74":0,"75":0,"76":0,"77":0,"78":0,"79":0,"80":0,"81":0,"82":0,"83":0,"84":0,"85":0,"86":0,"87":0,"88":0,"89":0,"90":0,"91":0,"92":0,"93":0,"94":0,"95":0,"96":0,"97":0,"98":0,"99":0,"100":0,"101":0,"102":0,"103":0,"104":0,"105":0,"106":0,"107":0,"108":0,"109":0,"110":0,"111":0,"112":0,"113":0,"114":0,"115":0,"116":0,"117":0,"118":0,"119":0,"120":0,"121":0,"122":0,"123":0,"124":0,"125":0,"126":0,"127":0,"128":0,"129":0,"130":0,"131":0,"132":0,"133":0,"134":0,"135":0,"136":0,"137":0,"138":0,"139":0,"140":0,"141":0,"142":0,"143":0,"144":0,"145":0,"146":0,"147":0,"148":0,"149":0,"150":0,"151":0,"152":0,"153":0,"154":0,"155":0,"156":0,"157":0},"branchMap":{"0":{"type":"branch","line":1,"loc":{"start":{"line":1,"column":0},"end":{"line":158,"column":-2323}},"locations":[{"start":{"line":1,"column":0},"end":{"line":158,"column":-2323}}]}},"b":{"0":[0]},"fnMap":{"0":{"name":"(empty-report)","decl":{"start":{"line":1,"column":0},"end":{"line":158,"column":-2323}},"loc":{"start":{"line":1,"column":0},"end":{"line":158,"column":-2323}},"line":1}},"f":{"0":0}}
+,"C:\\Users\\yubal\\OneDrive\\Escritorio\\TechMix\\TechMix\\src\\views\\HomeView.vue": {"path":"C:\\Users\\yubal\\OneDrive\\Escritorio\\TechMix\\TechMix\\src\\views\\HomeView.vue","all":true,"statementMap":{"0":{"start":{"line":1,"column":0},"end":{"line":1,"column":14}},"1":{"start":{"line":2,"column":0},"end":{"line":2,"column":45}},"2":{"start":{"line":3,"column":0},"end":{"line":3,"column":9}},"3":{"start":{"line":4,"column":0},"end":{"line":4,"column":0}},"4":{"start":{"line":5,"column":0},"end":{"line":5,"column":10}},"5":{"start":{"line":6,"column":0},"end":{"line":6,"column":3}},"6":{"start":{"line":7,"column":0},"end":{"line":7,"column":15}},"7":{"start":{"line":8,"column":0},"end":{"line":8,"column":11}}},"s":{"0":0,"1":0,"2":0,"3":0,"4":0,"5":0,"6":0,"7":0},"branchMap":{"0":{"type":"branch","line":1,"loc":{"start":{"line":1,"column":0},"end":{"line":8,"column":-89}},"locations":[{"start":{"line":1,"column":0},"end":{"line":8,"column":-89}}]}},"b":{"0":[0]},"fnMap":{"0":{"name":"(empty-report)","decl":{"start":{"line":1,"column":0},"end":{"line":8,"column":-89}},"loc":{"start":{"line":1,"column":0},"end":{"line":8,"column":-89}},"line":1}},"f":{"0":0}}
+,"C:\\Users\\yubal\\OneDrive\\Escritorio\\TechMix\\TechMix\\src\\views\\MainNavegationView.vue": {"path":"C:\\Users\\yubal\\OneDrive\\Escritorio\\TechMix\\TechMix\\src\\views\\MainNavegationView.vue","all":true,"statementMap":{"0":{"start":{"line":1,"column":0},"end":{"line":1,"column":14}},"1":{"start":{"line":2,"column":0},"end":{"line":2,"column":39}},"2":{"start":{"line":3,"column":0},"end":{"line":3,"column":0}},"3":{"start":{"line":4,"column":0},"end":{"line":4,"column":18}},"4":{"start":{"line":5,"column":0},"end":{"line":5,"column":33}},"5":{"start":{"line":6,"column":0},"end":{"line":6,"column":63}},"6":{"start":{"line":7,"column":0},"end":{"line":7,"column":1}},"7":{"start":{"line":8,"column":0},"end":{"line":8,"column":9}},"8":{"start":{"line":9,"column":0},"end":{"line":9,"column":0}},"9":{"start":{"line":10,"column":0},"end":{"line":10,"column":10}},"10":{"start":{"line":11,"column":0},"end":{"line":11,"column":91}},"11":{"start":{"line":12,"column":0},"end":{"line":12,"column":15}},"12":{"start":{"line":13,"column":0},"end":{"line":13,"column":39}},"13":{"start":{"line":14,"column":0},"end":{"line":14,"column":18}},"14":{"start":{"line":15,"column":0},"end":{"line":15,"column":19}},"15":{"start":{"line":16,"column":0},"end":{"line":16,"column":33}},"16":{"start":{"line":17,"column":0},"end":{"line":17,"column":18}},"17":{"start":{"line":18,"column":0},"end":{"line":18,"column":5}},"18":{"start":{"line":19,"column":0},"end":{"line":19,"column":21}},"19":{"start":{"line":20,"column":0},"end":{"line":20,"column":17}},"20":{"start":{"line":21,"column":0},"end":{"line":21,"column":8}},"21":{"start":{"line":22,"column":0},"end":{"line":22,"column":11}},"22":{"start":{"line":23,"column":0},"end":{"line":23,"column":0}},"23":{"start":{"line":24,"column":0},"end":{"line":24,"column":0}},"24":{"start":{"line":25,"column":0},"end":{"line":25,"column":14}},"25":{"start":{"line":26,"column":0},"end":{"line":26,"column":0}},"26":{"start":{"line":27,"column":0},"end":{"line":27,"column":0}},"27":{"start":{"line":28,"column":0},"end":{"line":28,"column":8}}},"s":{"0":0,"1":0,"2":0,"3":0,"4":0,"5":0,"6":0,"7":0,"8":0,"9":0,"10":0,"11":0,"12":0,"13":0,"14":0,"15":0,"16":0,"17":0,"18":0,"19":0,"20":0,"21":0,"22":0,"23":0,"24":0,"25":0,"26":0,"27":0},"branchMap":{"0":{"type":"branch","line":1,"loc":{"start":{"line":1,"column":558},"end":{"line":28,"column":8}},"locations":[{"start":{"line":1,"column":558},"end":{"line":28,"column":8}}]}},"b":{"0":[0]},"fnMap":{"0":{"name":"(empty-report)","decl":{"start":{"line":1,"column":558},"end":{"line":28,"column":8}},"loc":{"start":{"line":1,"column":558},"end":{"line":28,"column":8}},"line":1}},"f":{"0":0}}
+,"C:\\Users\\yubal\\OneDrive\\Escritorio\\TechMix\\TechMix\\src\\views\\PrivacyPolicyView.vue": {"path":"C:\\Users\\yubal\\OneDrive\\Escritorio\\TechMix\\TechMix\\src\\views\\PrivacyPolicyView.vue","all":true,"statementMap":{"0":{"start":{"line":1,"column":0},"end":{"line":1,"column":0}},"1":{"start":{"line":2,"column":0},"end":{"line":2,"column":11}},"2":{"start":{"line":3,"column":0},"end":{"line":3,"column":10}},"3":{"start":{"line":4,"column":0},"end":{"line":4,"column":35}},"4":{"start":{"line":5,"column":0},"end":{"line":5,"column":11}},"5":{"start":{"line":6,"column":0},"end":{"line":6,"column":8}},"6":{"start":{"line":7,"column":0},"end":{"line":7,"column":13}},"7":{"start":{"line":8,"column":0},"end":{"line":8,"column":30}},"8":{"start":{"line":9,"column":0},"end":{"line":9,"column":9}},"9":{"start":{"line":10,"column":0},"end":{"line":10,"column":60}},"10":{"start":{"line":11,"column":0},"end":{"line":11,"column":71}},"11":{"start":{"line":12,"column":0},"end":{"line":12,"column":80}},"12":{"start":{"line":13,"column":0},"end":{"line":13,"column":75}},"13":{"start":{"line":14,"column":0},"end":{"line":14,"column":10}},"14":{"start":{"line":15,"column":0},"end":{"line":15,"column":14}},"15":{"start":{"line":16,"column":0},"end":{"line":16,"column":13}},"16":{"start":{"line":17,"column":0},"end":{"line":17,"column":45}},"17":{"start":{"line":18,"column":0},"end":{"line":18,"column":9}},"18":{"start":{"line":19,"column":0},"end":{"line":19,"column":117}},"19":{"start":{"line":20,"column":0},"end":{"line":20,"column":40}},"20":{"start":{"line":21,"column":0},"end":{"line":21,"column":10}},"21":{"start":{"line":22,"column":0},"end":{"line":22,"column":14}},"22":{"start":{"line":23,"column":0},"end":{"line":23,"column":13}},"23":{"start":{"line":24,"column":0},"end":{"line":24,"column":45}},"24":{"start":{"line":25,"column":0},"end":{"line":25,"column":67}},"25":{"start":{"line":26,"column":0},"end":{"line":26,"column":10}},"26":{"start":{"line":27,"column":0},"end":{"line":27,"column":12}},"27":{"start":{"line":28,"column":0},"end":{"line":28,"column":75}},"28":{"start":{"line":29,"column":0},"end":{"line":29,"column":67}},"29":{"start":{"line":30,"column":0},"end":{"line":30,"column":13}},"30":{"start":{"line":31,"column":0},"end":{"line":31,"column":12}},"31":{"start":{"line":32,"column":0},"end":{"line":32,"column":80}},"32":{"start":{"line":33,"column":0},"end":{"line":33,"column":27}},"33":{"start":{"line":34,"column":0},"end":{"line":34,"column":13}},"34":{"start":{"line":35,"column":0},"end":{"line":35,"column":12}},"35":{"start":{"line":36,"column":0},"end":{"line":36,"column":75}},"36":{"start":{"line":37,"column":0},"end":{"line":37,"column":20}},"37":{"start":{"line":38,"column":0},"end":{"line":38,"column":13}},"38":{"start":{"line":39,"column":0},"end":{"line":39,"column":11}},"39":{"start":{"line":40,"column":0},"end":{"line":40,"column":14}},"40":{"start":{"line":41,"column":0},"end":{"line":41,"column":13}},"41":{"start":{"line":42,"column":0},"end":{"line":42,"column":45}},"42":{"start":{"line":43,"column":0},"end":{"line":43,"column":55}},"43":{"start":{"line":44,"column":0},"end":{"line":44,"column":10}},"44":{"start":{"line":45,"column":0},"end":{"line":45,"column":59}},"45":{"start":{"line":46,"column":0},"end":{"line":46,"column":62}},"46":{"start":{"line":47,"column":0},"end":{"line":47,"column":12}},"47":{"start":{"line":48,"column":0},"end":{"line":48,"column":75}},"48":{"start":{"line":49,"column":0},"end":{"line":49,"column":13}},"49":{"start":{"line":50,"column":0},"end":{"line":50,"column":80}},"50":{"start":{"line":51,"column":0},"end":{"line":51,"column":11}},"51":{"start":{"line":52,"column":0},"end":{"line":52,"column":14}},"52":{"start":{"line":53,"column":0},"end":{"line":53,"column":13}},"53":{"start":{"line":54,"column":0},"end":{"line":54,"column":59}},"54":{"start":{"line":55,"column":0},"end":{"line":55,"column":9}},"55":{"start":{"line":56,"column":0},"end":{"line":56,"column":79}},"56":{"start":{"line":57,"column":0},"end":{"line":57,"column":79}},"57":{"start":{"line":58,"column":0},"end":{"line":58,"column":32}},"58":{"start":{"line":59,"column":0},"end":{"line":59,"column":10}},"59":{"start":{"line":60,"column":0},"end":{"line":60,"column":14}},"60":{"start":{"line":61,"column":0},"end":{"line":61,"column":13}},"61":{"start":{"line":62,"column":0},"end":{"line":62,"column":42}},"62":{"start":{"line":63,"column":0},"end":{"line":63,"column":9}},"63":{"start":{"line":64,"column":0},"end":{"line":64,"column":77}},"64":{"start":{"line":65,"column":0},"end":{"line":65,"column":72}},"65":{"start":{"line":66,"column":0},"end":{"line":66,"column":10}},"66":{"start":{"line":67,"column":0},"end":{"line":67,"column":10}},"67":{"start":{"line":68,"column":0},"end":{"line":68,"column":12}},"68":{"start":{"line":69,"column":0},"end":{"line":69,"column":74}},"69":{"start":{"line":70,"column":0},"end":{"line":70,"column":20}},"70":{"start":{"line":71,"column":0},"end":{"line":71,"column":13}},"71":{"start":{"line":72,"column":0},"end":{"line":72,"column":79}},"72":{"start":{"line":73,"column":0},"end":{"line":73,"column":11}},"73":{"start":{"line":74,"column":0},"end":{"line":74,"column":14}},"74":{"start":{"line":75,"column":0},"end":{"line":75,"column":13}},"75":{"start":{"line":76,"column":0},"end":{"line":76,"column":45}},"76":{"start":{"line":77,"column":0},"end":{"line":77,"column":9}},"77":{"start":{"line":78,"column":0},"end":{"line":78,"column":80}},"78":{"start":{"line":79,"column":0},"end":{"line":79,"column":78}},"79":{"start":{"line":80,"column":0},"end":{"line":80,"column":10}},"80":{"start":{"line":81,"column":0},"end":{"line":81,"column":14}},"81":{"start":{"line":82,"column":0},"end":{"line":82,"column":13}},"82":{"start":{"line":83,"column":0},"end":{"line":83,"column":30}},"83":{"start":{"line":84,"column":0},"end":{"line":84,"column":50}},"84":{"start":{"line":85,"column":0},"end":{"line":85,"column":10}},"85":{"start":{"line":86,"column":0},"end":{"line":86,"column":48}},"86":{"start":{"line":87,"column":0},"end":{"line":87,"column":63}},"87":{"start":{"line":88,"column":0},"end":{"line":88,"column":12}},"88":{"start":{"line":89,"column":0},"end":{"line":89,"column":78}},"89":{"start":{"line":90,"column":0},"end":{"line":90,"column":74}},"90":{"start":{"line":91,"column":0},"end":{"line":91,"column":13}},"91":{"start":{"line":92,"column":0},"end":{"line":92,"column":12}},"92":{"start":{"line":93,"column":0},"end":{"line":93,"column":76}},"93":{"start":{"line":94,"column":0},"end":{"line":94,"column":66}},"94":{"start":{"line":95,"column":0},"end":{"line":95,"column":24}},"95":{"start":{"line":96,"column":0},"end":{"line":96,"column":13}},"96":{"start":{"line":97,"column":0},"end":{"line":97,"column":12}},"97":{"start":{"line":98,"column":0},"end":{"line":98,"column":80}},"98":{"start":{"line":99,"column":0},"end":{"line":99,"column":79}},"99":{"start":{"line":100,"column":0},"end":{"line":100,"column":79}},"100":{"start":{"line":101,"column":0},"end":{"line":101,"column":19}},"101":{"start":{"line":102,"column":0},"end":{"line":102,"column":13}},"102":{"start":{"line":103,"column":0},"end":{"line":103,"column":56}},"103":{"start":{"line":104,"column":0},"end":{"line":104,"column":11}},"104":{"start":{"line":105,"column":0},"end":{"line":105,"column":9}},"105":{"start":{"line":106,"column":0},"end":{"line":106,"column":62}},"106":{"start":{"line":107,"column":0},"end":{"line":107,"column":28}},"107":{"start":{"line":108,"column":0},"end":{"line":108,"column":10}},"108":{"start":{"line":109,"column":0},"end":{"line":109,"column":14}},"109":{"start":{"line":110,"column":0},"end":{"line":110,"column":13}},"110":{"start":{"line":111,"column":0},"end":{"line":111,"column":56}},"111":{"start":{"line":112,"column":0},"end":{"line":112,"column":9}},"112":{"start":{"line":113,"column":0},"end":{"line":113,"column":78}},"113":{"start":{"line":114,"column":0},"end":{"line":114,"column":80}},"114":{"start":{"line":115,"column":0},"end":{"line":115,"column":40}},"115":{"start":{"line":116,"column":0},"end":{"line":116,"column":10}},"116":{"start":{"line":117,"column":0},"end":{"line":117,"column":14}},"117":{"start":{"line":118,"column":0},"end":{"line":118,"column":13}},"118":{"start":{"line":119,"column":0},"end":{"line":119,"column":27}},"119":{"start":{"line":120,"column":0},"end":{"line":120,"column":9}},"120":{"start":{"line":121,"column":0},"end":{"line":121,"column":76}},"121":{"start":{"line":122,"column":0},"end":{"line":122,"column":64}},"122":{"start":{"line":123,"column":0},"end":{"line":123,"column":10}},"123":{"start":{"line":124,"column":0},"end":{"line":124,"column":14}},"124":{"start":{"line":125,"column":0},"end":{"line":125,"column":9}},"125":{"start":{"line":126,"column":0},"end":{"line":126,"column":11}}},"s":{"0":0,"1":0,"2":0,"3":0,"4":0,"5":0,"6":0,"7":0,"8":0,"9":0,"10":0,"11":0,"12":0,"13":0,"14":0,"15":0,"16":0,"17":0,"18":0,"19":0,"20":0,"21":0,"22":0,"23":0,"24":0,"25":0,"26":0,"27":0,"28":0,"29":0,"30":0,"31":0,"32":0,"33":0,"34":0,"35":0,"36":0,"37":0,"38":0,"39":0,"40":0,"41":0,"42":0,"43":0,"44":0,"45":0,"46":0,"47":0,"48":0,"49":0,"50":0,"51":0,"52":0,"53":0,"54":0,"55":0,"56":0,"57":0,"58":0,"59":0,"60":0,"61":0,"62":0,"63":0,"64":0,"65":0,"66":0,"67":0,"68":0,"69":0,"70":0,"71":0,"72":0,"73":0,"74":0,"75":0,"76":0,"77":0,"78":0,"79":0,"80":0,"81":0,"82":0,"83":0,"84":0,"85":0,"86":0,"87":0,"88":0,"89":0,"90":0,"91":0,"92":0,"93":0,"94":0,"95":0,"96":0,"97":0,"98":0,"99":0,"100":0,"101":0,"102":0,"103":0,"104":0,"105":0,"106":0,"107":0,"108":0,"109":0,"110":0,"111":0,"112":0,"113":0,"114":0,"115":0,"116":0,"117":0,"118":0,"119":0,"120":0,"121":0,"122":0,"123":0,"124":0,"125":0},"branchMap":{"0":{"type":"branch","line":1,"loc":{"start":{"line":1,"column":4550},"end":{"line":126,"column":11}},"locations":[{"start":{"line":1,"column":4550},"end":{"line":126,"column":11}}]}},"b":{"0":[0]},"fnMap":{"0":{"name":"(empty-report)","decl":{"start":{"line":1,"column":4550},"end":{"line":126,"column":11}},"loc":{"start":{"line":1,"column":4550},"end":{"line":126,"column":11}},"line":1}},"f":{"0":0}}
+,"C:\\Users\\yubal\\OneDrive\\Escritorio\\TechMix\\TechMix\\src\\views\\ProjectDetails.vue": {"path":"C:\\Users\\yubal\\OneDrive\\Escritorio\\TechMix\\TechMix\\src\\views\\ProjectDetails.vue","all":true,"statementMap":{"0":{"start":{"line":1,"column":0},"end":{"line":1,"column":14}},"1":{"start":{"line":2,"column":0},"end":{"line":2,"column":30}},"2":{"start":{"line":3,"column":0},"end":{"line":3,"column":37}},"3":{"start":{"line":4,"column":0},"end":{"line":4,"column":0}},"4":{"start":{"line":5,"column":0},"end":{"line":5,"column":81}},"5":{"start":{"line":6,"column":0},"end":{"line":6,"column":0}},"6":{"start":{"line":7,"column":0},"end":{"line":7,"column":27}},"7":{"start":{"line":8,"column":0},"end":{"line":8,"column":20}},"8":{"start":{"line":9,"column":0},"end":{"line":9,"column":1}},"9":{"start":{"line":10,"column":0},"end":{"line":10,"column":0}},"10":{"start":{"line":11,"column":0},"end":{"line":11,"column":0}},"11":{"start":{"line":12,"column":0},"end":{"line":12,"column":24}},"12":{"start":{"line":13,"column":0},"end":{"line":13,"column":59}},"13":{"start":{"line":14,"column":0},"end":{"line":14,"column":0}},"14":{"start":{"line":15,"column":0},"end":{"line":15,"column":0}},"15":{"start":{"line":16,"column":0},"end":{"line":16,"column":90}},"16":{"start":{"line":17,"column":0},"end":{"line":17,"column":9}},"17":{"start":{"line":18,"column":0},"end":{"line":18,"column":10}},"18":{"start":{"line":19,"column":0},"end":{"line":19,"column":7}},"19":{"start":{"line":20,"column":0},"end":{"line":20,"column":47}},"20":{"start":{"line":21,"column":0},"end":{"line":21,"column":8}},"21":{"start":{"line":22,"column":0},"end":{"line":22,"column":11}},"22":{"start":{"line":23,"column":0},"end":{"line":23,"column":0}},"23":{"start":{"line":24,"column":0},"end":{"line":24,"column":0}},"24":{"start":{"line":25,"column":0},"end":{"line":25,"column":14}},"25":{"start":{"line":26,"column":0},"end":{"line":26,"column":8}}},"s":{"0":0,"1":0,"2":0,"3":0,"4":0,"5":0,"6":0,"7":0,"8":0,"9":0,"10":0,"11":0,"12":0,"13":0,"14":0,"15":0,"16":0,"17":0,"18":0,"19":0,"20":0,"21":0,"22":0,"23":0,"24":0,"25":0},"branchMap":{"0":{"type":"branch","line":1,"loc":{"start":{"line":1,"column":547},"end":{"line":26,"column":8}},"locations":[{"start":{"line":1,"column":547},"end":{"line":26,"column":8}}]}},"b":{"0":[0]},"fnMap":{"0":{"name":"(empty-report)","decl":{"start":{"line":1,"column":547},"end":{"line":26,"column":8}},"loc":{"start":{"line":1,"column":547},"end":{"line":26,"column":8}},"line":1}},"f":{"0":0}}
+,"C:\\Users\\yubal\\OneDrive\\Escritorio\\TechMix\\TechMix\\src\\views\\ProjectsView.vue": {"path":"C:\\Users\\yubal\\OneDrive\\Escritorio\\TechMix\\TechMix\\src\\views\\ProjectsView.vue","all":true,"statementMap":{"0":{"start":{"line":1,"column":0},"end":{"line":1,"column":14}},"1":{"start":{"line":2,"column":0},"end":{"line":2,"column":76}},"2":{"start":{"line":3,"column":0},"end":{"line":3,"column":0}},"3":{"start":{"line":4,"column":0},"end":{"line":4,"column":18}},"4":{"start":{"line":5,"column":0},"end":{"line":5,"column":69}},"5":{"start":{"line":6,"column":0},"end":{"line":6,"column":2}},"6":{"start":{"line":7,"column":0},"end":{"line":7,"column":9}},"7":{"start":{"line":8,"column":0},"end":{"line":8,"column":0}},"8":{"start":{"line":9,"column":0},"end":{"line":9,"column":10}},"9":{"start":{"line":10,"column":0},"end":{"line":10,"column":56}},"10":{"start":{"line":11,"column":0},"end":{"line":11,"column":15}},"11":{"start":{"line":12,"column":0},"end":{"line":12,"column":33}},"12":{"start":{"line":13,"column":0},"end":{"line":13,"column":30}},"13":{"start":{"line":14,"column":0},"end":{"line":14,"column":61}},"14":{"start":{"line":15,"column":0},"end":{"line":15,"column":5}},"15":{"start":{"line":16,"column":0},"end":{"line":16,"column":77}},"16":{"start":{"line":17,"column":0},"end":{"line":17,"column":17}},"17":{"start":{"line":18,"column":0},"end":{"line":18,"column":8}},"18":{"start":{"line":19,"column":0},"end":{"line":19,"column":11}},"19":{"start":{"line":20,"column":0},"end":{"line":20,"column":0}},"20":{"start":{"line":21,"column":0},"end":{"line":21,"column":14}},"21":{"start":{"line":22,"column":0},"end":{"line":22,"column":16}},"22":{"start":{"line":23,"column":0},"end":{"line":23,"column":15}},"23":{"start":{"line":24,"column":0},"end":{"line":24,"column":15}},"24":{"start":{"line":25,"column":0},"end":{"line":25,"column":18}},"25":{"start":{"line":26,"column":0},"end":{"line":26,"column":34}},"26":{"start":{"line":27,"column":0},"end":{"line":27,"column":1}},"27":{"start":{"line":28,"column":0},"end":{"line":28,"column":0}},"28":{"start":{"line":29,"column":0},"end":{"line":29,"column":22}},"29":{"start":{"line":30,"column":0},"end":{"line":30,"column":25}},"30":{"start":{"line":31,"column":0},"end":{"line":31,"column":1}},"31":{"start":{"line":32,"column":0},"end":{"line":32,"column":8}}},"s":{"0":0,"1":0,"2":0,"3":0,"4":0,"5":0,"6":0,"7":0,"8":0,"9":0,"10":0,"11":0,"12":0,"13":0,"14":0,"15":0,"16":0,"17":0,"18":0,"19":0,"20":0,"21":0,"22":0,"23":0,"24":0,"25":0,"26":0,"27":0,"28":0,"29":0,"30":0,"31":0},"branchMap":{"0":{"type":"branch","line":1,"loc":{"start":{"line":1,"column":742},"end":{"line":32,"column":8}},"locations":[{"start":{"line":1,"column":742},"end":{"line":32,"column":8}}]}},"b":{"0":[0]},"fnMap":{"0":{"name":"(empty-report)","decl":{"start":{"line":1,"column":742},"end":{"line":32,"column":8}},"loc":{"start":{"line":1,"column":742},"end":{"line":32,"column":8}},"line":1}},"f":{"0":0}}
+,"C:\\Users\\yubal\\OneDrive\\Escritorio\\TechMix\\TechMix\\src\\views\\TechnicalTests.vue": {"path":"C:\\Users\\yubal\\OneDrive\\Escritorio\\TechMix\\TechMix\\src\\views\\TechnicalTests.vue","all":true,"statementMap":{"0":{"start":{"line":1,"column":0},"end":{"line":1,"column":14}},"1":{"start":{"line":2,"column":0},"end":{"line":2,"column":0}},"2":{"start":{"line":3,"column":0},"end":{"line":3,"column":9}},"3":{"start":{"line":4,"column":0},"end":{"line":4,"column":0}},"4":{"start":{"line":5,"column":0},"end":{"line":5,"column":10}},"5":{"start":{"line":6,"column":0},"end":{"line":6,"column":16}},"6":{"start":{"line":7,"column":0},"end":{"line":7,"column":11}},"7":{"start":{"line":8,"column":0},"end":{"line":8,"column":14}},"8":{"start":{"line":9,"column":0},"end":{"line":9,"column":0}},"9":{"start":{"line":10,"column":0},"end":{"line":10,"column":8}}},"s":{"0":0,"1":0,"2":0,"3":0,"4":0,"5":0,"6":0,"7":0,"8":0,"9":0},"branchMap":{"0":{"type":"branch","line":1,"loc":{"start":{"line":1,"column":0},"end":{"line":10,"column":-78}},"locations":[{"start":{"line":1,"column":0},"end":{"line":10,"column":-78}}]}},"b":{"0":[0]},"fnMap":{"0":{"name":"(empty-report)","decl":{"start":{"line":1,"column":0},"end":{"line":10,"column":-78}},"loc":{"start":{"line":1,"column":0},"end":{"line":10,"column":-78}},"line":1}},"f":{"0":0}}
+}
+
+
+
+--- File: coverage\favicon.png ---
+(Skipped (non-matching extension))
+
+
+--- File: coverage\index.html ---
+(Skipped (non-matching extension))
+
+
+--- File: coverage\prettify.css ---
+(Skipped (non-matching extension))
+
+
+--- File: coverage\prettify.js ---
+
+/* eslint-disable */
+window.PR_SHOULD_USE_CONTINUATION=true;(function(){var h=["break,continue,do,else,for,if,return,while"];var u=[h,"auto,case,char,const,default,double,enum,extern,float,goto,int,long,register,short,signed,sizeof,static,struct,switch,typedef,union,unsigned,void,volatile"];var p=[u,"catch,class,delete,false,import,new,operator,private,protected,public,this,throw,true,try,typeof"];var l=[p,"alignof,align_union,asm,axiom,bool,concept,concept_map,const_cast,constexpr,decltype,dynamic_cast,explicit,export,friend,inline,late_check,mutable,namespace,nullptr,reinterpret_cast,static_assert,static_cast,template,typeid,typename,using,virtual,where"];var x=[p,"abstract,boolean,byte,extends,final,finally,implements,import,instanceof,null,native,package,strictfp,super,synchronized,throws,transient"];var R=[x,"as,base,by,checked,decimal,delegate,descending,dynamic,event,fixed,foreach,from,group,implicit,in,interface,internal,into,is,lock,object,out,override,orderby,params,partial,readonly,ref,sbyte,sealed,stackalloc,string,select,uint,ulong,unchecked,unsafe,ushort,var"];var r="all,and,by,catch,class,else,extends,false,finally,for,if,in,is,isnt,loop,new,no,not,null,of,off,on,or,return,super,then,true,try,unless,until,when,while,yes";var w=[p,"debugger,eval,export,function,get,null,set,undefined,var,with,Infinity,NaN"];var s="caller,delete,die,do,dump,elsif,eval,exit,foreach,for,goto,if,import,last,local,my,next,no,our,print,package,redo,require,sub,undef,unless,until,use,wantarray,while,BEGIN,END";var I=[h,"and,as,assert,class,def,del,elif,except,exec,finally,from,global,import,in,is,lambda,nonlocal,not,or,pass,print,raise,try,with,yield,False,True,None"];var f=[h,"alias,and,begin,case,class,def,defined,elsif,end,ensure,false,in,module,next,nil,not,or,redo,rescue,retry,self,super,then,true,undef,unless,until,when,yield,BEGIN,END"];var H=[h,"case,done,elif,esac,eval,fi,function,in,local,set,then,until"];var A=[l,R,w,s+I,f,H];var e=/^(DIR|FILE|vector|(de|priority_)?queue|list|stack|(const_)?iterator|(multi)?(set|map)|bitset|u?(int|float)\d*)/;var C="str";var z="kwd";var j="com";var O="typ";var G="lit";var L="pun";var F="pln";var m="tag";var E="dec";var J="src";var P="atn";var n="atv";var N="nocode";var M="(?:^^\\.?|[+-]|\\!|\\!=|\\!==|\\#|\\%|\\%=|&|&&|&&=|&=|\\(|\\*|\\*=|\\+=|\\,|\\-=|\\->|\\/|\\/=|:|::|\\;|<|<<|<<=|<=|=|==|===|>|>=|>>|>>=|>>>|>>>=|\\?|\\@|\\[|\\^|\\^=|\\^\\^|\\^\\^=|\\{|\\||\\|=|\\|\\||\\|\\|=|\\~|break|case|continue|delete|do|else|finally|instanceof|return|throw|try|typeof)\\s*";function k(Z){var ad=0;var S=false;var ac=false;for(var V=0,U=Z.length;V<U;++V){var ae=Z[V];if(ae.ignoreCase){ac=true}else{if(/[a-z]/i.test(ae.source.replace(/\\u[0-9a-f]{4}|\\x[0-9a-f]{2}|\\[^ux]/gi,""))){S=true;ac=false;break}}}var Y={b:8,t:9,n:10,v:11,f:12,r:13};function ab(ah){var ag=ah.charCodeAt(0);if(ag!==92){return ag}var af=ah.charAt(1);ag=Y[af];if(ag){return ag}else{if("0"<=af&&af<="7"){return parseInt(ah.substring(1),8)}else{if(af==="u"||af==="x"){return parseInt(ah.substring(2),16)}else{return ah.charCodeAt(1)}}}}function T(af){if(af<32){return(af<16?"\\x0":"\\x")+af.toString(16)}var ag=String.fromCharCode(af);if(ag==="\\"||ag==="-"||ag==="["||ag==="]"){ag="\\"+ag}return ag}function X(am){var aq=am.substring(1,am.length-1).match(new RegExp("\\\\u[0-9A-Fa-f]{4}|\\\\x[0-9A-Fa-f]{2}|\\\\[0-3][0-7]{0,2}|\\\\[0-7]{1,2}|\\\\[\\s\\S]|-|[^-\\\\]","g"));var ak=[];var af=[];var ao=aq[0]==="^";for(var ar=ao?1:0,aj=aq.length;ar<aj;++ar){var ah=aq[ar];if(/\\[bdsw]/i.test(ah)){ak.push(ah)}else{var ag=ab(ah);var al;if(ar+2<aj&&"-"===aq[ar+1]){al=ab(aq[ar+2]);ar+=2}else{al=ag}af.push([ag,al]);if(!(al<65||ag>122)){if(!(al<65||ag>90)){af.push([Math.max(65,ag)|32,Math.min(al,90)|32])}if(!(al<97||ag>122)){af.push([Math.max(97,ag)&~32,Math.min(al,122)&~32])}}}}af.sort(function(av,au){return(av[0]-au[0])||(au[1]-av[1])});var ai=[];var ap=[NaN,NaN];for(var ar=0;ar<af.length;++ar){var at=af[ar];if(at[0]<=ap[1]+1){ap[1]=Math.max(ap[1],at[1])}else{ai.push(ap=at)}}var an=["["];if(ao){an.push("^")}an.push.apply(an,ak);for(var ar=0;ar<ai.length;++ar){var at=ai[ar];an.push(T(at[0]));if(at[1]>at[0]){if(at[1]+1>at[0]){an.push("-")}an.push(T(at[1]))}}an.push("]");return an.join("")}function W(al){var aj=al.source.match(new RegExp("(?:\\[(?:[^\\x5C\\x5D]|\\\\[\\s\\S])*\\]|\\\\u[A-Fa-f0-9]{4}|\\\\x[A-Fa-f0-9]{2}|\\\\[0-9]+|\\\\[^ux0-9]|\\(\\?[:!=]|[\\(\\)\\^]|[^\\x5B\\x5C\\(\\)\\^]+)","g"));var ah=aj.length;var an=[];for(var ak=0,am=0;ak<ah;++ak){var ag=aj[ak];if(ag==="("){++am}else{if("\\"===ag.charAt(0)){var af=+ag.substring(1);if(af&&af<=am){an[af]=-1}}}}for(var ak=1;ak<an.length;++ak){if(-1===an[ak]){an[ak]=++ad}}for(var ak=0,am=0;ak<ah;++ak){var ag=aj[ak];if(ag==="("){++am;if(an[am]===undefined){aj[ak]="(?:"}}else{if("\\"===ag.charAt(0)){var af=+ag.substring(1);if(af&&af<=am){aj[ak]="\\"+an[am]}}}}for(var ak=0,am=0;ak<ah;++ak){if("^"===aj[ak]&&"^"!==aj[ak+1]){aj[ak]=""}}if(al.ignoreCase&&S){for(var ak=0;ak<ah;++ak){var ag=aj[ak];var ai=ag.charAt(0);if(ag.length>=2&&ai==="["){aj[ak]=X(ag)}else{if(ai!=="\\"){aj[ak]=ag.replace(/[a-zA-Z]/g,function(ao){var ap=ao.charCodeAt(0);return"["+String.fromCharCode(ap&~32,ap|32)+"]"})}}}}return aj.join("")}var aa=[];for(var V=0,U=Z.length;V<U;++V){var ae=Z[V];if(ae.global||ae.multiline){throw new Error(""+ae)}aa.push("(?:"+W(ae)+")")}return new RegExp(aa.join("|"),ac?"gi":"g")}function a(V){var U=/(?:^|\s)nocode(?:\s|$)/;var X=[];var T=0;var Z=[];var W=0;var S;if(V.currentStyle){S=V.currentStyle.whiteSpace}else{if(window.getComputedStyle){S=document.defaultView.getComputedStyle(V,null).getPropertyValue("white-space")}}var Y=S&&"pre"===S.substring(0,3);function aa(ab){switch(ab.nodeType){case 1:if(U.test(ab.className)){return}for(var ae=ab.firstChild;ae;ae=ae.nextSibling){aa(ae)}var ad=ab.nodeName;if("BR"===ad||"LI"===ad){X[W]="\n";Z[W<<1]=T++;Z[(W++<<1)|1]=ab}break;case 3:case 4:var ac=ab.nodeValue;if(ac.length){if(!Y){ac=ac.replace(/[ \t\r\n]+/g," ")}else{ac=ac.replace(/\r\n?/g,"\n")}X[W]=ac;Z[W<<1]=T;T+=ac.length;Z[(W++<<1)|1]=ab}break}}aa(V);return{sourceCode:X.join("").replace(/\n$/,""),spans:Z}}function B(S,U,W,T){if(!U){return}var V={sourceCode:U,basePos:S};W(V);T.push.apply(T,V.decorations)}var v=/\S/;function o(S){var V=undefined;for(var U=S.firstChild;U;U=U.nextSibling){var T=U.nodeType;V=(T===1)?(V?S:U):(T===3)?(v.test(U.nodeValue)?S:V):V}return V===S?undefined:V}function g(U,T){var S={};var V;(function(){var ad=U.concat(T);var ah=[];var ag={};for(var ab=0,Z=ad.length;ab<Z;++ab){var Y=ad[ab];var ac=Y[3];if(ac){for(var ae=ac.length;--ae>=0;){S[ac.charAt(ae)]=Y}}var af=Y[1];var aa=""+af;if(!ag.hasOwnProperty(aa)){ah.push(af);ag[aa]=null}}ah.push(/[\0-\uffff]/);V=k(ah)})();var X=T.length;var W=function(ah){var Z=ah.sourceCode,Y=ah.basePos;var ad=[Y,F];var af=0;var an=Z.match(V)||[];var aj={};for(var ae=0,aq=an.length;ae<aq;++ae){var ag=an[ae];var ap=aj[ag];var ai=void 0;var am;if(typeof ap==="string"){am=false}else{var aa=S[ag.charAt(0)];if(aa){ai=ag.match(aa[1]);ap=aa[0]}else{for(var ao=0;ao<X;++ao){aa=T[ao];ai=ag.match(aa[1]);if(ai){ap=aa[0];break}}if(!ai){ap=F}}am=ap.length>=5&&"lang-"===ap.substring(0,5);if(am&&!(ai&&typeof ai[1]==="string")){am=false;ap=J}if(!am){aj[ag]=ap}}var ab=af;af+=ag.length;if(!am){ad.push(Y+ab,ap)}else{var al=ai[1];var ak=ag.indexOf(al);var ac=ak+al.length;if(ai[2]){ac=ag.length-ai[2].length;ak=ac-al.length}var ar=ap.substring(5);B(Y+ab,ag.substring(0,ak),W,ad);B(Y+ab+ak,al,q(ar,al),ad);B(Y+ab+ac,ag.substring(ac),W,ad)}}ah.decorations=ad};return W}function i(T){var W=[],S=[];if(T.tripleQuotedStrings){W.push([C,/^(?:\'\'\'(?:[^\'\\]|\\[\s\S]|\'{1,2}(?=[^\']))*(?:\'\'\'|$)|\"\"\"(?:[^\"\\]|\\[\s\S]|\"{1,2}(?=[^\"]))*(?:\"\"\"|$)|\'(?:[^\\\']|\\[\s\S])*(?:\'|$)|\"(?:[^\\\"]|\\[\s\S])*(?:\"|$))/,null,"'\""])}else{if(T.multiLineStrings){W.push([C,/^(?:\'(?:[^\\\']|\\[\s\S])*(?:\'|$)|\"(?:[^\\\"]|\\[\s\S])*(?:\"|$)|\`(?:[^\\\`]|\\[\s\S])*(?:\`|$))/,null,"'\"`"])}else{W.push([C,/^(?:\'(?:[^\\\'\r\n]|\\.)*(?:\'|$)|\"(?:[^\\\"\r\n]|\\.)*(?:\"|$))/,null,"\"'"])}}if(T.verbatimStrings){S.push([C,/^@\"(?:[^\"]|\"\")*(?:\"|$)/,null])}var Y=T.hashComments;if(Y){if(T.cStyleComments){if(Y>1){W.push([j,/^#(?:##(?:[^#]|#(?!##))*(?:###|$)|.*)/,null,"#"])}else{W.push([j,/^#(?:(?:define|elif|else|endif|error|ifdef|include|ifndef|line|pragma|undef|warning)\b|[^\r\n]*)/,null,"#"])}S.push([C,/^<(?:(?:(?:\.\.\/)*|\/?)(?:[\w-]+(?:\/[\w-]+)+)?[\w-]+\.h|[a-z]\w*)>/,null])}else{W.push([j,/^#[^\r\n]*/,null,"#"])}}if(T.cStyleComments){S.push([j,/^\/\/[^\r\n]*/,null]);S.push([j,/^\/\*[\s\S]*?(?:\*\/|$)/,null])}if(T.regexLiterals){var X=("/(?=[^/*])(?:[^/\\x5B\\x5C]|\\x5C[\\s\\S]|\\x5B(?:[^\\x5C\\x5D]|\\x5C[\\s\\S])*(?:\\x5D|$))+/");S.push(["lang-regex",new RegExp("^"+M+"("+X+")")])}var V=T.types;if(V){S.push([O,V])}var U=(""+T.keywords).replace(/^ | $/g,"");if(U.length){S.push([z,new RegExp("^(?:"+U.replace(/[\s,]+/g,"|")+")\\b"),null])}W.push([F,/^\s+/,null," \r\n\t\xA0"]);S.push([G,/^@[a-z_$][a-z_$@0-9]*/i,null],[O,/^(?:[@_]?[A-Z]+[a-z][A-Za-z_$@0-9]*|\w+_t\b)/,null],[F,/^[a-z_$][a-z_$@0-9]*/i,null],[G,new RegExp("^(?:0x[a-f0-9]+|(?:\\d(?:_\\d+)*\\d*(?:\\.\\d*)?|\\.\\d\\+)(?:e[+\\-]?\\d+)?)[a-z]*","i"),null,"0123456789"],[F,/^\\[\s\S]?/,null],[L,/^.[^\s\w\.$@\'\"\`\/\#\\]*/,null]);return g(W,S)}var K=i({keywords:A,hashComments:true,cStyleComments:true,multiLineStrings:true,regexLiterals:true});function Q(V,ag){var U=/(?:^|\s)nocode(?:\s|$)/;var ab=/\r\n?|\n/;var ac=V.ownerDocument;var S;if(V.currentStyle){S=V.currentStyle.whiteSpace}else{if(window.getComputedStyle){S=ac.defaultView.getComputedStyle(V,null).getPropertyValue("white-space")}}var Z=S&&"pre"===S.substring(0,3);var af=ac.createElement("LI");while(V.firstChild){af.appendChild(V.firstChild)}var W=[af];function ae(al){switch(al.nodeType){case 1:if(U.test(al.className)){break}if("BR"===al.nodeName){ad(al);if(al.parentNode){al.parentNode.removeChild(al)}}else{for(var an=al.firstChild;an;an=an.nextSibling){ae(an)}}break;case 3:case 4:if(Z){var am=al.nodeValue;var aj=am.match(ab);if(aj){var ai=am.substring(0,aj.index);al.nodeValue=ai;var ah=am.substring(aj.index+aj[0].length);if(ah){var ak=al.parentNode;ak.insertBefore(ac.createTextNode(ah),al.nextSibling)}ad(al);if(!ai){al.parentNode.removeChild(al)}}}break}}function ad(ak){while(!ak.nextSibling){ak=ak.parentNode;if(!ak){return}}function ai(al,ar){var aq=ar?al.cloneNode(false):al;var ao=al.parentNode;if(ao){var ap=ai(ao,1);var an=al.nextSibling;ap.appendChild(aq);for(var am=an;am;am=an){an=am.nextSibling;ap.appendChild(am)}}return aq}var ah=ai(ak.nextSibling,0);for(var aj;(aj=ah.parentNode)&&aj.nodeType===1;){ah=aj}W.push(ah)}for(var Y=0;Y<W.length;++Y){ae(W[Y])}if(ag===(ag|0)){W[0].setAttribute("value",ag)}var aa=ac.createElement("OL");aa.className="linenums";var X=Math.max(0,((ag-1))|0)||0;for(var Y=0,T=W.length;Y<T;++Y){af=W[Y];af.className="L"+((Y+X)%10);if(!af.firstChild){af.appendChild(ac.createTextNode("\xA0"))}aa.appendChild(af)}V.appendChild(aa)}function D(ac){var aj=/\bMSIE\b/.test(navigator.userAgent);var am=/\n/g;var al=ac.sourceCode;var an=al.length;var V=0;var aa=ac.spans;var T=aa.length;var ah=0;var X=ac.decorations;var Y=X.length;var Z=0;X[Y]=an;var ar,aq;for(aq=ar=0;aq<Y;){if(X[aq]!==X[aq+2]){X[ar++]=X[aq++];X[ar++]=X[aq++]}else{aq+=2}}Y=ar;for(aq=ar=0;aq<Y;){var at=X[aq];var ab=X[aq+1];var W=aq+2;while(W+2<=Y&&X[W+1]===ab){W+=2}X[ar++]=at;X[ar++]=ab;aq=W}Y=X.length=ar;var ae=null;while(ah<T){var af=aa[ah];var S=aa[ah+2]||an;var ag=X[Z];var ap=X[Z+2]||an;var W=Math.min(S,ap);var ak=aa[ah+1];var U;if(ak.nodeType!==1&&(U=al.substring(V,W))){if(aj){U=U.replace(am,"\r")}ak.nodeValue=U;var ai=ak.ownerDocument;var ao=ai.createElement("SPAN");ao.className=X[Z+1];var ad=ak.parentNode;ad.replaceChild(ao,ak);ao.appendChild(ak);if(V<S){aa[ah+1]=ak=ai.createTextNode(al.substring(W,S));ad.insertBefore(ak,ao.nextSibling)}}V=W;if(V>=S){ah+=2}if(V>=ap){Z+=2}}}var t={};function c(U,V){for(var S=V.length;--S>=0;){var T=V[S];if(!t.hasOwnProperty(T)){t[T]=U}else{if(window.console){console.warn("cannot override language handler %s",T)}}}}function q(T,S){if(!(T&&t.hasOwnProperty(T))){T=/^\s*</.test(S)?"default-markup":"default-code"}return t[T]}c(K,["default-code"]);c(g([],[[F,/^[^<?]+/],[E,/^<!\w[^>]*(?:>|$)/],[j,/^<\!--[\s\S]*?(?:-\->|$)/],["lang-",/^<\?([\s\S]+?)(?:\?>|$)/],["lang-",/^<%([\s\S]+?)(?:%>|$)/],[L,/^(?:<[%?]|[%?]>)/],["lang-",/^<xmp\b[^>]*>([\s\S]+?)<\/xmp\b[^>]*>/i],["lang-js",/^<script\b[^>]*>([\s\S]*?)(<\/script\b[^>]*>)/i],["lang-css",/^<style\b[^>]*>([\s\S]*?)(<\/style\b[^>]*>)/i],["lang-in.tag",/^(<\/?[a-z][^<>]*>)/i]]),["default-markup","htm","html","mxml","xhtml","xml","xsl"]);c(g([[F,/^[\s]+/,null," \t\r\n"],[n,/^(?:\"[^\"]*\"?|\'[^\']*\'?)/,null,"\"'"]],[[m,/^^<\/?[a-z](?:[\w.:-]*\w)?|\/?>$/i],[P,/^(?!style[\s=]|on)[a-z](?:[\w:-]*\w)?/i],["lang-uq.val",/^=\s*([^>\'\"\s]*(?:[^>\'\"\s\/]|\/(?=\s)))/],[L,/^[=<>\/]+/],["lang-js",/^on\w+\s*=\s*\"([^\"]+)\"/i],["lang-js",/^on\w+\s*=\s*\'([^\']+)\'/i],["lang-js",/^on\w+\s*=\s*([^\"\'>\s]+)/i],["lang-css",/^style\s*=\s*\"([^\"]+)\"/i],["lang-css",/^style\s*=\s*\'([^\']+)\'/i],["lang-css",/^style\s*=\s*([^\"\'>\s]+)/i]]),["in.tag"]);c(g([],[[n,/^[\s\S]+/]]),["uq.val"]);c(i({keywords:l,hashComments:true,cStyleComments:true,types:e}),["c","cc","cpp","cxx","cyc","m"]);c(i({keywords:"null,true,false"}),["json"]);c(i({keywords:R,hashComments:true,cStyleComments:true,verbatimStrings:true,types:e}),["cs"]);c(i({keywords:x,cStyleComments:true}),["java"]);c(i({keywords:H,hashComments:true,multiLineStrings:true}),["bsh","csh","sh"]);c(i({keywords:I,hashComments:true,multiLineStrings:true,tripleQuotedStrings:true}),["cv","py"]);c(i({keywords:s,hashComments:true,multiLineStrings:true,regexLiterals:true}),["perl","pl","pm"]);c(i({keywords:f,hashComments:true,multiLineStrings:true,regexLiterals:true}),["rb"]);c(i({keywords:w,cStyleComments:true,regexLiterals:true}),["js"]);c(i({keywords:r,hashComments:3,cStyleComments:true,multilineStrings:true,tripleQuotedStrings:true,regexLiterals:true}),["coffee"]);c(g([],[[C,/^[\s\S]+/]]),["regex"]);function d(V){var U=V.langExtension;try{var S=a(V.sourceNode);var T=S.sourceCode;V.sourceCode=T;V.spans=S.spans;V.basePos=0;q(U,T)(V);D(V)}catch(W){if("console" in window){console.log(W&&W.stack?W.stack:W)}}}function y(W,V,U){var S=document.createElement("PRE");S.innerHTML=W;if(U){Q(S,U)}var T={langExtension:V,numberLines:U,sourceNode:S};d(T);return S.innerHTML}function b(ad){function Y(af){return document.getElementsByTagName(af)}var ac=[Y("pre"),Y("code"),Y("xmp")];var T=[];for(var aa=0;aa<ac.length;++aa){for(var Z=0,V=ac[aa].length;Z<V;++Z){T.push(ac[aa][Z])}}ac=null;var W=Date;if(!W.now){W={now:function(){return +(new Date)}}}var X=0;var S;var ab=/\blang(?:uage)?-([\w.]+)(?!\S)/;var ae=/\bprettyprint\b/;function U(){var ag=(window.PR_SHOULD_USE_CONTINUATION?W.now()+250:Infinity);for(;X<T.length&&W.now()<ag;X++){var aj=T[X];var ai=aj.className;if(ai.indexOf("prettyprint")>=0){var ah=ai.match(ab);var am;if(!ah&&(am=o(aj))&&"CODE"===am.tagName){ah=am.className.match(ab)}if(ah){ah=ah[1]}var al=false;for(var ak=aj.parentNode;ak;ak=ak.parentNode){if((ak.tagName==="pre"||ak.tagName==="code"||ak.tagName==="xmp")&&ak.className&&ak.className.indexOf("prettyprint")>=0){al=true;break}}if(!al){var af=aj.className.match(/\blinenums\b(?::(\d+))?/);af=af?af[1]&&af[1].length?+af[1]:true:false;if(af){Q(aj,af)}S={langExtension:ah,sourceNode:aj,numberLines:af};d(S)}}}if(X<T.length){setTimeout(U,250)}else{if(ad){ad()}}}U()}window.prettyPrintOne=y;window.prettyPrint=b;window.PR={createSimpleLexer:g,registerLangHandler:c,sourceDecorator:i,PR_ATTRIB_NAME:P,PR_ATTRIB_VALUE:n,PR_COMMENT:j,PR_DECLARATION:E,PR_KEYWORD:z,PR_LITERAL:G,PR_NOCODE:N,PR_PLAIN:F,PR_PUNCTUATION:L,PR_SOURCE:J,PR_STRING:C,PR_TAG:m,PR_TYPE:O}})();PR.registerLangHandler(PR.createSimpleLexer([],[[PR.PR_DECLARATION,/^<!\w[^>]*(?:>|$)/],[PR.PR_COMMENT,/^<\!--[\s\S]*?(?:-\->|$)/],[PR.PR_PUNCTUATION,/^(?:<[%?]|[%?]>)/],["lang-",/^<\?([\s\S]+?)(?:\?>|$)/],["lang-",/^<%([\s\S]+?)(?:%>|$)/],["lang-",/^<xmp\b[^>]*>([\s\S]+?)<\/xmp\b[^>]*>/i],["lang-handlebars",/^<script\b[^>]*type\s*=\s*['"]?text\/x-handlebars-template['"]?\b[^>]*>([\s\S]*?)(<\/script\b[^>]*>)/i],["lang-js",/^<script\b[^>]*>([\s\S]*?)(<\/script\b[^>]*>)/i],["lang-css",/^<style\b[^>]*>([\s\S]*?)(<\/style\b[^>]*>)/i],["lang-in.tag",/^(<\/?[a-z][^<>]*>)/i],[PR.PR_DECLARATION,/^{{[#^>/]?\s*[\w.][^}]*}}/],[PR.PR_DECLARATION,/^{{&?\s*[\w.][^}]*}}/],[PR.PR_DECLARATION,/^{{{>?\s*[\w.][^}]*}}}/],[PR.PR_COMMENT,/^{{![^}]*}}/]]),["handlebars","hbs"]);PR.registerLangHandler(PR.createSimpleLexer([[PR.PR_PLAIN,/^[ \t\r\n\f]+/,null," \t\r\n\f"]],[[PR.PR_STRING,/^\"(?:[^\n\r\f\\\"]|\\(?:\r\n?|\n|\f)|\\[\s\S])*\"/,null],[PR.PR_STRING,/^\'(?:[^\n\r\f\\\']|\\(?:\r\n?|\n|\f)|\\[\s\S])*\'/,null],["lang-css-str",/^url\(([^\)\"\']*)\)/i],[PR.PR_KEYWORD,/^(?:url|rgb|\!important|@import|@page|@media|@charset|inherit)(?=[^\-\w]|$)/i,null],["lang-css-kw",/^(-?(?:[_a-z]|(?:\\[0-9a-f]+ ?))(?:[_a-z0-9\-]|\\(?:\\[0-9a-f]+ ?))*)\s*:/i],[PR.PR_COMMENT,/^\/\*[^*]*\*+(?:[^\/*][^*]*\*+)*\//],[PR.PR_COMMENT,/^(?:<!--|-->)/],[PR.PR_LITERAL,/^(?:\d+|\d*\.\d+)(?:%|[a-z]+)?/i],[PR.PR_LITERAL,/^#(?:[0-9a-f]{3}){1,2}/i],[PR.PR_PLAIN,/^-?(?:[_a-z]|(?:\\[\da-f]+ ?))(?:[_a-z\d\-]|\\(?:\\[\da-f]+ ?))*/i],[PR.PR_PUNCTUATION,/^[^\s\w\'\"]+/]]),["css"]);PR.registerLangHandler(PR.createSimpleLexer([],[[PR.PR_KEYWORD,/^-?(?:[_a-z]|(?:\\[\da-f]+ ?))(?:[_a-z\d\-]|\\(?:\\[\da-f]+ ?))*/i]]),["css-kw"]);PR.registerLangHandler(PR.createSimpleLexer([],[[PR.PR_STRING,/^[^\)\"\']+/]]),["css-str"]);
+
+
+
+--- File: coverage\sort-arrow-sprite.png ---
+(Skipped (non-matching extension))
+
+
+--- File: coverage\sorter.js ---
+
+/* eslint-disable */
+var addSorting = (function() {
+    'use strict';
+    var cols,
+        currentSort = {
+            index: 0,
+            desc: false
+        };
+
+    // returns the summary table element
+    function getTable() {
+        return document.querySelector('.coverage-summary');
+    }
+    // returns the thead element of the summary table
+    function getTableHeader() {
+        return getTable().querySelector('thead tr');
+    }
+    // returns the tbody element of the summary table
+    function getTableBody() {
+        return getTable().querySelector('tbody');
+    }
+    // returns the th element for nth column
+    function getNthColumn(n) {
+        return getTableHeader().querySelectorAll('th')[n];
+    }
+
+    function onFilterInput() {
+        const searchValue = document.getElementById('fileSearch').value;
+        const rows = document.getElementsByTagName('tbody')[0].children;
+        for (let i = 0; i < rows.length; i++) {
+            const row = rows[i];
+            if (
+                row.textContent
+                    .toLowerCase()
+                    .includes(searchValue.toLowerCase())
+            ) {
+                row.style.display = '';
+            } else {
+                row.style.display = 'none';
+            }
+        }
+    }
+
+    // loads the search box
+    function addSearchBox() {
+        var template = document.getElementById('filterTemplate');
+        var templateClone = template.content.cloneNode(true);
+        templateClone.getElementById('fileSearch').oninput = onFilterInput;
+        template.parentElement.appendChild(templateClone);
+    }
+
+    // loads all columns
+    function loadColumns() {
+        var colNodes = getTableHeader().querySelectorAll('th'),
+            colNode,
+            cols = [],
+            col,
+            i;
+
+        for (i = 0; i < colNodes.length; i += 1) {
+            colNode = colNodes[i];
+            col = {
+                key: colNode.getAttribute('data-col'),
+                sortable: !colNode.getAttribute('data-nosort'),
+                type: colNode.getAttribute('data-type') || 'string'
+            };
+            cols.push(col);
+            if (col.sortable) {
+                col.defaultDescSort = col.type === 'number';
+                colNode.innerHTML =
+                    colNode.innerHTML + '<span class="sorter"></span>';
+            }
+        }
+        return cols;
+    }
+    // attaches a data attribute to every tr element with an object
+    // of data values keyed by column name
+    function loadRowData(tableRow) {
+        var tableCols = tableRow.querySelectorAll('td'),
+            colNode,
+            col,
+            data = {},
+            i,
+            val;
+        for (i = 0; i < tableCols.length; i += 1) {
+            colNode = tableCols[i];
+            col = cols[i];
+            val = colNode.getAttribute('data-value');
+            if (col.type === 'number') {
+                val = Number(val);
+            }
+            data[col.key] = val;
+        }
+        return data;
+    }
+    // loads all row data
+    function loadData() {
+        var rows = getTableBody().querySelectorAll('tr'),
+            i;
+
+        for (i = 0; i < rows.length; i += 1) {
+            rows[i].data = loadRowData(rows[i]);
+        }
+    }
+    // sorts the table using the data for the ith column
+    function sortByIndex(index, desc) {
+        var key = cols[index].key,
+            sorter = function(a, b) {
+                a = a.data[key];
+                b = b.data[key];
+                return a < b ? -1 : a > b ? 1 : 0;
+            },
+            finalSorter = sorter,
+            tableBody = document.querySelector('.coverage-summary tbody'),
+            rowNodes = tableBody.querySelectorAll('tr'),
+            rows = [],
+            i;
+
+        if (desc) {
+            finalSorter = function(a, b) {
+                return -1 * sorter(a, b);
+            };
+        }
+
+        for (i = 0; i < rowNodes.length; i += 1) {
+            rows.push(rowNodes[i]);
+            tableBody.removeChild(rowNodes[i]);
+        }
+
+        rows.sort(finalSorter);
+
+        for (i = 0; i < rows.length; i += 1) {
+            tableBody.appendChild(rows[i]);
+        }
+    }
+    // removes sort indicators for current column being sorted
+    function removeSortIndicators() {
+        var col = getNthColumn(currentSort.index),
+            cls = col.className;
+
+        cls = cls.replace(/ sorted$/, '').replace(/ sorted-desc$/, '');
+        col.className = cls;
+    }
+    // adds sort indicators for current column being sorted
+    function addSortIndicators() {
+        getNthColumn(currentSort.index).className += currentSort.desc
+            ? ' sorted-desc'
+            : ' sorted';
+    }
+    // adds event listeners for all sorter widgets
+    function enableUI() {
+        var i,
+            el,
+            ithSorter = function ithSorter(i) {
+                var col = cols[i];
+
+                return function() {
+                    var desc = col.defaultDescSort;
+
+                    if (currentSort.index === i) {
+                        desc = !currentSort.desc;
+                    }
+                    sortByIndex(i, desc);
+                    removeSortIndicators();
+                    currentSort.index = i;
+                    currentSort.desc = desc;
+                    addSortIndicators();
+                };
+            };
+        for (i = 0; i < cols.length; i += 1) {
+            if (cols[i].sortable) {
+                // add the click event handler on the th so users
+                // dont have to click on those tiny arrows
+                el = getNthColumn(i).querySelector('.sorter').parentElement;
+                if (el.addEventListener) {
+                    el.addEventListener('click', ithSorter(i));
+                } else {
+                    el.attachEvent('onclick', ithSorter(i));
+                }
+            }
+        }
+    }
+    // adds sorting functionality to the UI
+    return function() {
+        if (!getTable()) {
+            return;
+        }
+        cols = loadColumns();
+        loadData();
+        addSearchBox();
+        addSortIndicators();
+        enableUI();
+    };
+})();
+
+window.addEventListener('load', addSorting);
+
+
+
+--- File: coverage\TechMix\index.html ---
+(Skipped (non-matching extension))
+
+
+--- File: coverage\TechMix\postcss.config.js.html ---
+(Skipped (non-matching extension))
+
+
+--- File: coverage\TechMix\src\App.vue.html ---
+(Skipped (non-matching extension))
+
+
+--- File: coverage\TechMix\src\index.html ---
+(Skipped (non-matching extension))
+
+
+--- File: coverage\TechMix\src\main.js.html ---
+(Skipped (non-matching extension))
+
+
+--- File: coverage\TechMix\src\modules\GenerateRandomPassword\index.html ---
+(Skipped (non-matching extension))
+
+
+--- File: coverage\TechMix\src\modules\GenerateRandomPassword\RandomPassword.vue.html ---
+(Skipped (non-matching extension))
+
+
+--- File: coverage\TechMix\src\router\index.html ---
+(Skipped (non-matching extension))
+
+
+--- File: coverage\TechMix\src\router\index.js.html ---
+(Skipped (non-matching extension))
+
+
+--- File: coverage\TechMix\src\views\FooterView.vue.html ---
+(Skipped (non-matching extension))
+
+
+--- File: coverage\TechMix\src\views\HomeView.vue.html ---
+(Skipped (non-matching extension))
+
+
+--- File: coverage\TechMix\src\views\index.html ---
+(Skipped (non-matching extension))
+
+
+--- File: coverage\TechMix\src\views\MainNavegationView.vue.html ---
+(Skipped (non-matching extension))
+
+
+--- File: coverage\TechMix\src\views\PrivacyPolicyView.vue.html ---
+(Skipped (non-matching extension))
+
+
+--- File: coverage\TechMix\src\views\ProjectDetails.vue.html ---
+(Skipped (non-matching extension))
+
+
+--- File: coverage\TechMix\src\views\ProjectsView.vue.html ---
+(Skipped (non-matching extension))
+
+
+--- File: coverage\TechMix\src\views\TechnicalTests.vue.html ---
+(Skipped (non-matching extension))
+
+
+--- File: coverage\TechMix\tailwind.config.js.html ---
+(Skipped (non-matching extension))
+
+
+--- File: index.html ---
+(Skipped (non-matching extension))
+
+
+--- File: jsconfig.json ---
+
+{
+  "compilerOptions": {
+    "paths": {
+      "@/*": ["./src/*"]
+    }
+  },
+  "exclude": ["node_modules", "dist"]
+}
+
+
+
+--- File: node_modules ---
+(Excluded)
+
+
+--- File: package-lock.json ---
+(Excluded)
+
+
+--- File: package.json ---
+(Excluded)
+
+
+--- File: postcss.config.js ---
+
+export default {
+  plugins: {
+    tailwindcss: {},
+    autoprefixer: {},
+  },
+}
+
+
+
+--- File: public\images\full-projects\image_01.webp ---
+(Skipped (non-matching extension))
+
+
+--- File: public\images\full-projects\image_02.webp ---
+(Skipped (non-matching extension))
+
+
+--- File: public\images\utilities\password.jpg ---
+(Skipped (non-matching extension))
+
+
+--- File: README.md ---
+(Skipped (non-matching extension))
+
+
+--- File: src\App.vue ---
+
+<script setup>
+import { RouterView } from 'vue-router'
+import MainNavegation from './views/MainNavegationView.vue'
+import FooterView from './views/FooterView.vue'
+</script>
+
+<template>
+  <div class="app-container">
+    <MainNavegation />
+    <div class="content-container">
+      <RouterView />
+    </div>
+    <FooterView />
+  </div>
+</template>
+
+<style scoped>
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.content-container {
+  flex: 1;
+}
+
+footer {
+  width: 100%;
+}
+
+.animate-charcter {
+  text-transform: uppercase;
+  background-image: linear-gradient(-225deg, #231557 0%, #44107a 29%, #ff1361 67%, #fff800 100%);
+  background-size: auto auto;
+  background-clip: border-box;
+  background-size: 200% auto;
+  color: #fff;
+  background-clip: text;
+  /* text-fill-color: transparent; */
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: textclip 2s linear infinite;
+  display: inline-block;
+  font-size: 6rem;
+}
+
+@keyframes textclip {
+  to {
+    background-position: 200% center;
+  }
+}
+</style>
+
+
+
+--- File: src\assets\base.css ---
+(Skipped (non-matching extension))
+
+
+--- File: src\assets\hamburguer.css ---
+(Skipped (non-matching extension))
+
+
+--- File: src\assets\images\TechMixLogo-Photoroom.png ---
+(Skipped (non-matching extension))
+
+
+--- File: src\assets\images\TechMixLogo.svg ---
+(Skipped (non-matching extension))
+
+
+--- File: src\assets\main.css ---
+(Skipped (non-matching extension))
+
+
+--- File: src\components\AnimatedContainer.vue ---
+
+<script setup>
+import { ref, onMounted } from 'vue';
+
+const isVisible = ref(false);
+onMounted(() => {
+  isVisible.value = true;
+});
+</script>
+
+<template>
+  <Transition name="slide-fade">
+    <div v-if="isVisible">
+      <slot></slot>
+    </div>
+  </Transition>
+</template>
+
+<style scoped>
+.slide-fade-enter-active,
+.slide-fade-leave-active {
+  transition: all 0.3s ease-out;
+}
+
+.slide-fade-enter-from,
+.slide-fade-leave-to {
+  transform: translateX(20px);
+  opacity: 0;
+}
+</style>
+
+
+
+
+--- File: src\components\ProjectCard.vue ---
+
+<script setup>
+import { ref, onMounted } from 'vue'
+import { defineProps } from 'vue'
+
+// Define props
+const props = defineProps({
+  fullProject: {
+    type: Object,
+    required: true
+  },
+  imageBasePath: {
+    type: String,
+    required: true
+  }
+})
+
+const isVisible = ref(false)
+
+function getImageUrl(imageName) {
+  return `${props.imageBasePath}/${imageName}`
+}
+
+onMounted(() => {
+  isVisible.value = true
+})
+</script>
+
+<template>
+  <section>
+    <transition name="fade-in">
+      <div v-if="isVisible" class="card">
+        <div
+          class="cover item"
+          :style="{ backgroundImage: `url(${getImageUrl(props.fullProject.image)})` }"
+        >
+          <h1>{{ props.fullProject.name }}</h1>
+          <span class="price">Project {{ props.fullProject.id }}</span>
+          <div class="card-back">
+            <p>{{ props.fullProject.description }}</p>
+            <RouterLink
+              :to="{ name: props.fullProject.routeName, params: { id: props.fullProject.id } }"
+              class="btn-link"
+            >
+              Ver Aplicación
+            </RouterLink>
+            <a :href="props.fullProject.github" target="_blank" class="text-lg mt-1 btn-link">
+              GitHub
+            </a>
+          </div>
+        </div>
+      </div>
+    </transition>
+  </section>
+</template>
+
+<style scoped>
+/* Transición suave de entrada */
+.fade-in-enter-active,
+.fade-in-leave-active {
+  transition:
+    opacity 0.5s ease,
+    transform 0.5s ease;
+}
+
+.fade-in-enter-from,
+.fade-in-leave-to {
+  opacity: 0;
+  transform: translateY(20px);
+}
+section {
+  width: 25rem;
+  margin: 0 auto;
+}
+
+section .row {
+  align-items: center;
+  height: 100vh;
+}
+
+.card {
+  position: relative;
+  height: 400px;
+  width: 100%;
+  margin: 10px 0;
+  transition: ease all 1.3s;
+  perspective: 1200px;
+}
+
+.card:hover .cover {
+  transform: rotateX(0deg) rotateY(-180deg);
+}
+
+.card:hover .cover:before {
+  transform: translateZ(30px);
+}
+
+.card:hover .cover:after {
+  background-color: black;
+}
+
+.card:hover .cover h1 {
+  transform: translateZ(100px);
+}
+
+.card:hover .cover span {
+  transform: translateZ(100px);
+}
+
+.card:hover .cover p {
+  transform: translateZ(-60px) rotateY(-180deg);
+}
+
+.card:hover .cover .btn-link {
+  transform: translateZ(-60px) rotateY(-180deg);
+}
+
+.cover {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  transform-style: preserve-3d;
+  transition: ease all 1.3s;
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+
+.cover:before {
+  content: '';
+  position: absolute;
+  border: 5px solid rgba(255, 255, 255, 0.5);
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.3);
+  top: 20px;
+  left: 20px;
+  right: 20px;
+  bottom: 20px;
+  z-index: 2;
+  transition: ease all 1.3s;
+  transform-style: preserve-3d;
+  transform: translateZ(0px);
+}
+
+.cover:after {
+  content: '';
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  z-index: 2;
+  transition: ease all 1.3s;
+  background: rgba(0, 0, 0, 0.4);
+}
+
+.cover h1 {
+  font-weight: 600;
+  position: absolute;
+  bottom: 55px;
+  left: 13%;
+  color: white;
+  transform-style: preserve-3d;
+  transition: ease all 1.3s;
+  z-index: 3;
+  font-size: 2rem;
+  transform: translateZ(0px);
+}
+.cover span {
+  font-weight: 600;
+  position: absolute;
+  top: 55px;
+  right: 60px;
+  color: white;
+  transform-style: preserve-3d;
+  transition: ease all 1.3s;
+  z-index: 3;
+  font-size: 2em;
+  transform: translateZ(0px);
+}
+
+.card-back {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background: #0b0f08;
+  transform-style: preserve-3d;
+  transition: ease all 1.3s;
+  transform: translateZ(-1px);
+  display: flex;
+  flex-direction: column; /* Para alinear verticalmente */
+  align-items: center;
+  justify-content: center;
+  padding: 20px; /* Añade padding para que el contenido no quede pegado a los bordes */
+  text-align: justify; /* Para centrar el texto dentro del contenedor */
+}
+.card-back p {
+  transform-style: preserve-3d;
+  transition:
+    ease transform 1.3s,
+    ease background 0.5s;
+  transform: translateZ(-1px) rotateY(-180deg);
+  background: transparent;
+  font-weight: 200;
+  font-size: small;
+  color: white;
+  padding: 4px 8px;
+  outline: none;
+  text-decoration: none;
+}
+
+.btn-link {
+  transform-style: preserve-3d;
+  transition:
+    ease transform 1.3s,
+    ease background 0.5s;
+  transform: translateZ(-1px) rotateY(-180deg);
+  background: transparent;
+  border: 1px solid white;
+  font-weight: 200;
+  font-size: small;
+  color: white;
+  padding: 4px 8px;
+  outline: none;
+  text-decoration: none;
+  margin-top: 5px;
+}
+
+.btn-link:hover {
+  background-color: rgb(255, 255, 255);
+  color: #0b0f08;
+}
+</style>
+
+
+
+--- File: src\components\ProjectDescription.vue ---
+
+
+
+<template>
+  <div class="m-5 p-6 bg-[#ad8bea] rounded-lg  shadow-lg hover:shadow-xl transition-shadow duration-300">
+    <p class="text-lg  text-[#ffffff] text-center"><slot></slot></p>
+  </div>
+</template>
+
+
+
+
+
+
+--- File: src\components\ProjectLinks.vue ---
+
+<script setup>
+const props = defineProps({
+  githubLink: {
+    type: String,
+    required: true
+  },
+  vitestLink: {
+    type: String,
+    required: true
+  }
+})
+</script>
+
+<template>
+  <div class="mt-4 text-[#fafdfe] ">
+    <p class="text-lg">
+      Puedes ver el código fuente del proyecto en:
+      <a :href="props.githubLink" target="_blank" class="text-[#030b0f] underline"> GitHub</a>.
+    </p>
+    <p class="text-lg">
+      Para ver el testing en:
+      <a :href="props.vitestLink" target="_blank" class="text-[#030b0f] underline">
+        Testing con Vitest</a
+      >.
+    </p>
+  </div>
+</template>
+
+<style scoped>
+/* Estilos opcionales para el componente */
+</style>
+
+
+
+--- File: src\components\UnderConstruction .vue ---
+
+<template>
+  <div class="flex items-center justify-center min-h-screen bg-gray-100">
+    <div class="text-center p-8 bg-white shadow-lg rounded-lg">
+      <span class="text-4xl text-yellow-500">🚧</span>
+      <h2 class="mt-4 text-2xl font-semibold text-gray-800">Esta sección está en construcción</h2>
+      <p class="mt-2 text-gray-600">Estamos trabajando en ello, vuelve pronto.</p>
+    </div>
+  </div>
+</template>
+
+
+
+--- File: src\data\full-projets\full-project.js ---
+
+export const fullProjects = [
+  {
+    id: 1,
+    name: 'BoardShop',
+    routeName: 'full-projects-detail',
+    image: 'image_01.webp',
+    github: 'https://github.com/YubalHormiga/TechMix/tree/main/src/modules/full-projects/BoardShop',
+    description:
+      'BoardShop es una tienda en línea de skateboards. El proyecto permite a los usuarios explorar una variedad de tablas de skate, agregarlas a su carrito de compras y gestionar su compra en un flujo sencillo. El carrito se guarda en el almacenamiento local del navegador, permitiendo que los productos persistan incluso después de recargar la página. Además, incluye un carrusel de imágenes interactivo'
+  },
+  {
+    id: 2,
+    name: 'InventoryManager',
+    routeName: 'full-projects-detail',
+    image: 'image_02.webp',
+    github: 'https://github.com/TuUsuario/InventoryManager',
+    description:
+      'InventoryManager es una app para gestionar el inventario de tu negocio. Agrega, edita y elimina productos fácilmente. Registra detalles como cantidad, proveedor y precio. Filtra productos y recibe alertas de bajo stock. Visualiza tus datos con gráficos intuitivos gracias a Chart.js. Guarda tu información de forma segura en Local Storage. Perfecta para pequeñas tiendas y almacenes.'
+  }
+]
+
+
+
+--- File: src\data\utilities\Utilities.js ---
+
+export const technicalTests = [
+  {
+    id: 1,
+    name: 'Random Password',
+    routeName: 'utility-detail',
+    image: 'password.jpg',
+    github:
+      'https://github.com/YubalHormiga/TechMix/tree/main/src/modules/utilities/GenerateRandomPassword',
+    description:
+      'Este proyecto permite al usuario generar contraseñas aleatorias utilizando la API de crypto. Incluye funcionalidad para copiar la contraseña generada al portapapeles para mayor comodidad. El diseño se centra en una interfaz limpia con un botón para crear la contraseña y una opción para copiarla, todo dentro de un diseño de tarjeta estructurada.'
+  }
+]
+
+
+
+--- File: src\main.js ---
+
+import './assets/main.css'
+
+import { createApp } from 'vue'
+import { createPinia } from 'pinia'
+import { useToast } from 'vue-toast-notification'
+import VueChartkick from 'vue-chartkick'
+
+import App from './App.vue'
+import router from './router'
+import 'vue-toast-notification/dist/theme-sugar.css'
+import 'chartkick/chart.js'
+
+const $toast = useToast({
+  position: 'top',
+  timeout: 2500,
+  closeOnClick: true,
+  pauseOnFocusLoss: true,
+  pauseOnHover: true,
+  draggable: true,
+  draggablePercent: 0.6,
+  showCloseButtonOnHover: false,
+  hideProgressBar: true,
+  closeButton: 'button',
+  icon: true,
+  rtl: false
+})
+
+const app = createApp(App)
+app.provide('toast', $toast)
+app.use(VueChartkick)
+app.use(createPinia())
+app.use(router)
+
+app.mount('#app')
+
+
+
+--- File: src\modules\full-projects\BoardShop\assets\icons\add.svg ---
+(Skipped (non-matching extension))
+
+
+--- File: src\modules\full-projects\BoardShop\assets\icons\cart.png ---
+(Skipped (non-matching extension))
+
+
+--- File: src\modules\full-projects\BoardShop\assets\icons\cart.webp ---
+(Skipped (non-matching extension))
+
+
+--- File: src\modules\full-projects\BoardShop\assets\icons\subtract.svg ---
+(Skipped (non-matching extension))
+
+
+--- File: src\modules\full-projects\BoardShop\assets\images\carrito.png ---
+(Skipped (non-matching extension))
+
+
+--- File: src\modules\full-projects\BoardShop\assets\images\image_01.webp ---
+(Skipped (non-matching extension))
+
+
+--- File: src\modules\full-projects\BoardShop\assets\images\image_02.webp ---
+(Skipped (non-matching extension))
+
+
+--- File: src\modules\full-projects\BoardShop\assets\images\image_03.webp ---
+(Skipped (non-matching extension))
+
+
+--- File: src\modules\full-projects\BoardShop\assets\images\image_04.webp ---
+(Skipped (non-matching extension))
+
+
+--- File: src\modules\full-projects\BoardShop\assets\images\image_05.webp ---
+(Skipped (non-matching extension))
+
+
+--- File: src\modules\full-projects\BoardShop\assets\images\skate_01.jpg ---
+(Skipped (non-matching extension))
+
+
+--- File: src\modules\full-projects\BoardShop\assets\images\skate_02.jpg ---
+(Skipped (non-matching extension))
+
+
+--- File: src\modules\full-projects\BoardShop\assets\images\skate_03.jpg ---
+(Skipped (non-matching extension))
+
+
+--- File: src\modules\full-projects\BoardShop\assets\images\skate_04.jpg ---
+(Skipped (non-matching extension))
+
+
+--- File: src\modules\full-projects\BoardShop\assets\images\skate_05.jpg ---
+(Skipped (non-matching extension))
+
+
+--- File: src\modules\full-projects\BoardShop\assets\images\skate_06.jpg ---
+(Skipped (non-matching extension))
+
+
+--- File: src\modules\full-projects\BoardShop\assets\images\skate_07.jpg ---
+(Skipped (non-matching extension))
+
+
+--- File: src\modules\full-projects\BoardShop\assets\images\skate_08.jpg ---
+(Skipped (non-matching extension))
+
+
+--- File: src\modules\full-projects\BoardShop\assets\images\skate_09.jpg ---
+(Skipped (non-matching extension))
+
+
+--- File: src\modules\full-projects\BoardShop\assets\images\skate_10.jpg ---
+(Skipped (non-matching extension))
+
+
+--- File: src\modules\full-projects\BoardShop\assets\images\skate_11.jpg ---
+(Skipped (non-matching extension))
+
+
+--- File: src\modules\full-projects\BoardShop\assets\images\skate_12.jpg ---
+(Skipped (non-matching extension))
+
+
+--- File: src\modules\full-projects\BoardShop\assets\vectors\delete.svg ---
+(Skipped (non-matching extension))
+
+
+--- File: src\modules\full-projects\BoardShop\BoardShop.vue ---
+
+<!-- App.vue -->
+<script setup>
+import { computed, onMounted, ref, watch, inject } from 'vue'
+import { db } from './data/skates.js'
+import ShoppingCart from './components/ShoppingCart.vue'
+import ProductCard from './components/ProductCard.vue'
+import AutoCarrousel from './components/AutoCarrousel.vue'
+import AnimatedContainer from '@/components/AnimatedContainer.vue'
+
+const toast = inject('toast')
+const tables = ref([])
+const cart = ref([])
+const cartVisible = ref(false)
+
+onMounted(() => {
+  const cartStorage = localStorage.getItem('cart')
+  if (cartStorage) {
+    cart.value = JSON.parse(cartStorage)
+  }
+  tables.value = db
+})
+
+const saveCartToLocalStorage = () => {
+  localStorage.setItem('cart', JSON.stringify(cart.value))
+}
+
+watch(
+  cart,
+  () => {
+    saveCartToLocalStorage()
+  },
+  {
+    deep: true
+  }
+)
+
+const toggleCart = () => {
+  cartVisible.value = !cartVisible.value
+}
+
+const addCart = (table) => {
+  const tableExist = cart.value.findIndex((product) => product.id === table.id)
+  if (tableExist >= 0) {
+    cart.value[tableExist].amount++
+    toast.open({
+      message: 'Cantidad del artículo incrementada en el carrito',
+      type: 'success'
+    })
+  } else {
+    cart.value.push({ ...table, amount: 1 })
+    toast.open({
+      message: 'Artículo añadido al carrito',
+      type: 'success'
+    })
+  }
+}
+
+const incrementAmount = (table) => {
+  const tableExists = cart.value.findIndex((product) => product.id === table.id)
+  if (cart.value[tableExists].amount >= 5) return
+  cart.value[tableExists].amount++
+}
+
+const decrementAmount = (table) => {
+  const tableExists = cart.value.findIndex((product) => product.id === table.id)
+  if (cart.value[tableExists].amount <= 1) return
+  cart.value[tableExists].amount--
+}
+
+const deleteTable = (id) => {
+  cart.value = cart.value.filter((product) => product.id !== id)
+}
+
+const totalCart = computed(() =>
+  cart.value.reduce((acc, product) => acc + product.amount * product.price, 0)
+)
+
+const totalItemsInCart = computed(() => cart.value.reduce((acc, item) => acc + item.amount, 0))
+</script>
+
+<template>
+  <AnimatedContainer>
+    <main>
+      <header class="w-full relative overflow-hidden">
+        <div class="flex gap-10">
+          <h1 class="font-black text-5xl p-5 text-fuchsia-600">
+            Board<span class="text-pink-500">Shop</span>
+          </h1>
+          <div @click="toggleCart" class="cursor-pointer h-20 w-20 relative">
+            <img src="../BoardShop/assets/icons/cart.webp" alt="carrito" />
+            <span
+              v-if="totalItemsInCart > 0"
+              class="absolute top-0 right-4 bg-red-500 text-white text-base opacity-90 rounded-full w-10 h-10 flex items-center justify-center"
+            >
+              {{ totalItemsInCart }}
+            </span>
+          </div>
+        </div>
+      </header>
+
+      <section class="flex relative w-full">
+        <div
+          :class="{ 'w-2/3': cartVisible, 'w-full': !cartVisible }"
+          class="transition-all duration-500 ease-in-out flex-grow"
+        >
+          <AutoCarrousel />
+          <div class="flex flex-wrap justify-center items-center gap-3 mt-4">
+            <div v-for="table in tables" :key="table.id">
+              <ProductCard :table="table" @add-cart="addCart" />
+            </div>
+          </div>
+        </div>
+
+        <div
+          v-if="cartVisible"
+          class="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50"
+        >
+          <div
+            class="bg-white rounded-lg shadow-lg p-4 w-11/12 max-w-xl max-h-[90%] overflow-y-auto"
+          >
+            <div class="flex justify-center flex-col items-center">
+              <template v-if="cart.length === 0">
+                <p class="text-center text-lg font-semibold mb-4">¡Tu carrito está vacío!</p>
+                <p class="text-center mb-4">Explora nuestros productos y añade algo al carrito.</p>
+                <button
+                  @click="toggleCart"
+                  type="button"
+                  class="bg-indigo-600 text-white font-medium px-4 py-2 rounded hover:bg-indigo-700"
+                >
+                  Continuar Comprando
+                </button>
+              </template>
+              <template v-else>
+                <ShoppingCart
+                  :cart="cart"
+                  :totalCart="totalCart"
+                  @toggle-cart="toggleCart"
+                  @increment-amount="incrementAmount"
+                  @decrement-amount="decrementAmount"
+                  @delete-table="deleteTable"
+                />
+              </template>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </AnimatedContainer>
+</template>
+
+<style scoped></style>
+
+
+
+--- File: src\modules\full-projects\BoardShop\components\AutoCarrousel.vue ---
+
+<script setup>
+import { Swiper, SwiperSlide } from 'swiper/vue'
+// Import Swiper styles
+import 'swiper/css'
+import 'swiper/css/pagination'
+import 'swiper/css/navigation'
+// import required modules
+import { Autoplay, Pagination } from 'swiper/modules'
+
+const modules = [Autoplay, Pagination]
+</script>
+
+<template>
+  <swiper
+    :spaceBetween="30"
+    :centeredSlides="true"
+    :autoplay="{
+      delay: 4000,
+      disableOnInteraction: false
+    }"
+    :pagination="{
+      clickable: true
+    }"
+    :modules="modules"
+    class="max-h-[45rem] w-full"
+  >
+    <swiper-slide>
+      <img src="../assets/images/image_01.webp" alt="image skate" class="w-full min-h-[30rem]" />
+    </swiper-slide>
+    <swiper-slide>
+      <img src="../assets/images/image_02.webp" alt="image skate" class="w-full min-h-[30rem]" />
+    </swiper-slide>
+    <swiper-slide>
+      <img src="../assets/images/image_03.webp" alt="image skate" class="w-full min-h-[30rem]" />
+    </swiper-slide>
+    <swiper-slide>
+      <img src="../assets/images/image_04.webp" alt="image skate" class="w-full min-h-[30rem]" />
+    </swiper-slide>
+    <swiper-slide>
+      <img src="../assets/images/image_05.webp" alt="image skate" class="w-full min-h-[30rem]" />
+    </swiper-slide>
+  </swiper>
+</template>
+
+<style scoped>
+/* Añade estilos si es necesario */
+</style>
+
+
+
+--- File: src\modules\full-projects\BoardShop\components\ProductCard.vue ---
+
+<script setup>
+const props = defineProps({
+  table: {
+    type: Object,
+    required: true
+  }
+})
+
+defineEmits(['add-cart'])
+
+// Función para obtener la URL de la imagen en tiempo de ejecución
+function getImageUrl(imageName) {
+  return new URL(`../assets/images/${imageName}.jpg`, import.meta.url).href
+}
+</script>
+
+<template>
+  <div class="max-w-[720px] mx-auto">
+    <!-- Centering wrapper -->
+    <div
+      class="relative flex flex-col text-gray-900 bg-white shadow-md bg-clip-border rounded-xl w-96"
+    >
+      <div
+        class="relative mx-4 mt-4 overflow-hidden text-gray-900 bg-white bg-clip-border rounded-xl h-96"
+      >
+        <img
+          :src="getImageUrl(props.table.image)"
+          alt="card-image"
+          class="object-cover w-full h-full"
+        />
+      </div>
+      <div class="p-6">
+        <div class="flex items-center justify-between mb-2">
+          <p
+            class="block font-sans text-base antialiased font-medium leading-relaxed text-blue-gray-900"
+          >
+            {{ props.table.name }}
+          </p>
+          <p
+            class="block font-sans text-base antialiased font-medium leading-relaxed text-blue-gray-900"
+          >
+            {{ props.table.price }} EUR
+          </p>
+        </div>
+        <p
+          class="block font-sans text-sm antialiased font-normal leading-normal text-gray-900 opacity-75"
+        >
+          {{ props.table.description }}
+        </p>
+      </div>
+      <div class="p-6 pt-0">
+        <button
+          @click="$emit('add-cart', props.table)"
+          class="align-middle select-none font-sans font-bold text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-lg py-3 px-6 rounded-lg shadow-gray-900/10 hover:shadow-gray-900/20 focus:opacity-[0.85] active:opacity-[0.85] active:shadow-none block w-full bg-blue-gray-900/10 text-blue-gray-900 shadow-none hover:scale-105 hover:shadow-none focus:scale-105 focus:shadow-none active:scale-100"
+          type="button"
+        >
+          Add to Cart
+        </button>
+      </div>
+    </div>
+  </div>
+</template>
+<style scoped></style>
+
+
+
+--- File: src\modules\full-projects\BoardShop\components\ShoppingCart.vue ---
+
+<script setup>
+const props = defineProps({
+  cart: {
+    type: Object,
+    required: true
+  },
+  totalCart: {
+    type: Number,
+    required: true
+  }
+})
+defineEmits(['increment-amount', 'decrement-amount', 'delete-table', 'toggle-cart'])
+</script>
+
+<template>
+  <div class="relative">
+    <button
+      type="button"
+      @click="$emit('toggle-cart')"
+      class="absolute -top-3 -right-3 p-3 text-gray-400 hover:text-gray-500"
+    >
+      <svg
+        class="h-9 w-9"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="1.5"
+        stroke="currentColor"
+        aria-hidden="true"
+      >
+        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+      </svg>
+    </button>
+  </div>
+  <div class="flex flex-col mt-2">
+    <div class="table_component rounded-lg">
+      <table>
+        <thead class="text-center">
+          <tr>
+            <th>Producto</th>
+            <th>Nombre</th>
+            <th>Precio</th>
+            <th>Cantidad</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody class="text-center">
+          <tr v-for="table in props.cart" :key="table.id">
+            <td>
+              <img
+                :src="`/src/modules/full-projects/BoardShop/assets/images/${table.image}.jpg`"
+                alt="imagen"
+                class="table-image"
+              />
+            </td>
+            <td>{{ table.name }}</td>
+            <td>{{ table.price }} EUR</td>
+            <td class="f my-auto">
+              <button
+                class="cursor-pointer"
+                @click="$emit('increment-amount', table)"
+                type="button"
+              >
+                <img src="../assets//icons/add.svg" alt="" />
+              </button>
+              <p>{{ table.amount }}</p>
+              <button
+                class="cursor-pointer"
+                @click="$emit('decrement-amount', table)"
+                type="button"
+              >
+                <img src="../assets//icons/subtract.svg" alt="" />
+              </button>
+            </td>
+            <td>
+              <button @click="$emit('delete-table', table.id)" class="h-10 w-10">
+                <img class="" src="../assets/vectors/delete.svg" alt="trash can" />
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="border-t border-gray-200 px-4 py-6 sm:px-6">
+    <div class="flex justify-between text-base font-medium text-gray-900">
+      <p>Total</p>
+      <p>{{ totalCart }} EUR</p>
+    </div>
+    <p class="mt-0.5 text-sm text-gray-500">Envío e impuestos calculados al finalizar la compra.</p>
+    <div class="mt-6">
+      <a
+        href="#"
+        class="flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700"
+        >Finalizar compra</a
+      >
+    </div>
+    <div class="mt-6 flex justify-center text-center text-sm text-gray-500">
+      <p>
+        o
+        <button
+          @click="$emit('toggle-cart')"
+          type="button"
+          class="font-medium text-indigo-600 hover:text-indigo-500"
+        >
+          Continue Comprando
+          <span aria-hidden="true"> &rarr;</span>
+        </button>
+      </p>
+    </div>
+  </div>
+</template>
+
+<style scoped>
+.table_component {
+  overflow-x: hidden; /* Evita scroll horizontal */
+  width: 100%; /* Usa el 100% del ancho */
+  font-size: small;
+}
+
+.table_component table {
+  width: 100%; /* Asegura que la tabla use todo el ancho disponible */
+  border-collapse: collapse;
+  text-align: center;
+}
+
+.table_component th,
+.table_component td {
+  padding: 10px;
+}
+</style>
+
+
+
+--- File: src\modules\full-projects\BoardShop\data\skates.js ---
+
+export const db = [
+  {
+    id: 1,
+    name: 'Thunderbolt',
+    image: 'skate_01',
+    description:
+      'Una tabla ágil con un diseño aerodinámico ideal para trucos rápidos y maniobras técnicas.',
+    price: 159
+  },
+  {
+    id: 2,
+    name: 'Street King',
+    image: 'skate_02',
+    description:
+      'Perfecta para dominar las calles, ofrece durabilidad y un excelente pop para saltos.',
+    price: 179
+  },
+  {
+    id: 3,
+    name: 'Wave Rider',
+    image: 'skate_03',
+    description:
+      'Diseñada para surfear el asfalto con fluidez, perfecta para paseos largos y trucos suaves.',
+    price: 169
+  },
+  {
+    id: 4,
+    name: 'Grind Master',
+    image: 'skate_04',
+    description:
+      'Construida para los rieles y bordillos, esta tabla es robusta y resistente a impactos.',
+    price: 189
+  },
+  {
+    id: 5,
+    name: 'Airborne',
+    image: 'skate_05',
+    description:
+      'Una tabla ligera que te permitirá alcanzar grandes alturas con facilidad y estabilidad.',
+    price: 199
+  },
+  {
+    id: 6,
+    name: 'Shadow Walker',
+    image: 'skate_06',
+    description: 'Diseño oscuro y elegante, perfecta para quienes buscan estilo y rendimiento.',
+    price: 189
+  },
+  {
+    id: 7,
+    name: 'Lightning Strike',
+    image: 'skate_07',
+    description: 'Tabla de alta velocidad con gran respuesta en curvas y giros rápidos.',
+    price: 179
+  },
+  {
+    id: 8,
+    name: 'Breeze',
+    image: 'skate_08',
+    description: 'Perfecta para paseos relajados, con una forma más amplia para mayor control.',
+    price: 169
+  },
+  {
+    id: 9,
+    name: 'Rocket',
+    image: 'skate_09',
+    description:
+      'Rendimiento explosivo para los más atrevidos, diseñada para velocidad y precisión.',
+    price: 199
+  },
+  {
+    id: 10,
+    name: 'Skyline',
+    image: 'skate_10',
+    description: 'Ideal para el skatepark, con un diseño que maximiza el control en los aires.',
+    price: 189
+  },
+  {
+    id: 11,
+    name: 'Urban Legend',
+    image: 'skate_11',
+    description: 'La mejor opción para conquistar el entorno urbano con estilo y resistencia.',
+    price: 179
+  },
+  {
+    id: 12,
+    name: 'Night Owl',
+    image: 'skate_12',
+    description:
+      'Hecha para los que prefieren patinar de noche, con un diseño que brilla en la oscuridad.',
+    price: 189
+  }
+]
+
+
+
+--- File: src\modules\full-projects\BoardShop\README.MD ---
+(Skipped (non-matching extension))
+
+
+--- File: src\modules\full-projects\FullProjectDetails.vue ---
+
+<script setup>
+import { computed } from 'vue'
+import { useRoute } from 'vue-router'
+import BoardShop from './BoardShop/BoardShop.vue'
+import InventoryManager from './InventoryManager/InventoryManager.vue'
+
+const utilitiesComponent = {
+  1: BoardShop,
+  2: InventoryManager
+}
+
+const route = useRoute()
+const projectId = computed(() => parseInt(route.params.id))
+
+const CurrentFullProjectComponent = computed(() => utilitiesComponent[projectId.value] || null)
+</script>
+
+<template>
+  <div>
+    <!-- Pasar la descripción al componente dinámico -->
+    <component :is="CurrentFullProjectComponent" />
+  </div>
+</template>
+
+<style scoped></style>
+
+
+
+--- File: src\modules\full-projects\FullProjectView.vue ---
+
+<script setup>
+import ProjectCard from '@/components/ProjectCard.vue'
+import { fullProjects } from '../../data/full-projets/full-project'
+
+const imageBasePath = '/images/full-projects'
+</script>
+
+<template>
+  <div class="flex gap-3 flex-wrap justify-center mt-3">
+    <div v-for="fullProject in fullProjects" :key="fullProject.id" class="router-link">
+      <ProjectCard :fullProject="fullProject" :imageBasePath="imageBasePath" />
+    </div>
+  </div>
+</template>
+
+
+
+--- File: src\modules\full-projects\InventoryManager\assets\icons\info-svgrepo-com.svg ---
+(Skipped (non-matching extension))
+
+
+--- File: src\modules\full-projects\InventoryManager\assets\images\agua_mineral.png ---
+(Skipped (non-matching extension))
+
+
+--- File: src\modules\full-projects\InventoryManager\assets\images\auriculares.png ---
+(Skipped (non-matching extension))
+
+
+--- File: src\modules\full-projects\InventoryManager\assets\images\bufanda.png ---
+(Skipped (non-matching extension))
+
+
+--- File: src\modules\full-projects\InventoryManager\assets\images\cafe.png ---
+(Skipped (non-matching extension))
+
+
+--- File: src\modules\full-projects\InventoryManager\assets\images\cafetera.png ---
+(Skipped (non-matching extension))
+
+
+--- File: src\modules\full-projects\InventoryManager\assets\images\calcetines.png ---
+(Skipped (non-matching extension))
+
+
+--- File: src\modules\full-projects\InventoryManager\assets\images\camiseta.png ---
+(Skipped (non-matching extension))
+
+
+--- File: src\modules\full-projects\InventoryManager\assets\images\cubiertos.png ---
+(Skipped (non-matching extension))
+
+
+--- File: src\modules\full-projects\InventoryManager\assets\images\desinfectante.png ---
+(Skipped (non-matching extension))
+
+
+--- File: src\modules\full-projects\InventoryManager\assets\images\detergente.png ---
+(Skipped (non-matching extension))
+
+
+--- File: src\modules\full-projects\InventoryManager\assets\images\escoba.png ---
+(Skipped (non-matching extension))
+
+
+--- File: src\modules\full-projects\InventoryManager\assets\images\gorra.png ---
+(Skipped (non-matching extension))
+
+
+--- File: src\modules\full-projects\InventoryManager\assets\images\guantes.png ---
+(Skipped (non-matching extension))
+
+
+--- File: src\modules\full-projects\InventoryManager\assets\images\header.webp ---
+(Skipped (non-matching extension))
+
+
+--- File: src\modules\full-projects\InventoryManager\assets\images\jeans.png ---
+(Skipped (non-matching extension))
+
+
+--- File: src\modules\full-projects\InventoryManager\assets\images\jugo.png ---
+(Skipped (non-matching extension))
+
+
+--- File: src\modules\full-projects\InventoryManager\assets\images\laptop.png ---
+(Skipped (non-matching extension))
+
+
+--- File: src\modules\full-projects\InventoryManager\assets\images\platos.png ---
+(Skipped (non-matching extension))
+
+
+--- File: src\modules\full-projects\InventoryManager\assets\images\smartphone.png ---
+(Skipped (non-matching extension))
+
+
+--- File: src\modules\full-projects\InventoryManager\assets\images\snacks.png ---
+(Skipped (non-matching extension))
+
+
+--- File: src\modules\full-projects\InventoryManager\assets\images\tablet.png ---
+(Skipped (non-matching extension))
+
+
+--- File: src\modules\full-projects\InventoryManager\assets\images\te.png ---
+(Skipped (non-matching extension))
+
+
+--- File: src\modules\full-projects\InventoryManager\assets\images\trapos.png ---
+(Skipped (non-matching extension))
+
+
+--- File: src\modules\full-projects\InventoryManager\assets\images\vasos.png ---
+(Skipped (non-matching extension))
+
+
+--- File: src\modules\full-projects\InventoryManager\components\InventoryDashboard.vue ---
+
+<script setup>
+import { computed } from 'vue'
+import { ref } from 'vue'
+import { watch } from 'vue'
+
+const props = defineProps({
+  products: {
+    type: Array,
+    required: true
+  }
+})
+
+const chartData = ref(props.products)
+const totalQuantity = computed(() => {
+  return props.products.reduce((sum, product) => sum + product.quantity, 0)
+})
+
+// Crear los datos del gráfico con porcentajes
+const updateChartData = computed(() => {
+  return props.products.map((product) => [
+    product.category,
+    totalQuantity.value > 0
+      ? ((product.quantity / totalQuantity.value) * 100).toFixed(2) // Calcular el porcentaje
+      : 0
+  ])
+})
+watch(chartData, () => {
+  updateChartData()
+})
+</script>
+
+<template>
+  <pie-chart :data="updateChartData" suffix="%" :donut="true"></pie-chart>
+</template>
+
+<style scoped></style>
+
+
+
+--- File: src\modules\full-projects\InventoryManager\components\ProductDetails.vue ---
+
+<script setup>
+defineProps({
+  selectedProductState: {
+    type: Object,
+    required: true
+  }
+})
+
+function getImageUrl(imageName) {
+  return new URL(`../assets/images/${imageName}.png`, import.meta.url).href
+}
+</script>
+
+<template>
+  <div class="h-[37rem] p-10">
+    <div v-if="selectedProductState.name" class="flex flex-col items-center">
+      <div class="">
+        <img
+          :src="getImageUrl(selectedProductState.image)"
+          :alt="selectedProductState.name"
+          class="w-60 h-60 object-cover bg-no-repeat"
+        />
+      </div>
+
+      <div class="w p-4">
+        <div class="flex flex-col">
+          <p class="text-lg font-bold text-[#237078]">
+            <span class="text-gray-700">SKU:</span> {{ selectedProductState.id }}
+          </p>
+          <p class="text-lg font-bold text-[#237078]">
+            <span class="text-gray-700">Producto:</span>
+            {{ selectedProductState.name }}
+          </p>
+        </div>
+        <p class="text-lg font-bold text-[#237078]">
+          <span class="text-gray-700">Cantidad:</span> {{ selectedProductState.quantity }} unidades
+        </p>
+        <p class="text-lg font-bold text-[#237078]">
+          <span class="text-gray-700">Precio de Compra: </span
+          >{{ selectedProductState.purchasePrice }} EUR
+        </p>
+        <p class="text-lg font-bold text-[#237078]">
+          <span class="text-gray-700">Precio de Venta: </span
+          >{{ selectedProductState.salePrice }} EUR
+        </p>
+        <p class="text-lg font-bold text-[#237078]">
+          <span class="text-gray-700">Nivel Mínimo Stock: </span>{{ selectedProductState.minStock }}
+        </p>
+        <p class="text-lg font-bold text-[#237078]">
+          <span class="text-gray-700">Estado:</span> {{ selectedProductState.status }}
+        </p>
+        <p class="text-lg font-bold text-[#237078]">
+          <span class="text-gray-700">Descripción: </span> {{ selectedProductState.description }}
+        </p>
+      </div>
+      <!-- Mostrar mensaje si no hay selectedProductStateo seleccionado -->
+    </div>
+    <div v-else class="text-center">
+      <p class="">No se ha seleccionado un selectedProductStateo</p>
+    </div>
+  </div>
+</template>
+
+
+
+--- File: src\modules\full-projects\InventoryManager\components\ProductForm.vue ---
+
+<script setup>
+import { onMounted, ref, reactive, computed, watch } from 'vue'
+import { db } from '../data/products.js'
+
+const props = defineProps({
+  productState: {
+    type: Object,
+    required: true
+  }
+})
+const emit = defineEmits(['submitProduct'])
+const categories = ref(db)
+onMounted(() => {
+  categories
+})
+
+watch(props.productState, (newProductState) => {
+  if (newProductState && Object.keys(newProductState).length > 0) {
+    Object.assign(product, newProductState) // Actualiza el producto con los datos del lote
+  }
+})
+const product = reactive({
+  category: '',
+  name: '',
+  quantity: 0,
+  purchasePrice: 0,
+  profitMargin: 0,
+  salePrice: 0,
+  entryDate: new Date().toISOString().split('T')[0],
+  minStock: 10,
+  status: 'active',
+  id: null
+})
+
+const handleSubmit = () => {
+  emit('submitProduct', { ...product })
+  Object.assign(product, {
+    category: '',
+    name: '',
+    quantity: 0,
+    purchasePrice: 0,
+    profitMargin: 0,
+    salePrice: 0,
+    entryDate: new Date().toISOString().split('T')[0],
+    minStock: 10,
+    status: 'active',
+    id: null
+  })
+}
+const handleCategoryChange = () => {
+  product.name = ''
+}
+
+const categoryItems = computed(() => {
+  const category = categories.value.find((cat) => cat.name === product.category)
+  return category ? category.items.map((item) => item.name) : []
+})
+
+const updateSalePrice = () => {
+  const purchasePrice = product.purchasePrice
+  const profitMargin = product.profitMargin
+
+  if (purchasePrice && profitMargin >= 0) {
+    product.salePrice = (purchasePrice * (1 + profitMargin / 100)).toFixed(2)
+  } else {
+    product.salePrice = '0.00'
+  }
+}
+</script>
+
+<template>
+  <div class="flex flex-col p-4 text-[#0b2a34]">
+    <div class="p-4 text-center font-bold uppercase">
+      <h2 class="text-[#527986]">Añade o modifica el Producto</h2>
+    </div>
+
+    <form class="flex flex-col gap-4" @submit.prevent="handleSubmit">
+      <div class="flex flex-col">
+        <label class="font-bold" for="sku">SKU (Stock Keeping Unit)</label>
+        <input v-model="product.sku" class="p-2" type="text" id="sku" placeholder="SKU" />
+      </div>
+
+      <div class="flex flex-col">
+        <label class="font-bold" for="category">Categoría del Producto</label>
+        <select v-model="product.category" @change="handleCategoryChange" class="p-2" id="category">
+          <option value="" disabled>Selecciona una categoría</option>
+          <option v-for="cat in categories" :key="cat.name" :value="cat.name">
+            {{ cat.name }}
+          </option>
+        </select>
+      </div>
+
+      <div v-if="product.category" class="flex flex-col">
+        <label class="font-bold" for="name">Producto</label>
+        <select v-model="product.name" class="p-2" id="name">
+          <option value="" disabled>Selecciona un producto</option>
+          <option v-for="item in categoryItems" :key="item" :value="item">{{ item }}</option>
+        </select>
+      </div>
+
+      <div class="flex flex-col">
+        <label class="font-bold" for="quantity">Cantidad del Producto</label>
+        <input
+          v-model.number="product.quantity"
+          class="border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md"
+          type="number"
+          id="quantity"
+          placeholder="Cantidad de Producto"
+        />
+      </div>
+
+      <div class="flex flex-col">
+        <label class="font-bold" for="purchasePrice">Precio de Compra</label>
+        <input
+          v-model.number="product.purchasePrice"
+          class="p-2"
+          type="number"
+          id="purchasePrice"
+          placeholder="Precio de compra del Producto"
+        />
+      </div>
+
+      <div class="flex flex-col">
+        <label class="font-bold" for="salePrice">Ganancia en %</label>
+        <input
+          v-model.number="product.profitMargin"
+          @input="updateSalePrice"
+          class="p-2"
+          type="number"
+          id="salePrice"
+          placeholder="Porcentaje de ganancia"
+        />
+      </div>
+
+      <div class="flex flex-col">
+        <label class="font-bold" for="calculatedSalePrice">Precio de Venta Calculado</label>
+        <input
+          v-model="product.salePrice"
+          class="p-2"
+          type="number"
+          id="calculatedSalePrice"
+          placeholder="Precio de venta calculado"
+          disabled
+        />
+      </div>
+
+      <div class="flex flex-col">
+        <label class="font-bold" for="entryDate">Fecha de Entrada</label>
+        <input
+          v-model="product.entryDate"
+          class="p-2"
+          type="date"
+          id="entryDate"
+          placeholder="Fecha de entrada del Producto"
+        />
+      </div>
+
+      <div class="flex flex-col">
+        <label class="font-bold" for="minStock">Nivel mínimo en Stock</label>
+        <input
+          v-model="product.minStock"
+          class="p-2"
+          type="number"
+          id="minStock"
+          placeholder="Nivel mínimo en stock"
+        />
+      </div>
+
+      <div class="flex flex-col">
+        <label class="font-bold p-2">Estado de disponibilidad</label>
+        <div class="flex items-center p-2">
+          <input
+            type="radio"
+            id="status-active"
+            value="active"
+            v-model="product.status"
+            class="mr-2"
+          />
+          <label for="status-active" class="mr-4">Activo</label>
+
+          <input
+            type="radio"
+            id="status-inactive"
+            value="inactive"
+            v-model="product.status"
+            class="mr-2"
+          />
+          <label for="status-inactive">Inactivo</label>
+        </div>
+      </div>
+
+      <input
+        type="submit"
+        class="bg-[#42cdc7] rounded-md mt-8 p-2 w-full text-white uppercase font-bold hover:bg-[#42b5af] cursor-pointer transition-colors"
+        value="Registrar producto"
+      />
+    </form>
+  </div>
+</template>
+
+<style scoped></style>
+
+
+
+--- File: src\modules\full-projects\InventoryManager\components\ProductListView.vue ---
+
+<script setup>
+import { ref, computed, onMounted, inject, watch } from 'vue'
+import { db } from '../data/products.js'
+
+onMounted(() => {
+  categories
+})
+
+const toast = inject('toast')
+
+const categories = ref(db)
+const props = defineProps({
+  products: {
+    type: Array,
+    required: true
+  }
+})
+defineEmits(['selectedProduct', 'editProduct'])
+const categorySelected = ref('')
+const productSelected = ref('')
+
+const categoryItems = computed(() => {
+  const category = categories.value.find((cat) => cat.name === categorySelected.value)
+  return category ? category.items.map((item) => item.name) : []
+})
+
+const productsToDisplay = computed(() => {
+  let filteredProducts = props.products
+
+  if (categorySelected.value) {
+    filteredProducts = filteredProducts.filter(
+      (product) => product.category === categorySelected.value
+    )
+  }
+
+  if (productSelected.value) {
+    filteredProducts = filteredProducts.filter((product) => product.name === productSelected.value)
+  }
+
+  return filteredProducts
+})
+
+const handleCategoryChange = () => {
+  productSelected.value = ''
+}
+
+watch(productsToDisplay, (newValue) => {
+  if (newValue.length === 0) {
+    toast.open({
+      message: 'No se encontraron productos.',
+      type: 'info'
+    })
+  }
+})
+</script>
+
+<template>
+  <div class="p-2">
+    <div class="flex flex-col">
+      <label class="font-bold" for="category">Categoría del Producto</label>
+      <select v-model="categorySelected" @change="handleCategoryChange" class="p-2" id="category">
+        <option value="" disabled>Selecciona una categoría</option>
+        <option v-for="cat in categories" :key="cat.name" :value="cat.name">
+          {{ cat.name }}
+        </option>
+      </select>
+    </div>
+
+    <div class="flex flex-col">
+      <label class="font-bold" for="name">Producto</label>
+      <select v-model="productSelected" class="p-2" id="name">
+        <option value="" disabled>Selecciona un producto</option>
+        <option v-for="item in categoryItems" :key="item" :value="item">{{ item }}</option>
+      </select>
+    </div>
+
+    <div v-if="productsToDisplay.length > 0">
+      <div v-for="product in productsToDisplay" :key="product.id">
+        <div
+          class="flex items-center justify-between gap-4 p-4 mb-4 rounded-lg border border-[#d8dfdf] shadow-lg"
+        >
+          <div class="flex flex-col justify-between">
+            <!-- <div class="flex items-center gap-3"> -->
+            <button class="flex justify-center my-2" @click="$emit('selectedProduct', product.id)">
+              <img src="../assets//icons/info-svgrepo-com.svg" alt="inf" class="h-8" />
+            </button>
+            <p class="font-bold">{{ product.name }}</p>
+            <!-- </div> -->
+            <p><span class="font-semibold">Cantidad:</span>{{ product.quantity }}</p>
+          </div>
+
+          <div class="flex flex-col justify-between text-center">
+            <p><span class="font-semibold">PreComp:</span>{{ product.purchasePrice }}</p>
+            <p><span class="font-semibold">PreVenta:</span>{{ product.salePrice }}</p>
+            <p><span class="font-semibold">MinStock:</span>{{ product.minStock }}</p>
+          </div>
+
+          <div class="flex flex-col justify-between text-center">
+            <p><span class="font-bold">Estado:</span> {{ product.status }}</p>
+          </div>
+
+          <div class="flex flex-col gap-2 justify-center">
+            <button
+              @click="$emit('editProduct', product.id)"
+              type="button"
+              class="p-2 bg-blue-500 text-white rounded"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                width="16"
+                height="16"
+                stroke-width="2"
+              >
+                <path d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1"></path>
+                <path
+                  d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z"
+                ></path>
+                <path d="M16 5l3 3"></path>
+              </svg>
+            </button>
+            <button type="button" class="p-2 bg-red-500 text-white rounded">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                width="16"
+                height="16"
+                stroke-width="2"
+              >
+                <path d="M4 7l16 0"></path>
+                <path d="M10 11l0 6"></path>
+                <path d="M14 11l0 6"></path>
+                <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12"></path>
+                <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3"></path>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<style scoped></style>
+
+
+
+--- File: src\modules\full-projects\InventoryManager\data\products.js ---
+
+export const db = [
+  {
+    name: 'Electrónica',
+    items: [
+      {
+        name: 'Smartphone',
+        image: 'smartphone',
+        description: 'Un teléfono inteligente con pantalla táctil y múltiples funciones.'
+      },
+      {
+        name: 'Tablet',
+        image: 'tablet',
+        description: 'Dispositivo portátil ideal para trabajo y entretenimiento.'
+      },
+      {
+        name: 'Laptop',
+        image: 'laptop',
+        description: 'Ordenador portátil ligero y de alto rendimiento.'
+      },
+      {
+        name: 'Auriculares',
+        image: 'auriculares',
+        description: 'Auriculares cómodos con sonido de alta calidad.'
+      },
+      {
+        name: 'Cargador USB',
+        image: 'cargador_usb',
+        description: 'Cargador compacto compatible con múltiples dispositivos USB.'
+      }
+    ]
+  },
+  {
+    name: 'Alimentos y Bebidas',
+    items: [
+      {
+        name: 'Agua Mineral',
+        image: 'agua_mineral',
+        description: 'Agua pura y refrescante para hidratarte.'
+      },
+      {
+        name: 'Snacks',
+        image: 'snacks',
+        description: 'Bocadillos ideales para disfrutar en cualquier momento.'
+      },
+      {
+        name: 'Café',
+        image: 'cafe',
+        description: 'Café molido de alta calidad para los amantes del café.'
+      },
+      {
+        name: 'Té',
+        image: 'te',
+        description: 'Té aromático perfecto para relajarte.'
+      },
+      {
+        name: 'Jugo',
+        image: 'jugo',
+        description: 'Jugo natural lleno de sabor y vitaminas.'
+      }
+    ]
+  },
+  {
+    name: 'Hogar y Cocina',
+    items: [
+      {
+        name: 'Platos',
+        image: 'platos',
+        description: 'Platos resistentes y elegantes para tu mesa.'
+      },
+      {
+        name: 'Vasos',
+        image: 'vasos',
+        description: 'Vasos de vidrio perfectos para cualquier bebida.'
+      },
+      {
+        name: 'Cubiertos',
+        image: 'cubiertos',
+        description: 'Cubiertos de acero inoxidable de alta calidad.'
+      },
+      {
+        name: 'Sartenes',
+        image: 'sartenes',
+        description: 'Sartenes antiadherentes ideales para cocinar sin esfuerzo.'
+      },
+      {
+        name: 'Cafetera',
+        image: 'cafetera',
+        description: 'Cafetera moderna para preparar café delicioso en casa.'
+      }
+    ]
+  },
+  {
+    name: 'Ropa y Accesorios',
+    items: [
+      {
+        name: 'Camiseta',
+        image: 'camiseta',
+        description: 'Camiseta de algodón cómoda y casual.'
+      },
+      {
+        name: 'Jeans',
+        image: 'jeans',
+        description: 'Jeans duraderos con un ajuste moderno.'
+      },
+      {
+        name: 'Gorra',
+        image: 'gorra',
+        description: 'Gorra ajustable con diseño elegante.'
+      },
+      {
+        name: 'Bufanda',
+        image: 'bufanda',
+        description: 'Bufanda suave y cálida para el invierno.'
+      },
+      {
+        name: 'Calcetines',
+        image: 'calcetines',
+        description: 'Calcetines cómodos y transpirables.'
+      }
+    ]
+  },
+  {
+    name: 'Limpieza',
+    items: [
+      {
+        name: 'Detergente',
+        image: 'detergente',
+        description: 'Detergente eficaz para ropa limpia y fresca.'
+      },
+      {
+        name: 'Escoba',
+        image: 'escoba',
+        description: 'Escoba resistente para barrer cualquier superficie.'
+      },
+      {
+        name: 'Desinfectante',
+        image: 'desinfectante',
+        description: 'Desinfectante poderoso para mantener tu hogar libre de gérmenes.'
+      },
+      {
+        name: 'Trapos',
+        image: 'trapos',
+        description: 'Trapos absorbentes ideales para limpieza general.'
+      },
+      {
+        name: 'Guantes',
+        image: 'guantes',
+        description: 'Guantes protectores para tareas de limpieza.'
+      }
+    ]
+  }
+]
+
+
+
+--- File: src\modules\full-projects\InventoryManager\InventoryManager.vue ---
+
+<script setup>
+import { markRaw, ref, reactive } from 'vue'
+import { db } from './data/products'
+import { useDragAndDrop } from '@formkit/drag-and-drop/vue'
+import InventoryDashboard from './components/InventoryDashboard.vue'
+import ProductForm from './components/ProductForm.vue'
+import ProductListView from './components/ProductListView.vue'
+import ProductDetails from './components/ProductDetails.vue'
+import AnimatedContainer from '@/components/AnimatedContainer.vue'
+
+const products = ref([])
+const selectedProductState = reactive({})
+const productState = reactive({})
+
+const submitProduct = (product) => {
+  const existProduct = products.value.findIndex((item) => item.name === product.name)
+  const selectedCategory = db.find((cat) => cat.name === product.category)
+  const selectedItem = selectedCategory?.items.find((item) => item.name === product.name)
+
+  if (existProduct >= 0) {
+    const existingProduct = products.value[existProduct]
+
+    const existingLotIndex = existingProduct.lots.findIndex((lot) => lot.lotId === product.lotId)
+    if (existingLotIndex >= 0) {
+      Object.assign(existingProduct.lots[existingLotIndex], product)
+
+      existingProduct.quantity = existingProduct.lots.reduce((sum, lot) => sum + lot.quantity, 0)
+
+      const totalCost = existingProduct.lots.reduce(
+        (sum, lot) => sum + lot.purchasePrice * lot.quantity,
+        0
+      )
+      existingProduct.purchasePrice = parseFloat((totalCost / existingProduct.quantity).toFixed(2))
+
+      existingProduct.salePrice = parseFloat(
+        (existingProduct.purchasePrice * (1 + product.profitMargin / 100)).toFixed(2)
+      )
+
+      return
+    }
+
+    const newLot = {
+      ...product,
+      description: selectedItem ? selectedItem.description : 'Descripción no encontrada',
+      image: selectedItem ? selectedItem.image : 'Imagen no encontrada',
+      lotId: crypto.randomUUID(),
+      createdAt: new Date().toISOString()
+    }
+    existingProduct.lots.push(newLot)
+
+    existingProduct.quantity = existingProduct.lots.reduce((sum, lot) => sum + lot.quantity, 0)
+    const totalCost = existingProduct.lots.reduce(
+      (sum, lot) => sum + lot.purchasePrice * lot.quantity,
+      0
+    )
+    existingProduct.purchasePrice = parseFloat((totalCost / existingProduct.quantity).toFixed(2))
+    existingProduct.salePrice = parseFloat(
+      (existingProduct.purchasePrice * (1 + product.profitMargin / 100)).toFixed(2)
+    )
+  } else {
+    const newProduct = {
+      ...product,
+      description: selectedItem ? selectedItem.description : 'Descripción no encontrada',
+      image: selectedItem ? selectedItem.image : 'Imagen no encontrada',
+      id: crypto.randomUUID(),
+      quantity: product.quantity,
+      lots: [
+        {
+          ...product,
+          lotId: crypto.randomUUID(),
+          createdAt: new Date().toISOString()
+        }
+      ]
+    }
+    products.value.push(newProduct)
+  }
+}
+
+const selectedProduct = (id) => {
+  const product = products.value.find((item) => item.id === id) || {}
+  Object.assign(selectedProductState, product)
+}
+
+const editProduct = (id) => {
+  const productToEdit = products.value.find((item) => item.id === id)
+  if (productToEdit) {
+    const lastLot = productToEdit.lots[productToEdit.lots.length - 1] || {}
+    Object.assign(productState, lastLot) // Cargar los datos del último lote en el formulario
+  }
+}
+
+const [parent, components] = useDragAndDrop([
+  {
+    name: 'section_1',
+    component: markRaw(ProductForm),
+    props: { productState: productState },
+    emit: { submitProduct }
+  },
+  {
+    name: 'section_2',
+    component: markRaw(ProductListView),
+    props: { products: products.value },
+    emit: { selectedProduct, editProduct }
+  },
+  {
+    name: 'section_3',
+    component: markRaw(InventoryDashboard),
+    props: { products: products.value }
+  },
+  {
+    name: 'section_4',
+    component: markRaw(ProductDetails),
+    props: { selectedProductState: selectedProductState }
+  }
+])
+</script>
+
+<template>
+  <AnimatedContainer>
+    <main>
+      <header>
+        <div class="mt-3">
+          <img class="w-full max-h-[40rem]" src="./assets/images/header.webp" alt="header image" />
+        </div>
+      </header>
+
+      <main class="p-4 container">
+        <div ref="parent" class="custom-grid-container">
+          <div
+            v-for="component in components"
+            :key="component.name"
+            :class="`${component.name}`"
+            class="rounded-lg border border-[#d8dfdf] shadow-lg cursor-move"
+          >
+            <component
+              :is="component.component"
+              v-bind="component.props"
+              v-on="component.emit || {}"
+            />
+          </div>
+        </div>
+      </main>
+    </main>
+  </AnimatedContainer>
+</template>
+
+<style scoped>
+.custom-grid-container {
+  display: grid;
+  grid-template-columns: 1fr; /* Base: 1 columna */
+  gap: 1rem;
+}
+
+@media (min-width: 640px) {
+  .custom-grid-container {
+    grid-template-columns: repeat(2, 1fr); /* 2 columnas para móviles grandes y tablets pequeñas */
+  }
+}
+
+@media (min-width: 1280px) {
+  .custom-grid-container {
+    grid-template-columns: repeat(3, 1fr); /* 4 columnas para pantallas grandes (opcional) */
+  }
+}
+
+.section_1 {
+  grid-column: span 1 / span 1;
+  grid-row: span 4;
+  max-height: 90rem;
+  overflow-y: auto;
+}
+.section_2 {
+  grid-column: span 1;
+  grid-row: span 4;
+  max-height: 90rem;
+  overflow-y: auto;
+}
+.section_3 {
+  max-width: 100%;
+  overflow: hidden;
+  height: 44.5rem;
+}
+.section_4 {
+  max-width: 100%;
+  overflow: hidden;
+  height: 44.5rem;
+}
+</style>
+
+
+
+--- File: src\modules\full-projects\InventoryManager\todo_el_contenido.txt ---
+(Skipped (non-matching extension))
+
+
+--- File: src\modules\logic-exercises\LogicExercisesView.vue ---
+
+<script setup>
+import UnderConstruction from '@/components/UnderConstruction .vue'
+</script>
+
+<template>
+  <UnderConstruction />
+</template>
+
+
+
+--- File: src\modules\tecnichals-test\TecnicalTestView.vue ---
+
+<script setup>
+import UnderConstruction from '@/components/UnderConstruction .vue'
+</script>
+
+<template>
+  <UnderConstruction />
+</template>
+
+
+
+--- File: src\modules\utilities\GenerateRandomPassword\assets\images\password.jpg ---
+(Skipped (non-matching extension))
+
+
+--- File: src\modules\utilities\GenerateRandomPassword\assets\vectors\lightning.svg ---
+(Skipped (non-matching extension))
+
+
+--- File: src\modules\utilities\GenerateRandomPassword\RandomPassword.vue ---
+
+<script setup>
+import AnimatedContainer from '@/components/AnimatedContainer.vue'
+import { ref, inject } from 'vue'
+
+const passwordBox = ref('')
+const toast = inject('toast')
+const createPassword = () => {
+  passwordBox.value = crypto.randomUUID()
+}
+
+const copyPassword = async () => {
+  try {
+    await navigator.clipboard.writeText(passwordBox.value)
+
+    toast.open({
+      message: 'Contraseña copiada al portapapeles',
+      type: 'info'
+    })
+  } catch (err) {
+    console.error('Error al copiar la contraseña: ', err)
+  }
+}
+</script>
+
+<template>
+  <AnimatedContainer>
+    <div class="flex flex-col justify-center items-center mt-10">
+      <div
+        class="flex flex-col items-center justify-center w-[50rem] h-60 rounded-xl text-[#1b933b] bg-[#060a07]"
+      >
+        <div class="mb-3">
+          <h2 class="text-4xl text-[#eff1ef]">Crear Contraseña Aleatoria</h2>
+        </div>
+        <div class="flex justify-center gap-3 items-center w-full h-15">
+          <div>
+            <input type="text" :value="passwordBox" class="p-1 w-[33rem] text-center" readonly />
+          </div>
+          <div>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="40"
+              height="40"
+              viewBox="0 0 24 24"
+              @click="copyPassword"
+              class="cursor-pointer"
+            >
+              <g
+                fill="none"
+                stroke="#eab308"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+              >
+                <path d="M16 3H4v13" />
+                <path d="M8 7h12v12a2 2 0 0 1-2 2h-8a2 2 0 0 1-2-2z" />
+              </g>
+            </svg>
+          </div>
+        </div>
+        <button @click="createPassword" class="p-3 mt-3 text-[#1e2733] bg-[#95daa7] rounded-lg">
+          Generar Contraseña
+        </button>
+      </div>
+    </div>
+  </AnimatedContainer>
+</template>
+
+<style scoped></style>
+
+
+
+--- File: src\modules\utilities\UtilitieDetails.vue ---
+
+<script setup>
+import { computed } from 'vue'
+import { useRoute } from 'vue-router'
+
+import RandomPassword from './GenerateRandomPassword/RandomPassword.vue'
+
+const utilitiesComponent = {
+  1: RandomPassword
+}
+
+const route = useRoute()
+const projectId = computed(() => parseInt(route.params.id))
+
+const CurrentUtilitiesComponent = computed(() => utilitiesComponent[projectId.value] || null)
+</script>
+
+<template>
+  <div>
+    <!-- Pasar la descripción al componente dinámico -->
+    <component :is="CurrentUtilitiesComponent" :utilitieDescription="utilitieDescription" />
+  </div>
+</template>
+
+<style scoped></style>
+
+
+
+--- File: src\modules\utilities\UtilitieViews.vue ---
+
+<script setup>
+import ProjectCard from '@/components/ProjectCard.vue'
+import { technicalTests } from '@/data/utilities/Utilities.js'
+
+// Define la ruta base de las imágenes
+const imageBasePath = '/images/utilities'
+</script>
+
+<template>
+  <div class="flex gap-3 flex-wrap justify-center mt-3">
+    <div v-for="fullProject in technicalTests" :key="fullProject.id" class="router-link">
+      <ProjectCard :fullProject="fullProject" :imageBasePath="imageBasePath" />
+    </div>
+  </div>
+</template>
+
+
+
+--- File: src\router\index.js ---
+
+import { createRouter, createWebHistory } from 'vue-router'
+import HomeView from '../views/HomeView.vue'
+
+const router = createRouter({
+  history: createWebHistory(import.meta.env.BASE_URL),
+  routes: [
+    {
+      path: '/',
+      name: 'home',
+      component: HomeView
+    },
+    {
+      path: '/projects',
+      name: 'full-projects',
+      component: () => import('../../src/modules/full-projects/FullProjectView.vue')
+    },
+    {
+      path: '/projects/:id',
+      name: "full-projects-detail",
+      component: () => import('../../src/modules/full-projects/FullProjectDetails.vue'),
+      props: true
+    },
+    {
+      path: '/logic-exercises',
+      name: 'logic-exercises',
+      component: () => import('../../src/modules/logic-exercises/LogicExercisesView.vue')
+    },
+    {
+      path: '/technical-tests',
+      name: 'technical-tests',
+      component: () => import('../../src/modules/tecnichals-test/TecnicalTestView.vue')
+    },
+    {
+      path: '/utilities',
+      name: 'utilities',
+      component: () => import('../modules/utilities/UtilitieViews.vue')
+    },
+    {
+      path: '/utilities/:id',
+      name: 'utility-detail',
+      component: () => import('../modules/utilities/UtilitieDetails.vue'),
+      props: true
+    },
+    {
+      path: '/privacy-policy',
+      name: 'privacy-policy',
+      component: () => import('../views/PrivacyPolicyView.vue')
+    }
+  ]
+})
+
+export default router
+
+
+
+--- File: src\test\demo.test.js ---
+
+import {describe, it, expect} from 'vitest'
+
+describe('testing', () => {
+    it('should be true', () => {
+      expect(true).toBe(true);
+    });
+  });
+  
+
+
+--- File: src\test\modules\GenerateRAndomPassword\RandomPassword.test.js ---
+
+import { describe, it, expect, vi } from 'vitest'
+import RandomPassword from '@/modules/GenerateRandomPassword/RandomPassword.vue'
+import { mount } from '@vue/test-utils'
+
+//Component Rendering Text
+describe('RandomPassword', () => {
+  const wrapper = mount(RandomPassword)
+  it('matches the snapshot', () => {
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+  it('reders correctly', () => {
+    expect(wrapper.find('h2').text()).toContain('Crear Contraseña Aleatoria')
+    expect(wrapper.find('button').text()).toBe('Generar Contraseña')
+  })
+})
+
+// Password Generation Test
+
+describe('Password Generator', () => {
+  const wrapper = mount(RandomPassword)
+
+  it('generates a password when clicking the button', async () => {
+    const button = wrapper.find('button')
+    await button.trigger('click')
+    const input = wrapper.find('input')
+    expect(input.element.value).toHaveLength(36)
+  })
+})
+
+//Clipboard Copy Test
+
+describe('PasswordGenerator', () => {
+  it('Copies de password to the clipboard', async () => {
+    const wrapper = mount(RandomPassword)
+
+    const button = wrapper.find('button')
+    await button.trigger('click')
+
+    Object.assign(navigator, {
+      clipboard: {
+        writeText: vi.fn(() => Promise.resolve())
+      }
+    })
+    const copyIcon = wrapper.find('svg')
+    await copyIcon.trigger('click')
+    expect(navigator.clipboard.writeText).toHaveBeenCalledWith(wrapper.vm.passwordBox)
+  })
+})
+
+describe('PasswordGenerator', () => {
+    it('shows an error if unable to copy password', async () => {
+      const wrapper = mount(RandomPassword)
+  
+      Object.assign(navigator, {
+        clipboard: {
+          writeText: vi.fn(() => Promise.reject('Copy Error')) 
+        }
+      })
+  
+      const consoleSpy = vi.spyOn(console, 'error')
+  
+      const button = wrapper.find('button')
+      await button.trigger('click')
+  
+      const copyIcon = wrapper.find('svg')
+      await copyIcon.trigger('click')
+  
+      expect(consoleSpy).toHaveBeenCalledWith('Error al copiar la contraseña: ', 'Copy Error')
+  
+      consoleSpy.mockRestore()
+    })
+  })
+  
+
+
+--- File: src\test\modules\GenerateRAndomPassword\__snapshots__\RandomPassword.test.js.snap ---
+(Skipped (non-matching extension))
+
+
+--- File: src\todo_el_contenido.txt ---
+(Skipped (non-matching extension))
+
+
+--- File: src\views\FooterView.vue ---
+
+<script setup>
+import { RouterLink } from "vue-router";
+const socialLinks = [
+  {
+    href: "https://www.linkedin.com/in/yubal-hormiga/",
+    iconClass: "fa-linkedin",
+    alt: "LinkedIn",
+  },
+  {
+    href: "https://github.com/YubalHormiga",
+    iconClass: "fa-github",
+    alt: "GitHub",
+  },
+];
+</script>
+
+<template>
+  <footer class="footer-container">
+    <div itemscope itemtype="http://schema.org/WPFooter" class="media">
+      <div>
+        <p class="footer-text" itemprop="copyrightHolder">
+          &copy; 2024 <span itemprop="name">Yubal Hormiga</span>
+        </p>
+      </div>
+      <div align="center" class="socialbtns">
+        <ul>
+          <li v-for="link in socialLinks" :key="link.alt">
+            <a
+              :href="link.href"
+              class="fa fa-lg"
+              :class="link.iconClass"
+              :alt="link.alt"
+              target="_blank"
+            >
+              <!-- Enlace visible para accesibilidad -->
+              <span class="sr-only">{{ link.alt }}</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-links">
+      <div class="links">
+        <a href="mailto:yubalhh@yahoo.es" itemprop="url">Contact</a>
+      </div>
+      <div>
+        <RouterLink :to="{ name: 'privacy-policy' }" itemprop="url"
+          >Privacy Policy</RouterLink
+        >
+      </div>
+    </div>
+  </footer>
+</template>
+
+<style scoped>
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+.media {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.footer-container {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+}
+
+.footer-text {
+  margin: 0;
+  text-align: center;
+  color: var(--text-200);
+}
+
+.footer-links {
+  list-style-type: none;
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.footer-links a {
+  text-decoration: none;
+  color: var(--text-100);
+}
+
+.footer-links a:hover {
+  border-bottom: 2px solid var(--accent-100);
+}
+
+/*Social */
+
+a,
+a:hover {
+  color: #000;
+  text-decoration: none;
+  padding: 5px;
+}
+
+.socialbtnsbtnsbtns,
+.socialbtnsbtnsbtns ul,
+.socialbtnsbtnsbtns li {
+  margin: 0;
+  padding: 5px;
+}
+
+.socialbtnsbtnsbtns li {
+  list-style: none outside none;
+  display: inline-block;
+}
+
+.socialbtns li {
+  list-style: none outside none;
+  display: inline-block;
+}
+
+.socialbtns .fa {
+  color: #fff;
+  text-shadow: 1px 1px 0px #000, 1px -1px 0px #000, -1px 1px 0px #000,
+    -1px -1px 0px #000;
+  -webkit-text-shadow: 1px 1px 0px #000, 1px -1px 0px #000, -1px 1px 0px #000,
+    -1px -1px 0px #000;
+  -moz-text-shadow: 1px 1px 0px #000, 1px -1px 0px #000, -1px 1px 0px #000,
+    -1px -1px 0px #000;
+  -o-text-shadow: 1px 1px 0px #000, 1px -1px 0px #000, -1px 1px 0px #000,
+    -1px -1px 0px #000;
+  transition: all ease-out 0.5s;
+  -moz-transition: all ease-out 0.5s;
+  -webkit-transition: all ease-out 0.5s;
+  -o-transition: all ease-out 0.5s;
+}
+
+.socialbtns .fa:hover {
+  color: #000;
+  text-shadow: 1px 1px 0px #fff, 1px -1px 0px #fff, -1px 1px 0px #fff,
+    -1px -1px 0px #fff;
+  -webkit-text-shadow: 1px 1px 0px #fff, 1px -1px 0px #fff, -1px 1px 0px #fff,
+    -1px -1px 0px #fff;
+  -moz-text-shadow: 1px 1px 0px #fff, 1px -1px 0px #fff, -1px 1px 0px #fff,
+    -1px -1px 0px #fff;
+  -o-text-shadow: 1px 1px 0px #fff, 1px -1px 0px #fff, -1px 1px 0px #fff,
+    -1px -1px 0px #fff;
+  transition: all ease 0.5s;
+  -moz-transition: all ease-in 0.5s;
+  -webkit-transition: all ease-in 0.5s;
+  -o-transition: all ease-in 0.5s;
+}
+</style>
+
+
+
+--- File: src\views\HomeView.vue ---
+
+<script setup>
+import AnimatedContainer from '@/components/AnimatedContainer.vue'
+</script>
+<template>
+  <AnimatedContainer>
+    <div class="max-w-7xl mx-auto px-4 py-8">
+      <h1 class="text-3xl font-bold mb-6 text-center">Descripción de la Aplicación</h1>
+
+      <section class="mb-6">
+        <h2 class="font-semibold mb-4">Inicio</h2>
+        <p class="text-gray-700">
+          Esta aplicación se está desarrollando como un <strong>ejercicio de práctica</strong> para
+          mejorar mis habilidades de programación. El objetivo principal es
+          <strong>mostrar pequeñas aplicaciones</strong> que ilustran conceptos clave de
+          programación utilizando <strong>Vue 3</strong> con la sintaxis de
+          <strong>&lt;script setup&gt;</strong>. Cada aplicación es un ejemplo práctico que me
+          ayudará a comprender mejor la lógica de programación y las mejores prácticas en el
+          desarrollo de software.
+        </p>
+      </section>
+
+      <section class="mb-6">
+        <h2 class="font-semibold mb-4">Proyectos Completos</h2>
+        <p class="text-gray-700">
+          En esta sección, presentaré <strong>proyectos completos</strong> que muestran aplicaciones
+          más robustas y funcionales. Estos proyectos se centrarán en resolver problemas del mundo
+          real y proporcionarán una experiencia más completa al usuario. Aquí podré presentar
+          desarrollos más complejos, que van más allá de simples demostraciones, y en los que se
+          pondrán a prueba mis habilidades y conocimientos en programación a gran escala.
+        </p>
+      </section>
+
+      <section class="mb-6">
+        <h2 class="font-semibold mb-4">Utilidades</h2>
+        <p class="text-gray-700">
+          En esta sección, se incluirán diversas <strong>utilidades</strong> que abordarán problemas
+          comunes en la programación. Estas herramientas están diseñadas para ser prácticas y
+          fáciles de usar, permitiendo a los usuarios llevar a cabo tareas específicas con
+          eficiencia. Al igual que las pruebas técnicas, estas utilidades también permitirán mejorar
+          la productividad en tareas diarias de programación.
+        </p>
+      </section>
+
+      <section class="mb-6">
+        <h2 class="font-semibold mb-4">Pruebas Técnicas</h2>
+        <p class="text-gray-700">
+          Además de las pequeñas aplicaciones, también incluiré
+          <strong>pruebas técnicas</strong> que simulan ejercicios comunes que se encuentran en
+          entrevistas de trabajo para el puesto de programador. Estas pruebas están diseñadas para:
+        </p>
+        <ul class="list-disc list-inside text-gray-700">
+          <li>
+            <strong>Desafiar mi lógica de programación</strong>: Cada prueba presenta un problema
+            que debo resolver, lo que me ayudará a afinar mis habilidades de pensamiento crítico y
+            resolución de problemas.
+          </li>
+          <li>
+            <strong>Prepararme para entrevistas</strong>: Las pruebas son similares a las que
+            podrías encontrar en entrevistas reales, lo que me brinda una ventaja al momento de
+            enfrentar futuros reclutadores.
+          </li>
+          <li>
+            <strong>Fomentar la práctica continua</strong>: Con una variedad de ejercicios
+            disponibles, puedo practicar y mejorar continuamente mis habilidades a mi propio ritmo.
+          </li>
+        </ul>
+      </section>
+
+      <section class="mb-6">
+        <h2 class="font-semibold mb-4">Ejercicios de Lógica</h2>
+        <p class="text-gray-700">
+          La sección de <strong>ejercicios de lógica</strong> estará dedicada a una serie de
+          desafíos diseñados para fortalecer mis habilidades de resolución de problemas. Estos
+          ejercicios me permitirán practicar y aplicar los conceptos aprendidos a través de las
+          pequeñas aplicaciones y las pruebas técnicas. Algunos de los tipos de ejercicios
+          incluirán:
+        </p>
+        <ul class="list-disc list-inside text-gray-700">
+          <li>
+            <strong>Problemas de Algoritmos:</strong> Desafíos centrados en la creación de
+            algoritmos eficientes.
+          </li>
+          <li>
+            <strong>Desafíos de Programación:</strong> Ejercicios que involucran la implementación
+            de soluciones a problemas específicos.
+          </li>
+          <li>
+            <strong>Puzzles Lógicos:</strong> Retos diseñados para ejercitar el pensamiento crítico
+            y la creatividad.
+          </li>
+        </ul>
+      </section>
+
+      <section>
+        <h2 class="font-semibold mb-4">Conclusión</h2>
+        <p class="text-gray-700">
+          En resumen, esta aplicación es un entorno ideal para quienes desean
+          <strong>entrenar su lógica de programación</strong> y prepararse para el competitivo mundo
+          de las entrevistas de trabajo en tecnología. A través de pequeñas aplicaciones, proyectos
+          completos, pruebas técnicas y ejercicios de lógica, puedo desarrollarme y avanzar en mi
+          carrera como programador.
+        </p>
+      </section>
+    </div>
+  </AnimatedContainer>
+</template>
+
+
+
+--- File: src\views\MainNavegationView.vue ---
+
+<script setup>
+import { ref } from 'vue'
+import { RouterLink, useRoute } from 'vue-router'
+
+const navItems = [
+  { text: 'Inicio', to: '/' },
+  { text: 'Proyectos Completos', to: { name: 'full-projects' } },
+  { text: 'Utilidades', to: { name: 'utilities' } },
+  { text: 'Pruebas Técnicas', to: { name: 'technical-tests' } },
+  { text: 'Ejercicios de Lógica', to: { name: 'logic-exercises' } }
+]
+
+const showContent = ref(false)
+const route = useRoute()
+
+const isActive = (item) => {
+  return item.to.name === route.name || (route.path === '/' && item.text === 'Inicio')
+}
+</script>
+
+<template>
+  <nav class="flex items-center justify-between flex-wrap p-2 bg-[#fff] mb-10">
+    <a href="http://localhost:5173/">
+      <h1 class="animate-charcter">TechMix</h1>
+    </a>
+
+    <div class="block lg:hidden">
+      <button
+        :class="['hamburger', 'hamburger--spring', { 'is-active': showContent }]"
+        @click="showContent = !showContent"
+        type="button"
+      >
+        <span class="hamburger-box">
+          <span class="hamburger-inner"></span>
+        </span>
+      </button>
+    </div>
+
+    <div :class="['w-full lg:flex lg:justify-evenly lg:items-center', { hidden: !showContent }]">
+      <RouterLink
+        v-for="(item, index) in navItems"
+        :key="index"
+        :to="item.to"
+        :class="{ 'active-link': isActive(item) }"
+        class="flex mt-4 lg:inline-block font-semibold lg:mt-0 text-[#44107a] hover:text-[#ff1361] mr-4"
+      >
+        {{ item.text }}
+      </RouterLink>
+    </div>
+  </nav>
+</template>
+
+<style scoped>
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Poppins:wght@400;700&display=swap');
+
+nav a {
+  transition: color 0.3s ease;
+  font-family: 'Poppins', sans-serif;
+}
+
+.active-link {
+  font-weight: bold;
+  color: #ff1361;
+}
+
+.animate-charcter {
+  font-family: 'Poppins', sans-serif;
+  font-weight: bold;
+  text-transform: uppercase;
+  background-image: linear-gradient(-225deg, #231557 0%, #44107a 29%, #ff1361 67%, #fff800 100%);
+  background-size: 200% auto;
+  color: #fff;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: textclip 5s linear infinite;
+  display: inline-block;
+  font-size: 5.5rem;
+}
+
+@keyframes textclip {
+  to {
+    background-position: 200% center;
+  }
+}
+</style>
+
+
+
+--- File: src\views\PrivacyPolicyView.vue ---
+
+<template>
+  <div class="container">
+    <header>
+      <h1 class="text-center font-bold">Política de Privacidad</h1>
+    </header>
+    <main>
+      <section>
+        <h2>1. Introducción</h2>
+        <p>
+          En TechMix, valoramos tu privacidad y estamos comprometidos a proteger tus datos
+          personales. Esta política de privacidad describe cómo recopilamos, usamos y protegemos tu
+          información de acuerdo con el Reglamento General de Protección de Datos (RGPD).
+        </p>
+      </section>
+      <section>
+        <h2>2. Responsable del Tratamiento</h2>
+        <p>El responsable del tratamiento de tus datos es TechMix</p>
+      </section>
+      <section>
+        <h2>3. Información que Recopilamos</h2>
+        <p>Podemos recopilar los siguientes tipos de información:</p>
+        <ul>
+          <li>
+            Información personal, como nombre y correo electrónico, cuando te registras en nuestro
+            sitio o suscribes a nuestro boletín.
+          </li>
+          <li>
+            Información de uso, como las páginas que visitas y el tiempo que pasas en nuestro sitio.
+          </li>
+          <li>Datos técnicos, como tu dirección IP, tipo de navegador y sistema operativo.</li>
+        </ul>
+      </section>
+      <section>
+        <h2>4. Finalidades del Tratamiento</h2>
+        <p>Utilizamos la información recopilada para:</p>
+        <ul>
+          <li>Proporcionar y mejorar nuestros servicios.</li>
+          <li>Personalizar tu experiencia en nuestro sitio.</li>
+          <li>Enviar comunicaciones y actualizaciones sobre nuestros servicios.</li>
+          <li>Analizar el uso del sitio y mejorar nuestro contenido y diseño.</li>
+        </ul>
+      </section>
+      <section>
+        <h2>5. Legitimación para el Tratamiento de Datos</h2>
+        <p>
+          La base legal para el tratamiento de tus datos es el consentimiento que nos otorgas al
+          aceptar esta política de privacidad y al proporcionarnos tu información personal.
+        </p>
+      </section>
+      <section>
+        <h2>6. Compartir tu Información</h2>
+        <p>
+          No vendemos, intercambiamos ni transferimos a terceros tu información personal sin tu
+          consentimiento, excepto en los siguientes casos:
+        </p>
+        <ul>
+          <li>Proveedores de servicios que nos ayudan a operar nuestro sitio y servicios.</li>
+          <li>En cumplimiento de la ley o en respuesta a una orden judicial.</li>
+        </ul>
+      </section>
+      <section>
+        <h2>7. Seguridad de tu Información</h2>
+        <p>
+          Implementamos medidas de seguridad para proteger tu información personal contra el acceso
+          no autorizado, alteración, divulgación o destrucción.
+        </p>
+      </section>
+      <section>
+        <h2>8. Tus Derechos</h2>
+        <p>En virtud del RGPD, tienes derecho a:</p>
+        <ul>
+          <li>Acceder a tus datos personales.</li>
+          <li>Solicitar la rectificación de datos inexactos.</li>
+          <li>
+            Solicitar la supresión de tus datos cuando, entre otros motivos, los datos ya no sean
+            necesarios para los fines que fueron recogidos.
+          </li>
+          <li>
+            Solicitar la limitación del tratamiento de tus datos, en cuyo caso solo los
+            conservaremos para el ejercicio o la defensa de reclamaciones.
+          </li>
+          <li>
+            Oponerte al tratamiento de tus datos. Dejaremos de tratar los datos en la forma que nos
+            indiques, salvo que por motivos legítimos imperiosos o el ejercicio o la defensa de
+            posibles reclamaciones se deban seguir tratando.
+          </li>
+          <li>Solicitar la portabilidad de tus datos.</li>
+        </ul>
+        <p>Puedes ejercer estos derechos enviando una solicitud a [email@example.com].</p>
+      </section>
+      <section>
+        <h2>9. Cambios en esta Política de Privacidad</h2>
+        <p>
+          Nos reservamos el derecho de actualizar esta política de privacidad en cualquier momento.
+          Te notificaremos sobre cualquier cambio publicando la nueva política en nuestro sitio.
+        </p>
+      </section>
+      <section>
+        <h2>10. Contacto</h2>
+        <p>
+          Si tienes preguntas sobre esta política de privacidad, contáctanos a través de
+          [email@example.com] o en [dirección completa].
+        </p>
+      </section>
+    </main>
+  </div>
+</template>
+
+
+
+--- File: tailwind.config.js ---
+
+/** @type {import('tailwindcss').Config} */
+export default {
+  content: [
+    "./index.html",
+    "./src/**/*.{vue,js,ts,jsx,tsx}",
+  ],
+  theme: {
+    extend: {
+      backgroundImage: {
+        'custom-gradient': ' linear-gradient(to right top, #051937, #004d7a, #008793, #00bf72, #a8eb12)',
+      
+      },
+    },
+  },
+  plugins: [],
+}
+
+
+
+--- File: todo_el_contenido.txt ---
+(Skipped (non-matching extension))
+
+
+--- File: vite.config.js ---
+
+import { fileURLToPath, URL } from 'node:url'
+
+import { defineConfig } from 'vite'
+import vue from '@vitejs/plugin-vue'
+import vueDevTools from 'vite-plugin-vue-devtools'
+
+// https://vitejs.dev/config/
+export default defineConfig({
+  plugins: [
+    vue(),
+    vueDevTools(),
+  ],
+  resolve: {
+    alias: {
+      '@': fileURLToPath(new URL('./src', import.meta.url))
+    }
+  }
+})
+
+
+
+--- File: vitest.config.js ---
+
+import { fileURLToPath } from 'node:url'
+import { mergeConfig, defineConfig, configDefaults } from 'vitest/config'
+import viteConfig from './vite.config'
+
+export default mergeConfig(
+  viteConfig,
+  defineConfig({
+    test: {
+      environment: 'jsdom',
+      exclude: [...configDefaults.exclude, 'e2e/**'],
+      root: fileURLToPath(new URL('./', import.meta.url))
+    }
+  })
+)
+

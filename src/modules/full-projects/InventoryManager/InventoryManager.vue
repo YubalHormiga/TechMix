@@ -20,6 +20,25 @@ const submitProduct = (product) => {
   if (existProduct >= 0) {
     const existingProduct = products.value[existProduct]
 
+    const existingLotIndex = existingProduct.lots.findIndex((lot) => lot.lotId === product.lotId)
+    if (existingLotIndex >= 0) {
+      Object.assign(existingProduct.lots[existingLotIndex], product)
+
+      existingProduct.quantity = existingProduct.lots.reduce((sum, lot) => sum + lot.quantity, 0)
+
+      const totalCost = existingProduct.lots.reduce(
+        (sum, lot) => sum + lot.purchasePrice * lot.quantity,
+        0
+      )
+      existingProduct.purchasePrice = parseFloat((totalCost / existingProduct.quantity).toFixed(2))
+
+      existingProduct.salePrice = parseFloat(
+        (existingProduct.purchasePrice * (1 + product.profitMargin / 100)).toFixed(2)
+      )
+
+      return
+    }
+
     const newLot = {
       ...product,
       description: selectedItem ? selectedItem.description : 'Descripción no encontrada',
@@ -27,16 +46,14 @@ const submitProduct = (product) => {
       lotId: crypto.randomUUID(),
       createdAt: new Date().toISOString()
     }
+    existingProduct.lots.push(newLot)
 
-    existingProduct.lots.push(newLot) // Agregar el nuevo lote al producto
-
-    const totalQuantity = existingProduct.lots.reduce((sum, lot) => sum + lot.quantity, 0)
+    existingProduct.quantity = existingProduct.lots.reduce((sum, lot) => sum + lot.quantity, 0)
     const totalCost = existingProduct.lots.reduce(
       (sum, lot) => sum + lot.purchasePrice * lot.quantity,
       0
     )
-    existingProduct.purchasePrice = parseFloat((totalCost / totalQuantity).toFixed(2))
-
+    existingProduct.purchasePrice = parseFloat((totalCost / existingProduct.quantity).toFixed(2))
     existingProduct.salePrice = parseFloat(
       (existingProduct.purchasePrice * (1 + product.profitMargin / 100)).toFixed(2)
     )
@@ -46,6 +63,7 @@ const submitProduct = (product) => {
       description: selectedItem ? selectedItem.description : 'Descripción no encontrada',
       image: selectedItem ? selectedItem.image : 'Imagen no encontrada',
       id: crypto.randomUUID(),
+      quantity: product.quantity,
       lots: [
         {
           ...product,
@@ -66,7 +84,6 @@ const selectedProduct = (id) => {
 const editProduct = (id) => {
   const productToEdit = products.value.find((item) => item.id === id)
   if (productToEdit) {
-    // Obtener el último lote de este producto
     const lastLot = productToEdit.lots[productToEdit.lots.length - 1] || {}
     Object.assign(productState, lastLot) // Cargar los datos del último lote en el formulario
   }
