@@ -16,7 +16,7 @@ onMounted(() => {
 
 watch(props.productState, (newProductState) => {
   if (newProductState && Object.keys(newProductState).length > 0) {
-    Object.assign(product, newProductState) // Actualiza el producto con los datos del lote
+    Object.assign(product, newProductState)
   }
 })
 const product = reactive({
@@ -90,10 +90,12 @@ const updateSalePrice = () => {
         </select>
       </div>
 
-      <div v-if="product.category" class="flex flex-col">
+      <div class="flex flex-col">
         <label class="font-bold" for="name">Producto</label>
-        <select v-model="product.name" class="p-2" id="name">
-          <option value="" disabled>Selecciona un producto</option>
+        <select v-model="product.name" class="p-2" id="name" :disabled="!product.category">
+          <option value="" disabled>
+            {{ product.category ? 'Selecciona un producto' : 'Selecciona una categoría primero' }}
+          </option>
           <option v-for="item in categoryItems" :key="item" :value="item">{{ item }}</option>
         </select>
       </div>
@@ -192,7 +194,7 @@ const updateSalePrice = () => {
       <input
         type="submit"
         class="bg-[#42cdc7] rounded-md mt-8 p-2 w-full text-white uppercase font-bold hover:bg-[#42b5af] cursor-pointer transition-colors"
-        value="Registrar producto"
+        :value="productState.lotId ? 'Guardar cambios' : 'Registrar producto'"
       />
     </form>
   </div>

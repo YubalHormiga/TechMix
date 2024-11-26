@@ -62,7 +62,6 @@ const submitProduct = (product) => {
     if (existingLotIndex >= 0) {
       Object.assign(existingProduct.lots[existingLotIndex], product)
       calculatePrices(existingProduct)
-      // Notificación de producto editado correctamente
       toast.open({
         message: 'Artículo modificado correctamente',
         type: 'success'
@@ -205,23 +204,23 @@ const [parent, components] = useDragAndDrop([
 .section_1 {
   grid-column: span 1 / span 1;
   grid-row: span 4;
-  max-height: 90rem;
+  height: 82rem;
   overflow-y: auto;
 }
 .section_2 {
   grid-column: span 1;
   grid-row: span 4;
-  max-height: 90rem;
+  max-height: 82rem;
   overflow-y: auto;
 }
 .section_3 {
   max-width: 100%;
   overflow: hidden;
-  height: 44.5rem;
+  height: 40.5rem;
 }
 .section_4 {
   max-width: 100%;
   overflow: hidden;
-  height: 44.5rem;
+  height: 40.5rem;
 }
 </style>

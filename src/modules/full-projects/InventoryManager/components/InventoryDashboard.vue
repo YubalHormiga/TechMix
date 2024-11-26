@@ -1,7 +1,5 @@
 <script setup>
 import { computed } from 'vue'
-import { ref } from 'vue'
-import { watch } from 'vue'
 
 const props = defineProps({
   products: {
@@ -10,27 +8,31 @@ const props = defineProps({
   }
 })
 
-const chartData = ref(props.products)
 const totalQuantity = computed(() => {
-  return props.products.reduce((sum, product) => sum + product.quantity, 0)
+  return props.products.reduce((sum, product) => {
+    return sum + (product.quantity || 0)
+  }, 0)
 })
 
-// Crear los datos del gráfico con porcentajes
 const updateChartData = computed(() => {
-  return props.products.map((product) => [
-    product.category,
-    totalQuantity.value > 0
-      ? ((product.quantity / totalQuantity.value) * 100).toFixed(2) // Calcular el porcentaje
-      : 0
+  const categoryData = props.products.reduce((acc, product) => {
+    const category = product.category || 'Desconocida'
+    acc[category] = (acc[category] || 0) + (product.quantity || 0)
+    return acc
+  }, {})
+
+  return Object.entries(categoryData).map(([category, quantity]) => [
+    category,
+    totalQuantity.value > 0 ? ((quantity / totalQuantity.value) * 100).toFixed(2) : 0
   ])
-})
-watch(chartData, () => {
-  updateChartData()
 })
 </script>
 
 <template>
-  <pie-chart :data="updateChartData" suffix="%" :donut="true"></pie-chart>
+  <div>
+    <pie-chart v-if="updateChartData.length" :data="updateChartData" suffix="%" :donut="true" />
+    <p v-else>No hay datos para mostrar.</p>
+  </div>
 </template>
 
 <style scoped></style>
