@@ -1,12 +1,10 @@
 <script setup>
-import { ref, computed, onMounted, inject, watch } from 'vue'
+import { ref, computed, onMounted, watch } from 'vue'
 import { db } from '../data/products.js'
 
 onMounted(() => {
   categories
 })
-
-const toast = inject('toast')
 
 const categories = ref(db)
 const props = defineProps({
@@ -15,7 +13,7 @@ const props = defineProps({
     required: true
   }
 })
-defineEmits(['selectedProduct', 'editProduct'])
+defineEmits(['selectedProduct', 'editProduct', 'deleteProduct'])
 const categorySelected = ref('')
 const productSelected = ref('')
 
@@ -44,14 +42,13 @@ const handleCategoryChange = () => {
   productSelected.value = ''
 }
 
-watch(productsToDisplay, (newValue) => {
-  if (newValue.length === 0) {
-    toast.open({
-      message: 'No se encontraron productos.',
-      type: 'info'
-    })
-  }
-})
+watch(
+  () => props.products,
+  (newValue) => {
+    console.log('Productos actualizados:', newValue)
+  },
+  { deep: true }
+)
 </script>
 
 <template>
@@ -123,7 +120,11 @@ watch(productsToDisplay, (newValue) => {
                 <path d="M16 5l3 3"></path>
               </svg>
             </button>
-            <button type="button" class="p-2 bg-red-500 text-white rounded">
+            <button
+              @click="$emit('deleteProduct', product.id)"
+              type="button"
+              class="p-2 bg-red-500 text-white rounded"
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"

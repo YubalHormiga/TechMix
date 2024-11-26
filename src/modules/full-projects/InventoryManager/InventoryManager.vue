@@ -1,5 +1,5 @@
 <script setup>
-import { markRaw, ref, reactive } from 'vue'
+import { markRaw, ref, reactive, watch, onMounted, inject } from 'vue'
 import { db } from './data/products'
 import { useDragAndDrop } from '@formkit/drag-and-drop/vue'
 import InventoryDashboard from './components/InventoryDashboard.vue'
@@ -11,6 +11,44 @@ import AnimatedContainer from '@/components/AnimatedContainer.vue'
 const products = ref([])
 const selectedProductState = reactive({})
 const productState = reactive({})
+const toast = inject('toast')
+
+onMounted(() => {
+  const productsStorage = localStorage.getItem('products')
+  if (productsStorage) {
+    try {
+      products.value = JSON.parse(productsStorage)
+    } catch (e) {
+      console.error('Error parsing products from localStorage', e)
+      products.value = []
+    }
+  } else {
+    products.value = []
+  }
+})
+
+const saveProductsToLocalStorage = () => {
+  try {
+    localStorage.setItem('products', JSON.stringify(products.value))
+  } catch (e) {
+    console.error('Error saving products to localStorage', e)
+  }
+}
+
+watch(
+  () => products.value,
+  () => saveProductsToLocalStorage(),
+  { deep: true }
+)
+
+const calculatePrices = (product) => {
+  product.quantity = product.lots.reduce((sum, lot) => sum + lot.quantity, 0)
+  const totalCost = product.lots.reduce((sum, lot) => sum + lot.purchasePrice * lot.quantity, 0)
+  product.purchasePrice = parseFloat((totalCost / product.quantity).toFixed(2))
+  product.salePrice = parseFloat(
+    (product.purchasePrice * (1 + product.profitMargin / 100)).toFixed(2)
+  )
+}
 
 const submitProduct = (product) => {
   const existProduct = products.value.findIndex((item) => item.name === product.name)
@@ -19,49 +57,37 @@ const submitProduct = (product) => {
 
   if (existProduct >= 0) {
     const existingProduct = products.value[existProduct]
-
     const existingLotIndex = existingProduct.lots.findIndex((lot) => lot.lotId === product.lotId)
+
     if (existingLotIndex >= 0) {
       Object.assign(existingProduct.lots[existingLotIndex], product)
-
-      existingProduct.quantity = existingProduct.lots.reduce((sum, lot) => sum + lot.quantity, 0)
-
-      const totalCost = existingProduct.lots.reduce(
-        (sum, lot) => sum + lot.purchasePrice * lot.quantity,
-        0
-      )
-      existingProduct.purchasePrice = parseFloat((totalCost / existingProduct.quantity).toFixed(2))
-
-      existingProduct.salePrice = parseFloat(
-        (existingProduct.purchasePrice * (1 + product.profitMargin / 100)).toFixed(2)
-      )
-
+      calculatePrices(existingProduct)
+      // Notificación de producto editado correctamente
+      toast.open({
+        message: 'Artículo modificado correctamente',
+        type: 'success'
+      })
       return
     }
 
     const newLot = {
       ...product,
-      description: selectedItem ? selectedItem.description : 'Descripción no encontrada',
-      image: selectedItem ? selectedItem.image : 'Imagen no encontrada',
+      description: selectedItem?.description || 'Descripción no encontrada',
+      image: selectedItem?.image || 'Imagen no encontrada',
       lotId: crypto.randomUUID(),
       createdAt: new Date().toISOString()
     }
     existingProduct.lots.push(newLot)
-
-    existingProduct.quantity = existingProduct.lots.reduce((sum, lot) => sum + lot.quantity, 0)
-    const totalCost = existingProduct.lots.reduce(
-      (sum, lot) => sum + lot.purchasePrice * lot.quantity,
-      0
-    )
-    existingProduct.purchasePrice = parseFloat((totalCost / existingProduct.quantity).toFixed(2))
-    existingProduct.salePrice = parseFloat(
-      (existingProduct.purchasePrice * (1 + product.profitMargin / 100)).toFixed(2)
-    )
+    calculatePrices(existingProduct)
+    toast.open({
+      message: 'Artículo ingresado correctamente',
+      type: 'success'
+    })
   } else {
     const newProduct = {
       ...product,
-      description: selectedItem ? selectedItem.description : 'Descripción no encontrada',
-      image: selectedItem ? selectedItem.image : 'Imagen no encontrada',
+      description: selectedItem?.description || 'Descripción no encontrada',
+      image: selectedItem?.image || 'Imagen no encontrada',
       id: crypto.randomUUID(),
       quantity: product.quantity,
       lots: [
@@ -73,6 +99,10 @@ const submitProduct = (product) => {
       ]
     }
     products.value.push(newProduct)
+    toast.open({
+      message: 'Artículo ingresado correctamente',
+      type: 'success'
+    })
   }
 }
 
@@ -85,8 +115,17 @@ const editProduct = (id) => {
   const productToEdit = products.value.find((item) => item.id === id)
   if (productToEdit) {
     const lastLot = productToEdit.lots[productToEdit.lots.length - 1] || {}
-    Object.assign(productState, lastLot) // Cargar los datos del último lote en el formulario
+    Object.assign(productState, lastLot)
   }
+}
+
+const deleteProduct = (id) => {
+  products.value = products.value.filter((product) => product.id !== id)
+
+  toast.open({
+    message: 'Producto eliminado correctamente',
+    type: 'warning'
+  })
 }
 
 const [parent, components] = useDragAndDrop([
@@ -99,18 +138,18 @@ const [parent, components] = useDragAndDrop([
   {
     name: 'section_2',
     component: markRaw(ProductListView),
-    props: { products: products.value },
-    emit: { selectedProduct, editProduct }
+    props: { products },
+    emit: { selectedProduct, editProduct, deleteProduct }
   },
   {
     name: 'section_3',
     component: markRaw(InventoryDashboard),
-    props: { products: products.value }
+    props: { products }
   },
   {
     name: 'section_4',
     component: markRaw(ProductDetails),
-    props: { selectedProductState: selectedProductState }
+    props: { selectedProductState }
   }
 ])
 </script>
@@ -147,19 +186,19 @@ const [parent, components] = useDragAndDrop([
 <style scoped>
 .custom-grid-container {
   display: grid;
-  grid-template-columns: 1fr; /* Base: 1 columna */
+  grid-template-columns: 1fr;
   gap: 1rem;
 }
 
 @media (min-width: 640px) {
   .custom-grid-container {
-    grid-template-columns: repeat(2, 1fr); /* 2 columnas para móviles grandes y tablets pequeñas */
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
 @media (min-width: 1280px) {
   .custom-grid-container {
-    grid-template-columns: repeat(3, 1fr); /* 4 columnas para pantallas grandes (opcional) */
+    grid-template-columns: repeat(3, 1fr);
   }
 }
 
