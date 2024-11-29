@@ -515,6 +515,10 @@ export default {
 (Skipped (non-matching extension))
 
 
+--- File: public\_redirects ---
+(Skipped (non-matching extension))
+
+
 --- File: README.md ---
 (Skipped (non-matching extension))
 
@@ -1396,6 +1400,9 @@ const props = defineProps({
   }
 })
 defineEmits(['increment-amount', 'decrement-amount', 'delete-table', 'toggle-cart'])
+function getImageUrl(imageName) {
+  return new URL(`../assets/images/${imageName}.jpg`, import.meta.url).href
+}
 </script>
 
 <template>
@@ -1433,9 +1440,9 @@ defineEmits(['increment-amount', 'decrement-amount', 'delete-table', 'toggle-car
           <tr v-for="table in props.cart" :key="table.id">
             <td>
               <img
-                :src="`/src/modules/full-projects/BoardShop/assets/images/${table.image}.jpg`"
-                alt="imagen"
-                class="table-image"
+                :src="getImageUrl(table.image)"
+                alt="card-image"
+                class="object-cover w-full h-full"
               />
             </td>
             <td>{{ table.name }}</td>
@@ -1615,7 +1622,7 @@ export const db = [
 
 
 
---- File: src\modules\full-projects\BoardShop\README.MD ---
+--- File: src\modules\full-projects\BoardShop\README.md ---
 (Skipped (non-matching extension))
 
 
@@ -1772,8 +1779,6 @@ const imageBasePath = '/images/full-projects'
 
 <script setup>
 import { computed } from 'vue'
-import { ref } from 'vue'
-import { watch } from 'vue'
 
 const props = defineProps({
   products: {
@@ -1782,27 +1787,31 @@ const props = defineProps({
   }
 })
 
-const chartData = ref(props.products)
 const totalQuantity = computed(() => {
-  return props.products.reduce((sum, product) => sum + product.quantity, 0)
+  return props.products.reduce((sum, product) => {
+    return sum + (product.quantity || 0)
+  }, 0)
 })
 
-// Crear los datos del gráfico con porcentajes
 const updateChartData = computed(() => {
-  return props.products.map((product) => [
-    product.category,
-    totalQuantity.value > 0
-      ? ((product.quantity / totalQuantity.value) * 100).toFixed(2) // Calcular el porcentaje
-      : 0
+  const categoryData = props.products.reduce((acc, product) => {
+    const category = product.category || 'Desconocida'
+    acc[category] = (acc[category] || 0) + (product.quantity || 0)
+    return acc
+  }, {})
+
+  return Object.entries(categoryData).map(([category, quantity]) => [
+    category,
+    totalQuantity.value > 0 ? ((quantity / totalQuantity.value) * 100).toFixed(2) : 0
   ])
-})
-watch(chartData, () => {
-  updateChartData()
 })
 </script>
 
 <template>
-  <pie-chart :data="updateChartData" suffix="%" :donut="true"></pie-chart>
+  <div>
+    <pie-chart v-if="updateChartData.length" :data="updateChartData" suffix="%" :donut="true" />
+    <p v-else>No hay datos para mostrar.</p>
+  </div>
 </template>
 
 <style scoped></style>
@@ -1896,7 +1905,7 @@ onMounted(() => {
 
 watch(props.productState, (newProductState) => {
   if (newProductState && Object.keys(newProductState).length > 0) {
-    Object.assign(product, newProductState) // Actualiza el producto con los datos del lote
+    Object.assign(product, newProductState)
   }
 })
 const product = reactive({
@@ -1970,10 +1979,12 @@ const updateSalePrice = () => {
         </select>
       </div>
 
-      <div v-if="product.category" class="flex flex-col">
+      <div class="flex flex-col">
         <label class="font-bold" for="name">Producto</label>
-        <select v-model="product.name" class="p-2" id="name">
-          <option value="" disabled>Selecciona un producto</option>
+        <select v-model="product.name" class="p-2" id="name" :disabled="!product.category">
+          <option value="" disabled>
+            {{ product.category ? 'Selecciona un producto' : 'Selecciona una categoría primero' }}
+          </option>
           <option v-for="item in categoryItems" :key="item" :value="item">{{ item }}</option>
         </select>
       </div>
@@ -2072,7 +2083,7 @@ const updateSalePrice = () => {
       <input
         type="submit"
         class="bg-[#42cdc7] rounded-md mt-8 p-2 w-full text-white uppercase font-bold hover:bg-[#42b5af] cursor-pointer transition-colors"
-        value="Registrar producto"
+        :value="productState.lotId ? 'Guardar cambios' : 'Registrar producto'"
       />
     </form>
   </div>
@@ -2085,14 +2096,12 @@ const updateSalePrice = () => {
 --- File: src\modules\full-projects\InventoryManager\components\ProductListView.vue ---
 
 <script setup>
-import { ref, computed, onMounted, inject, watch } from 'vue'
+import { ref, computed, onMounted, watch } from 'vue'
 import { db } from '../data/products.js'
 
 onMounted(() => {
   categories
 })
-
-const toast = inject('toast')
 
 const categories = ref(db)
 const props = defineProps({
@@ -2101,7 +2110,7 @@ const props = defineProps({
     required: true
   }
 })
-defineEmits(['selectedProduct', 'editProduct'])
+defineEmits(['selectedProduct', 'editProduct', 'deleteProduct'])
 const categorySelected = ref('')
 const productSelected = ref('')
 
@@ -2130,14 +2139,13 @@ const handleCategoryChange = () => {
   productSelected.value = ''
 }
 
-watch(productsToDisplay, (newValue) => {
-  if (newValue.length === 0) {
-    toast.open({
-      message: 'No se encontraron productos.',
-      type: 'info'
-    })
-  }
-})
+watch(
+  () => props.products,
+  (newValue) => {
+    console.log('Productos actualizados:', newValue)
+  },
+  { deep: true }
+)
 </script>
 
 <template>
@@ -2209,7 +2217,11 @@ watch(productsToDisplay, (newValue) => {
                 <path d="M16 5l3 3"></path>
               </svg>
             </button>
-            <button type="button" class="p-2 bg-red-500 text-white rounded">
+            <button
+              @click="$emit('deleteProduct', product.id)"
+              type="button"
+              class="p-2 bg-red-500 text-white rounded"
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
@@ -2399,7 +2411,7 @@ export const db = [
 --- File: src\modules\full-projects\InventoryManager\InventoryManager.vue ---
 
 <script setup>
-import { markRaw, ref, reactive } from 'vue'
+import { markRaw, ref, reactive, watch, onMounted, inject } from 'vue'
 import { db } from './data/products'
 import { useDragAndDrop } from '@formkit/drag-and-drop/vue'
 import InventoryDashboard from './components/InventoryDashboard.vue'
@@ -2411,6 +2423,44 @@ import AnimatedContainer from '@/components/AnimatedContainer.vue'
 const products = ref([])
 const selectedProductState = reactive({})
 const productState = reactive({})
+const toast = inject('toast')
+
+onMounted(() => {
+  const productsStorage = localStorage.getItem('products')
+  if (productsStorage) {
+    try {
+      products.value = JSON.parse(productsStorage)
+    } catch (e) {
+      console.error('Error parsing products from localStorage', e)
+      products.value = []
+    }
+  } else {
+    products.value = []
+  }
+})
+
+const saveProductsToLocalStorage = () => {
+  try {
+    localStorage.setItem('products', JSON.stringify(products.value))
+  } catch (e) {
+    console.error('Error saving products to localStorage', e)
+  }
+}
+
+watch(
+  () => products.value,
+  () => saveProductsToLocalStorage(),
+  { deep: true }
+)
+
+const calculatePrices = (product) => {
+  product.quantity = product.lots.reduce((sum, lot) => sum + lot.quantity, 0)
+  const totalCost = product.lots.reduce((sum, lot) => sum + lot.purchasePrice * lot.quantity, 0)
+  product.purchasePrice = parseFloat((totalCost / product.quantity).toFixed(2))
+  product.salePrice = parseFloat(
+    (product.purchasePrice * (1 + product.profitMargin / 100)).toFixed(2)
+  )
+}
 
 const submitProduct = (product) => {
   const existProduct = products.value.findIndex((item) => item.name === product.name)
@@ -2419,49 +2469,36 @@ const submitProduct = (product) => {
 
   if (existProduct >= 0) {
     const existingProduct = products.value[existProduct]
-
     const existingLotIndex = existingProduct.lots.findIndex((lot) => lot.lotId === product.lotId)
+
     if (existingLotIndex >= 0) {
       Object.assign(existingProduct.lots[existingLotIndex], product)
-
-      existingProduct.quantity = existingProduct.lots.reduce((sum, lot) => sum + lot.quantity, 0)
-
-      const totalCost = existingProduct.lots.reduce(
-        (sum, lot) => sum + lot.purchasePrice * lot.quantity,
-        0
-      )
-      existingProduct.purchasePrice = parseFloat((totalCost / existingProduct.quantity).toFixed(2))
-
-      existingProduct.salePrice = parseFloat(
-        (existingProduct.purchasePrice * (1 + product.profitMargin / 100)).toFixed(2)
-      )
-
+      calculatePrices(existingProduct)
+      toast.open({
+        message: 'Artículo modificado correctamente',
+        type: 'success'
+      })
       return
     }
 
     const newLot = {
       ...product,
-      description: selectedItem ? selectedItem.description : 'Descripción no encontrada',
-      image: selectedItem ? selectedItem.image : 'Imagen no encontrada',
+      description: selectedItem?.description || 'Descripción no encontrada',
+      image: selectedItem?.image || 'Imagen no encontrada',
       lotId: crypto.randomUUID(),
       createdAt: new Date().toISOString()
     }
     existingProduct.lots.push(newLot)
-
-    existingProduct.quantity = existingProduct.lots.reduce((sum, lot) => sum + lot.quantity, 0)
-    const totalCost = existingProduct.lots.reduce(
-      (sum, lot) => sum + lot.purchasePrice * lot.quantity,
-      0
-    )
-    existingProduct.purchasePrice = parseFloat((totalCost / existingProduct.quantity).toFixed(2))
-    existingProduct.salePrice = parseFloat(
-      (existingProduct.purchasePrice * (1 + product.profitMargin / 100)).toFixed(2)
-    )
+    calculatePrices(existingProduct)
+    toast.open({
+      message: 'Artículo ingresado correctamente',
+      type: 'success'
+    })
   } else {
     const newProduct = {
       ...product,
-      description: selectedItem ? selectedItem.description : 'Descripción no encontrada',
-      image: selectedItem ? selectedItem.image : 'Imagen no encontrada',
+      description: selectedItem?.description || 'Descripción no encontrada',
+      image: selectedItem?.image || 'Imagen no encontrada',
       id: crypto.randomUUID(),
       quantity: product.quantity,
       lots: [
@@ -2473,6 +2510,10 @@ const submitProduct = (product) => {
       ]
     }
     products.value.push(newProduct)
+    toast.open({
+      message: 'Artículo ingresado correctamente',
+      type: 'success'
+    })
   }
 }
 
@@ -2485,8 +2526,17 @@ const editProduct = (id) => {
   const productToEdit = products.value.find((item) => item.id === id)
   if (productToEdit) {
     const lastLot = productToEdit.lots[productToEdit.lots.length - 1] || {}
-    Object.assign(productState, lastLot) // Cargar los datos del último lote en el formulario
+    Object.assign(productState, lastLot)
   }
+}
+
+const deleteProduct = (id) => {
+  products.value = products.value.filter((product) => product.id !== id)
+
+  toast.open({
+    message: 'Producto eliminado correctamente',
+    type: 'warning'
+  })
 }
 
 const [parent, components] = useDragAndDrop([
@@ -2499,18 +2549,18 @@ const [parent, components] = useDragAndDrop([
   {
     name: 'section_2',
     component: markRaw(ProductListView),
-    props: { products: products.value },
-    emit: { selectedProduct, editProduct }
+    props: { products },
+    emit: { selectedProduct, editProduct, deleteProduct }
   },
   {
     name: 'section_3',
     component: markRaw(InventoryDashboard),
-    props: { products: products.value }
+    props: { products }
   },
   {
     name: 'section_4',
     component: markRaw(ProductDetails),
-    props: { selectedProductState: selectedProductState }
+    props: { selectedProductState }
   }
 ])
 </script>
@@ -2547,46 +2597,50 @@ const [parent, components] = useDragAndDrop([
 <style scoped>
 .custom-grid-container {
   display: grid;
-  grid-template-columns: 1fr; /* Base: 1 columna */
+  grid-template-columns: 1fr;
   gap: 1rem;
 }
 
 @media (min-width: 640px) {
   .custom-grid-container {
-    grid-template-columns: repeat(2, 1fr); /* 2 columnas para móviles grandes y tablets pequeñas */
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
 @media (min-width: 1280px) {
   .custom-grid-container {
-    grid-template-columns: repeat(3, 1fr); /* 4 columnas para pantallas grandes (opcional) */
+    grid-template-columns: repeat(3, 1fr);
   }
 }
 
 .section_1 {
   grid-column: span 1 / span 1;
   grid-row: span 4;
-  max-height: 90rem;
+  height: 82rem;
   overflow-y: auto;
 }
 .section_2 {
   grid-column: span 1;
   grid-row: span 4;
-  max-height: 90rem;
+  max-height: 82rem;
   overflow-y: auto;
 }
 .section_3 {
   max-width: 100%;
   overflow: hidden;
-  height: 44.5rem;
+  height: 40.5rem;
 }
 .section_4 {
   max-width: 100%;
   overflow: hidden;
-  height: 44.5rem;
+  height: 40.5rem;
 }
 </style>
 
+
+
+--- File: src\modules\full-projects\InventoryManager\README.md ---
+(Skipped (non-matching extension))
 
 
 --- File: src\modules\full-projects\InventoryManager\todo_el_contenido.txt ---
@@ -2894,10 +2948,6 @@ describe('PasswordGenerator', () => {
 
 
 --- File: src\test\modules\GenerateRAndomPassword\__snapshots__\RandomPassword.test.js.snap ---
-(Skipped (non-matching extension))
-
-
---- File: src\todo_el_contenido.txt ---
 (Skipped (non-matching extension))
 
 

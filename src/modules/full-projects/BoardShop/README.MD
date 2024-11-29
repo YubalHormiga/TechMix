@@ -4,6 +4,8 @@
 
 BoardShop es una tienda en línea de skateboards construida con **Vue.js**. El proyecto permite a los usuarios explorar una variedad de tablas de skate, agregarlas a su carrito de compras y gestionar su compra en un flujo sencillo. El carrito se guarda en el almacenamiento local del navegador, permitiendo que los productos persistan incluso después de recargar la página. Además, incluye un carrusel de imágenes interactivo de los productos.
 
+Ha sido desarrollado con el objetivo de afianzar conocimientos en Vue.js y mejorar la comprensión de conceptos básicos de desarrollo web.
+
 ### Funcionalidades principales:
 
 - **Exploración de productos**: Los usuarios pueden ver los productos (skateboards) disponibles con detalles como nombre, precio y descripción.
@@ -69,6 +71,31 @@ Para ejecutar este proyecto en tu máquina local, sigue estos pasos:
 - Un conjunto de imágenes se muestran de forma atractiva en un carrusel que cambia automáticamente cada 4 segundos.
 - Los usuarios pueden navegar manualmente a través de las imágenes si lo desean.
 
+## **Dificultades encontradas**
+
+Durante el desarrollo de este proyecto, se presentaron varios desafíos que enriquecieron mi aprendizaje. Aquí los más relevantes:
+
+### **Gestión del carrito y persistencia**
+
+- Configurar correctamente el almacenamiento local (`localStorage`) para garantizar que los productos en el carrito persistan después de recargar la página.
+- Actualizar dinámicamente el estado del carrito al modificar cantidades o eliminar productos, asegurando la sincronización con la vista.
+
+### **Carrusel de imágenes**
+
+- Integrar la biblioteca **Swiper.js** para lograr un carrusel funcional y visualmente atractivo.
+- Personalizar las opciones del carrusel, como la paginación, autoplay y navegación manual.
+
+### **Optimización de componentes**
+
+- Diseñar componentes reutilizables para los productos y el carrito, asegurando una estructura modular.
+- Manejar las props y eventos entre componentes, especialmente para sincronizar el estado del carrito.
+
+### **Flujo de datos entre componentes**
+
+- Pasar datos y eventos correctamente entre componentes padres e hijos, una habilidad clave para cualquier desarrollador trabajando con **Vue.js**.
+
+Estos desafíos reflejan mi proceso de aprendizaje como desarrollador web junior y mi enfoque para dominar conceptos fundamentales antes de avanzar hacia patrones y herramientas más complejas.
+
 ## Mejoras futuras
 
 Algunas mejoras que podrían agregarse a este proyecto son:
@@ -86,6 +113,6 @@ Si deseas contribuir a este proyecto, ¡estoy abierto a tus sugerencias y cambio
 
 Si tienes alguna pregunta sobre el proyecto o sobre mi experiencia como desarrollador, no dudes en contactarme:
 
-- **Correo electrónico**: yubalhh@yahoo.es
+- **Correo electrónico**: yubalhh@gmail.com
 - **LinkedIn**: https://www.linkedin.com/in/yubal-hormiga/
 - **GitHub**: https://github.com/YubalHormiga

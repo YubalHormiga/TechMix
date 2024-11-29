@@ -16,7 +16,7 @@ const router = createRouter({
     },
     {
       path: '/projects/:id',
-      name: "full-projects-detail",
+      name: 'full-projects-detail',
       component: () => import('../../src/modules/full-projects/FullProjectDetails.vue'),
       props: true
     },
@@ -39,6 +39,12 @@ const router = createRouter({
       path: '/utilities/:id',
       name: 'utility-detail',
       component: () => import('../modules/utilities/UtilitieDetails.vue'),
+      props: true
+    },
+    {
+      path: '/helpers',
+      name: 'helpers',
+      component: () => import('../modules/helpers/HelperLibrary.vue'),
       props: true
     },
     {

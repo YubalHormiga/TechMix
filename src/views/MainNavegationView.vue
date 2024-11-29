@@ -7,7 +7,8 @@ const navItems = [
   { text: 'Proyectos Completos', to: { name: 'full-projects' } },
   { text: 'Utilidades', to: { name: 'utilities' } },
   { text: 'Pruebas Técnicas', to: { name: 'technical-tests' } },
-  { text: 'Ejercicios de Lógica', to: { name: 'logic-exercises' } }
+  { text: 'Ejercicios de Lógica', to: { name: 'logic-exercises' } },
+  { text: 'Helpers', to: { name: 'helpers' } }
 ]
 
 const showContent = ref(false)
