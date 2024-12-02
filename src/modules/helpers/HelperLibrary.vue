@@ -35,7 +35,7 @@ const copyToClipboard = (code) => {
         <div class="rounded-md shadow-lg p-5">
           <h2 class="text-xl font-semibold">{{ helper.name }}</h2>
           <p class="text-gray-600">{{ helper.description }}</p>
-          <pre class="bg-gray-100 p-4 rounded-lg overflow-x-auto">
+          <pre class="bg-gray-100 p-1 rounded-lg overflow-x-auto">
             <code>{{ helper.code }}</code>
           </pre>
           <button

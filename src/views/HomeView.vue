@@ -21,13 +21,15 @@ import AnimatedContainer from '@/components/AnimatedContainer.vue'
       <section class="mb-6">
         <h2 class="font-semibold mb-4">Proyectos y Objetivo</h2>
         <p class="text-gray-700">
-          El objetivo de esta plataforma es prepararme para desarrollar proyectos más complejos en
-          el futuro. Al reforzar los fundamentos de Vue.js, estaré listo para implementar nuevas
-          funcionalidades avanzadas, como el uso de un <strong>store centralizado</strong> o la
-          creación de <strong>paneles interactivos</strong>.
+          Aunque ya he desarrollado proyectos más avanzados anteriormente, estoy utilizando esta
+          plataforma como un espacio para repasar y reforzar mis conocimientos en Vue.js. Esto me
+          permitirá prepararme para enfrentar desafíos más complejos en el futuro. Entre las
+          funcionalidades que espero dominar se incluyen el uso de un
+          <strong>store centralizado</strong> y la creación de
+          <strong>paneles interactivos</strong>.
         </p>
         <p class="text-gray-700">
-          Algunos ejemplos de proyectos más complejos que ya he desarrollado incluyen:
+          Algunos ejemplos de proyectos más avanzados que he desarrollado incluyen:
         </p>
         <ul class="list-disc list-inside text-gray-700">
           <li>
@@ -46,8 +48,8 @@ import AnimatedContainer from '@/components/AnimatedContainer.vue'
             >
           </li>
           <li>
-            <strong>WaterSportWorld</strong> 🌊: Un sitio web dedicado a la venta de deportes
-            acuáticos, con una interfaz interactiva para la visualización y compra de productos.
+            <strong>WaterSportWorld</strong> 🌊: Un sitio web dedicado a los deportes acuáticos, con
+            una interfaz interactiva para la visualización y reserva de actividades.
             <br />
             <a
               href="https://github.com/YubalHormiga/Proyectos-Personales/tree/main/04_WaterSportWorld"
@@ -83,7 +85,18 @@ import AnimatedContainer from '@/components/AnimatedContainer.vue'
         </ul>
       </section>
 
-      <!-- Sección de Helpers con descripción general -->
+      <!-- Nueva sección de funciones utilitarias -->
+      <section class="mb-6">
+        <h2 class="font-semibold mb-4">Funciones Utilitarias con Copiar al Portapapeles</h2>
+        <p class="text-gray-700">
+          Las funciones utilitarias incluyen herramientas prácticas para el desarrollo, como la
+          manipulación de datos, la generación de identificadores únicos, y ahora, la capacidad de
+          copiar código al portapapeles directamente desde la interfaz. Cada función está diseñada
+          para facilitar tareas comunes y mejorar la eficiencia del desarrollo.
+        </p>
+      </section>
+
+      <!-- Sección de Helpers existente -->
       <section class="mb-6">
         <h2 class="font-semibold mb-4">Funciones Utilitarias (Helpers)</h2>
         <p class="text-gray-700">

@@ -17,18 +17,28 @@ const route = useRoute()
 const isActive = (item) => {
   return item.to.name === route.name || (route.path === '/' && item.text === 'Inicio')
 }
+
+const toggleMenu = () => {
+  showContent.value = !showContent.value
+
+  if (showContent.value) {
+    setTimeout(() => {
+      showContent.value = false
+    }, 4000)
+  }
+}
 </script>
 
 <template>
   <nav class="flex items-center justify-between flex-wrap p-2 bg-[#fff] mb-10">
-    <a href="http://localhost:5173/">
+    <RouterLink to="/">
       <h1 class="animate-charcter">TechMix</h1>
-    </a>
+    </RouterLink>
 
     <div class="block lg:hidden">
       <button
         :class="['hamburger', 'hamburger--spring', { 'is-active': showContent }]"
-        @click="showContent = !showContent"
+        @click="toggleMenu"
         type="button"
       >
         <span class="hamburger-box">

@@ -16,6 +16,6 @@ export const fullProjects = [
     github:
       'https://github.com/YubalHormiga/TechMix/tree/main/src/modules/full-projects/InventoryManager',
     description:
-      'InventoryManager es una app para gestionar el inventario de tu negocio. Agrega, edita y elimina productos fácilmente. Registra detalles como cantidad, proveedor y precio. Filtra productos y recibe alertas de bajo stock. Visualiza tus datos con gráficos intuitivos gracias a Chart.js. Guarda tu información de forma segura en Local Storage. Perfecta para pequeñas tiendas y almacenes.'
+      'InventoryManager es una app para gestionar el inventario de tu negocio. Agrega, edita y elimina productos fácilmente. Registra detalles como cantidad, proveedor y precio. Filtra productos. Visualiza tus datos con gráficos intuitivos gracias a Chart.js. Usa drag-and-drop para personalizar componentes. Guarda tu información de forma segura en Local Storage. Perfecta para pequeñas tiendas y almacenes.'
   }
 ]

@@ -26,20 +26,20 @@ const copyPassword = async () => {
   <AnimatedContainer>
     <div class="flex flex-col justify-center items-center mt-10">
       <div
-        class="flex flex-col items-center justify-center w-[50rem] h-60 rounded-xl text-[#1b933b] bg-[#060a07]"
+        class="flex flex-col items-center justify-center p-3 rounded-xl text-[#1b933b] bg-[#060a07]"
       >
         <div class="mb-3">
           <h2 class="text-4xl text-[#eff1ef]">Crear Contraseña Aleatoria</h2>
         </div>
         <div class="flex justify-center gap-3 items-center w-full h-15">
           <div>
-            <input type="text" :value="passwordBox" class="p-1 w-[33rem] text-center" readonly />
+            <input type="text" :value="passwordBox" class="p-1 text-center" readonly />
           </div>
           <div>
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              width="40"
-              height="40"
+              width="30"
+              height="30"
               viewBox="0 0 24 24"
               @click="copyPassword"
               class="cursor-pointer"
@@ -57,7 +57,7 @@ const copyPassword = async () => {
             </svg>
           </div>
         </div>
-        <button @click="createPassword" class="p-3 mt-3 text-[#1e2733] bg-[#95daa7] rounded-lg">
+        <button @click="createPassword" class="p-2 my-3 text-[#1e2733] bg-[#95daa7] rounded-lg">
           Generar Contraseña
         </button>
       </div>
