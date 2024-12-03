@@ -111,41 +111,60 @@ const totalItemsInCart = computed(() => cart.value.reduce((acc, item) => acc + i
           </div>
         </div>
 
-        <div
-          v-if="cartVisible"
-          class="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50"
-        >
+        <!-- Aquí agregamos la transición para el modal -->
+        <Transition name="modal">
           <div
-            class="bg-white rounded-lg shadow-lg p-4 w-11/12 max-w-xl max-h-[90%] overflow-y-auto"
+            v-if="cartVisible"
+            class="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50"
           >
-            <div class="flex justify-center flex-col items-center">
-              <template v-if="cart.length === 0">
-                <p class="text-center text-lg font-semibold mb-4">¡Tu carrito está vacío!</p>
-                <p class="text-center mb-4">Explora nuestros productos y añade algo al carrito.</p>
-                <button
-                  @click="toggleCart"
-                  type="button"
-                  class="bg-indigo-600 text-white font-medium px-4 py-2 rounded hover:bg-indigo-700"
-                >
-                  Continuar Comprando
-                </button>
-              </template>
-              <template v-else>
-                <ShoppingCart
-                  :cart="cart"
-                  :totalCart="totalCart"
-                  @toggle-cart="toggleCart"
-                  @increment-amount="incrementAmount"
-                  @decrement-amount="decrementAmount"
-                  @delete-table="deleteTable"
-                />
-              </template>
+            <div
+              class="bg-white rounded-lg shadow-lg p-4 w-11/12 max-w-xl max-h-[90%] overflow-y-auto"
+            >
+              <div class="flex justify-center flex-col items-center">
+                <template v-if="cart.length === 0">
+                  <p class="text-center text-lg font-semibold mb-4">¡Tu carrito está vacío!</p>
+                  <p class="text-center mb-4">
+                    Explora nuestros productos y añade algo al carrito.
+                  </p>
+                  <button
+                    @click="toggleCart"
+                    type="button"
+                    class="bg-indigo-600 text-white font-medium px-4 py-2 rounded hover:bg-indigo-700"
+                  >
+                    Continuar Comprando
+                  </button>
+                </template>
+                <template v-else>
+                  <ShoppingCart
+                    :cart="cart"
+                    :totalCart="totalCart"
+                    @toggle-cart="toggleCart"
+                    @increment-amount="incrementAmount"
+                    @decrement-amount="decrementAmount"
+                    @delete-table="deleteTable"
+                  />
+                </template>
+              </div>
             </div>
           </div>
-        </div>
+        </Transition>
       </section>
     </main>
   </AnimatedContainer>
 </template>
 
-<style scoped></style>
+<style scoped>
+.modal-enter-active {
+  transition: all 0.3s ease-out;
+}
+
+.modal-leave-active {
+  transition: all 0.3s ease-out;
+}
+
+.modal-enter-from,
+.modal-leave-to {
+  transform: translateX(20px);
+  opacity: 0;
+}
+</style>

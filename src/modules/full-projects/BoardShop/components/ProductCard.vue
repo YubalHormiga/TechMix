@@ -8,7 +8,6 @@ const props = defineProps({
 
 defineEmits(['add-cart'])
 
-// Función para obtener la URL de la imagen en tiempo de ejecución
 function getImageUrl(imageName) {
   return new URL(`../assets/images/${imageName}.jpg`, import.meta.url).href
 }
@@ -16,7 +15,6 @@ function getImageUrl(imageName) {
 
 <template>
   <div class="max-w-[720px] mx-auto">
-    <!-- Centering wrapper -->
     <div
       class="relative flex flex-col text-gray-900 bg-white shadow-md bg-clip-border rounded-xl w-96"
     >
