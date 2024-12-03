@@ -77,7 +77,17 @@ const updateSalePrice = () => {
     <form class="flex flex-col gap-4" @submit.prevent="handleSubmit">
       <div class="flex flex-col">
         <label class="font-bold" for="sku">SKU (Stock Keeping Unit)</label>
-        <input v-model="product.sku" class="p-2" type="text" id="sku" placeholder="SKU" />
+        <input
+          v-model="product.sku"
+          class="p-2"
+          type="text"
+          id="sku"
+          :placeholder="
+            productState.lotId
+              ? productState.lotId
+              : 'El SKU estará disponible al editar este producto'
+          "
+        />
       </div>
 
       <div class="flex flex-col">

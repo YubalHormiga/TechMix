@@ -186,7 +186,7 @@ const [parent, components] = useDragAndDrop([
 .custom-grid-container {
   display: grid;
   grid-template-columns: 1fr;
-  margin: 0 1rem;
+  margin: 0 2rem;
   gap: 1rem;
 }
 
