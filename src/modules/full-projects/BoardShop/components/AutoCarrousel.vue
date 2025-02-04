@@ -42,6 +42,4 @@ const modules = [Autoplay, Pagination]
   </swiper>
 </template>
 
-<style scoped>
-/* Añade estilos si es necesario */
-</style>
+<style scoped></style>

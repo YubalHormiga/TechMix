@@ -30,7 +30,7 @@ const toggleMenu = () => {
 </script>
 
 <template>
-  <nav class="flex items-center justify-between flex-wrap p-2 bg-[#fff] mb-10">
+  <nav class="flex items-center justify-between lg:flex-col flex-wrap p-2 bg-[#fff] mb-10">
     <RouterLink to="/">
       <h1 class="animate-charcter">TechMix</h1>
     </RouterLink>

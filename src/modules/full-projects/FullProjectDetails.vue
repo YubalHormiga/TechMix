@@ -3,10 +3,12 @@ import { computed } from 'vue'
 import { useRoute } from 'vue-router'
 import BoardShop from './BoardShop/BoardShop.vue'
 import InventoryManager from './InventoryManager/InventoryManager.vue'
+import Saborify from './Saborify/SaborifyApp.vue'
 
 const utilitiesComponent = {
   1: BoardShop,
-  2: InventoryManager
+  2: InventoryManager,
+  3: Saborify
 }
 
 const route = useRoute()
@@ -17,7 +19,6 @@ const CurrentFullProjectComponent = computed(() => utilitiesComponent[projectId.
 
 <template>
   <div>
-    <!-- Pasar la descripción al componente dinámico -->
     <component :is="CurrentFullProjectComponent" />
   </div>
 </template>

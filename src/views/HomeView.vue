@@ -4,11 +4,11 @@ import AnimatedContainer from '@/components/AnimatedContainer.vue'
 
 <template>
   <AnimatedContainer>
-    <div class="max-w-7xl mx-auto px-4 py-8">
-      <h1 class="text-3xl font-bold mb-6 text-center">Descripción de la Aplicación</h1>
+    <div class="px-4 py-8 mx-auto max-w-7xl">
+      <h1 class="mb-6 text-3xl font-bold text-center">Descripción de la Aplicación</h1>
 
       <section class="mb-6">
-        <h2 class="font-semibold mb-4">Inicio</h2>
+        <h2 class="mb-4 font-semibold">Inicio</h2>
         <p class="text-gray-700">
           Esta aplicación se está desarrollando como un <strong>ejercicio de práctica</strong> para
           mejorar mis habilidades de programación. El objetivo principal es consolidar las
@@ -19,7 +19,7 @@ import AnimatedContainer from '@/components/AnimatedContainer.vue'
       </section>
 
       <section class="mb-6">
-        <h2 class="font-semibold mb-4">Proyectos y Objetivo</h2>
+        <h2 class="mb-4 font-semibold">Proyectos y Objetivo</h2>
         <p class="text-gray-700">
           Aunque ya he desarrollado proyectos más avanzados anteriormente, estoy utilizando esta
           plataforma como un espacio para repasar y reforzar mis conocimientos en Vue.js. Esto me
@@ -31,7 +31,7 @@ import AnimatedContainer from '@/components/AnimatedContainer.vue'
         <p class="text-gray-700">
           Algunos ejemplos de proyectos más avanzados que he desarrollado incluyen:
         </p>
-        <ul class="list-disc list-inside text-gray-700">
+        <ul class="text-gray-700 list-disc list-inside">
           <li>
             <strong>CanineConnect</strong> 🐾: Una aplicación para la gestión de perros y su
             adopción, utilizando Vue.js para crear una interfaz moderna y dinámica.
@@ -69,9 +69,9 @@ import AnimatedContainer from '@/components/AnimatedContainer.vue'
       </section>
 
       <section class="mb-6">
-        <h2 class="font-semibold mb-4">Pruebas Técnicas y Ejercicios de Lógica</h2>
+        <h2 class="mb-4 font-semibold">Pruebas Técnicas y Ejercicios de Lógica</h2>
         <p class="text-gray-700">Además de los pequeños proyectos, esta plataforma incluye:</p>
-        <ul class="list-disc list-inside text-gray-700">
+        <ul class="text-gray-700 list-disc list-inside">
           <li>
             <strong>Pruebas Técnicas:</strong> Simulan ejercicios típicos de entrevistas técnicas
             para desarrolladores. Ayudan a mejorar mi capacidad de resolución de problemas y me
@@ -85,9 +85,8 @@ import AnimatedContainer from '@/components/AnimatedContainer.vue'
         </ul>
       </section>
 
-      <!-- Nueva sección de funciones utilitarias -->
       <section class="mb-6">
-        <h2 class="font-semibold mb-4">Funciones Utilitarias con Copiar al Portapapeles</h2>
+        <h2 class="mb-4 font-semibold">Funciones Utilitarias con Copiar al Portapapeles</h2>
         <p class="text-gray-700">
           Las funciones utilitarias incluyen herramientas prácticas para el desarrollo, como la
           manipulación de datos, la generación de identificadores únicos, y ahora, la capacidad de
@@ -98,7 +97,7 @@ import AnimatedContainer from '@/components/AnimatedContainer.vue'
 
       <!-- Sección de Helpers existente -->
       <section class="mb-6">
-        <h2 class="font-semibold mb-4">Funciones Utilitarias (Helpers)</h2>
+        <h2 class="mb-4 font-semibold">Funciones Utilitarias (Helpers)</h2>
         <p class="text-gray-700">
           Esta sección contiene diversas funciones utilitarias que facilitan tareas comunes en la
           programación. Las funciones están diseñadas para realizar tareas como el formateo de
@@ -110,7 +109,7 @@ import AnimatedContainer from '@/components/AnimatedContainer.vue'
       </section>
 
       <section>
-        <h2 class="font-semibold mb-4">Conclusión</h2>
+        <h2 class="mb-4 font-semibold">Conclusión</h2>
         <p class="text-gray-700">
           En resumen, esta aplicación es un entorno ideal para consolidar las bases del
           <strong>desarrollo web con Vue.js</strong>. A través de pequeños ejercicios, pruebas

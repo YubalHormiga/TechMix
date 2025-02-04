@@ -30,7 +30,6 @@ const imageBasePath = '/images/full-projects'
       </div>
     </div>
 
-    <!-- Contenedor de proyectos -->
     <div class="projects-container">
       <div v-for="fullProject in filteredProjects" :key="fullProject.id" class="router-link">
         <ProjectCard :fullProject="fullProject" :imageBasePath="imageBasePath" />
