@@ -8,7 +8,7 @@ import Food from './assets/images/food.webp'
 const ingredient = ref('')
 const recipes = ref([])
 const loading = ref(false)
-const apiKey = import.meta.env.VITE_TASTY_API_KEY // Asegúrate de tener tu clave de API de Tasty aquí
+const apiKey = import.meta.env.VITE_TASTY_API_KEY
 
 async function fetchRecipes(ingredients) {
   try {

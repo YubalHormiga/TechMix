@@ -4,11 +4,13 @@ import { useRoute } from 'vue-router'
 import BoardShop from './BoardShop/BoardShop.vue'
 import InventoryManager from './InventoryManager/InventoryManager.vue'
 import Saborify from './Saborify/SaborifyApp.vue'
+import CineScope from './CineScope/CineScope.vue'
 
 const utilitiesComponent = {
   1: BoardShop,
   2: InventoryManager,
-  3: Saborify
+  3: CineScope,
+  4: Saborify
 }
 
 const route = useRoute()

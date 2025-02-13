@@ -36,14 +36,14 @@ onMounted(() => {
           <h1>{{ props.fullProject.name }}</h1>
           <span class="price">Project {{ props.fullProject.id }}</span>
           <div class="card-back">
-            <p>{{ props.fullProject.description }}</p>
+            <p v-html="props.fullProject.description"></p>
             <RouterLink
               :to="{ name: props.fullProject.routeName, params: { id: props.fullProject.id } }"
               class="btn-link"
             >
               Ver Aplicación
             </RouterLink>
-            <a :href="props.fullProject.github" target="_blank" class="text-lg mt-1 btn-link">
+            <a :href="props.fullProject.github" target="_blank" class="mt-1 text-lg btn-link">
               GitHub
             </a>
           </div>
