@@ -2,7 +2,7 @@
 import { ref, onMounted, watch, inject, computed } from 'vue'
 
 import AnimatedContainer from '@/components/AnimatedContainer.vue'
-import AutoCarrousel from '@/components/AutoCArrousel.vue'
+import AutoCarrousel from '@/components/AutoCarrousel.vue'
 import PaginationComponent from '@/components/PaginationComponent.vue'
 
 import MovieCard from './components/MovieCard.vue'
