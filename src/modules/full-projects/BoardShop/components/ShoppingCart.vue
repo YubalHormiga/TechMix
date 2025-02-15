@@ -20,7 +20,7 @@ function getImageUrl(imageName) {
     <button
       type="button"
       @click="$emit('toggle-cart')"
-      class="absolute -top-3 -right-3 p-3 text-gray-400 hover:text-gray-500"
+      class="absolute p-3 text-gray-400 -top-3 -right-3 hover:text-gray-500"
     >
       <svg
         class="h-9 w-9"
@@ -35,7 +35,7 @@ function getImageUrl(imageName) {
     </button>
   </div>
   <div class="flex flex-col mt-2">
-    <div class="table_component rounded-lg">
+    <div class="rounded-lg table_component">
       <table>
         <thead class="text-center">
           <tr>
@@ -57,7 +57,7 @@ function getImageUrl(imageName) {
             </td>
             <td>{{ table.name }}</td>
             <td>{{ table.price }} EUR</td>
-            <td class="f my-auto">
+            <td class="my-auto f">
               <button
                 class="cursor-pointer"
                 @click="$emit('increment-amount', table)"
@@ -75,7 +75,7 @@ function getImageUrl(imageName) {
               </button>
             </td>
             <td>
-              <button @click="$emit('delete-table', table.id)" class="h-10 w-10">
+              <button @click="$emit('delete-table', table.id)" class="w-10 h-10">
                 <img class="" src="../assets/vectors/delete.svg" alt="trash can" />
               </button>
             </td>
@@ -84,7 +84,7 @@ function getImageUrl(imageName) {
       </table>
     </div>
   </div>
-  <div class="border-t border-gray-200 px-4 py-6 sm:px-6">
+  <div class="px-4 py-6 border-t border-gray-200 sm:px-6">
     <div class="flex justify-between text-base font-medium text-gray-900">
       <p>Total</p>
       <p>{{ totalCart }} EUR</p>
@@ -93,11 +93,11 @@ function getImageUrl(imageName) {
     <div class="mt-6">
       <a
         href="#"
-        class="flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700"
+        class="flex items-center justify-center px-6 py-3 text-base font-medium text-white bg-indigo-600 border border-transparent rounded-md shadow-sm hover:bg-indigo-700"
         >Finalizar compra</a
       >
     </div>
-    <div class="mt-6 flex justify-center text-center text-sm text-gray-500">
+    <div class="flex justify-center mt-6 text-sm text-center text-gray-500">
       <p>
         o
         <button
@@ -115,13 +115,13 @@ function getImageUrl(imageName) {
 
 <style scoped>
 .table_component {
-  overflow-x: hidden; /* Evita scroll horizontal */
-  width: 100%; /* Usa el 100% del ancho */
+  overflow-x: hidden;
+  width: 100%;
   font-size: small;
 }
 
 .table_component table {
-  width: 100%; /* Asegura que la tabla use todo el ancho disponible */
+  width: 100%;
   border-collapse: collapse;
   text-align: center;
 }

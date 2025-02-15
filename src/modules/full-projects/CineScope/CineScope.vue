@@ -10,7 +10,6 @@ import NoMovies from './assets/images/image_01.webp'
 import TryAnother from './assets/images/image_02.webp'
 
 const toast = inject('toast')
-const toastVisible = ref(false)
 
 const currentPage = ref(1)
 const itemsPerPage = ref(4)
@@ -60,11 +59,16 @@ const fetchData = async () => {
     fullMoviesList.value = filteredMovies
 
     if (!filteredMovies.length) {
-      showToast('No se encontraron películas', 'error')
+      toast.open({
+        message: 'No se encontraron películas',
+        type: 'error'
+      })
     }
-  } catch (error) {
-    console.error(error)
-    showToast('Error al cargar películas', 'error')
+  } catch {
+    toast.open({
+      message: 'Error al cargar películas',
+      type: 'error'
+    })
   }
 }
 
@@ -79,21 +83,6 @@ const fetchGenres = async () => {
     genres.value = data.genres
   } catch (error) {
     console.error(error)
-  }
-}
-
-const showToast = (message, type) => {
-  if (!toastVisible.value) {
-    toastVisible.value = true
-    toast.open({
-      message,
-      type,
-      onClose: () => {
-        setTimeout(() => {
-          toastVisible.value = false
-        }, 2000) // Evita que desaparezca instantáneamente
-      }
-    })
   }
 }
 
@@ -161,5 +150,3 @@ watch([searchMovie, selectedGenre, selectedLanguage], fetchData, { deep: true })
     />
   </AnimatedContainer>
 </template>
-
-<style scoped></style>

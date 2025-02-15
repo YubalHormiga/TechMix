@@ -34,5 +34,3 @@ const updateChartData = computed(() => {
     <p v-else>No hay datos para mostrar.</p>
   </div>
 </template>
-
-<style scoped></style>

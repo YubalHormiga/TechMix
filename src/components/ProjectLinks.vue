@@ -12,7 +12,7 @@ const props = defineProps({
 </script>
 
 <template>
-  <div class="mt-4 text-[#fafdfe] ">
+  <div class="mt-4 text-[#fafdfe]">
     <p class="text-lg">
       Puedes ver el código fuente del proyecto en:
       <a :href="props.githubLink" target="_blank" class="text-[#030b0f] underline"> GitHub</a>.
@@ -25,7 +25,3 @@ const props = defineProps({
     </p>
   </div>
 </template>
-
-<style scoped>
-/* Estilos opcionales para el componente */
-</style>

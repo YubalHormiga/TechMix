@@ -18,11 +18,11 @@ function getImageUrl(imageName) {
         <img
           :src="getImageUrl(selectedProductState.image)"
           :alt="selectedProductState.name"
-          class="w-60 h-60 object-cover bg-no-repeat"
+          class="object-cover bg-no-repeat w-60 h-60"
         />
       </div>
 
-      <div class="w p-4">
+      <div class="p-4 w">
         <div class="flex flex-col">
           <p class="text-lg font-bold text-[#237078]">
             <span class="text-gray-700">SKU:</span> {{ selectedProductState.id }}
@@ -53,10 +53,9 @@ function getImageUrl(imageName) {
           <span class="text-gray-700">Descripción: </span> {{ selectedProductState.description }}
         </p>
       </div>
-      <!-- Mostrar mensaje si no hay selectedProductStateo seleccionado -->
     </div>
     <div v-else class="text-center">
-      <p class="">No se ha seleccionado un selectedProductStateo</p>
+      <p class="">Seleccione ( ℹ ) del producto para más informción</p>
     </div>
   </div>
 </template>

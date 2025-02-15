@@ -81,16 +81,16 @@ const totalItemsInCart = computed(() => cart.value.reduce((acc, item) => acc + i
 <template>
   <AnimatedContainer>
     <main>
-      <header class="w-full relative overflow-hidden">
+      <header class="relative w-full overflow-hidden">
         <div class="flex gap-10">
-          <h1 class="font-black text-5xl p-5 text-fuchsia-600">
+          <h1 class="p-5 text-5xl font-black text-fuchsia-600">
             Board<span class="text-pink-500">Shop</span>
           </h1>
-          <div @click="toggleCart" class="cursor-pointer h-20 w-20 relative">
+          <div @click="toggleCart" class="relative w-20 h-20 cursor-pointer">
             <img src="../BoardShop/assets/icons/cart.webp" alt="carrito" />
             <span
               v-if="totalItemsInCart > 0"
-              class="absolute top-0 right-4 bg-red-500 text-white text-base opacity-90 rounded-full w-10 h-10 flex items-center justify-center"
+              class="absolute top-0 flex items-center justify-center w-10 h-10 text-base text-white bg-red-500 rounded-full right-4 opacity-90"
             >
               {{ totalItemsInCart }}
             </span>
@@ -98,38 +98,37 @@ const totalItemsInCart = computed(() => cart.value.reduce((acc, item) => acc + i
         </div>
       </header>
 
-      <section class="flex relative w-full">
+      <section class="relative flex w-full">
         <div
           :class="{ 'w-2/3': cartVisible, 'w-full': !cartVisible }"
-          class="transition-all duration-500 ease-in-out flex-grow"
+          class="flex-grow transition-all duration-500 ease-in-out"
         >
           <AutoCarrousel />
-          <div class="flex flex-wrap justify-center items-center gap-3 mt-4">
+          <div class="flex flex-wrap items-center justify-center gap-3 mt-4">
             <div v-for="table in tables" :key="table.id">
               <ProductCard :table="table" @add-cart="addCart" />
             </div>
           </div>
         </div>
 
-        <!-- Aquí agregamos la transición para el modal -->
         <Transition name="modal">
           <div
             v-if="cartVisible"
-            class="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50"
+            class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50"
           >
             <div
               class="bg-white rounded-lg shadow-lg p-4 w-11/12 max-w-xl max-h-[90%] overflow-y-auto"
             >
-              <div class="flex justify-center flex-col items-center">
+              <div class="flex flex-col items-center justify-center">
                 <template v-if="cart.length === 0">
-                  <p class="text-center text-lg font-semibold mb-4">¡Tu carrito está vacío!</p>
-                  <p class="text-center mb-4">
+                  <p class="mb-4 text-lg font-semibold text-center">¡Tu carrito está vacío!</p>
+                  <p class="mb-4 text-center">
                     Explora nuestros productos y añade algo al carrito.
                   </p>
                   <button
                     @click="toggleCart"
                     type="button"
-                    class="bg-indigo-600 text-white font-medium px-4 py-2 rounded hover:bg-indigo-700"
+                    class="px-4 py-2 font-medium text-white bg-indigo-600 rounded hover:bg-indigo-700"
                   >
                     Continuar Comprando
                   </button>

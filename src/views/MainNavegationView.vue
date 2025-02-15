@@ -31,7 +31,7 @@ const toggleMenu = () => {
 
 <template>
   <nav class="flex items-center justify-between lg:flex-col flex-wrap p-2 bg-[#fff] mb-10">
-    <RouterLink to="/">
+    <RouterLink :to="{ name: 'home' }">
       <h1 class="animate-charcter">TechMix</h1>
     </RouterLink>
 

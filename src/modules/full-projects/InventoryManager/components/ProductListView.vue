@@ -77,12 +77,10 @@ watch(
           class="flex items-center justify-between gap-4 p-4 mb-4 rounded-lg border border-[#d8dfdf] shadow-lg"
         >
           <div class="flex flex-col justify-between">
-            <!-- <div class="flex items-center gap-3"> -->
             <button class="flex justify-center my-2" @click="$emit('selectedProduct', product.id)">
               <img src="../assets//icons/info-svgrepo-com.svg" alt="inf" class="h-8" />
             </button>
             <p class="font-bold">{{ product.name }}</p>
-            <!-- </div> -->
             <p><span class="font-semibold">Cantidad:</span>{{ product.quantity }}</p>
           </div>
 
@@ -96,11 +94,11 @@ watch(
             <p><span class="font-bold">Estado:</span> {{ product.status }}</p>
           </div>
 
-          <div class="flex flex-col gap-2 justify-center">
+          <div class="flex flex-col justify-center gap-2">
             <button
               @click="$emit('editProduct', product.id)"
               type="button"
-              class="p-2 bg-blue-500 text-white rounded"
+              class="p-2 text-white bg-blue-500 rounded"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -123,7 +121,7 @@ watch(
             <button
               @click="$emit('deleteProduct', product.id)"
               type="button"
-              class="p-2 bg-red-500 text-white rounded"
+              class="p-2 text-white bg-red-500 rounded"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -149,5 +147,3 @@ watch(
     </div>
   </div>
 </template>
-
-<style scoped></style>

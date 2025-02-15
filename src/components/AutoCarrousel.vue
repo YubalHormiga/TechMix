@@ -50,5 +50,3 @@ const modules = [Autoplay, Pagination]
     </swiper-slide>
   </swiper>
 </template>
-
-<style scoped></style>

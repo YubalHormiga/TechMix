@@ -24,5 +24,3 @@ const CurrentFullProjectComponent = computed(() => utilitiesComponent[projectId.
     <component :is="CurrentFullProjectComponent" />
   </div>
 </template>
-
-<style scoped></style>

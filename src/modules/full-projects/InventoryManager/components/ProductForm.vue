@@ -70,7 +70,7 @@ const updateSalePrice = () => {
 
 <template>
   <div class="flex flex-col p-4 text-[#0b2a34]">
-    <div class="p-4 text-center font-bold uppercase">
+    <div class="p-4 font-bold text-center uppercase">
       <h2 class="text-[#527986]">Añade o modifica el Producto</h2>
     </div>
 
@@ -114,7 +114,7 @@ const updateSalePrice = () => {
         <label class="font-bold" for="quantity">Cantidad del Producto</label>
         <input
           v-model.number="product.quantity"
-          class="border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md"
+          class="w-full p-2 mt-2 placeholder-gray-400 border-2 rounded-md"
           type="number"
           id="quantity"
           placeholder="Cantidad de Producto"
@@ -179,7 +179,7 @@ const updateSalePrice = () => {
       </div>
 
       <div class="flex flex-col">
-        <label class="font-bold p-2">Estado de disponibilidad</label>
+        <label class="p-2 font-bold">Estado de disponibilidad</label>
         <div class="flex items-center p-2">
           <input
             type="radio"
@@ -209,5 +209,3 @@ const updateSalePrice = () => {
     </form>
   </div>
 </template>
-
-<style scoped></style>

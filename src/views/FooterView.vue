@@ -1,5 +1,7 @@
 <script setup>
+import { computed } from 'vue'
 import { RouterLink } from 'vue-router'
+
 const socialLinks = [
   {
     href: 'https://www.linkedin.com/in/yubal-hormiga/',
@@ -12,6 +14,7 @@ const socialLinks = [
     alt: 'GitHub'
   }
 ]
+const date = computed(() => new Date().getFullYear())
 </script>
 
 <template>
@@ -19,7 +22,7 @@ const socialLinks = [
     <div itemscope itemtype="http://schema.org/WPFooter" class="media">
       <div>
         <p class="footer-text" itemprop="copyrightHolder">
-          &copy; 2024 <span itemprop="name">Yubal Hormiga</span>
+          &copy; {{ date }} <span itemprop="name">Yubal Hormiga</span>
         </p>
       </div>
       <div align="center" class="socialbtns">
@@ -30,6 +33,8 @@ const socialLinks = [
               class="fa fa-lg"
               :class="link.iconClass"
               :alt="link.alt"
+              :aria-label="link.alt"
+              rel="noopener noreferrer"
               target="_blank"
             >
               <span class="sr-only">{{ link.alt }}</span>

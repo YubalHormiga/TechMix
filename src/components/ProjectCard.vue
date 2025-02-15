@@ -2,7 +2,6 @@
 import { ref, onMounted } from 'vue'
 import { defineProps } from 'vue'
 
-// Define props
 const props = defineProps({
   fullProject: {
     type: Object,
@@ -54,7 +53,6 @@ onMounted(() => {
 </template>
 
 <style scoped>
-/* Transición suave de entrada */
 .fade-in-enter-active,
 .fade-in-leave-active {
   transition:
@@ -186,11 +184,11 @@ section .row {
   transition: ease all 1.3s;
   transform: translateZ(-1px);
   display: flex;
-  flex-direction: column; /* Para alinear verticalmente */
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 20px; /* Añade padding para que el contenido no quede pegado a los bordes */
-  text-align: justify; /* Para centrar el texto dentro del contenedor */
+  padding: 20px;
+  text-align: justify;
 }
 .card-back p {
   transform-style: preserve-3d;

@@ -1,5 +1,3 @@
-<script setup></script>
-
 <template>
   <div class="mx-auto my-0 loader"></div>
 </template>
