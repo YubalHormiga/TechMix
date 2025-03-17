@@ -1,6 +1,6 @@
 <script setup>
 import ProjectCard from '@/components/ProjectCard.vue'
-import { utilities } from '@/data/utilities/utilities'
+import { utilities } from '../../data/utilities/utilitie'
 const imageBasePath = '/images/utilities'
 </script>
 

@@ -1,5 +1,5 @@
 <script setup>
-import { utilities } from '@/data/utilities/utilities'
+import { utilities } from '../../data/utilities/utilitie'
 import { computed } from 'vue'
 import { useRoute } from 'vue-router'
 
