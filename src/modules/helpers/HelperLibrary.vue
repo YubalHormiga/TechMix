@@ -16,7 +16,7 @@ const copyToClipboard = (code) => {
 
 <template>
   <AnimatedContainer>
-    <div class="px-4 py-8 mx-auto max-w-7xl">
+    <div class="p-8 mx-auto max-w-screen-2xl">
       <section class="mb-6">
         <h1 class="mb-4 text-3xl font-bold text-center">Funciones Utilitarias (Helpers)</h1>
         <p class="text-gray-700">

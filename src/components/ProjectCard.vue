@@ -37,7 +37,7 @@ onMounted(() => {
           <div class="card-back">
             <p v-html="props.fullProject.description"></p>
             <RouterLink
-              :to="{ name: props.fullProject.routeName, params: { id: props.fullProject.id } }"
+              :to="{ name: props.fullProject.routeName, params: { name: props.fullProject.name } }"
               class="btn-link"
             >
               Ver Aplicación

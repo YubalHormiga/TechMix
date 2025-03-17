@@ -1,23 +1,28 @@
 <script setup>
+import { utilities } from '@/data/utilities/utilities'
 import { computed } from 'vue'
 import { useRoute } from 'vue-router'
 
 import RandomPassword from './GenerateRandomPassword/RandomPassword.vue'
 
+const route = useRoute()
+const projectName = computed(() => route.params.name)
+
 const utilitiesComponent = {
-  1: RandomPassword
+  RandomPassword
 }
 
-const route = useRoute()
-const projectId = computed(() => parseInt(route.params.id))
-
-const CurrentUtilitiesComponent = computed(() => utilitiesComponent[projectId.value] || null)
+const CurrentUtilitiesComponent = computed(() => {
+  const project = utilities.find(
+    (utilities) => utilities.name.toLowerCase() === projectName.value.toLowerCase()
+  )
+  return project ? utilitiesComponent[project.name] : null
+})
 </script>
 
 <template>
   <div>
-    <!-- Pasar la descripción al componente dinámico -->
-    <component :is="CurrentUtilitiesComponent" :utilitieDescription="utilitieDescription" />
+    <component :is="CurrentUtilitiesComponent" v-if="CurrentUtilitiesComponent" />
   </div>
 </template>
 

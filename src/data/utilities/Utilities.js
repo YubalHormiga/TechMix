@@ -1,7 +1,7 @@
-export const technicalTests = [
+export const utilities = [
   {
     id: 1,
-    name: 'Random Password',
+    name: 'RandomPassword',
     routeName: 'utility-detail',
     image: 'password.jpg',
     github:

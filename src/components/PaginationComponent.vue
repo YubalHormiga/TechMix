@@ -5,7 +5,8 @@ import { defineProps, defineEmits, computed } from 'vue'
 const props = defineProps({
   totalItems: { type: Number, required: true },
   itemsPerPage: { type: Number, default: 10 },
-  currentPage: { type: Number, default: 1 }
+  currentPage: { type: Number, default: 1 },
+  buttonBgColor: { type: String, default: 'bg-[#231557]' }
 })
 
 const emit = defineEmits(['update:currentPage'])
@@ -29,7 +30,8 @@ const nextPage = () => {
     <button
       @click="prevPage"
       :disabled="currentPage === 1"
-      class="px-4 py-2 border rounded bg-[#231557] text-white"
+      class="px-4 py-2 text-white border rounded"
+      :class="buttonBgColor"
     >
       Anterior
     </button>
@@ -37,7 +39,8 @@ const nextPage = () => {
     <button
       @click="nextPage"
       :disabled="currentPage === totalPages"
-      class="px-4 py-2 border rounded bg-[#231557] text-white"
+      class="px-4 py-2 text-white border rounded"
+      :class="buttonBgColor"
     >
       Siguiente
     </button>

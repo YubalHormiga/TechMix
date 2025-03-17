@@ -16,21 +16,46 @@ const imageBasePath = '/images/full-projects'
 </script>
 
 <template>
-  <div class="container">
-    <div class="select-container">
-      <label for="difficulty-select" class="select-label">Filtrar por dificultad:</label>
+  <div class="p-8 mx-auto max-w-screen-2xl">
+    <div class="text-gray-700">
+      <h2 class="mb-4 font-semibold text-center">¿Cómo se clasifican los proyectos?</h2>
+      <p class="mb-4 text-center">
+        Los proyectos están organizados por nivel de dificultad según los conocimientos y
+        herramientas de
+        <strong>Vue.js</strong> que se aplican en cada uno:
+      </p>
+      <ul>
+        <li>
+          <span class="font-bold text-green-500">Fácil:</span> Uso básico de Vue (props, directivas
+          como <code>v-for</code> y <code>v-if</code>, comunicación entre componentes mediante
+          eventos). No requiere gestión de estado avanzada ni manejo de datos asíncrono.
+        </li>
+        <li>
+          <span class="font-bold text-orange-500">Intermedio:</span> Manejo de datos asíncrono,
+          gestión de estado con <strong>Pinia</strong>, uso de <strong>composables</strong> para
+          reutilizar lógica y modularización de componentes.
+        </li>
+        <li>
+          <span class="font-bold text-red-500">Avanzado:</span> Enrutamiento con
+          <strong>Vue Router</strong>, autenticación de usuarios, integración de múltiples fuentes
+          de datos, optimización del rendimiento y arquitecturas escalables.
+        </li>
+      </ul>
+    </div>
+    <div class="mb-4 text-center">
+      <label for="difficulty-select" class="mr-2 font-bold">Filtrar por dificultad:</label>
       <div class="select-wrapper">
         <select id="difficulty-select" v-model="selectedDifficulty" class="select-box">
           <option value="all">Todos</option>
-          <option value="easy">Fácil</option>
-          <option value="intermidiate">Intermedio</option>
-          <option value="advanced">Avanzado</option>
+          <option value="easy" class="font-bold text-green-500">Fácil</option>
+          <option value="intermidiate" class="font-bold text-orange-500">Intermedio</option>
+          <option value="advanced" class="font-bold text-red-500">Avanzado</option>
         </select>
-        <span class="project-count"> {{ filteredProjects.length }} Proyectos encontrados </span>
+        <span class="font-bold"> {{ filteredProjects.length }} Proyectos encontrados </span>
       </div>
     </div>
 
-    <div class="projects-container">
+    <div class="flex flex-wrap justify-center gap-8 mt-4">
       <div v-for="fullProject in filteredProjects" :key="fullProject.id" class="router-link">
         <ProjectCard :fullProject="fullProject" :imageBasePath="imageBasePath" />
       </div>
@@ -39,18 +64,6 @@ const imageBasePath = '/images/full-projects'
 </template>
 
 <style scoped>
-.select-container {
-  text-align: center;
-  margin-bottom: 2rem;
-}
-
-.select-label {
-  font-weight: bold;
-  font-size: 1.8rem;
-  margin-right: 1rem;
-  color: #333;
-}
-
 .select-wrapper {
   display: inline-flex;
   align-items: center;
@@ -63,7 +76,6 @@ const imageBasePath = '/images/full-projects'
 
 .select-box {
   padding: 1rem;
-  font-size: 1.4rem;
   border: none;
   background-color: transparent;
   cursor: pointer;
@@ -81,20 +93,6 @@ const imageBasePath = '/images/full-projects'
 .select-box:hover {
   background-color: #e0e0e0;
   border-radius: 4px;
-}
-
-.project-count {
-  font-size: 1.4rem;
-  font-weight: bold;
-  color: #555;
-}
-
-.projects-container {
-  display: flex;
-  gap: 2rem;
-  flex-wrap: wrap;
-  justify-content: center;
-  margin-top: 2rem;
 }
 
 @media (max-width: 768px) {

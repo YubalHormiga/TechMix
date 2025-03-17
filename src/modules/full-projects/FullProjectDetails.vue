@@ -1,26 +1,50 @@
 <script setup>
 import { computed } from 'vue'
-import { useRoute } from 'vue-router'
+import { RouterLink, RouterView, useRoute } from 'vue-router'
+import { fullProjects } from '@/data/full-projets/full-project'
+
 import BoardShop from './BoardShop/BoardShop.vue'
 import InventoryManager from './InventoryManager/InventoryManager.vue'
 import Saborify from './Saborify/SaborifyApp.vue'
 import CineScope from './CineScope/CineScope.vue'
 
-const utilitiesComponent = {
-  1: BoardShop,
-  2: InventoryManager,
-  3: CineScope,
-  4: Saborify
+const route = useRoute()
+const projectName = computed(() => route.params.name)
+
+const projectComponents = {
+  BoardShop,
+  InventoryManager,
+  Saborify,
+  CineScope
 }
 
-const route = useRoute()
-const projectId = computed(() => parseInt(route.params.id))
-
-const CurrentFullProjectComponent = computed(() => utilitiesComponent[projectId.value] || null)
+const currentProjectComponent = computed(() => {
+  const project = fullProjects.find(
+    (project) => project.name.toLowerCase() === projectName.value.toLowerCase()
+  )
+  return project ? (projectComponents[project.name] ?? null) : null
+})
+const currentProject = computed(() => {
+  return fullProjects.find(
+    (project) => project.name.toLowerCase() === projectName.value.toLowerCase()
+  )
+})
+const isSubRoute = computed(() => {
+  return route.matched.length > 1
+})
 </script>
-
 <template>
   <div>
-    <component :is="CurrentFullProjectComponent" />
+    <component :is="currentProjectComponent" v-if="currentProjectComponent && !isSubRoute" />
+    <div v-if="currentProjectComponent && currentProject?.routes">
+      <RouterLink
+        v-for="route in currentProject.routes"
+        :key="route.name"
+        :to="`/projects/${projectName}/${route.path}`"
+      >
+      </RouterLink>
+
+      <RouterView />
+    </div>
   </div>
 </template>
