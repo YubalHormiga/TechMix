@@ -1,6 +1,5 @@
 import { ref, inject, computed, onMounted } from 'vue'
 import { defineStore } from 'pinia'
-
 import { useModalStore } from './modalStore'
 import { watch } from 'vue'
 
@@ -50,7 +49,13 @@ export const useFavoriteStore = defineStore('favoriteRecipes', () => {
           type: 'warning'
         })
       } else {
-        favoriteRecipes.value.push(recipe)
+        const filteredRecipe = {
+          ...recipe,
+          nutrition: Object.fromEntries(
+            Object.entries(recipe.nutrition).filter(([key]) => key !== 'updated_at')
+          )
+        }
+        favoriteRecipes.value.push(filteredRecipe)
         toast.open({
           message: 'Receta guardada correctamente',
           type: 'success'
@@ -69,5 +74,20 @@ export const useFavoriteStore = defineStore('favoriteRecipes', () => {
 
   const hasFavoriteRecipes = computed(() => favoriteRecipes.value.length > 0)
 
-  return { handleClickfavorite, favoriteRecipes, existFavorite, hasFavoriteRecipes }
+  const filteredFavoriteRecipes = computed(() => {
+    return favoriteRecipes.value.map((recipe) => ({
+      ...recipe,
+      nutrition: Object.fromEntries(
+        Object.entries(recipe.nutrition).filter(([key]) => key !== 'updated_at')
+      )
+    }))
+  })
+
+  return {
+    handleClickfavorite,
+    favoriteRecipes,
+    existFavorite,
+    hasFavoriteRecipes,
+    filteredFavoriteRecipes
+  }
 })
