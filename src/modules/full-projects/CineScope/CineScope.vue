@@ -23,11 +23,14 @@ const selectedLanguage = ref('')
 const defaultCarouselImages = [NoMovies, TryAnother]
 
 const carouselImages = computed(() => {
-  return fullMoviesList.value.length > 0
-    ? fullMoviesList.value.map(
-        (movie) => `https://image.tmdb.org/t/p/original${movie.backdrop_path}`
-      )
-    : defaultCarouselImages
+  if (fullMoviesList.value.length > 0) {
+    const validMovies = fullMoviesList.value.filter((movie) => movie.backdrop_path !== null)
+    return validMovies.length > 0
+      ? validMovies.map((movie) => `https://image.tmdb.org/t/p/original${movie.backdrop_path}`)
+      : defaultCarouselImages
+  } else {
+    return defaultCarouselImages
+  }
 })
 
 const allMovies = computed(() => {
@@ -45,6 +48,7 @@ const fetchData = async () => {
 
     const response = await fetch(URL)
     const data = await response.json()
+    console.log(data)
 
     if (!response.ok) throw new Error('Error al obtener datos de películas')
 

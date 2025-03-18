@@ -19,7 +19,7 @@ const toggleModal = () => {
   <div class="relative overflow-hidden rounded-lg shadow-lg h-[400px] w-[300px]">
     <div class="absolute inset-0 cover">
       <img
-        :src="'https://image.tmdb.org/t/p/original' + movie.backdrop_path"
+        :src="'https://image.tmdb.org/t/p/original' + movie.poster_path"
         :alt="movie.original_title"
         class="object-cover w-full h-full"
       />
