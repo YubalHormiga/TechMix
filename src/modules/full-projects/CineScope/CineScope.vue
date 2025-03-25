@@ -48,7 +48,6 @@ const fetchData = async () => {
 
     const response = await fetch(URL)
     const data = await response.json()
-    console.log(data)
 
     if (!response.ok) throw new Error('Error al obtener datos de películas')
 

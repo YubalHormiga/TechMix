@@ -7,8 +7,8 @@ const navItems = [
   { text: 'Ruta de Aprendizaje', to: { name: 'learning-path' } },
   { text: 'Proyectos Completos', to: { name: 'full-projects' } },
   { text: 'Utilidades', to: { name: 'utilities' } },
-  { text: 'Pruebas Técnicas', to: { name: 'technical-tests' } },
   { text: 'Ejercicios de Lógica', to: { name: 'logic-exercises' } },
+  { text: 'Pruebas Técnicas', to: { name: 'technical-tests' } },
   { text: 'Helpers', to: { name: 'helpers' } }
 ]
 
