@@ -1,6 +1,6 @@
 <script setup>
 import { ref, inject, computed } from 'vue'
-import { logicExercises } from '@/data/logic-exercises/logic-exercises'
+import { logicExercises } from '@/data/logic-exercises/logic-exercises.js'
 import AnimatedContainer from '@/components/AnimatedContainer.vue'
 
 import PaginationComponent from '@/components/PaginationComponent.vue'

@@ -38,7 +38,7 @@ export const fullProjects = [
     image: 'image_04.webp',
     github: 'https://github.com/YubalHormiga/TechMix/tree/main/src/modules/full-projects/Saborify',
     description:
-      'Saborify es una aplicación web para explorar recetas, donde los usuarios pueden buscar por ingrediente, visualizar detalles nutricionales y guardar recetas favoritas. El proyecto utiliza **Vue.js** para la interactividad, **Pinia** para la gestión de estado y **Tailwind CSS** para el diseño. <span style="color: #E6760E; font-weight: bold;">Este proyecto es de nivel intermedio</span>, ya que implementa consumo de API y almacenamiento de favoritos con Pinia.🍳🍽️',
+      'Saborify es una aplicación web para explorar recetas, donde los usuarios pueden buscar por ingrediente, visualizar detalles nutricionales, generar recetas con IA y guardar favoritas. El proyecto utiliza **Vue.js** para la interactividad, **Pinia** para la gestión de estado y **Tailwind CSS** para el diseño. <span style="color: #E6760E; font-weight: bold;">Este proyecto es de nivel intermedio</span>, ya que integra consumo de API, IA y almacenamiento con Pinia.🍳🍽️',
     difficulty: 'intermidiate',
     routes: [
       {
@@ -46,6 +46,11 @@ export const fullProjects = [
         name: 'favorites',
         component: () =>
           import('../../modules/full-projects/Saborify/components/FavoriteRecipes.vue')
+      },
+      {
+        path: 'recipeia',
+        name: 'recipeia',
+        component: () => import('../../modules/full-projects/Saborify/components/RecipeIA.vue')
       }
     ]
   }

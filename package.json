@@ -14,7 +14,9 @@
   },
   "dependencies": {
     "@formkit/drag-and-drop": "^0.2.5",
+    "@openrouter/ai-sdk-provider": "^0.4.5",
     "@vitest/coverage-v8": "^1.6.0",
+    "ai": "^4.2.8",
     "axios": "^1.8.1",
     "chart.js": "^4.4.6",
     "pinia": "^2.1.7",
