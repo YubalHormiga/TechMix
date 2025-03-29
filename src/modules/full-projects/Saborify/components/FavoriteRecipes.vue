@@ -23,14 +23,20 @@ const { favoriteRecipes } = storeToRefs(favoriteStore)
         class="flex flex-col items-center justify-center py-6 mb-6 gap-7 md:flex-row md:justify-between md:items-center"
       >
         <h1 class="text-[#7fa961] text-6xl font-bold uppercase text-center md:text-left">
-          Saborify
+          <RouterLink to="/projects/Saborify"> Saborify </RouterLink>
         </h1>
-        <nav>
+        <nav class="flex justify-around w-full md:w-auto md:gap-10">
           <RouterLink
             to="/projects/Saborify"
             class="font-semibold text-[#2b4d12] hover:text-[#fd9200] transition-all hover:underline hover:underline-offset-4 hover:decoration-2 hover:decoration-[#fd9200]"
           >
             Inicio
+          </RouterLink>
+          <RouterLink
+            :to="{ name: 'recipeia' }"
+            class="font-semibold text-[#2b4d12] hover:text-[#fd9200] transition-all hover:underline hover:underline-offset-4 hover:decoration-2 hover:decoration-[#fd9200]"
+          >
+            RecetaIA
           </RouterLink>
         </nav>
       </header>
@@ -40,7 +46,7 @@ const { favoriteRecipes } = storeToRefs(favoriteStore)
         <RecipeCard :recipes="favoriteRecipes" />
       </section>
       <section v-else class="flex flex-col items-center justify-center mt-8">
-        <p class="text-[#437345]">Aún no has añadido ninguna receta a favoritos</p>
+        <p class="text-[#64453d]">Aún no has añadido ninguna receta a favoritos</p>
       </section>
 
       <ModalRecipe v-if="modal" />

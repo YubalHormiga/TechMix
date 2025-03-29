@@ -29,14 +29,20 @@ const buttonBgColor = 'bg-[#fd9200]'
 
 <template>
   <AnimatedContainer class="py-8 background">
-    <div class="w-[95%] mx-auto max-w-[var(--max-width)] text-[#21160f]">
+    <div class="w-[95%] mx-auto max-w-[var(--max-width)] text-[#64453d]">
       <header
         class="flex flex-col items-center justify-center py-4 mb-4 gap-7 md:flex-row md:justify-between md:items-center"
       >
         <h1 class="text-[#7fa961] text-6xl font-bold uppercase text-center md:text-left">
           Saborify
         </h1>
-        <nav>
+        <nav class="flex justify-around w-full md:w-auto md:gap-10">
+          <RouterLink
+            :to="{ name: 'recipeia' }"
+            class="block font-semibold text-[#2b4d12] hover:text-[#fd9200] duration-300 transition-all hover:underline hover:underline-offset-4 decoration-2 hover:decoration-[#fd9200]"
+          >
+            RecetaIA
+          </RouterLink>
           <RouterLink
             :to="{ name: 'favorites' }"
             class="font-semibold text-[#2b4d12] hover:text-[#fd9200] duration-300 transition-all hover:underline hover:underline-offset-4 decoration-2 hover:decoration-[#fd9200]"
@@ -54,6 +60,13 @@ const buttonBgColor = 'bg-[#fd9200]'
             En Saborify, queremos que disfrutes de la magia de cocinar. Explora miles de recetas,
             busca platos por ingredientes que ya tienes en casa, y descubre nuevas ideas que se
             adapten a tus gustos y necesidades.
+          </p>
+          <p class="font-semibold text-[#2b4d12]">
+            ¿No sabes qué cocinar? Prueba
+            <RouterLink :to="{ name: 'recipeia' }" class="text-[#fd9200] hover:underline"
+              >RecetaIA</RouterLink
+            >, nuestro generador de recetas con inteligencia artificial. ¡Sorpréndete con ideas
+            personalizadas!
           </p>
         </div>
         <div class="">
