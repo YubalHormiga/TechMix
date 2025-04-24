@@ -1,8 +1,9 @@
-# Clasificar archivos .vue como Vue (no HTML)
+# Clasificar archivos .vue como Vue
 *.vue linguist-language=Vue
 
-# Ignorar archivos generados para estadísticas de lenguaje
-/dist/* linguist-vendored
-/public/* linguist-vendored
-/node_modules/* linguist-vendored
-/build/* linguist-vendored
+# Ignorar archivos generados y estáticos
+dist/** linguist-vendored
+public/** linguist-vendored
+node_modules/** linguist-vendored
+build/** linguist-vendored
+assets/** linguist-vendored

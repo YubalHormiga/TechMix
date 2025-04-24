@@ -20,7 +20,7 @@ const date = computed(() => new Date().getFullYear())
 <template>
   <footer class="footer-container">
     <div itemscope itemtype="http://schema.org/WPFooter" class="media">
-      <div>
+      <div class="">
         <p class="footer-text" itemprop="copyrightHolder">
           &copy; {{ date }} <span itemprop="name">Yubal Hormiga</span>
         </p>
