@@ -2,6 +2,9 @@ import './assets/main.css'
 
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
+import { VueFire, VueFireAuth } from 'vuefire'
+import { firebaseApp } from '../config/firabase'
+
 import { useToast } from 'vue-toast-notification'
 import VueChartkick from 'vue-chartkick'
 
@@ -26,6 +29,10 @@ const $toast = useToast({
 })
 
 const app = createApp(App)
+app.use(VueFire, {
+  firebaseApp,
+  modules: [VueFireAuth()]
+})
 app.provide('toast', $toast)
 app.use(VueChartkick)
 app.use(createPinia())

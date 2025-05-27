@@ -4,7 +4,7 @@ import { RouterLink, useRoute } from 'vue-router'
 
 const navItems = [
   { text: 'Inicio', to: '/' },
-  { text: 'Ruta de Aprendizaje', to: { name: 'learning-path' } },
+  // { text: 'Ruta de Aprendizaje', to: { name: 'learning-path' } },
   { text: 'Proyectos Completos', to: { name: 'full-projects' } },
   { text: 'Utilidades', to: { name: 'utilities' } },
   { text: 'Ejercicios de Lógica', to: { name: 'logic-exercises' } },

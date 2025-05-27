@@ -7,6 +7,7 @@ import BoardShop from './BoardShop/BoardShop.vue'
 import InventoryManager from './InventoryManager/InventoryManager.vue'
 import Saborify from './Saborify/SaborifyApp.vue'
 import CineScope from './CineScope/CineScope.vue'
+import NautiFleet from './NautiFleet/NautiFleet.vue'
 
 const route = useRoute()
 const projectName = computed(() => route.params.name)
@@ -15,7 +16,8 @@ const projectComponents = {
   BoardShop,
   InventoryManager,
   Saborify,
-  CineScope
+  CineScope,
+  NautiFleet
 }
 
 const currentProjectComponent = computed(() => {

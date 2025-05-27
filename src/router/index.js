@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import { fullProjects } from '@/data/full-projets/full-project'
+import { authenticateUser } from '@/composables/useAuth'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -65,12 +66,29 @@ const router = createRouter({
 fullProjects.forEach((project) => {
   if (project.routes && project.routes.length > 0) {
     project.routes.forEach((route) => {
-      router.addRoute('full-projects-detail', {
-        path: route.path,
+      router.addRoute({
+        path: `/projects/${project.name}/${route.path}`,
         name: route.name,
-        component: route.component
+        component: route.component,
+        meta: route.meta || {}
       })
     })
+  }
+})
+
+router.beforeEach(async (to, from, next) => {
+  const requiresAuth = to.matched.some((route) => route.meta.requiresAuth)
+
+  if (requiresAuth) {
+    try {
+      await authenticateUser()
+      next()
+    } catch (error) {
+      console.warn('Usuario no autenticado:', error)
+      next({ name: 'login' })
+    }
+  } else {
+    next()
   }
 })
 // console.log('Rutas añadidas:', router.getRoutes())

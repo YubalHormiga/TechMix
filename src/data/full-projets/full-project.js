@@ -42,15 +42,54 @@ export const fullProjects = [
     difficulty: 'intermidiate',
     routes: [
       {
-        path: 'favorites',
+        path: 'recetas-favoritas',
         name: 'favorites',
         component: () =>
           import('../../modules/full-projects/Saborify/components/FavoriteRecipes.vue')
       },
       {
-        path: 'recipeia',
+        path: 'receta-ia',
         name: 'recipeia',
         component: () => import('../../modules/full-projects/Saborify/components/RecipeIA.vue')
+      }
+    ]
+  },
+  {
+    id: 5,
+    name: 'NautiFleet',
+    routeName: 'full-projects-detail',
+    image: 'image_05.webp',
+    github:
+      'https://github.com/YubalHormiga/TechMix/tree/main/src/modules/full-projects/NautiFleet',
+    description:
+      'NautiFleet es una app web para comprar o trasladar embarcaciones por mar. Los usuarios pueden filtrar por tipo, año o precio, ver detalles técnicos y solicitar traslados entre puertos. El proyecto utiliza **Vue.js**, **Vuefire**, **Firebase**, **Pinia** y **Tailwind CSS**. <span style="color: #f35454; font-weight: bold;">Este proyecto es de nivel avanzado</span>, ya que incluye roles de usuario, favoritos, mapas interactivos y simulación de compra.🛥️📍',
+
+    difficulty: 'advanced',
+    routes: [
+      {
+        path: 'login',
+        name: 'login',
+        component: () => import('../../modules/full-projects/NautiFleet/views/auth/LoginView.vue')
+        // meta: { requiresAuth: true }
+      },
+      {
+        path: 'register',
+        name: 'register',
+        component: () =>
+          import('../../modules/full-projects/NautiFleet/views/auth/RegisterView.vue')
+      },
+      {
+        path: 'panel',
+        name: 'dash-board',
+        component: () =>
+          import('../../modules/full-projects/NautiFleet/views/dashboard/DashboardHome.vue'),
+        meta: { requiresAuth: true }
+      },
+      {
+        path: 'convertirse-en-vendedor',
+        name: 'seller-onboarding',
+        component: () =>
+          import('../../modules/full-projects/NautiFleet/views/dashboard/SellerOnboardingView.vue')
       }
     ]
   }
