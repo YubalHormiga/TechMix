@@ -1,7 +1,6 @@
 <script setup>
 import { ref } from 'vue'
 import { useAuthStore } from '../../stores/authStore'
-import Login from '../../assets/images/login.webp'
 
 const email = ref('yubalhh@yahoo.es')
 const password = ref('Iraya2902.')
@@ -15,73 +14,57 @@ const handleSubmit = async () => {
 </script>
 
 <template>
-  <div class="flex justify-center px-6 my-12">
-    <div class="flex w-full xl:w-2/4 lg:w-11/12">
-      <div
-        class="hidden w-full h-auto bg-cover rounded-l-lg in-h-screen lg:block lg:w-7/12"
-        :style="{
-          'background-image': `url(${Login})`,
-          'background-position': 'center',
-          'background-repeat': 'no-repeat',
-          'background-size': 'cover'
-        }"
-      ></div>
-      <div class="w-full p-5 bg-white rounded-lg lg:w-5/12 lg:rounded-l-none">
-        <form @click="handleSubmit" class="px-8 pt-6 pb-8 mb-4 bg-white rounded">
-          <div class="mb-4">
-            <label class="block mb-2 text-sm font-bold text-gray-700" for="email"> Email </label>
+  <div class="flex justify-center flex-1 px-40 py-5">
+    <div class="flex flex-col w-[512px] max-w-[512px] py-5 flex-1">
+      <h2 class="pt-5 pb-3 text-3xl font-bold text-center md:text-4xl md:font-black text-[#121416]">
+        Bienvenido de nuevo
+      </h2>
+      <form @submit.prevent="handleSubmit">
+        <div class="flex flex-wrap px-4 py-3 text-[#121416]">
+          <label class="flex flex-col flex-1" for="email">
+            <p class="pb-2 text-base font-normal md:text-lg">
+              Nombre de usuario o correo electrónico
+            </p>
             <input
-              class="w-full px-3 py-2 mb-3 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
-              id="email"
-              type="email"
-              placeholder="Email"
               v-model.trim="email"
-              autocomplete="email"
+              placeholder="Introduce tu usuario o correo"
+              class="w-full p-4 text-base font-normal bg-white border border-gray-300 form-input rounded-xl h-14 focus:outline-none focus:border-gray-400"
+              id="email"
             />
-          </div>
-          <div class="mb-4">
-            <div class="mb-4 md:mr-2 md:mb-0">
-              <label class="block mb-2 text-sm font-bold text-gray-700" for="password">
-                Password
-              </label>
-              <input
-                class="w-full px-3 py-2 mb-3 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
-                id="password"
-                type="password"
-                placeholder="******************"
-                v-model.trim="password"
-                autocomplete="new-password"
-              />
-            </div>
-          </div>
-          <div class="mb-6 text-center">
-            <button
-              class="w-full px-4 py-2 font-bold text-white bg-blue-500 rounded-sm hover:bg-blue-700 focus:outline-none focus:shadow-outline"
-              type="button"
-            >
-              Iniciar sesión
-            </button>
-          </div>
-          <hr class="mb-6 border-t" />
-          <div class="text-center">
-            <a
-              class="inline-block text-sm text-blue-500 align-baseline hover:text-blue-800"
-              href="#"
-            >
-              Forgot Password?
-            </a>
-          </div>
-          <div class="text-center">
-            <RouterLink
-              class="inline-block text-sm text-blue-500 align-baseline hover:text-blue-800"
-              :to="{ name: 'register' }"
-            >
-              > ¿No tienes una cuenta? ¡Regístrate!
-            </RouterLink>
-          </div>
-        </form>
-      </div>
+          </label>
+        </div>
+        <div class="flex flex-wrap px-4 py-3">
+          <label class="flex flex-col flex-1">
+            <p class="pb-2 text-base font-normal md:text-lg">Contraseña</p>
+            <input
+              v-model.trim="password"
+              placeholder="Introduce tu contraseña"
+              class="w-full p-4 text-base font-normal bg-white border border-gray-300 form-input rounded-xl h-14 focus:outline-none focus:border-gray-400"
+              type="password"
+            />
+          </label>
+        </div>
+        <div class="flex px-4 py-3">
+          <button
+            type="submit"
+            class="w-full rounded-sm h-10 px-2 bg-[#dce7f3] text-[#121416] text-lg font-bold"
+          >
+            Iniciar sesión
+          </button>
+        </div>
+      </form>
+      <RouterLink
+        :to="{ name: 'reset-password-nautifleet' }"
+        class="px-4 pt-1 pb-3 text-base font-normal text-center text-blue-600 underline transition-colors cursor-pointer hover:text-blue-800 md:text-lg"
+      >
+        ¿Has olvidado tu contraseña?
+      </RouterLink>
+      <RouterLink
+        :to="{ name: 'register-nautifleet' }"
+        class="px-4 pt-1 text-base font-normal text-center text-blue-600 underline transition-colors cursor-pointer hover:text-blue-800 md:text-lg"
+      >
+        ¿No tienes cuenta? Regístrate
+      </RouterLink>
     </div>
   </div>
 </template>
-<style scoped></style>

@@ -4,11 +4,13 @@ import { defineStore } from 'pinia'
 import { useFirebaseAuth, useFirestore, useDocument } from 'vuefire'
 import {
   createUserWithEmailAndPassword,
+  sendPasswordResetEmail,
   signInWithEmailAndPassword,
   signOut,
+  updatePassword,
   updateProfile
 } from 'firebase/auth'
-import { doc, setDoc } from 'firebase/firestore'
+import { doc, setDoc, updateDoc } from 'firebase/firestore'
 import { useErrorHandling } from '@/composables/useErrorHandling'
 
 export const useAuthStore = defineStore('auth', () => {
@@ -74,8 +76,11 @@ export const useAuthStore = defineStore('auth', () => {
     router.push({ name: 'dash-board' })
   }
 
-  const handleToastError = () => {
-    toast.open({ message: errorMessage.value, type: 'error' })
+  const handleToastError = (customMessage = null) => {
+    toast.open({
+      message: customMessage || errorMessage.value,
+      type: 'error'
+    })
   }
 
   const handleToastSuccess = (message) => {
@@ -90,6 +95,49 @@ export const useAuthStore = defineStore('auth', () => {
   const isSeller = computed(() => userDoc.value?.isSeller === true)
   const displayName = computed(() => userDoc.value?.displayName || '')
 
+  const updateUserProfile = async (newDisplayName, newPassword) => {
+    try {
+      const currentUser = auth.currentUser
+      if (!currentUser) {
+        handleToastError('Usuario no autenticado.')
+        return
+      }
+
+      const trimmedName = newDisplayName?.trim()
+      const trimmedPassword = newPassword?.trim()
+
+      if (!trimmedName && !trimmedPassword) {
+        handleToastError('Debes ingresar al menos un dato para actualizar.')
+        return
+      }
+
+      if (trimmedName) {
+        await updateProfile(currentUser, { displayName: trimmedName })
+        if (userDoc.value) {
+          await updateDoc(userDocRef.value, { displayName: trimmedName })
+        }
+      }
+
+      if (trimmedPassword) {
+        await updatePassword(currentUser, trimmedPassword)
+      }
+
+      handleToastSuccess('Perfil actualizado correctamente.')
+    } catch (error) {
+      handleErrorMessage(error)
+      handleToastError()
+    }
+  }
+
+  const resetPassword = async (email) => {
+    try {
+      await sendPasswordResetEmail(auth, email)
+      handleToastSuccess('Te enviamos un correo para restablecer tu contraseña.')
+    } catch (error) {
+      handleErrorMessage(error)
+      handleToastError()
+    }
+  }
   return {
     userData,
     register,
@@ -98,6 +146,8 @@ export const useAuthStore = defineStore('auth', () => {
     isLoggedIn,
     isAdmin,
     isSeller,
-    displayName
+    displayName,
+    updateUserProfile,
+    resetPassword
   }
 })

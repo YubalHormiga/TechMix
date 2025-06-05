@@ -84,16 +84,7 @@ p {
   line-height: 1.5;
 }
 
-/* a {
-  color: var(--text-100);
-  text-decoration: none;
-} */
 
-/* a:hover,
-a:focus {
-  text-decoration: underline;
-
-} */
 
 ul,
 ol {
@@ -122,4 +113,23 @@ svg {
 
 .active-link {
   @apply text-[#ff1361] font-bold
+}
+
+
+
+/* ProjectCard colors*/
+.tech {
+  color: #4f87a5;
+}
+
+.term {
+  color: #f6c744;
+}
+
+.api {
+  color: #74ddf7;
+}
+
+.lib {
+  color: #ab83e1;
 }

@@ -1,0 +1,1580 @@
+
+
+--- File: assets\images\editProfile.webp ---
+(Skipped (non-matching extension))
+
+
+--- File: assets\images\landing\boatHeader.webp ---
+(Skipped (non-matching extension))
+
+
+--- File: assets\images\landing\inflatableBoat.webp ---
+(Skipped (non-matching extension))
+
+
+--- File: assets\images\landing\mooring.webp ---
+(Skipped (non-matching extension))
+
+
+--- File: assets\images\landing\motorboat.webp ---
+(Skipped (non-matching extension))
+
+
+--- File: assets\images\landing\rowboat.webp ---
+(Skipped (non-matching extension))
+
+
+--- File: assets\images\landing\sailboat.webp ---
+(Skipped (non-matching extension))
+
+
+--- File: assets\images\landing\sailboatHero.webp ---
+(Skipped (non-matching extension))
+
+
+--- File: assets\images\login.webp ---
+(Skipped (non-matching extension))
+
+
+--- File: assets\images\register.webp ---
+(Skipped (non-matching extension))
+
+
+--- File: components\boats\BoatCard.vue ---
+
+<template>
+  <div class="grid grid-cols-1 gap-4 lg:grid-cols-4 lg:gap-8">
+    <div class="rounded">
+      <div class="space-y-2">
+        <img
+          src="https://source.unsplash.com/random/480x360/?4"
+          alt=""
+          class="block object-cover object-center w-full rounded-md h-72 dark:bg-gray-500"
+        />
+        <div class="flex items-center text-xs">
+          <span>6 min ago</span>
+        </div>
+      </div>
+    </div>
+    <div class="rounded lg:col-span-2">
+      <div class="space-y-2">
+        <a rel="noopener noreferrer" href="#" class="block">
+          <h3 class="text-xl font-semibold dark:text-violet-600">
+            Facere ipsa nulla corrupti praesentium pariatur architecto
+          </h3>
+        </a>
+        <p class="leading-snug dark:text-gray-600">
+          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Repellat, excepturi. Lorem ipsum
+          dolor sit amet consectetur, adipisicing elit. Repellat, excepturi.
+        </p>
+      </div>
+    </div>
+    <div class="rounded">
+      <div class="flex flex-col justify-between p-6 space-y-8">
+        <div class="space-y-2">
+          <h2 class="text-3xl font-semibold tracking-wide">Donec lectus leo</h2>
+          <p class="dark:text-gray-800">
+            Curabitur luctus erat nunc, sed ullamcorper erat vestibulum eget.
+          </p>
+        </div>
+        <button
+          type="button"
+          class="flex items-center justify-center w-full p-3 font-semibold tracking-wide rounded-md dark:bg-violet-600 dark:text-gray-50"
+        >
+          Read more
+        </button>
+      </div>
+    </div>
+  </div>
+</template>
+
+
+
+--- File: components\boats\BoatFilters.vue ---
+
+<script setup></script>
+
+<template>
+  <div class="grid grid-cols-1 gap-4 p-4 md:grid-cols-2 lg:col-span-5">
+    <div>
+      <label for="type" class="block text-xl font-semibold text-[#284352] mb-1"
+        >Tipo de embarcación</label
+      >
+      <select
+        id="type"
+        class="w-full border rounded px-3 py-2 text-xl focus:outline-none focus:ring-2 focus:ring-[#4f87a5]"
+      >
+        <option value="">Todos</option>
+        <option value="velero">Velero</option>
+        <option value="yate">Yate</option>
+        <option value="lancha">Lancha</option>
+        <option value="catamaran">Catamarán</option>
+      </select>
+    </div>
+
+    <div>
+      <label for="price" class="block text-xl font-semibold text-[#284352] mb-1"
+        >Precio máximo (€)</label
+      >
+      <input
+        id="price"
+        type="number"
+        min="0"
+        class="w-full border rounded px-3 py-2 text-xl focus:outline-none focus:ring-2 focus:ring-[#4f87a5]"
+        placeholder="Ej. 500"
+      />
+    </div>
+  </div>
+</template>
+<style scoped></style>
+
+
+
+--- File: components\dashboards\BoatList.vue ---
+
+<script setup>
+import BoatCard from '../boats/BoatCard.vue'
+import BoatFilters from '../boats/BoatFilters.vue'
+</script>
+
+<template>
+  <BoatFilters />
+  <BoatCard />
+</template>
+<style scoped></style>
+
+
+
+--- File: components\dashboards\FavoritesList.vue ---
+
+<script setup></script>
+
+<template>
+  <h1>FAvoritos</h1>
+</template>
+<style scoped></style>
+
+
+
+--- File: components\dashboards\ProfileForm.vue ---
+
+<script setup>
+import { ref } from 'vue'
+import { useAuthStore } from '../../stores/authStore'
+import { authSchema } from '../../../../../../validation/authSchema'
+import EditProfile from '../../assets/images/editProfile.webp'
+
+const authStore = useAuthStore()
+const { updateUserProfile } = authStore
+
+const firstName = ref('')
+const lastName = ref('')
+const email = ref('')
+const password = ref('')
+const confirmPassword = ref('')
+const error = ref({})
+
+const handleSubmit = async () => {
+  const emailError = authSchema.email(email.value)
+  const passwordError = authSchema.email(password.value)
+
+  if (!emailError) {
+    error.value.email = emailError
+  }
+
+  if (!passwordError) {
+    error.value.password = passwordError
+  }
+
+  if (Object.keys(error.value).length > 0) {
+    return
+  }
+  const displayName = `${firstName.value} ${lastName.value}`
+  await updateUserProfile(displayName, password.value)
+}
+</script>
+
+<template>
+  <div class="mx-auto my-auto">
+    <div class="flex items-center justify-center px-6">
+      <div class="flex w-full xl:w-3/4 lg:w-11/12">
+        <div
+          class="hidden w-full h-[400px] bg-cover rounded-l-lg lg:block lg:w-5/12"
+          :style="{
+            'background-image': `url(${EditProfile})`,
+            'background-position': 'center',
+            'background-repeat': 'no-repeat',
+            'background-size': 'cover'
+          }"
+        ></div>
+        <div class="flex items-center w-full lg:w-7/12 lg:rounded-l-none">
+          <form @submit.prevent="handleSubmit" class="px-8">
+            <div class="mb-6 rounded-lg bg-blue-50">
+              <p class="text-lg text-[#4f87a5] font-semibold">
+                Actualiza tu nombre y contraseña aquí. La contraseña debe tener al menos 8
+                caracteres, incluir una mayúscula , una minúscula, un número y un símbolo
+              </p>
+            </div>
+            <div class="mb-4 md:flex md:justify-between">
+              <div class="mb-4 md:mr-2 md:mb-0">
+                <label class="block mb-2 text-sm font-bold text-gray-700" for="firstName">
+                  Nombre
+                </label>
+                <input
+                  class="w-full px-3 py-2 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+                  id="firstName"
+                  type="text"
+                  placeholder="Nombre"
+                  v-model.trim="firstName"
+                  autocomplete="firstName"
+                />
+              </div>
+              <div class="md:ml-2">
+                <label class="block mb-2 text-sm font-bold text-gray-700" for="lastName">
+                  Apellido
+                </label>
+                <input
+                  class="w-full px-3 py-2 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+                  id="lastName"
+                  type="text"
+                  placeholder="Apellido"
+                  v-model.trim="lastName"
+                  autocomplete="lastName"
+                />
+              </div>
+            </div>
+
+            <div class="mb-4 md:flex md:justify-between">
+              <div class="mb-4 md:mr-2 md:mb-0">
+                <label class="block mb-2 text-sm font-bold text-gray-700" for="password">
+                  Password
+                </label>
+                <input
+                  class="w-full px-3 py-2 mb-3 text-sm leading-tight text-gray-700 shadow appearance-none borderrounded focus:outline-none focus:shadow-outline"
+                  id="password"
+                  type="password"
+                  placeholder="******************"
+                  v-model.trim="password"
+                  autocomplete="new-password"
+                />
+              </div>
+              <div class="md:ml-2">
+                <label class="block mb-2 text-sm font-bold text-gray-700" for="c_password">
+                  Confirma Password
+                </label>
+                <input
+                  class="w-full px-3 py-2 mb-3 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+                  id="c_password"
+                  type="password"
+                  placeholder="******************"
+                  v-model.trim="confirmPassword"
+                  autocomplete="new-password"
+                />
+              </div>
+            </div>
+            <div class="mb-6 text-center">
+              <button
+                class="w-full bg-[#284352] hover:bg-[#4f87a5] text-white font-medium py-3 px-4 rounded-md transition duration-300 transform hover:scale-[1.01]"
+                type="submit"
+              >
+                Actualizar Datos
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+
+
+--- File: components\dashboards\SidebarContainer.vue ---
+
+<script setup>
+import { ref, watch } from 'vue'
+import { useAuthStore } from '../../stores/authStore'
+import { storeToRefs } from 'pinia'
+
+const props = defineProps({
+  options: {
+    type: Array,
+    required: true
+  },
+  initial: {
+    type: String,
+    default: ''
+  }
+})
+
+const emit = defineEmits(['select-option'])
+
+const authStore = useAuthStore()
+const { displayName } = storeToRefs(authStore)
+
+const selectedOption = ref(props.initial || props.options[0]?.id)
+
+watch(
+  selectedOption,
+  (optionId) => {
+    emit('select-option', optionId)
+  },
+  { immediate: true }
+)
+
+const selectOption = (optionId) => {
+  selectedOption.value = optionId
+}
+</script>
+
+<template>
+  <div class="sticky top-10">
+    <h2 class="mb-4">
+      <span class="text-[#284352] font-bold">
+        <span class="text-[#4f87a5]">Hola,</span> {{ displayName }} 👋
+      </span>
+    </h2>
+    <ul>
+      <li
+        v-for="option in options"
+        :key="option.id"
+        @click="selectOption(option.id)"
+        :class="{ 'font-bold text-[#4f87a5]': selectedOption === option.id }"
+        class="cursor-pointer text-[#284352] hover:text-[#4f87a5] mb-2"
+      >
+        {{ option.label }}
+      </li>
+    </ul>
+  </div>
+</template>
+
+
+
+--- File: components\landing\BackToHomeButton.vue ---
+
+<script setup></script>
+
+<template>
+  <div class="flex justify-center mt-10">
+    <RouterLink
+      to="/projects/NautiFleet"
+      class="flex items-center space-x-2 text-lg font-semibold text-[#255290] hover:text-[#20395c]"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        height="48px"
+        viewBox="0 -960 960 960"
+        width="48px"
+        fill="#255290"
+      >
+        <path
+          d="m129-420 301-438v438H129Zm115-60h126v-187L244-480Zm270 60q19-60 27.5-120.5T550-670q0-66-8.5-128.5T514-918q47 19 101 66.5T716-737q47 67 79 148.5T830-420H514Zm75-60h175q-17-87-62.5-168T602-782q5 30 6.5 59t1.5 53q0 46-6.5 99T589-480ZM360-196q-34 0-65-18.5T240-261q-14 14-33.5 27.5T169-213q-29-18-54-53.5T82-340h796q-8 38-33 73.5T791-213q-18-7-37.5-20.5T720-261q-24 28-55 46.5T600-196q-34 0-65-18.5T480-261q-24 28-55 46.5T360-196ZM80-40v-60h40q32 0 61.5-10.5T240-149q29 28 59 38.5t61 10.5q32 0 61.5-10.5T480-149q29 28 59 38.5t61 10.5q32 0 61.5-10.5T720-149q29 28 58.5 38.5T840-100h40v60h-40q-29 0-59.5-8.5T720-80q-30 23-60.5 31.5T600-40q-29 0-59.5-8.5T480-80q-30 23-60.5 31.5T360-40q-29 0-59.5-8.5T240-80q-30 23-60.5 31.5T120-40H80Zm290-440Zm219 0Z"
+        />
+      </svg>
+
+      <span class="text-2xl">Volver a Inicio</span>
+    </RouterLink>
+  </div>
+</template>
+<style scoped></style>
+
+
+
+--- File: components\landing\BenefitsContainer.vue ---
+
+<template>
+  <div class="container flex flex-col gap-10 px-4 py-10">
+    <div class="flex flex-col gap-4">
+      <h1 class="text-[#121416] text-3xl md:text-4xl font-bold md:font-black">
+        Beneficios de NautiFleet
+      </h1>
+      <p class="text-[#121416] text-base md:text-lg font-normal">
+        Descubre las ventajas de usar nuestra plataforma para tus traslados y amarres náuticos.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-[repeat(auto-fit,minmax(158px,1fr))] gap-3">
+      <!-- Tarjeta 1 -->
+      <div class="flex flex-1 flex-col gap-3 rounded-lg border border-[#dde0e3] bg-white p-4">
+        <div class="text-[#121416]" data-icon="ShieldCheck" data-size="24px" data-weight="regular">
+          <!-- Ícono -->
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            fill="currentColor"
+            viewBox="0 0 256 256"
+          >
+            <path
+              d="M208,40H48A16,16,0,0,0,32,56v58.78c0,89.61,75.82,119.34,91,124.39a15.53,15.53,0,0,0,10,0c15.2-5.05,91-34.78,91-124.39V56A16,16,0,0,0,208,40Zm0,74.79c0,78.42-66.35,104.62-80,109.18-13.53-4.51-80-30.69-80-109.18V56H208ZM82.34,141.66a8,8,0,0,1,11.32-11.32L112,148.68l50.34-50.34a8,8,0,0,1,11.32,11.32l-56,56a8,8,0,0,1-11.32,0Z"
+            />
+          </svg>
+        </div>
+        <div class="flex flex-col gap-1">
+          <h2 class="text-[#121416] text-xl md:text-2xl font-bold">Seguro y Confiable</h2>
+          <p class="text-[#6a7581] text-base md:text-lg font-normal">
+            Nuestra plataforma garantiza transacciones seguras y proveedores verificados para tu
+            tranquilidad.
+          </p>
+        </div>
+      </div>
+
+      <!-- Tarjeta 2 -->
+      <div class="flex flex-1 flex-col gap-3 rounded-lg border border-[#dde0e3] bg-white p-4">
+        <div class="text-[#121416]" data-icon="Users" data-size="24px" data-weight="regular">
+          <!-- Ícono -->
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            fill="currentColor"
+            viewBox="0 0 256 256"
+          >
+            <path
+              d="M117.25,157.92a60,60,0,1,0-66.5,0A95.83,95.83,0,0,0,3.53,195.63a8,8,0,1,0,13.4,8.74,80,80,0,0,1,134.14,0,8,8,0,0,0,13.4-8.74A95.83,95.83,0,0,0,117.25,157.92ZM40,108a44,44,0,1,1,44,44A44.05,44.05,0,0,1,40,108Zm210.14,98.7a8,8,0,0,1-11.07-2.33A79.83,79.83,0,0,0,172,168a8,8,0,0,1,0-16,44,44,0,1,0-16.34-84.87,8,8,0,1,1-5.94-14.85,60,60,0,0,1,55.53,105.64,95.83,95.83,0,0,1,47.22,37.71A8,8,0,0,1,250.14,206.7Z"
+            />
+          </svg>
+        </div>
+        <div class="flex flex-col gap-1">
+          <h2 class="text-[#121416] text-xl md:text-2xl font-bold">Comunidad Activa</h2>
+          <p class="text-[#6a7581] text-base md:text-lg font-normal">
+            Únete a una comunidad de propietarios y profesionales náuticos, compartiendo
+            experiencias y recomendaciones.
+          </p>
+        </div>
+      </div>
+
+      <!-- Tarjeta 3 -->
+      <div class="flex flex-1 flex-col gap-3 rounded-lg border border-[#dde0e3] bg-white p-4">
+        <div class="text-[#121416]" data-icon="Clock" data-size="24px" data-weight="regular">
+          <!-- Ícono -->
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            fill="currentColor"
+            viewBox="0 0 256 256"
+          >
+            <path
+              d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm0,192a88,88,0,1,1,88-88A88.1,88.1,0,0,1,128,216Zm64-88a8,8,0,0,1-8,8H128a8,8,0,0,1-8-8V72a8,8,0,0,1,16,0v48h48A8,8,0,0,1,192,128Z"
+            />
+          </svg>
+        </div>
+        <div class="flex flex-col gap-1">
+          <h2 class="text-[#121416] text-xl md:text-2xl font-bold">Ahorra Tiempo</h2>
+          <p class="text-[#6a7581] text-base md:text-lg font-normal">
+            Encuentra y reserva servicios de forma rápida y eficiente, optimizando tu tiempo.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+
+
+--- File: components\landing\FooterLanding.vue ---
+
+<template>
+  <footer class="flex justify-center">
+    <div class="flex max-w-[960px] flex-1 flex-col">
+      <footer class="flex flex-col gap-6 px-5 py-10 text-center @container">
+        <div
+          class="flex flex-wrap items-center justify-center gap-6 @[480px]:flex-row @[480px]:justify-around"
+        >
+          <a
+            class="text-[#6a7581] text-base font-normal leading-none tracking-tight min-w-40"
+            href="#"
+            >About Us</a
+          >
+          <a
+            class="text-[#6a7581] text-base font-normal leading-none tracking-tight min-w-40"
+            href="#"
+            >Contact</a
+          >
+          <a
+            class="text-[#6a7581] text-base font-normal leading-none tracking-tight min-w-40"
+            href="#"
+            >Terms of Service</a
+          >
+          <a
+            class="text-[#6a7581] text-base font-normal leading-none tracking-tight min-w-40"
+            href="#"
+            >Privacy Policy</a
+          >
+        </div>
+        <div class="flex flex-wrap justify-center gap-4">
+          <a href="#">
+            <div
+              class="text-[#6a7581]"
+              data-icon="TwitterLogo"
+              data-size="24px"
+              data-weight="regular"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24px"
+                height="24px"
+                fill="currentColor"
+                viewBox="0 0 256 256"
+              >
+                <path
+                  d="M247.39,68.94A8,8,0,0,0,240,64H209.57A48.66,48.66,0,0,0,168.1,40a46.91,46.91,0,0,0-33.75,13.7A47.9,47.9,0,0,0,120,88v6.09C79.74,83.47,46.81,50.72,46.46,50.37a8,8,0,0,0-13.65,4.92c-4.31,47.79,9.57,79.77,22,98.18a110.93,110.93,0,0,0,21.88,24.2c-15.23,17.53-39.21,26.74-39.47,26.84a8,8,0,0,0-3.85,11.93c.75,1.12,3.75,5.05,11.08,8.72C53.51,229.7,65.48,232,80,232c70.67,0,129.72-54.42,135.75-124.44l29.91-29.9A8,8,0,0,0,247.39,68.94Zm-45,29.41a8,8,0,0,0-2.32,5.14C196,166.58,143.28,216,80,216c-10.56,0-18-1.4-23.22-3.08,11.51-6.25,27.56-17,37.88-32.48A8,8,0,0,0,92,169.08c-.47-.27-43.91-26.34-44-96,16,13,45.25,33.17,78.67,38.79A8,8,0,0,0,136,104V88a32,32,0,0,1,9.6-22.92A30.94,30.94,0,0,1,167.9,56c12.66.16,24.49,7.88,29.44,19.21A8,8,0,0,0,204.67,80h16Z"
+                ></path>
+              </svg>
+            </div>
+          </a>
+          <a href="#">
+            <div
+              class="text-[#6a7581]"
+              data-icon="FacebookLogo"
+              data-size="24px"
+              data-weight="regular"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24px"
+                height="24px"
+                fill="currentColor"
+                viewBox="0 0 256 256"
+              >
+                <path
+                  d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm8,191.63V152h24a8,8,0,0,0,0-16H136V112a16,16,0,0,1,16-16h16a8,8,0,0,0,0-16H152a32,32,0,0,0-32,32v24H96a8,8,0,0,0,0,16h24v63.63a88,88,0,1,1,16,0Z"
+                ></path>
+              </svg>
+            </div>
+          </a>
+          <a href="#">
+            <div
+              class="text-[#6a7581]"
+              data-icon="InstagramLogo"
+              data-size="24px"
+              data-weight="regular"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24px"
+                height="24px"
+                fill="currentColor"
+                viewBox="0 0 256 256"
+              >
+                <path
+                  d="M128,80a48,48,0,1,0,48,48A48.05,48.05,0,0,0,128,80Zm0,80a32,32,0,1,1,32-32A32,32,0,0,1,128,160ZM176,24H80A56.06,56.06,0,0,0,24,80v96a56.06,56.06,0,0,0,56,56h96a56.06,56.06,0,0,0,56-56V80A56.06,56.06,0,0,0,176,24Zm40,152a40,40,0,0,1-40,40H80a40,40,0,0,1-40-40V80A40,40,0,0,1,80,40h96a40,40,0,0,1,40,40ZM192,76a12,12,0,1,1-12-12A12,12,0,0,1,192,76Z"
+                ></path>
+              </svg>
+            </div>
+          </a>
+        </div>
+        <p class="text-[#6a7581] text-base font-normal leading-none tracking-tight">
+          © 2024 AquaLink. All rights reserved.
+        </p>
+      </footer>
+    </div>
+  </footer>
+</template>
+
+
+
+--- File: components\landing\HeroSection.vue ---
+
+<script setup>
+import BoatHeader from '../../assets/images/landing/boatHeader.webp'
+</script>
+
+<template>
+  <div class="">
+    <div
+      class="flex min-h-[480px] lg:min-h-[680px] flex-col gap-10 bg-cover bg-center bg-no-repeat md:gap-20 items-center justify-center p-4"
+      :style="{
+        backgroundImage: `
+            linear-gradient(rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.4) 100%),
+            url('${BoatHeader}')
+          `
+      }"
+    >
+      <div class="flex flex-col gap-10 text-center">
+        <h1
+          class="text-white text-4xl font-black leading-tight tracking-[-0.033em] md:text-5xl md:font-black md:leading-tight md:tracking-[-0.033em]"
+        >
+          Traslados de Embarcaciones y Amarres Sin Complicaciones
+        </h1>
+        <h2 class="text-sm text-white md:text-lg">
+          Conéctate con transportistas confiables y encuentra el amarre perfecto para tu
+          embarcación. Ya seas propietario, vendedor o transportista, NautiFleet ofrece una
+          experiencia simplificada.
+        </h2>
+      </div>
+      <div class="flex flex-wrap justify-center gap-3">
+        <button
+          class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 px-4 md:h-12 md:px-5 bg-[#dce7f3] text-[#121416] text-sm font-bold tracking-[0.015em] md:text-base md:font-bold md:tracking-[0.015em]"
+        >
+          <span class="truncate">Buscar Traslado</span>
+        </button>
+        <button
+          class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 px-4 md:h-12 md:px-5 bg-[#f1f2f4] text-[#121416] text-sm font-bold tracking-[0.015em] md:text-base md:font-bold md:tracking-[0.015em]"
+        >
+          <span class="truncate">Buscar Amarre</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</template>
+<style scoped></style>
+
+
+
+--- File: components\landing\HowItWorks.vue ---
+
+<template>
+  <h2
+    class="text-[#121416] text-3xl md:text-4xl font-bold md:font-black leading-tight px-4 pb-3 pt-5"
+  >
+    Cómo Funciona
+  </h2>
+
+  <div class="grid grid-cols-[40px_1fr] gap-x-2 px-4">
+    <!-- Paso 1 -->
+    <div class="flex flex-col items-center gap-1 pt-3">
+      <div class="text-[#121416]">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24px"
+          height="24px"
+          fill="currentColor"
+          viewBox="0 0 256 256"
+        >
+          <path
+            d="M229.66,218.34l-50.07-50.06a88.11,88.11,0,1,0-11.31,11.31l50.06,50.07a8,8,0,0,0,11.32-11.32ZM40,112a72,72,0,1,1,72,72A72.08,72.08,0,0,1,40,112Z"
+          ></path>
+        </svg>
+      </div>
+      <div class="w-[1.5px] bg-[#dde0e3] h-2 grow"></div>
+    </div>
+
+    <div class="flex flex-col flex-1 py-3">
+      <p class="text-[#121416] text-base md:text-lg font-medium leading-normal">
+        Encuentra un servicio
+      </p>
+      <p class="text-[#6a7581] text-base md:text-lg font-normal leading-normal">
+        Explora traslados o amarres disponibles según tus necesidades.
+      </p>
+    </div>
+
+    <!-- Paso 2 -->
+    <div class="flex flex-col items-center gap-1">
+      <div class="w-[1.5px] bg-[#dde0e3] h-2"></div>
+      <div class="text-[#121416]">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24px"
+          height="24px"
+          fill="currentColor"
+          viewBox="0 0 256 256"
+        >
+          <path
+            d="M208,32H184V24a8,8,0,0,0-16,0v8H88V24a8,8,0,0,0-16,0v8H48A16,16,0,0,0,32,48V208a16,16,0,0,0,16,16H208a16,16,0,0,0,16-16V48A16,16,0,0,0,208,32ZM72,48v8a8,8,0,0,0,16,0V48h80v8a8,8,0,0,0,16,0V48h24V80H48V48ZM208,208H48V96H208V208Zm-96-88v64a8,8,0,0,1-16,0V132.94l-4.42,2.22a8,8,0,0,1-7.16-14.32l16-8A8,8,0,0,1,112,120Zm59.16,30.45L152,176h16a8,8,0,0,1,0,16H136a8,8,0,0,1-6.4-12.8l28.78-38.37A8,8,0,1,0,145.07,132a8,8,0,1,1-13.85-8A24,24,0,0,1,176,136,23.76,23.76,0,0,1,171.16,150.45Z"
+          ></path>
+        </svg>
+      </div>
+      <div class="w-[1.5px] bg-[#dde0e3] h-2 grow"></div>
+    </div>
+
+    <div class="flex flex-col flex-1 py-3">
+      <p class="text-[#121416] text-base md:text-lg font-medium leading-normal">
+        Conecta y reserva
+      </p>
+      <p class="text-[#6a7581] text-base md:text-lg font-normal leading-normal">
+        Comunícate directamente con los proveedores, acuerda detalles y reserva con seguridad.
+      </p>
+    </div>
+
+    <!-- Paso 3 -->
+    <div class="flex flex-col items-center gap-1 pb-3">
+      <div class="w-[1.5px] bg-[#dde0e3] h-2"></div>
+      <div class="text-[#121416]">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24px"
+          height="24px"
+          fill="currentColor"
+          viewBox="0 0 256 256"
+        >
+          <path
+            d="M221.06,110.63,208,106.27V56a16,16,0,0,0-16-16H136V24a8,8,0,0,0-16,0V40H64A16,16,0,0,0,48,56v50.27l-13.06,4.36A16,16,0,0,0,24,125.82V160.1a7.73,7.73,0,0,0,.31,2.19c15.72,55.09,86.12,74.06,100.07,77.3a16.19,16.19,0,0,0,7.24,0c13.95-3.24,84.35-22.21,100.07-77.3a7.73,7.73,0,0,0,.31-2.19V125.82A16,16,0,0,0,221.06,110.63ZM64,56H192v44.93L130.53,80.41a8,8,0,0,0-5.06,0L64,100.93ZM216,158.94c-5.78,19-20.55,35.17-43.95,48.12A181.7,181.7,0,0,1,128,224a181.7,181.7,0,0,1-44-16.94C60.56,194.11,45.78,177.93,40,158.94V125.81l80-26.7V168a8,8,0,0,0,16,0V99.11l80,26.71Z"
+          ></path>
+        </svg>
+      </div>
+    </div>
+
+    <div class="flex flex-col flex-1 py-3">
+      <p class="text-[#121416] text-base md:text-lg font-medium leading-normal">
+        Disfruta tu embarcación
+      </p>
+      <p class="text-[#6a7581] text-base md:text-lg font-normal leading-normal">
+        Relájate y disfruta tu barco sabiendo que tu traslado o amarre está resuelto.
+      </p>
+    </div>
+  </div>
+</template>
+
+
+
+--- File: components\landing\InteractiveMap.vue ---
+
+<template>
+  <h2 class="text-[#121416] text-3xl md:text-4xl font-bold md:font-black px-4 pb-3 pt-5">
+    Mapa Interactivo
+  </h2>
+  <div class="container flex flex-col flex-1 h-full gap-10 px-4 py-10">
+    <div class="flex flex-col flex-1 md:px-4 md:py-3">
+      <div
+        class="bg-cover bg-center flex min-h-[320px] flex-1 flex-col justify-between px-4 pb-4 pt-5 md:rounded-xl md:px-8 md:pb-6 md:pt-8"
+        style="background-image: url('map_image_url')"
+      >
+        <label class="flex flex-col h-12 min-w-40">
+          <div class="flex items-stretch flex-1 w-full h-full rounded-xl">
+            <div
+              class="text-[#6a7581] flex border-none bg-white items-center justify-center pl-4 rounded-l-xl border-r-0"
+              data-icon="MagnifyingGlass"
+              data-size="24px"
+              data-weight="regular"
+            >
+              <!-- SVG aquí -->
+            </div>
+            <input
+              placeholder="Buscar ubicaciones"
+              class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-xl text-[#121416] focus:outline-0 focus:ring-0 border-none bg-white focus:border-none h-full placeholder:text-[#6a7581] px-4 rounded-l-none border-l-0 pl-2 text-base md:text-lg font-normal"
+              value=""
+            />
+          </div>
+        </label>
+
+        <div class="flex flex-col items-end gap-3">
+          <div class="flex flex-col gap-0.5">
+            <button
+              class="flex size-10 items-center justify-center rounded-t-full bg-white shadow-[0_2px_4px_rgba(0,0,0,0.1)]"
+            >
+              <div class="text-[#121416]" data-icon="Plus" data-size="24px" data-weight="regular">
+                <!-- SVG Plus -->
+              </div>
+            </button>
+            <button
+              class="flex size-10 items-center justify-center rounded-b-full bg-white shadow-[0_2px_4px_rgba(0,0,0,0.1)]"
+            >
+              <div class="text-[#121416]" data-icon="Minus" data-size="24px" data-weight="regular">
+                <!-- SVG Minus -->
+              </div>
+            </button>
+          </div>
+          <button
+            class="flex size-10 items-center justify-center rounded-full bg-white shadow-[0_2px_4px_rgba(0,0,0,0.1)]"
+          >
+            <div
+              class="text-[#121416]"
+              data-icon="NavigationArrow"
+              data-size="24px"
+              data-weight="regular"
+            >
+              <!-- SVG Navegación -->
+            </div>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+
+
+--- File: components\landing\NavigationHeader .vue ---
+
+<template>
+  <header
+    class="flex flex-wrap items-center justify-between px-10 py-3 lg:flex-nowrap whitespace-nowrap"
+  >
+    <div class="flex items-center gap-4 text-[#121416]">
+      <div class="size-4">
+        <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <g clip-path="url(#clip0_6_330)">
+            <path
+              fill-rule="evenodd"
+              clip-rule="evenodd"
+              d="M24 0.757355L47.2426 24L24 47.2426L0.757355 24L24 0.757355ZM21 35.7574V12.2426L9.24264 24L21 35.7574Z"
+              fill="currentColor"
+            ></path>
+          </g>
+          <defs>
+            <clipPath id="clip0_6_330">
+              <rect width="48" height="48" fill="white"></rect>
+            </clipPath>
+          </defs>
+        </svg>
+      </div>
+      <h2 class="text-[#121416] text-xl font-bold">NautiFleet</h2>
+    </div>
+    <div class="flex justify-between flex-1 gap-4 md:justify-end md:gap-10">
+      <div class="flex items-center gap-4">
+        <a class="text-[#121416] text-lg font-medium">Traslados</a>
+        <a class="text-[#121416] text-lg font-medium">Amarres</a>
+        <a class="text-[#121416] text-lg font-medium">Sobre Nosotros</a>
+      </div>
+      <div class="flex items-center gap-2">
+        <button
+          class="flex min-w-[64px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-sm h-10 px-2 bg-[#dce7f3] text-[#121416] text-lg font-bold"
+        >
+          <span class="truncate">Iniciar Sesión</span>
+        </button>
+        <button
+          class="flex min-w-[64px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-sm h-10 px-2 bg-[#f1f2f4] text-[#121416] text-lg font-bold"
+        >
+          <span class="truncate">Registrarse</span>
+        </button>
+      </div>
+    </div>
+  </header>
+</template>
+
+
+
+--- File: components\landing\OurServices.vue ---
+
+<template>
+  <div class="container flex flex-col gap-10 px-4 py-10">
+    <div class="flex flex-col gap-4">
+      <h1 class="text-[#121416] text-3xl md:text-4xl font-bold md:font-black max-w-[720px]">
+        Nuestros Servicios
+      </h1>
+      <p class="text-[#121416] text-base md:text-lg font-normal max-w-[720px]">
+        NautiFleet ofrece una plataforma integral para todas tus necesidades náuticas.
+      </p>
+    </div>
+    <div class="grid grid-cols-[repeat(auto-fit,minmax(158px,1fr))] gap-3">
+      <div class="flex flex-1 flex-col gap-3 rounded-lg border border-[#dde0e3] bg-white p-4">
+        <div class="text-[#121416]" data-icon="Boat" data-size="24px" data-weight="regular">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            fill="currentColor"
+            viewBox="0 0 256 256"
+          >
+            <path
+              d="M221.06,110.63,208,106.27V56a16,16,0,0,0-16-16H136V24a8,8,0,0,0-16,0V40H64A16,16,0,0,0,48,56v50.27l-13.06,4.36A16,16,0,0,0,24,125.82V160.1a7.73,7.73,0,0,0,.31,2.19c15.72,55.09,86.12,74.06,100.07,77.3a16.19,16.19,0,0,0,7.24,0c13.95-3.24,84.35-22.21,100.07-77.3a7.73,7.73,0,0,0,.31-2.19V125.82A16,16,0,0,0,221.06,110.63ZM64,56H192v44.93L130.53,80.41a8,8,0,0,0-5.06,0L64,100.93ZM216,158.94c-5.78,19-20.55,35.17-43.95,48.12A181.7,181.7,0,0,1,128,224a181.7,181.7,0,0,1-44-16.94C60.56,194.11,45.78,177.93,40,158.94V125.81l80-26.7V168a8,8,0,0,0,16,0V99.11l80,26.71Z"
+            ></path>
+          </svg>
+        </div>
+        <div class="flex flex-col gap-1">
+          <h2 class="text-[#121416] text-xl md:text-2xl font-bold">Traslados en Barco</h2>
+          <p class="text-[#6a7581] text-base md:text-lg font-normal">
+            Encuentra transportistas confiables para mover tu barco de forma segura y eficiente.
+          </p>
+        </div>
+      </div>
+
+      <div class="flex flex-1 flex-col gap-3 rounded-lg border border-[#dde0e3] bg-white p-4">
+        <div class="text-[#121416]" data-icon="MapPin" data-size="24px" data-weight="regular">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            fill="currentColor"
+            viewBox="0 0 256 256"
+          >
+            <path
+              d="M128,64a40,40,0,1,0,40,40A40,40,0,0,0,128,64Zm0,64a24,24,0,1,1,24-24A24,24,0,0,1,128,128Zm0-112a88.1,88.1,0,0,0-88,88c0,31.4,14.51,64.68,42,96.25a254.19,254.19,0,0,0,41.45,38.3,8,8,0,0,0,9.18,0A254.19,254.19,0,0,0,174,200.25c27.45-31.57,42-64.85,42-96.25A88.1,88.1,0,0,0,128,16Zm0,206c-16.53-13-72-60.75-72-118a72,72,0,0,1,144,0C200,161.23,144.53,209,128,222Z"
+            ></path>
+          </svg>
+        </div>
+        <div class="flex flex-col gap-1">
+          <h2 class="text-[#121416] text-xl md:text-2xl font-bold">Amarres</h2>
+          <p class="text-[#6a7581] text-base md:text-lg font-normal">
+            Descubre y reserva amarres en ubicaciones privilegiadas, adaptados a tu embarcación.
+          </p>
+        </div>
+      </div>
+
+      <div class="flex flex-1 flex-col gap-3 rounded-lg border border-[#dde0e3] bg-white p-4">
+        <div class="text-[#121416]" data-icon="Handshake" data-size="24px" data-weight="regular">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            fill="currentColor"
+            viewBox="0 0 256 256"
+          >
+            <path
+              d="M119.76,217.94A8,8,0,0,1,112,224a8.13,8.13,0,0,1-2-.24l-32-8a8,8,0,0,1-2.5-1.11l-24-16a8,8,0,1,1,8.88-13.31l22.84,15.23,30.66,7.67A8,8,0,0,1,119.76,217.94Zm132.69-96.46a15.89,15.89,0,0,1-8,9.25l-23.68,11.84-55.08,55.09a8,8,0,0,1-7.6,2.1l-64-16a8.06,8.06,0,0,1-2.71-1.25L35.86,142.87,11.58,130.73a16,16,0,0,1-7.16-21.46L29.27,59.58h0a16,16,0,0,1,21.46-7.16l22.06,11,53-15.14a8,8,0,0,1,4.4,0l53,15.14,22.06-11a16,16,0,0,1,21.46,7.16l24.85,49.69A15.9,15.9,0,0,1,252.45,121.48Zm-46.18,12.94L179.06,80H147.24L104,122c12.66,8.09,32.51,10.32,50.32-7.63a8,8,0,0,1,10.68-.61l34.41,27.57Zm-187.54-18,17.69,8.85L61.27,75.58,43.58,66.73ZM188,152.66l-27.71-22.19c-19.54,16-44.35,18.11-64.91,5a16,16,0,0,1-2.72-24.82.6.6,0,0,1,.08-.08L137.6,67.06,128,64.32,77.58,78.73,50.21,133.46l49.2,35.15,58.14,14.53Zm49.24-36.24L212.42,66.73l-17.69,8.85,24.85,49.69Z"
+            ></path>
+          </svg>
+        </div>
+        <div class="flex flex-col gap-1">
+          <h2 class="text-[#121416] text-xl md:text-2xl font-bold">Red Confiable</h2>
+          <p class="text-[#6a7581] text-base md:text-lg font-normal">
+            Conéctate con una red de transportistas y proveedores de amarres verificados para tu
+            tranquilidad.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+
+
+--- File: components\landing\SellersTransporter.vue ---
+
+<template>
+  <section class="container my-10">
+    <div class="flex flex-col gap-6 px-4 py-10 md:gap-8 md:py-20">
+      <div class="flex flex-col gap-2">
+        <!-- Título -->
+        <h1 class="text-[#121416] text-3xl md:text-4xl font-bold md:font-black leading-tight">
+          Para Vendedores y Transportistas
+        </h1>
+        <!-- Párrafo -->
+        <p class="text-[#121416] text-base md:text-lg font-normal leading-normal">
+          Amplía tu alcance y conéctate con clientes potenciales. Publica tu barco en venta u ofrece
+          tus servicios de transporte en NautiFleet.
+        </p>
+      </div>
+      <div class="flex justify-center flex-1">
+        <div class="flex justify-center">
+          <button
+            class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-sm h-10 px-4 md:h-12 md:px-5 bg-[#dce7f3] text-[#121416] text-base md:text-lg font-bold grow"
+          >
+            <span class="truncate">Publica tu Barco</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+</template>
+
+
+
+--- File: NautiFleet.vue ---
+
+<script setup>
+import InteractiveMap from './components/landing/InteractiveMap.vue'
+import BenefitsContainer from './components/landing/BenefitsContainer.vue'
+import OurServices from './components/landing/OurServices.vue'
+import FooterLanding from './components/landing/FooterLanding.vue'
+import HeroSection from './components/landing/HeroSection.vue'
+import HowItWorks from './components/landing/HowItWorks.vue'
+import SellersTransporter from './components/landing/SellersTransporter.vue'
+import NavigationHeader from './components/landing/NavigationHeader .vue'
+</script>
+
+<template>
+  <div class="relative flex flex-col min-h-screen overflow-x-hidden bg-white size-full">
+    <div class="flex flex-col h-full layout-container grow">
+      <NavigationHeader />
+      <HeroSection />
+      <div class="container flex justify-center flex-1 py-5">
+        <div class="flex flex-col flex-1 layout-content-container max-w-[1024px]">
+          <OurServices />
+          <HowItWorks />
+          <BenefitsContainer />
+          <InteractiveMap />
+          <SellersTransporter />
+          <FooterLanding />
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+<style scoped></style>
+
+
+
+--- File: README.MD ---
+(Skipped (non-matching extension))
+
+
+--- File: stores\authStore.js ---
+
+import { ref, inject, computed } from 'vue'
+import { useRouter } from 'vue-router'
+import { defineStore } from 'pinia'
+import { useFirebaseAuth, useFirestore, useDocument } from 'vuefire'
+import {
+  createUserWithEmailAndPassword,
+  sendPasswordResetEmail,
+  signInWithEmailAndPassword,
+  signOut,
+  updatePassword,
+  updateProfile
+} from 'firebase/auth'
+import { doc, setDoc, updateDoc } from 'firebase/firestore'
+import { useErrorHandling } from '@/composables/useErrorHandling'
+
+export const useAuthStore = defineStore('auth', () => {
+  const auth = useFirebaseAuth()
+  const db = useFirestore()
+  const router = useRouter()
+  const toast = inject('toast')
+  const { errorMessage, handleErrorMessage } = useErrorHandling()
+
+  const userData = ref(null)
+  const isLoggedIn = ref(false)
+
+  const register = async (email, password, displayName) => {
+    try {
+      const { user } = await createUserWithEmailAndPassword(auth, email, password)
+      await updateProfile(user, { displayName })
+      await setDoc(doc(db, 'users', user.uid), {
+        uid: user.uid,
+        email: user.email,
+        displayName,
+        isAdmin: false,
+        isSeller: false
+      })
+      handleAuthSuccess(user)
+      handleToastSuccess('¡Registro exitoso!')
+    } catch (error) {
+      handleErrorMessage(error)
+      handleToastError()
+    }
+  }
+
+  const login = async (email, password) => {
+    try {
+      const { user } = await signInWithEmailAndPassword(auth, email, password)
+      handleAuthSuccess(user)
+      handleToastSuccess('¡Inicio de sesión exitoso!')
+    } catch (error) {
+      handleErrorMessage(error)
+      handleToastError()
+    }
+  }
+
+  const logoutUser = async () => {
+    try {
+      await signOut(auth)
+      router.push({ name: 'login' })
+      isLoggedIn.value = false
+      userData.value = null
+      handleToastSuccess('Se ha cerrado sesión correctamente.')
+    } catch (error) {
+      handleErrorMessage(error)
+      handleToastError()
+    }
+  }
+
+  const handleAuthSuccess = async (user) => {
+    userData.value = {
+      email: user.email,
+      uid: user.uid,
+      displayName: user.displayName || ''
+    }
+    isLoggedIn.value = true
+    router.push({ name: 'dash-board' })
+  }
+
+  const handleToastError = (customMessage = null) => {
+    toast.open({
+      message: customMessage || errorMessage.value,
+      type: 'error'
+    })
+  }
+
+  const handleToastSuccess = (message) => {
+    toast.open({ message, type: 'success' })
+  }
+
+  const userDocRef = computed(() =>
+    userData.value?.uid ? doc(db, 'users', userData.value.uid) : null
+  )
+  const { data: userDoc } = useDocument(userDocRef)
+  const isAdmin = computed(() => userDoc.value?.isAdmin === true)
+  const isSeller = computed(() => userDoc.value?.isSeller === true)
+  const displayName = computed(() => userDoc.value?.displayName || '')
+
+  const updateUserProfile = async (newDisplayName, newPassword) => {
+    try {
+      const currentUser = auth.currentUser
+      if (!currentUser) {
+        handleToastError('Usuario no autenticado.')
+        return
+      }
+
+      const trimmedName = newDisplayName?.trim()
+      const trimmedPassword = newPassword?.trim()
+
+      if (!trimmedName && !trimmedPassword) {
+        handleToastError('Debes ingresar al menos un dato para actualizar.')
+        return
+      }
+
+      if (trimmedName) {
+        await updateProfile(currentUser, { displayName: trimmedName })
+        if (userDoc.value) {
+          await updateDoc(userDocRef.value, { displayName: trimmedName })
+        }
+      }
+
+      if (trimmedPassword) {
+        await updatePassword(currentUser, trimmedPassword)
+      }
+
+      handleToastSuccess('Perfil actualizado correctamente.')
+    } catch (error) {
+      handleErrorMessage(error)
+      handleToastError()
+    }
+  }
+
+  const resetPassword = async (email) => {
+    try {
+      await sendPasswordResetEmail(auth, email)
+      handleToastSuccess('Te enviamos un correo para restablecer tu contraseña.')
+    } catch (error) {
+      handleErrorMessage(error)
+      handleToastError()
+    }
+  }
+  return {
+    userData,
+    register,
+    login,
+    logoutUser,
+    isLoggedIn,
+    isAdmin,
+    isSeller,
+    displayName,
+    updateUserProfile,
+    resetPassword
+  }
+})
+
+
+
+--- File: todo_el_contenido.txt ---
+(Skipped (non-matching extension))
+
+
+--- File: views\auth\LoginView.vue ---
+
+<script setup>
+import { ref } from 'vue'
+import { useAuthStore } from '../../stores/authStore'
+import Login from '../../assets/images/login.webp'
+import BackToHomeButton from '../../components/landing/BackToHomeButton.vue'
+
+const email = ref('yubalhh@yahoo.es')
+const password = ref('Iraya2902.')
+
+const authStore = useAuthStore()
+const { login } = authStore
+
+const handleSubmit = async () => {
+  await login(email.value, password.value)
+}
+</script>
+
+<template>
+  <div class="flex justify-center px-6 my-12">
+    <div class="flex w-full xl:w-2/4 lg:w-11/12">
+      <div
+        class="hidden w-full h-auto bg-cover rounded-l-lg in-h-screen lg:block lg:w-6/12"
+        :style="{
+          'background-image': `url(${Login})`,
+          'background-position': 'center',
+          'background-repeat': 'no-repeat',
+          'background-size': 'cover'
+        }"
+      ></div>
+      <div class="w-full p-5 lg:w-6/12 lg:rounded-l-none">
+        <form @submit.prevent="handleSubmit" class="px-8 pt-6 pb-8 mb-4 bg-white rounded">
+          <div class="mb-4">
+            <label class="block mb-2 text-lg font-bold text-gray-700" for="email"> Email </label>
+            <input
+              class="w-full px-3 py-2 mb-3 text-lg leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+              id="email"
+              type="email"
+              placeholder="Email"
+              v-model.trim="email"
+              autocomplete="email"
+            />
+          </div>
+          <div class="mb-4">
+            <div class="mb-4 md:mr-2 md:mb-0">
+              <label class="block mb-2 text-lg font-bold text-gray-700" for="password">
+                Password
+              </label>
+              <input
+                class="w-full px-3 py-2 mb-3 text-lg leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+                id="password"
+                type="password"
+                placeholder="******************"
+                v-model.trim="password"
+                autocomplete="new-password"
+              />
+            </div>
+          </div>
+          <div class="mb-6 text-center">
+            <button
+              class="w-full bg-[#3b7e85] hover:bg-[#5B9594] text-white font-medium py-3 px-4 rounded-md transition duration-300 transform hover:scale-[1.01]"
+              type="submit"
+            >
+              Iniciar sesión
+            </button>
+          </div>
+          <hr class="mb-6 border-t" />
+          <div class="text-center">
+            <RouterLink
+              class="inline-block text-lg text-blue-500 align-baseline hover:text-blue-800"
+              :to="{ name: 'reset-password' }"
+            >
+              Olvidaste tu contraseña?
+            </RouterLink>
+          </div>
+          <div class="text-center">
+            <RouterLink
+              class="inline-block text-lg text-blue-500 align-baseline hover:text-blue-800"
+              :to="{ name: 'register' }"
+            >
+              > ¿No tienes una cuenta? ¡Regístrate!
+            </RouterLink>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <BackToHomeButton />
+</template>
+<style scoped></style>
+
+
+
+--- File: views\auth\RegisterView.vue ---
+
+<script setup>
+import { ref } from 'vue'
+import { useAuthStore } from '../../stores/authStore'
+import { authSchema } from '../../../../../../validation/authSchema'
+
+import Register from '../../assets/images/register.webp'
+import BackToHomeButton from '../../components/landing/BackToHomeButton.vue'
+
+const authStore = useAuthStore()
+const { register } = authStore
+
+const firstName = ref('')
+const lastName = ref('')
+const email = ref('')
+const password = ref('')
+const confirmPassword = ref('')
+const error = ref({})
+
+const handleSubmit = async () => {
+  const emailError = authSchema.email(email.value)
+  const passwordError = authSchema.password(password.value)
+
+  if (!emailError) {
+    error.value.email = emailError
+  }
+
+  if (!passwordError) {
+    error.value.password = passwordError
+  }
+
+  if (Object.keys(error.value).length > 0) {
+    return
+  }
+  const displayName = `${firstName.value} ${lastName.value}`
+  await register(email.value, password.value, displayName)
+}
+</script>
+
+<template>
+  <div class="mx-auto my-auto">
+    <div class="flex items-center justify-center px-6 my-12">
+      <div class="flex w-full xl:w-3/4 lg:w-11/12">
+        <div
+          class="hidden w-full h-auto bg-cover rounded-l-lg lg:block lg:w-6/12"
+          :style="{
+            'background-image': `url(${Register})`,
+            'background-position': 'center',
+            'background-repeat': 'no-repeat',
+            'background-size': 'cover'
+          }"
+        ></div>
+        <div class="w-full p-5 bg-white rounded-lg lg:w-6/12 lg:rounded-l-none">
+          <form @submit.prevent="handleSubmit" class="px-8 pt-6 pb-8 mb-4 bg-white rounded">
+            <div class="mb-4 md:flex md:justify-between">
+              <div class="mb-4 md:mr-2 md:mb-0">
+                <label class="block mb-2 text-lg font-bold text-gray-700" for="firstName">
+                  Nombre
+                </label>
+                <input
+                  class="w-full px-3 py-2 text-lg leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+                  id="firstName"
+                  type="text"
+                  placeholder="Nombre"
+                  v-model.trim="firstName"
+                  autocomplete="firstName"
+                />
+              </div>
+              <div class="md:ml-2">
+                <label class="block mb-2 text-lg font-bold text-gray-700" for="lastName">
+                  Apellido
+                </label>
+                <input
+                  class="w-full px-3 py-2 text-lg leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+                  id="lastName"
+                  type="text"
+                  placeholder="Apellido"
+                  v-model.trim="lastName"
+                  autocomplete="lastName"
+                />
+              </div>
+            </div>
+            <div class="mb-4">
+              <label class="block mb-2 text-lg font-bold text-gray-700" for="email"> Email </label>
+              <input
+                class="w-full px-3 py-2 mb-3 text-lg leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+                id="email"
+                type="email"
+                placeholder="Email"
+                v-model.trim="email"
+                autocomplete="email"
+              />
+            </div>
+            <div class="mb-4 md:flex md:justify-between">
+              <div class="mb-4 md:mr-2 md:mb-0">
+                <label class="block mb-2 text-lg font-bold text-gray-700" for="password">
+                  Password
+                </label>
+                <input
+                  class="w-full px-3 py-2 mb-3 text-lg leading-tight text-gray-700 shadow appearance-none borderrounded focus:outline-none focus:shadow-outline"
+                  id="password"
+                  type="password"
+                  placeholder="Ejemplo: Seguro123!"
+                  v-model.trim="password"
+                  autocomplete="new-password"
+                />
+              </div>
+              <div class="md:ml-2">
+                <label class="block mb-2 text-lg font-bold text-gray-700" for="c_password">
+                  Confirma Password
+                </label>
+                <input
+                  class="w-full px-3 py-2 mb-3 text-lg leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+                  id="c_password"
+                  type="password"
+                  placeholder="Ejemplo: Seguro123!"
+                  v-model.trim="confirmPassword"
+                  autocomplete="new-password"
+                />
+              </div>
+            </div>
+            <div class="mb-6 text-center">
+              <button
+                class="w-full bg-[#D56339] hover:bg-[#e68751] text-white font-medium py-3 px-4 rounded-md transition duration-300 transform hover:scale-[1.01]"
+                type="submit"
+              >
+                Crear cuenta
+              </button>
+            </div>
+            <hr class="mb-6 border-t" />
+            <div class="text-center">
+              <RouterLink
+                class="inline-block text-lg text-blue-500 align-baseline hover:text-blue-800"
+                :to="{ name: 'login' }"
+              >
+                > ¿Ya tienes una cuenta? ¡Inicia sesión!
+              </RouterLink>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <BackToHomeButton />
+</template>
+
+
+
+--- File: views\auth\ResetPassword.vue ---
+
+<script setup>
+import { ref } from 'vue'
+import SailBoat from '../../assets/images/landing/sailboatHero.webp'
+import { useAuthStore } from '../../stores/authStore'
+
+const authStore = useAuthStore()
+const { resetPassword } = authStore
+const email = ref('')
+
+const handleSubmit = async () => {
+  await resetPassword(email.value)
+}
+</script>
+
+<template>
+  <div class="flex justify-center px-6 my-12">
+    <div class="flex w-full xl:w-2/4 lg:w-11/12">
+      <div
+        class="hidden w-full h-[400px] bg-cover rounded-l-lg in-h-screen lg:block lg:w-6/12"
+        :style="{
+          'background-image': `url(${SailBoat})`,
+          'background-position': 'center',
+          'background-repeat': 'no-repeat',
+          'background-size': 'cover'
+        }"
+      ></div>
+      <div class="w-full p-5 lg:w-6/12">
+        <div class="flex justify-center min-h-screen px-4">
+          <div class="w-full max-w-xl p-8">
+            <h2 class="mb-6 text-2xl font-semibold text-center text-gray-700">
+              ¿Olvidaste tu contraseña?
+            </h2>
+            <p class="text-center text-gray-700">
+              Ingresa tu correo electrónico y te enviaremos un enlace seguro para restablecerla.
+            </p>
+            <form @submit.prevent="handleSubmit">
+              <div class="mt-4 mb-4">
+                <label for="email" class="block mb-1 text-lg font-medium text-gray-700">
+                  Correo electrónico
+                </label>
+                <input
+                  id="email"
+                  v-model="email"
+                  type="email"
+                  required
+                  placeholder="tucorreo@ejemplo.com"
+                  class="w-full px-4 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+              </div>
+              <button
+                type="submit"
+                class="w-full px-4 py-2 text-white transition bg-blue-600 rounded-lg hover:bg-blue-700"
+              >
+                Enviar enlace de recuperación
+              </button>
+            </form>
+
+            <p class="mt-6 text-lg text-center text-gray-600">
+              ¿Recuerdas tu contraseña?
+              <RouterLink :to="{ name: 'login' }" class="text-blue-600 hover:underline">
+                Inicia sesión
+              </RouterLink>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+
+
+--- File: views\dashboard\DashboardAdminView.vue ---
+
+<template>
+  <div>
+    <h2>Panel de Administración</h2>
+    <ul>
+      <li>👥 Gestión de Usuarios</li>
+      <li>🛍 Revisión de Productos</li>
+      <li>📊 Reportes Generales</li>
+      <li>⚙️ Configuración</li>
+    </ul>
+  </div>
+</template>
+
+
+
+--- File: views\dashboard\DashboardSellerView.vue ---
+
+<template>
+  <div>
+    <h2>Panel del Vendedor</h2>
+    <ul>
+      <li>➕ Añadir Nuevo Producto</li>
+      <li>📦 Lista de Productos</li>
+      <li>📈 Estadísticas de Ventas</li>
+      <li>📬 Pedidos Recibidos</li>
+    </ul>
+  </div>
+</template>
+
+
+
+--- File: views\dashboard\DashboardUserView.vue ---
+
+<script setup>
+import { ref } from 'vue'
+import SidebarContainer from '../../components/dashboards/SidebarContainer.vue'
+import EditProfile from '../../components/dashboards/ProfileForm.vue'
+import FavoritesList from '../../components/dashboards/FavoritesList.vue'
+import BoatList from '../../components/dashboards/BoatList.vue'
+
+const selectedSection = ref('profile')
+
+const userOptions = [
+  { id: 'profile', label: '👤 Editar Perfil' },
+  { id: 'favorites', label: '❤️ Favoritos' },
+  { id: 'boards', label: '⛵ Embarcaciones' }
+]
+
+const sections = {
+  profile: EditProfile,
+  favorites: FavoritesList,
+  boards: BoatList
+}
+
+const selectOption = (optionId) => {
+  selectedSection.value = optionId
+}
+</script>
+
+<template>
+  <div class="grid grid-cols-1 gap-4 lg:grid-cols-5 lg:gap-8">
+    <SidebarContainer
+      :options="userOptions"
+      :initial="selectedSection"
+      @select-option="selectOption"
+    />
+    <div class="rounded lg:col-span-4">
+      <component :is="sections[selectedSection]" />
+    </div>
+  </div>
+</template>
+
+
+
+--- File: views\dashboard\DashboardView.vue ---
+
+<script setup>
+import { useAuthStore } from '../../stores/authStore'
+import DashboardAdmin from './DashboardAdminView.vue'
+import DashboardSeller from './DashboardSellerView.vue'
+import DashboardUser from './DashboardUserView.vue'
+
+const authStore = useAuthStore()
+const { logoutUser } = authStore
+</script>
+
+<template>
+  <header class="flex items-center justify-between p-4 mb-6 bg-[#284352]">
+    <h1 class="text-6xl font-bold text-white">NautiFleet</h1>
+
+    <div class="flex items-center gap-4">
+      <button
+        @click="logoutUser"
+        class="px-6 py-3 text-white transition bg-[#4f87a5]/80 border hover:bg-[#4f87a5] rounded-md"
+      >
+        Cerrar sesión
+      </button>
+    </div>
+  </header>
+  <div class="container p-4">
+    <DashboardAdmin v-if="authStore.isAdmin" />
+    <DashboardSeller v-else-if="authStore.isSeller" />
+    <DashboardUser v-else />
+  </div>
+</template>
+<style scoped></style>
+

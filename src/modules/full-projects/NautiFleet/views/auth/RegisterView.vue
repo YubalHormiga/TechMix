@@ -3,20 +3,19 @@ import { ref } from 'vue'
 import { useAuthStore } from '../../stores/authStore'
 import { authSchema } from '../../../../../../validation/authSchema'
 
-import Register from '../../assets/images/register.webp'
 const authStore = useAuthStore()
 const { register } = authStore
 
-const firstName = ref('Yubal')
-const lastName = ref('Hormiga')
-const email = ref('yubalhh@yahoo.es')
-const password = ref('Iraya2902.')
-const confirmPassword = ref('Iraya2902.')
+const firstName = ref('')
+const lastName = ref('')
+const email = ref('')
+const password = ref('')
+const confirmPassword = ref('')
 const error = ref({})
 
 const handleSubmit = async () => {
   const emailError = authSchema.email(email.value)
-  const passwordError = authSchema.email(password.value)
+  const passwordError = authSchema.password(password.value)
 
   if (!emailError) {
     error.value.email = emailError
@@ -35,107 +34,81 @@ const handleSubmit = async () => {
 </script>
 
 <template>
-  <div class="mx-auto my-auto">
-    <div class="flex items-center justify-center px-6 my-12">
-      <div class="flex w-full xl:w-3/4 lg:w-11/12">
-        <div
-          class="hidden w-full h-auto bg-cover rounded-l-lg lg:block lg:w-7/12"
-          :style="{
-            'background-image': `url(${Register})`,
-            'background-position': 'center',
-            'background-repeat': 'no-repeat',
-            'background-size': 'cover'
-          }"
-        ></div>
-        <div class="w-full p-5 bg-white rounded-lg lg:w-5/12 lg:rounded-l-none">
-          <form @submit.prevent="handleSubmit" class="px-8 pt-6 pb-8 mb-4 bg-white rounded">
-            <div class="mb-4 md:flex md:justify-between">
-              <div class="mb-4 md:mr-2 md:mb-0">
-                <label class="block mb-2 text-sm font-bold text-gray-700" for="firstName">
-                  Nombre
-                </label>
-                <input
-                  class="w-full px-3 py-2 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
-                  id="firstName"
-                  type="text"
-                  placeholder="Nombre"
-                  v-model.trim="firstName"
-                  autocomplete="firstName"
-                />
-              </div>
-              <div class="md:ml-2">
-                <label class="block mb-2 text-sm font-bold text-gray-700" for="lastName">
-                  Apellido
-                </label>
-                <input
-                  class="w-full px-3 py-2 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
-                  id="lastName"
-                  type="text"
-                  placeholder="Apellido"
-                  v-model.trim="lastName"
-                  autocomplete="lastName"
-                />
-              </div>
-            </div>
-            <div class="mb-4">
-              <label class="block mb-2 text-sm font-bold text-gray-700" for="email"> Email </label>
-              <input
-                class="w-full px-3 py-2 mb-3 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
-                id="email"
-                type="email"
-                placeholder="Email"
-                v-model.trim="email"
-                autocomplete="email"
-              />
-            </div>
-            <div class="mb-4 md:flex md:justify-between">
-              <div class="mb-4 md:mr-2 md:mb-0">
-                <label class="block mb-2 text-sm font-bold text-gray-700" for="password">
-                  Password
-                </label>
-                <input
-                  class="w-full px-3 py-2 mb-3 text-sm leading-tight text-gray-700 shadow appearance-none borderrounded focus:outline-none focus:shadow-outline"
-                  id="password"
-                  type="password"
-                  placeholder="******************"
-                  v-model.trim="password"
-                  autocomplete="new-password"
-                />
-              </div>
-              <div class="md:ml-2">
-                <label class="block mb-2 text-sm font-bold text-gray-700" for="c_password">
-                  Confirma Password
-                </label>
-                <input
-                  class="w-full px-3 py-2 mb-3 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
-                  id="c_password"
-                  type="password"
-                  placeholder="******************"
-                  v-model.trim="confirmPassword"
-                  autocomplete="new-password"
-                />
-              </div>
-            </div>
-            <div class="mb-6 text-center">
-              <button
-                class="w-full px-4 py-2 font-bold text-white bg-blue-500 rounded-sm hover:bg-blue-700 focus:outline-none focus:shadow-outline"
-                type="submit"
-              >
-                Crear cuenta
-              </button>
-            </div>
-            <hr class="mb-6 border-t" />
-            <div class="text-center">
-              <RouterLink
-                class="inline-block text-sm text-blue-500 align-baseline hover:text-blue-800"
-                :to="{ name: 'login' }"
-              >
-                > ¿Ya tienes una cuenta? ¡Inicia sesión!
-              </RouterLink>
-            </div>
-          </form>
-        </div>
+  <div class="flex justify-center flex-1 px-40 py-5">
+    <form @submit.prevent="handleSubmit" class="flex flex-col w-[512px] max-w-[512px] py-5 flex-1">
+      <h2 class="pt-5 pb-3 text-3xl font-bold text-center md:text-4xl md:font-black text-[#121416]">
+        Crea tu cuenta
+      </h2>
+
+      <div class="flex flex-wrap gap-4 px-4 py-3">
+        <label class="flex flex-col flex-1">
+          <p class="pb-2 text-base font-normal md:text-lg">Nombre</p>
+          <input
+            v-model.trim="firstName"
+            placeholder="Introduce tu nombre"
+            class="w-full p-4 text-base font-normal bg-white border border-gray-300 form-input rounded-xl h-14 focus:outline-none focus:border-gray-400"
+          />
+        </label>
+        <label class="flex flex-col flex-1">
+          <p class="pb-2 text-base font-normal md:text-lg">Apellidos</p>
+          <input
+            v-model.trim="lastName"
+            placeholder="Introduce tus apellidos"
+            class="w-full p-4 text-base font-normal bg-white border border-gray-300 form-input rounded-xl h-14 focus:outline-none focus:border-gray-400"
+          />
+        </label>
       </div>
-    </div>
+
+      <div class="flex flex-wrap px-4 py-3">
+        <label class="flex flex-col flex-1">
+          <p class="pb-2 text-base font-normal md:text-lg">Correo electrónico</p>
+          <input
+            v-model.trim="email"
+            placeholder="Introduce tu correo electrónico"
+            class="w-full p-4 text-base font-normal bg-white border border-gray-300 form-input rounded-xl h-14 focus:outline-none focus:border-gray-400"
+          />
+        </label>
+      </div>
+
+      <div class="flex flex-wrap px-4 py-3">
+        <label class="flex flex-col flex-1">
+          <p class="pb-2 text-base font-normal md:text-lg">Contraseña</p>
+          <input
+            v-model.trim="password"
+            placeholder="Introduce tu contraseña"
+            type="password"
+            class="w-full p-4 text-base font-normal bg-white border border-gray-300 form-input rounded-xl h-14 focus:outline-none focus:border-gray-400"
+          />
+        </label>
+      </div>
+
+      <div class="flex flex-wrap px-4 py-3">
+        <label class="flex flex-col flex-1">
+          <p class="pb-2 text-base font-normal md:text-lg">Confirmar contraseña</p>
+          <input
+            v-model.trim="confirmPassword"
+            placeholder="Confirma tu contraseña"
+            type="password"
+            class="w-full p-4 text-base font-normal bg-white border border-gray-300 form-input rounded-xl h-14 focus:outline-none focus:border-gray-400"
+          />
+        </label>
+      </div>
+
+      <div class="flex px-4 py-3">
+        <button
+          type="submit"
+          class="w-full rounded-sm h-10 px-2 bg-[#dce7f3] text-[#121416] text-lg font-bold"
+        >
+          Registrarse
+        </button>
+      </div>
+
+      <RouterLink
+        :to="{ name: 'login-nautifleet' }"
+        class="px-4 pt-1 text-base font-normal text-center text-blue-600 underline transition-colors cursor-pointer hover:text-blue-800 md:text-lg"
+      >
+        ¿Ya tienes una cuenta? Inicia sesión
+      </RouterLink>
+    </form>
   </div>
 </template>

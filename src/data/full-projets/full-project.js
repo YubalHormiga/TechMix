@@ -6,8 +6,7 @@ export const fullProjects = [
     image: 'image_01.webp',
     github: 'https://github.com/YubalHormiga/TechMix/tree/main/src/modules/full-projects/BoardShop',
     description:
-      'BoardShop es una tienda en línea de skateboards donde los usuarios pueden explorar productos, agregarlos al carrito y gestionar su compra. El carrito persiste en el almacenamiento local, incluso tras recargar la página. <span style="color: #72AF06; font-weight: bold;">Este proyecto es de nivel fácil</span>, ya que se enfoca en el uso básico de props y eventos para la gestión de datos, sin lógica compleja. También incluye un carrusel de imágenes interactivo.🛹🛒',
-
+      'BoardShop es una tienda en línea de skateboards donde los usuarios pueden explorar productos, agregarlos al carrito y gestionar su compra. El carrito persiste en el <span class="term">almacenamiento local</span>. <span style="color: #72AF06; font-weight: bold;">Este proyecto es de nivel fácil</span>, y se enfoca en el uso básico de <span class="term">props</span> y <span class="term">eventos</span>, sin <span class="term">lógica compleja</span>. También incluye un carrusel de imágenes interactivo implementado con <span class="lib">Swiper</span>. 🛹🛒',
     difficulty: 'easy'
   },
   {
@@ -18,7 +17,7 @@ export const fullProjects = [
     github:
       'https://github.com/YubalHormiga/TechMix/tree/main/src/modules/full-projects/InventoryManager',
     description:
-      'InventoryManager es una app para gestionar inventarios, con opciones para agregar, editar y eliminar productos, manejar lotes y calcular precios. Utiliza drag-and-drop para personalizar la interfaz y Chart.js para la visualización de datos. <span style="color: #E6760E; font-weight: bold;">Este proyecto es de nivel intermedio</span>, ya que incluye el uso de composables, manejo de lotes y lógica avanzada para la gestión de productos.📊🛠️',
+      'InventoryManager es una app para gestionar inventarios, con funciones <span class="term"> agregar, editar y eliminar</span> productos,  <span class="term">manejar lotes</span> y <span class="term">calcular precios.</span> La interfaz es modular y personalizable gracias a <span class="lib">FormKit Drag-and-Drop</span>, y se visualizan datos con <span class="lib">Chart.js</span>. <span class="tech">Vue.js</span> y <span class="tech">Tailwind CSS</span> forman la base del proyecto. <span style="color: #E6760E; font-weight: bold;">Proyecto intermedio</span>, con uso de <span class="term">props</span>, <span class="term">emit</span> y <span class="term">composables</span>. 📊🛠️',
     difficulty: 'intermidiate'
   },
   {
@@ -28,7 +27,7 @@ export const fullProjects = [
     image: 'image_03.webp',
     github: 'https://github.com/YubalHormiga/TechMix/tree/main/src/modules/full-projects/CineScope',
     description:
-      'CineScope es una aplicación web para explorar películas, donde los usuarios pueden buscar, filtrar por género e idioma, y navegar por una lista de títulos populares. El proyecto utiliza **Vue.js** para la interactividad y **Tailwind CSS** para el diseño.  <span style="color: #72AF06; font-weight: bold;">Este proyecto es de nivel fácil</span>, ya que se enfoca en la gestión de datos y la integración con la API de TMDb para la carga dinámica de información.🎬🍿',
+      'CineScope es una app para explorar películas, con <span class="term">búsqueda</span>, <span class="term">filtrado</span> por <span class="term">género</span> e <span class="term">idioma</span>, y una lista de títulos populares. Usa <span class="tech">Vue.js</span> para la interactividad y <span class="tech">Tailwind CSS</span> para el diseño. <span style="color: #72AF06; font-weight: bold;">Proyecto fácil</span>, centrado en la gestión de datos</span> y consumo de la <span class="api">API de TMDb</span>. 🎬🍿',
     difficulty: 'easy'
   },
   {
@@ -38,7 +37,7 @@ export const fullProjects = [
     image: 'image_04.webp',
     github: 'https://github.com/YubalHormiga/TechMix/tree/main/src/modules/full-projects/Saborify',
     description:
-      'Saborify es una aplicación web para explorar recetas, donde los usuarios pueden buscar por ingrediente, visualizar detalles nutricionales, generar recetas con IA y guardar favoritas. El proyecto utiliza **Vue.js** para la interactividad, **Pinia** para la gestión de estado y **Tailwind CSS** para el diseño. <span style="color: #E6760E; font-weight: bold;">Este proyecto es de nivel intermedio</span>, ya que integra consumo de API, IA y almacenamiento con Pinia.🍳🍽️',
+      'Saborify es una app para explorar recetas, buscar por ingrediente, ver <span class="term">información nutricional</span> y generar platos con <span class="api">IA</span>. Usa <span class="tech">Vue.js</span>, <span class="tech">Pinia</span> y <span class="tech">Tailwind CSS</span>. <span style="color: #E6760E; font-weight: bold;">Proyecto intermedio</span> que combina consumo de <span class="api">API externa</span> y gestión de estado. 🍳🍽️',
     difficulty: 'intermidiate',
     routes: [
       {
@@ -62,34 +61,64 @@ export const fullProjects = [
     github:
       'https://github.com/YubalHormiga/TechMix/tree/main/src/modules/full-projects/NautiFleet',
     description:
-      'NautiFleet es una app web para comprar o trasladar embarcaciones por mar. Los usuarios pueden filtrar por tipo, año o precio, ver detalles técnicos y solicitar traslados entre puertos. El proyecto utiliza **Vue.js**, **Vuefire**, **Firebase**, **Pinia** y **Tailwind CSS**. <span style="color: #f35454; font-weight: bold;">Este proyecto es de nivel avanzado</span>, ya que incluye roles de usuario, favoritos, mapas interactivos y simulación de compra.🛥️📍',
-
+      'NautiFleet es una app para gestionar <span class="term">traslados marítimos</span> y <span class="term">alquiler de amarres</span>. También permite publicar o explorar embarcaciones de segunda mano. Usa <span class="tech">Vue.js</span>, <span class="tech">Vuefire</span>, <span class="tech">Firebase</span>, <span class="tech">Pinia</span> y <span class="tech">Tailwind CSS</span>. <span style="color: #f35454; font-weight: bold;">Proyecto avanzado</span>, con <span class="term">roles de usuario</span>, <span class="term">favoritos</span>, <span class="api">mapas interactivos</span> y simulación de servicios. ⚓⛵',
     difficulty: 'advanced',
     routes: [
       {
-        path: 'login',
-        name: 'login',
-        component: () => import('../../modules/full-projects/NautiFleet/views/auth/LoginView.vue')
-        // meta: { requiresAuth: true }
-      },
-      {
-        path: 'register',
-        name: 'register',
-        component: () =>
-          import('../../modules/full-projects/NautiFleet/views/auth/RegisterView.vue')
-      },
-      {
-        path: 'panel',
-        name: 'dash-board',
-        component: () =>
-          import('../../modules/full-projects/NautiFleet/views/dashboard/DashboardHome.vue'),
-        meta: { requiresAuth: true }
-      },
-      {
-        path: 'convertirse-en-vendedor',
-        name: 'seller-onboarding',
-        component: () =>
-          import('../../modules/full-projects/NautiFleet/views/dashboard/SellerOnboardingView.vue')
+        path: '',
+        name: '',
+        component: () => import('../../modules/full-projects/NautiFleet/NautiFleet.vue'),
+        children: [
+          {
+            path: 'traslados',
+            name: 'transfers',
+            component: () =>
+              import(
+                '../../modules/full-projects/NautiFleet/views/transfers/TransfertCatalogView.vue'
+              )
+          },
+
+          {
+            path: 'amarres',
+            name: 'moorings',
+            component: () =>
+              import(
+                '../../modules/full-projects/NautiFleet/views/moorings/MooringCatalogView .vue'
+              )
+          },
+
+          {
+            path: 'embarcaiones',
+            name: 'boats',
+            component: () =>
+              import('../../modules/full-projects/NautiFleet/views/boats/BoatCatalogView.vue')
+          },
+          {
+            path: 'login-nautifleet',
+            name: 'login-nautifleet',
+            component: () =>
+              import('../../modules/full-projects/NautiFleet/views/auth/LoginView.vue')
+          },
+          {
+            path: 'registro-nautifleet',
+            name: 'register-nautifleet',
+            component: () =>
+              import('../../modules/full-projects/NautiFleet/views/auth/RegisterView.vue')
+          },
+          {
+            path: 'restablecer-contrasena-nautifleet',
+            name: 'reset-password-nautifleet',
+            component: () =>
+              import('../../modules/full-projects/NautiFleet/views/auth/ResetPassword.vue')
+          },
+
+          {
+            path: 'panel',
+            name: 'dash-board',
+            component: () =>
+              import('../../modules/full-projects/NautiFleet/views/dashboard/DashboardView.vue')
+          }
+        ]
       }
     ]
   }

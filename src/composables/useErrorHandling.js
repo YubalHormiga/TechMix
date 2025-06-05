@@ -10,7 +10,8 @@ export const useErrorHandling = () => {
       'No se encontró ninguna cuenta de usuario asociada a este correo electrónico.',
     'auth/wrong-password': 'La contraseña proporcionada es incorrecta.',
     'auth/email-already-in-use': 'El correo electrónico ya está en uso.',
-    'auth/weak-password': 'La contraseña es débil.',
+    'auth/weak-password':
+      'La contraseña debe tener al menos 8 caracteres, incluir una mayúscula , una minúscula, un número y un símbolo',
     'auth/operation-not-allowed':
       'El inicio de sesión con correo electrónico y contraseña no está habilitado en este momento.',
     'auth/invalid-credential': 'Las credenciales proporcionadas son inválidas.'

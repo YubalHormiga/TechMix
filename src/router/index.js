@@ -66,12 +66,26 @@ const router = createRouter({
 fullProjects.forEach((project) => {
   if (project.routes && project.routes.length > 0) {
     project.routes.forEach((route) => {
-      router.addRoute({
-        path: `/projects/${project.name}/${route.path}`,
-        name: route.name,
-        component: route.component,
-        meta: route.meta || {}
-      })
+      if (route.children) {
+        // Agrega la ruta padre con sus hijos
+        router.addRoute({
+          path: `/projects/${project.name}/${route.path}`,
+          component: route.component,
+          children: route.children.map((child) => ({
+            path: child.path,
+            name: child.name,
+            component: child.component
+          }))
+        })
+      } else {
+        // Ruta plana
+        router.addRoute({
+          path: `/projects/${project.name}/${route.path}`,
+          name: route.name,
+          component: route.component,
+          meta: route.meta || {}
+        })
+      }
     })
   }
 })
