@@ -56,7 +56,7 @@ export const useAuthStore = defineStore('auth', () => {
   const logoutUser = async () => {
     try {
       await signOut(auth)
-      router.push({ name: 'login' })
+      router.push('/projects/NautiFleet')
       isLoggedIn.value = false
       userData.value = null
       handleToastSuccess('Se ha cerrado sesión correctamente.')
@@ -87,6 +87,7 @@ export const useAuthStore = defineStore('auth', () => {
     toast.open({ message, type: 'success' })
   }
 
+  const isAuthenticated = computed(() => isLoggedIn.value && !!userData.value)
   const userDocRef = computed(() =>
     userData.value?.uid ? doc(db, 'users', userData.value.uid) : null
   )
@@ -144,6 +145,7 @@ export const useAuthStore = defineStore('auth', () => {
     login,
     logoutUser,
     isLoggedIn,
+    isAuthenticated,
     isAdmin,
     isSeller,
     displayName,

@@ -14,57 +14,63 @@ const handleSubmit = async () => {
 </script>
 
 <template>
-  <div class="flex justify-center flex-1 px-40 py-5">
-    <div class="flex flex-col w-[512px] max-w-[512px] py-5 flex-1">
-      <h2 class="pt-5 pb-3 text-3xl font-bold text-center md:text-4xl md:font-black text-[#121416]">
-        Bienvenido de nuevo
-      </h2>
-      <form @submit.prevent="handleSubmit">
-        <div class="flex flex-wrap px-4 py-3 text-[#121416]">
-          <label class="flex flex-col flex-1" for="email">
-            <p class="pb-2 text-base font-normal md:text-lg">
-              Nombre de usuario o correo electrónico
-            </p>
-            <input
-              v-model.trim="email"
-              placeholder="Introduce tu usuario o correo"
-              class="w-full p-4 text-base font-normal bg-white border border-gray-300 form-input rounded-xl h-14 focus:outline-none focus:border-gray-400"
-              id="email"
-            />
-          </label>
-        </div>
-        <div class="flex flex-wrap px-4 py-3">
-          <label class="flex flex-col flex-1">
-            <p class="pb-2 text-base font-normal md:text-lg">Contraseña</p>
-            <input
-              v-model.trim="password"
-              placeholder="Introduce tu contraseña"
-              class="w-full p-4 text-base font-normal bg-white border border-gray-300 form-input rounded-xl h-14 focus:outline-none focus:border-gray-400"
-              type="password"
-            />
-          </label>
-        </div>
-        <div class="flex px-4 py-3">
-          <button
-            type="submit"
-            class="w-full rounded-sm h-10 px-2 bg-[#dce7f3] text-[#121416] text-lg font-bold"
-          >
-            Iniciar sesión
-          </button>
-        </div>
-      </form>
+  <section class="max-w-[512px] w-full mx-auto p-5">
+    <h2 class="text-3xl md:text-4xl font-black text-center text-[#121416] py-5">
+      Bienvenido de nuevo
+    </h2>
+
+    <form @submit.prevent="handleSubmit" class="space-y-4">
+      <!-- Email -->
+      <div>
+        <label class="block text-[#121416] text-base md:text-lg mb-2" for="email"
+          >Correo electrónico</label
+        >
+        <input
+          id="email"
+          v-model.trim="email"
+          type="email"
+          placeholder="Introduce tu correo"
+          class="w-full px-4 text-base bg-white border border-gray-300 h-14 rounded-xl focus:outline-none focus:border-gray-400"
+        />
+      </div>
+
+      <!-- Password -->
+      <div>
+        <label class="block text-[#121416] text-base md:text-lg mb-2">Contraseña</label>
+        <input
+          v-model.trim="password"
+          type="password"
+          placeholder="Introduce tu contraseña"
+          class="w-full px-4 text-base bg-white border border-gray-300 h-14 rounded-xl focus:outline-none focus:border-gray-400"
+        />
+      </div>
+
+      <!-- Submit -->
+      <div>
+        <button
+          type="submit"
+          class="w-full h-10 bg-[#dce7f3] text-[#121416] text-lg font-bold rounded-sm"
+        >
+          Iniciar sesión
+        </button>
+      </div>
+    </form>
+
+    <!-- Enlaces -->
+    <div class="pt-4 space-y-2 text-base text-center md:text-lg">
       <RouterLink
         :to="{ name: 'reset-password-nautifleet' }"
-        class="px-4 pt-1 pb-3 text-base font-normal text-center text-blue-600 underline transition-colors cursor-pointer hover:text-blue-800 md:text-lg"
+        class="text-blue-600 underline hover:text-blue-800"
       >
         ¿Has olvidado tu contraseña?
       </RouterLink>
+      <br />
       <RouterLink
         :to="{ name: 'register-nautifleet' }"
-        class="px-4 pt-1 text-base font-normal text-center text-blue-600 underline transition-colors cursor-pointer hover:text-blue-800 md:text-lg"
+        class="text-blue-600 underline hover:text-blue-800"
       >
         ¿No tienes cuenta? Regístrate
       </RouterLink>
     </div>
-  </div>
+  </section>
 </template>

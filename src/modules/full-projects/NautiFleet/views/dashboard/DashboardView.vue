@@ -4,7 +4,7 @@ import { ref } from 'vue'
 import SidebarContainer from '../../components/dashboards/SidebarContainer.vue'
 import EditProfile from '../../components/dashboards/ProfileForm.vue'
 import FavoritesList from '../../components/dashboards/FavoritesList.vue'
-import BoatList from '../../components/dashboards/BoatList.vue'
+import BoatList from '../../components/commom/BoatList.vue'
 
 // Icons
 import DashBoard from '../../assets/icons/dashBoard.svg'
@@ -16,7 +16,7 @@ import Listings from '../../assets/icons/listings.svg'
 import BookingHistory from '../../assets/icons/bookingHistory.svg'
 import Profile from '../../assets/icons/profile.svg'
 import Help from '../../assets/icons/help.svg'
-import Logout from '../../assets/icons/logout.svg'
+// import Logout from '../../assets/icons/logout.svg'
 
 const selectedSection = ref('dashboard')
 
@@ -29,8 +29,8 @@ const userOptions = [
   { id: 'history', label: 'Historial', icon: BookingHistory },
   { id: 'listings', label: 'Listado', icon: Listings },
   { id: 'profile', label: 'Perfil', icon: Profile },
-  { id: 'help', label: 'Ayuda', icon: Help },
-  { id: 'logout', label: 'Cerrar sesión', icon: Logout }
+  { id: 'help', label: 'Ayuda', icon: Help }
+  // { id: 'logout', label: 'Cerrar sesión', icon: Logout }
 ]
 
 const sections = {
@@ -48,16 +48,22 @@ const selectOption = (optionId) => {
 </script>
 
 <template>
-  <div class="container grid grid-cols-1 gap-10 px-4 py-10 lg:grid-cols-5 lg:gap-8">
-    <SidebarContainer
-      :options="userOptions"
-      :initial="selectedSection"
-      @select-option="selectOption"
-    />
-    <div class="rounded lg:col-span-4">
-      <component :is="sections[selectedSection]" />
+  <div class="relative min-h-screen overflow-x-hidden mx-auto max-w-[1366px] px-4">
+    <div class="grid lg:grid-cols-[minmax(100px,200px)_1fr] h-full">
+      <!-- Sidebar -->
+      <div class="w-full">
+        <SidebarContainer
+          :options="userOptions"
+          :initial="selectedSection"
+          @select-option="selectOption"
+          class="h-full"
+        />
+      </div>
+
+      <!-- Contenido principal -->
+      <div class="w-full p-4 lg:p-6">
+        <component :is="sections[selectedSection]" class="h-full rounded-lg" />
+      </div>
     </div>
   </div>
 </template>
-
-<style scoped></style>

@@ -86,9 +86,8 @@ export const fullProjects = [
                 '../../modules/full-projects/NautiFleet/views/moorings/MooringCatalogView .vue'
               )
           },
-
           {
-            path: 'embarcaiones',
+            path: 'embarcaciones',
             name: 'boats',
             component: () =>
               import('../../modules/full-projects/NautiFleet/views/boats/BoatCatalogView.vue')

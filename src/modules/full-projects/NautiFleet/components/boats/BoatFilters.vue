@@ -1,5 +1,3 @@
-<script setup></script>
-
 <template>
   <div class="grid grid-cols-1 gap-4 p-4 md:grid-cols-2 lg:col-span-5">
     <div>
