@@ -1,12 +1,12 @@
 <script setup>
-import BoatHeader from '../../assets/images/landing/boatHeader.webp'
+import LandingHeader from '../../assets/images/landing/landingHeader.webp'
 </script>
 
 <template>
   <section
     class="flex min-h-[480px] lg:min-h-[680px] flex-col items-center justify-center gap-10 p-4 text-center bg-cover bg-center bg-no-repeat"
     :style="{
-      backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.3)), url('${BoatHeader}')`
+      backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.3)), url('${LandingHeader}')`
     }"
   >
     <div class="max-w-3xl">
@@ -15,7 +15,7 @@ import BoatHeader from '../../assets/images/landing/boatHeader.webp'
       </h1>
       <h2 class="mt-4 text-sm text-white md:text-lg">
         Conéctate con transportistas confiables y encuentra el amarre perfecto para tu embarcación.
-        Ya seas propietario, vendedor o transportista, NautiFleet simplifica la experiencia.
+        Ya seas propietario o transportista, NautiFleet simplifica la experiencia.
       </h2>
     </div>
 

@@ -8,7 +8,7 @@ import InteractiveMap from './components/commom/InteractiveMap.vue'
 import BenefitsContainer from './views/landing/BenefitsContainerView.vue'
 import OurServices from './views/landing/OurServicesView.vue'
 import FooterLanding from './views/landing/FooterLandingView.vue'
-import HeroSection from './views/landing/HeroSectionView.vue'
+import HeroSection from './views/landing/HeroLandingView.vue'
 import HowItWorks from './views/landing/HowItWorksView.vue'
 import SellersTransporter from './views/landing/SellersTransporterView.vue'
 
@@ -24,7 +24,7 @@ const showLanding = computed(
     <NavigationHeader v-if="!authStore.isAuthenticated" />
     <div v-if="showLanding" class="flex-1">
       <HeroSection />
-      <div class="max-w-[1366px] mx-auto px-4 py-5">
+      <div class="max-w-[1366px] mx-auto px-4">
         <OurServices />
         <HowItWorks />
         <BenefitsContainer />

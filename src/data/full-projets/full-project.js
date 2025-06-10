@@ -73,18 +73,14 @@ export const fullProjects = [
             path: 'traslados',
             name: 'transfers',
             component: () =>
-              import(
-                '../../modules/full-projects/NautiFleet/views/transfers/TransfertCatalogView.vue'
-              )
+              import('../../modules/full-projects/NautiFleet/views/transfers/TransfersView.vue')
           },
 
           {
             path: 'amarres',
             name: 'moorings',
             component: () =>
-              import(
-                '../../modules/full-projects/NautiFleet/views/moorings/MooringCatalogView .vue'
-              )
+              import('../../modules/full-projects/NautiFleet/views/moorings/MooringsView .vue')
           },
           {
             path: 'embarcaciones',
