@@ -1,5 +1,5 @@
 <template>
-  <section class="container my-10">
+  <section class="max-w-[1366px] mx-auto my-10 px-4">
     <h2 class="text-3xl md:text-4xl font-bold md:font-black px-4 pb-3 pt-5 text-[#121416]">
       Mapa Interactivo
     </h2>

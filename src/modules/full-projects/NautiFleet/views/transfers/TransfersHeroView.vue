@@ -6,7 +6,7 @@ import TransfersHero from '../../assets/images/landing/transfersHero.webp'
   <section
     class="flex min-h-[480px] lg:min-h-[680px] flex-col items-center justify-center gap-10 p-4 text-center bg-cover bg-center bg-no-repeat"
     :style="{
-      backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.3)), url('${TransfersHero}')`
+      backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.4)), url('${TransfersHero}')`
     }"
   >
     <div class="max-w-3xl">
@@ -21,7 +21,7 @@ import TransfersHero from '../../assets/images/landing/transfersHero.webp'
 
     <div class="flex justify-center">
       <button
-        class="h-10 md:h-12 px-4 md:px-5 rounded-full bg-[#dce7f3] text-[#121416] text-sm md:text-base font-bold"
+        class="h-10 md:h-12 px-4 md:px-5 rounded-full bg-[#dce7f3] hover:bg-[#c8d8eb] transition-colors duration-200 text-[#121416] text-sm md:text-base font-bold"
       >
         Solicitar Presupuesto
       </button>

@@ -20,16 +20,18 @@ import LandingHeader from '../../assets/images/landing/landingHeader.webp'
     </div>
 
     <div class="flex flex-wrap justify-center gap-3">
-      <button
-        class="h-10 md:h-12 px-4 md:px-5 rounded-full bg-[#dce7f3] text-[#121416] text-sm md:text-base font-bold"
+      <router-link
+        :to="{ name: 'transfers' }"
+        class="h-10 md:h-12 px-4 md:px-5 rounded-full bg-[#dce7f3] hover:bg-[#c8d8eb] text-[#121416] text-sm md:text-base font-bold flex items-center justify-center transition-colors duration-200"
       >
         Buscar Traslado
-      </button>
-      <button
-        class="h-10 md:h-12 px-4 md:px-5 rounded-full bg-[#f1f2f4] text-[#121416] text-sm md:text-base font-bold"
+      </router-link>
+      <router-link
+        :to="{ name: 'moorings' }"
+        class="h-10 md:h-12 px-4 md:px-5 rounded-full bg-[#f1f2f4] hover:bg-[#e1e3e7] text-[#121416] text-sm md:text-base font-bold flex items-center justify-center transition-colors duration-200"
       >
         Buscar Amarre
-      </button>
+      </router-link>
     </div>
   </section>
 </template>

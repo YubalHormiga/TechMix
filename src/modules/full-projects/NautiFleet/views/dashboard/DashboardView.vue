@@ -4,11 +4,9 @@ import { ref } from 'vue'
 import SidebarContainer from '../../components/dashboards/SidebarContainer.vue'
 import EditProfile from '../../components/dashboards/ProfileForm.vue'
 import FavoritesList from '../../components/dashboards/FavoritesList.vue'
-import BoatList from '../../components/commom/BoatList.vue'
 
 // Icons
 import DashBoard from '../../assets/icons/dashBoard.svg'
-import BrowseBoats from '../../assets/icons/browseBoats.svg'
 import Transfers from '../../assets/icons/transfers.svg'
 import Moorings from '../../assets/icons/moorings.svg'
 import Favorites from '../../assets/icons/favorites.svg'
@@ -22,7 +20,6 @@ const selectedSection = ref('dashboard')
 
 const userOptions = [
   { id: 'dashboard', label: 'Panel', icon: DashBoard },
-  { id: 'browseBoats', label: 'Explorar Embarciones', icon: BrowseBoats },
   { id: 'transfers', label: 'Traslados', icon: Transfers },
   { id: 'moorings', label: 'Amarres', icon: Moorings },
   { id: 'favorites', label: 'Favoritos', icon: Favorites },
@@ -34,10 +31,10 @@ const userOptions = [
 ]
 
 const sections = {
-  dashboard: BoatList,
-  transfers: BoatList,
-  moorings: BoatList,
-  listings: BoatList,
+  dashboard: EditProfile,
+  transfers: EditProfile,
+  moorings: EditProfile,
+  listings: EditProfile,
   profile: EditProfile,
   help: FavoritesList
 }

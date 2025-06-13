@@ -50,9 +50,7 @@ const isActive = (name) =>
         :to="{ name: 'moorings' }"
         :class="[
           'px-4 py-2 rounded-full text-sm md:text-base font-medium transition duration-200',
-          isActive('amarres-nautifleet')
-            ? 'bg-[#dce7f3] font-bold'
-            : 'bg-[#f1f2f4] hover:bg-[#dce7f3]'
+          isActive('moorings') ? 'bg-[#dce7f3] font-bold' : 'bg-[#f1f2f4] hover:bg-[#dce7f3]'
         ]"
       >
         Amarres

@@ -1,18 +1,17 @@
 <script setup>
-import BenifitsOurServicesView from './BenifitsOurServicesView.vue'
-import FeaturedDestinationsView from './FeaturedDestinationsView.vue'
-import HeroTransfertView from './HeroTransferView.vue'
-import HowItWorksView from './HowItWorksView.vue'
-import ReadyToBookView from './ReadyToBookView.vue'
-import WhatOurUsersSayView from './WhatOurUsersSayView.vue'
+import TransfersBenifitsOurServicesView from './TransfersBenifitsOurServicesView.vue'
+import TransfersFeaturedDestinationsView from './TransfersFeaturedDestinationsView.vue'
+import TransfersHeroView from './TransfersHeroView.vue'
+import TransfersHowItWorksView from './TransfersHowItWorksView.vue'
+import TransfersReadyToBookView from './TransfersReadyToBookView.vue'
+import TransfersWhatOurUsersSayView from './TransfersWhatOurUsersSayView.vue'
 </script>
 
 <template>
-  <HeroTransfertView />
-  <HowItWorksView />
-  <BenifitsOurServicesView />
-  <FeaturedDestinationsView />
-  <WhatOurUsersSayView />
-  <ReadyToBookView />
+  <TransfersHeroView />
+  <TransfersHowItWorksView />
+  <TransfersBenifitsOurServicesView />
+  <TransfersFeaturedDestinationsView />
+  <TransfersWhatOurUsersSayView />
+  <TransfersReadyToBookView />
 </template>
-<style scoped></style>

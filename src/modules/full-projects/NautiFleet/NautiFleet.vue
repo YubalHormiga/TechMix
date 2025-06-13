@@ -4,7 +4,7 @@ import { useRoute } from 'vue-router'
 import { useAuthStore } from './stores/authStore'
 
 import NavigationHeader from './views/landing/NavigationHeaderView .vue'
-import InteractiveMap from './components/commom/InteractiveMap.vue'
+import InteractiveMap from './components/moorings/InteractiveMap.vue'
 import BenefitsContainer from './views/landing/BenefitsContainerView.vue'
 import OurServices from './views/landing/OurServicesView.vue'
 import FooterLanding from './views/landing/FooterLandingView.vue'

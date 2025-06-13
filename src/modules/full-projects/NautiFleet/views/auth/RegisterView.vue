@@ -91,7 +91,7 @@ const handleSubmit = async () => {
       <!-- Botón -->
       <button
         type="submit"
-        class="w-full h-10 bg-[#dce7f3] text-[#121416] text-lg font-bold rounded-sm"
+        class="w-full h-10 bg-[#dce7f3] hover:bg-[#c8d8eb] transition-colors duration-200 text-[#121416] text-lg font-bold rounded-full"
       >
         Registrarse
       </button>
