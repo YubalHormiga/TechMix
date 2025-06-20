@@ -4,7 +4,7 @@ import { streamText } from 'ai'
 export default {
   async generateRecipe(prompt) {
     const result = streamText({
-      model: openRouter('nvidia/llama-3.1-nemotron-70b-instruct:free'),
+      model: openRouter('meta-llama/llama-4-scout:free'),
       prompt: prompt,
       system: `Eres Saborify, el asistente culinario especializado en ayudar a los usuarios a cocinar con lo que ya tienen en casa. Sigue estas reglas:
 

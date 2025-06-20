@@ -6,15 +6,14 @@ import EditProfile from '../../components/dashboards/ProfileForm.vue'
 import FavoritesList from '../../components/dashboards/FavoritesList.vue'
 
 // Icons
-import DashBoard from '../../assets/icons/dashBoard.svg'
-import Transfers from '../../assets/icons/transfers.svg'
-import Moorings from '../../assets/icons/moorings.svg'
-import Favorites from '../../assets/icons/favorites.svg'
-import Listings from '../../assets/icons/listings.svg'
-import BookingHistory from '../../assets/icons/bookingHistory.svg'
-import Profile from '../../assets/icons/profile.svg'
-import Help from '../../assets/icons/help.svg'
-// import Logout from '../../assets/icons/logout.svg'
+import DashBoard from '../../assets/icons/dashBoard/dashBoard.svg'
+import Transfers from '../../assets/icons/dashBoard/transfers.svg'
+import Moorings from '../../assets/icons/dashBoard/moorings.svg'
+import Favorites from '../../assets/icons/dashBoard/favorites.svg'
+import Listings from '../../assets/icons/dashBoard/listings.svg'
+import BookingHistory from '../../assets/icons/dashBoard/bookingHistory.svg'
+import Profile from '../../assets/icons/dashBoard/profile.svg'
+import Help from '../../assets/icons/dashBoard/help.svg'
 
 const selectedSection = ref('dashboard')
 
@@ -27,7 +26,6 @@ const userOptions = [
   { id: 'listings', label: 'Listado', icon: Listings },
   { id: 'profile', label: 'Perfil', icon: Profile },
   { id: 'help', label: 'Ayuda', icon: Help }
-  // { id: 'logout', label: 'Cerrar sesión', icon: Logout }
 ]
 
 const sections = {

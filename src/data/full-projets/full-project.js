@@ -83,19 +83,26 @@ export const fullProjects = [
               import('../../modules/full-projects/NautiFleet/views/moorings/MooringsView .vue')
           },
           {
-            path: 'detalles/:id',
+            path: 'amarres/:id',
             name: 'mooring-detail',
             component: () =>
               import(
-                '../../modules/full-projects/NautiFleet/components/moorings/MooringsDetail.vue'
+                '../../modules/full-projects/NautiFleet/views/moorings/MooringsDetailsView.vue'
               )
           },
           {
-            path: 'mapa-amarres',
+            path: 'crear-amarre',
+            name: 'create-mooring',
+            component: () =>
+              import('../../modules/full-projects/NautiFleet/components/moorings/MooringForm.vue')
+          },
+
+          {
+            path: 'explorar-amarres',
             name: 'moorings-map',
             component: () =>
               import(
-                '../../modules/full-projects/NautiFleet/views/moorings/MooringsMapAndDetailsView.vue'
+                '../../modules/full-projects/NautiFleet/components/moorings/InteractiveMap.vue'
               )
           },
           {

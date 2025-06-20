@@ -1,20 +1,26 @@
+<script setup>
+defineProps({
+  mooring: {
+    type: Object,
+    required: true
+  }
+})
+</script>
+
 <template>
   <div class="max-w-[769px] mx-auto my-10 px-4">
     <div class="flex flex-col gap-10 py-10">
       <div
         class="rounded-lg border border-[#dde0e3] p-4 hover:shadow-md transition-shadow duration-200"
       >
-        <!-- Contenedor principal responsivo -->
         <div class="flex flex-col gap-6 lg:flex-row">
-          <!-- Contenido -->
           <div class="flex flex-col justify-between flex-1">
             <div>
-              <h3 class="text-xl md:text-2xl font-bold text-[#121416]">Sentosa Cove, Singapore</h3>
+              <h3 class="text-xl md:text-2xl font-bold text-[#121416]">{{ mooring.name }}</h3>
               <p class="text-base md:text-lg font-normal text-[#6a7581] mb-2">
                 Prime mooring in the heart of the harbor
               </p>
 
-              <!-- Info básica -->
               <div class="flex items-center gap-3 text-sm text-[#6a7581] mb-3">
                 <span class="flex items-center gap-1">
                   <svg
@@ -103,11 +109,10 @@
               </div>
             </div>
 
-            <!-- Precio y rating -->
             <div class="flex items-center justify-between mt-4">
               <div>
                 <p class="text-[#6a7581] text-sm font-normal">From</p>
-                <p class="text-xl font-bold text-[#121416]">$120/night</p>
+                <p class="text-xl font-bold text-[#121416]">{{ mooring.price }}</p>
               </div>
               <div class="flex items-center gap-1">
                 <svg
@@ -127,7 +132,6 @@
             </div>
           </div>
 
-          <!-- Imagen -->
           <div
             class="flex-shrink-0 w-full h-[200px] lg:w-[340px] lg:h-auto rounded-lg bg-center bg-cover aspect-video"
             style="
@@ -136,9 +140,8 @@
           ></div>
         </div>
 
-        <!-- Botón -->
         <router-link
-          :to="{ name: 'mooring-detail' }"
+          :to="{ name: 'mooring-detail', params: { id: mooring.id } }"
           class="h-10 md:h-12 px-4 mt-5 md:px-5 rounded-sm text-sm md:text-base flex items-center justify-center bg-[#dce7f3] hover:bg-[#c8d8eb] transition-colors duration-200 font-bold"
         >
           Ver Detalles

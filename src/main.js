@@ -12,6 +12,10 @@ import App from './App.vue'
 import router from './router'
 import 'vue-toast-notification/dist/theme-sugar.css'
 import 'chartkick/chart.js'
+import VCalendar from 'v-calendar';
+import 'v-calendar/style.css';
+
+
 
 const $toast = useToast({
   position: 'top',
@@ -35,6 +39,7 @@ app.use(VueFire, {
 })
 app.provide('toast', $toast)
 app.use(VueChartkick)
+app.use(VCalendar, {componentPrefix: 'vc'})
 app.use(createPinia())
 app.use(router)
 
