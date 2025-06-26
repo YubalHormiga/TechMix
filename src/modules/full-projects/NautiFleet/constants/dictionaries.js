@@ -105,3 +105,47 @@ export const PRICING = {
   yearly: { name: 'Anual', icon: CalendarYear },
   deposit: { name: 'Depósito', icon: ShieldDollar }
 }
+
+// Tipo de Embarcación Aceptada
+export const BOAT_TYPES = {
+  motor: 'Motora',
+  sail: 'Vela',
+  catamaran: 'Catamarán',
+  trimaran: 'Trimarán',
+  jetski: 'Jetski',
+  houseboat: 'Casa flotante'
+}
+
+// Servicios Adicionales
+export const ADDITIONAL_SERVICES = {
+  maintenance: 'Mantenimiento',
+  wasteDisposal: 'Retirada de residuos',
+  boatCleaning: 'Limpieza de embarcación',
+  iceDelivery: 'Entrega de hielo',
+  pickup: 'Servicio de recogida',
+  divingService: 'Servicio de buceo'
+}
+
+// Documentación Requerida
+export const REQUIRED_DOCS = {
+  boatInsurance: 'Seguro del barco',
+  captainLicense: 'Titulación del patrón',
+  idDocument: 'DNI o pasaporte',
+  navigationPermit: 'Permiso de navegación'
+}
+// Política de Cancelación
+
+export const CANCELLATION_POLICIES = {
+  flexible: {
+    name: 'Flexible',
+    description: 'Reembolso completo hasta 24 horas antes'
+  },
+  moderate: {
+    name: 'Moderada',
+    description: 'Reembolso del 50% hasta 48 horas antes'
+  },
+  strict: {
+    name: 'Estricta',
+    description: 'No se realizan reembolsos por cancelación'
+  }
+}

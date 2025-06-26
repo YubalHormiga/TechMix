@@ -1,5 +1,5 @@
 <script setup>
-import { PRICING } from '../../constants/dictionaries'
+import { PRICING } from '../../../constants/dictionaries'
 </script>
 
 <template>

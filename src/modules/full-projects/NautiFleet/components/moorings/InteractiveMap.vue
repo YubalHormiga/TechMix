@@ -4,7 +4,7 @@ import { ref, computed } from 'vue'
 import { useRoute } from 'vue-router'
 import { LMap, LTileLayer, LMarker, LPopup } from '@vue-leaflet/vue-leaflet'
 import useLocationMap from '../../compasables/useLocationMap'
-import MooringCard from './MooringCard.vue'
+import MooringCard from './display/MooringCard.vue'
 
 const { zoom, getAnchorIcon, getAnchorIconSelected } = useLocationMap()
 const route = useRoute()

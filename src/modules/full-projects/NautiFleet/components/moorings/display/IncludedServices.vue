@@ -1,5 +1,5 @@
 <script setup>
-import { SERVICES } from '../../constants/dictionaries'
+import { SERVICES } from '../../../constants/dictionaries'
 </script>
 
 <template>

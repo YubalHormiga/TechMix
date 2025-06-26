@@ -1,11 +1,11 @@
 <script setup>
-import MooringHeader from '../../components/moorings/MooringHeader.vue'
-import IncludedServices from '../../components/moorings/IncludedServices.vue'
-import MooringCharacteristics from '../../components/moorings/MooringCharacteristics.vue'
-import TechnicalSpecifications from '../../components/moorings/TechnicalSpecifications.vue'
-import PriceAndRules from '../../components/moorings/PriceAndRules.vue'
-import RulesAndRestrictions from '../../components/moorings/RulesAndRestrictions.vue'
-import BookingSidebar from '../../components/moorings/BookingSidebar.vue'
+import MooringHeader from '../../components/moorings/display/MooringHeader.vue'
+import IncludedServices from '../../components/moorings/display/IncludedServices.vue'
+import MooringCharacteristics from '../../components/moorings/display/MooringCharacteristics.vue'
+import TechnicalSpecifications from '../../components/moorings/display/TechnicalSpecifications.vue'
+import PriceAndRules from '../../components/moorings/display/PriceAndRules.vue'
+import RulesAndRestrictions from '../../components/moorings/display/RulesAndRestrictions.vue'
+import AvailabilityCalendar from '../../components/moorings/display/AvailabilityCalendar.vue'
 </script>
 
 <template>
@@ -30,6 +30,6 @@ import BookingSidebar from '../../components/moorings/BookingSidebar.vue'
       </div>
     </main>
     <!-- Sidebar -->
-    <BookingSidebar />
+    <AvailabilityCalendar />
   </div>
 </template>

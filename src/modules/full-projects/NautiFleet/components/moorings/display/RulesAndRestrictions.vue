@@ -1,5 +1,5 @@
 <script setup>
-import { RULES } from '../../constants/dictionaries'
+import { RULES } from '../../../constants/dictionaries'
 </script>
 
 <template>

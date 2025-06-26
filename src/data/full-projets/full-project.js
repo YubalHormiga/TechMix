@@ -94,7 +94,7 @@ export const fullProjects = [
             path: 'crear-amarre',
             name: 'create-mooring',
             component: () =>
-              import('../../modules/full-projects/NautiFleet/components/moorings/MooringForm.vue')
+              import('../../modules/full-projects/NautiFleet/views/moorings/MooringFormView.vue')
           },
 
           {

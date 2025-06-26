@@ -1,5 +1,5 @@
 <script setup>
-import { FEATURES } from '../../constants/dictionaries'
+import { FEATURES } from '../../../constants/dictionaries'
 </script>
 
 <template>

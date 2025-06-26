@@ -1,5 +1,5 @@
 <script setup>
-import { SPECS } from '../../constants/dictionaries'
+import { SPECS } from '../../../constants/dictionaries'
 </script>
 
 <template>
