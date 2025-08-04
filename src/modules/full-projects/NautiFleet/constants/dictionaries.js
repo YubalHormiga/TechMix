@@ -74,27 +74,27 @@ export const SERVICES = {
 
 // Características del amarre
 export const FEATURES = {
-  type: { name: 'Tipo', icon: Mooring }, // valor: 'Fijo', 'Flotante', etc.
-  material: { name: 'Material', icon: Steel }, // valor: 'Acero', 'Madera'...
-  orientation: { name: 'Orientación', icon: Compass }, // valor: 'Norte-Sur'...
-  waveProtection: { name: 'Protección oleaje', icon: Waves }, // valor: 'Alta'...
-  naturalShade: { name: 'Sombra natural', icon: Umbrella } // valor: 'Sí', 'No'
+  type: { name: 'Tipo', icon: Mooring },
+  material: { name: 'Material', icon: Steel },
+  orientation: { name: 'Orientación', icon: Compass },
+  waveProtection: { name: 'Protección oleaje', icon: Waves },
+  naturalShade: { name: 'Sombra natural', icon: Umbrella }
 }
 
 // Reglas
 export const RULES = {
-  insurance: { name: 'Seguro obligatorio', icon: FileContract }, // Sí / No
-  quietHours: { name: 'Horario silencio', icon: QuietTime }, // texto
-  petsAllowed: { name: 'Mascotas', icon: Paw }, // Sí / No
-  barbecues: { name: 'Barbacoas', icon: Grill } // 'Permitidas', 'Prohibidas'
+  insurance: { name: 'Seguro obligatorio', icon: FileContract },
+  quietHours: { name: 'Horario silencio', icon: QuietTime },
+  petsAllowed: { name: 'Mascotas', icon: Paw },
+  barbecues: { name: 'Barbacoas', icon: Grill }
 }
 
 // Especificaciones técnicas
 export const SPECS = {
-  length: { name: 'Longitud máxima', icon: Ruler }, // en ft o m
+  length: { name: 'Longitud máxima', icon: Ruler },
   beam: { name: 'Manga máxima', icon: Width },
   draft: { name: 'Calado máximo', icon: Depth },
-  weight: { name: 'Peso máximo', icon: Weight } // en toneladas
+  weight: { name: 'Peso máximo', icon: Weight }
 }
 
 // Precios
@@ -102,7 +102,9 @@ export const PRICING = {
   daily: { name: 'Diario', icon: Sun },
   weekly: { name: 'Semanal', icon: CalendarWeek },
   monthly: { name: 'Mensual', icon: CalendarMonth },
-  yearly: { name: 'Anual', icon: CalendarYear },
+  yearly: { name: 'Anual', icon: CalendarYear }
+}
+export const DEPOSIT = {
   deposit: { name: 'Depósito', icon: ShieldDollar }
 }
 

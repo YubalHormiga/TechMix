@@ -1,5 +1,6 @@
 <script setup>
 import { PRICING } from '../../../constants/dictionaries'
+import { DEPOSIT } from '../../../constants/dictionaries'
 
 defineProps({
   daily: { type: String },
@@ -40,6 +41,24 @@ defineEmits(['update:daily', 'update:weekly', 'update:monthly', 'update:yearly',
               required
             />
           </div>
+        </div>
+      </div>
+      <div class="grid grid-cols-[20%_1fr] gap-x-6 border-t border-t-[#dde0e3] py-5">
+        <label class="flex items-center gap-2 text-[#6a7581] text-base md:text-lg font-normal">
+          <img :src="DEPOSIT.deposit.icon" class="w-6 h-6" :alt="DEPOSIT.deposit.name" />
+          {{ DEPOSIT.deposit.name }}
+        </label>
+        <div class="flex items-center">
+          <span class="mr-2"></span>
+          <input
+            @input="$emit('update:deposit', $event.target.value)"
+            maxlength="50"
+            :value="deposit"
+            type="text"
+            class="text-[#121416] text-base md:text-lg font-normal bg-transparent outline-none w-full"
+            placeholder="Indica porcentaje o importe del depósito "
+            required
+          />
         </div>
       </div>
     </div>

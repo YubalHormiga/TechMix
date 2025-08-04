@@ -1,9 +1,2 @@
-# Clasificar archivos .vue como Vue
+* linguist-vendored
 *.vue linguist-language=Vue
-
-# Ignorar archivos generados y estáticos
-dist/** linguist-vendored
-public/** linguist-vendored
-node_modules/** linguist-vendored
-build/** linguist-vendored
-assets/** linguist-vendored

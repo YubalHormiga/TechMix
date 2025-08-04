@@ -3,13 +3,7 @@ import { REQUIRED_DOCS } from '../../constants/dictionaries'
 
 defineProps({
   requiredDocs: {
-    type: Object,
-    default: () => ({
-      boatInsurance: false,
-      captainLicense: false,
-      idDocument: false,
-      navigationPermit: false
-    })
+    type: Object
   }
 })
 
@@ -23,8 +17,8 @@ defineEmits(['update:required-docs'])
     <div class="flex flex-col gap-3 p-4 rounded-lg border border-[#dde0e3]">
       <div class="grid grid-cols-2 gap-4">
         <div
-          v-for="(docName, docKey) in REQUIRED_DOCS"
-          :key="docKey"
+          v-for="(required, key) in REQUIRED_DOCS"
+          :key="key"
           class="grid col-span-1 grid-cols-subgrid"
         >
           <label
@@ -32,17 +26,17 @@ defineEmits(['update:required-docs'])
           >
             <input
               type="checkbox"
-              :checked="requiredDocs[docKey]"
+              :checked="requiredDocs[key]"
               @change="
                 $emit('update:required-docs', {
                   ...requiredDocs,
-                  [docKey]: $event.target.checked
+                  [key]: $event.target.checked
                 })
               "
               class="w-5 h-5 checkbox accent-blue-600"
             />
             <span class="text-[#121416] text-base md:text-lg font-normal">
-              {{ docName }}
+              {{ required }}
             </span>
           </label>
         </div>

@@ -1,8 +1,10 @@
 <script setup>
 import { reactive, computed } from 'vue'
+import { useMooringsStore } from '../../stores/moorings'
+
 import GeneralInfoForm from '../../components/moorings/forms/GeneralInfoForm.vue'
 import FeaturesForm from '../../components/moorings/forms/FeaturesForm.vue'
-import ImagesForm from '../../components/moorings/forms/ImagesForm.vue'
+// import ImagesForm from '../../components/moorings/forms/ImagesForm.vue'
 import SpecsForm from '../../components/moorings/forms/SpecsForm.vue'
 import PricingForm from '../../components/moorings/forms/PricingForm.vue'
 import ServicesForm from '../../components/moorings/forms/ServicesForm.vue'
@@ -15,11 +17,12 @@ import AdditionalServicesForm from '../../components/moorings/forms/AdditionalSe
 import RequiredDocsForm from './RequiredDocsForm.vue'
 import CancellationPolicyForm from './CancellationPolicyForm.vue'
 
+const mooring = useMooringsStore()
 const form = reactive({
   // Información básica
   title: '',
   description: '',
-  images: '',
+  // images: '',
 
   // Características del amarre
   type: '',
@@ -45,6 +48,9 @@ const form = reactive({
     deposit: ''
   },
 
+  // Servicios
+  services: {},
+
   // Reglas
   rules: {
     insurance: '',
@@ -52,9 +58,6 @@ const form = reactive({
     petsAllowed: '',
     barbecues: ''
   },
-
-  // Servicios
-  services: {},
 
   // Ubicación
   location: {
@@ -77,15 +80,17 @@ const form = reactive({
   environment: {
     currents: '',
     seabed: '',
-    draft: '',
     access: ''
   },
 
-  // Restricciones
-  restrictions: {
-    schedule: '',
-    residentsOnly: '',
-    requiredDocs: ''
+  // Servicios adicionales
+  additionalServices: {
+    maintenance: false,
+    wasteDisposal: false,
+    boatCleaning: false,
+    iceDelivery: false,
+    pickup: false,
+    divingService: false
   },
 
   // Documentación requerida
@@ -97,25 +102,14 @@ const form = reactive({
   },
 
   // Políticas
-  cancellationPolicy: 'flexible',
-
-  // Servicios adicionales
-  additionalServices: {
-    maintenance: false,
-    wasteDisposal: false,
-    boatCleaning: false,
-    iceDelivery: false,
-    pickup: false,
-    divingService: false
-  }
+  cancellationPolicy: 'flexible'
 })
 
 // Envío del formulario
 const submitForm = async () => {
   try {
     console.log('Formulario enviado:', form)
-    // Aquí iría la lógica para enviar a tu backend
-    // await api.post('/moorings', form)
+    mooring.createMooring(form)
     alert('Amarre guardado correctamente!')
   } catch (error) {
     console.error('Error al enviar el formulario:', error)
@@ -141,7 +135,7 @@ const remainingChars = computed(() => {
         :remainingChars="remainingChars"
       />
       <!-- IMÁGENES -->
-      <ImagesForm v-model:image="form.image" />
+      <!-- <ImagesForm v-model:image="form.image" /> -->
 
       <!-- CARACTERÍSTICAS DEL AMARRE -->
       <FeaturesForm
@@ -161,11 +155,11 @@ const remainingChars = computed(() => {
 
       <!-- PRECIOS -->
       <PricingForm
-        v-model:daily="form.daily"
-        v-model:weekly="form.weekly"
-        v-model:monthly="form.monthly"
-        v-model:yearly="form.yearly"
-        v-model:deposit="form.deposit"
+        v-model:daily="form.pricing.daily"
+        v-model:weekly="form.pricing.weekly"
+        v-model:monthly="form.pricing.monthly"
+        v-model:yearly="form.pricing.yearly"
+        v-model:deposit="form.pricing.deposit"
       />
       <!-- SERVICIOS INCLUIDOS -->
       <ServicesForm v-model:services="form.services" />

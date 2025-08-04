@@ -1,15 +1,39 @@
 <script setup>
 import { SERVICES } from '../../../constants/dictionaries'
+import { computed } from 'vue'
+
+const props = defineProps({
+  mooring: {
+    type: Object,
+    required: true
+  }
+})
+
+const displayedServices = computed(() => {
+  const servicesObject = props.mooring?.services || {}
+
+  const activeServices = Object.keys(servicesObject).filter((key) => servicesObject[key])
+
+  return Object.entries(SERVICES)
+    .filter(([key]) => activeServices.includes(key))
+    .map(([key, service]) => ({
+      key,
+      ...service
+    }))
+})
 </script>
 
 <template>
   <div class="flex flex-col gap-4 mt-6">
     <h2 class="text-3xl md:text-4xl font-bold text-[#121416]">Included Services</h2>
 
-    <div class="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4">
+    <div
+      v-if="displayedServices.length"
+      class="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4"
+    >
       <div
-        v-for="(service, index) in SERVICES"
-        :key="index"
+        v-for="service in displayedServices"
+        :key="service.key"
         class="flex flex-1 gap-3 rounded-lg border border-[#dde0e3] bg-white p-4 items-center hover:bg-blue-50 transition-colors"
       >
         <img :src="service.icon" :alt="service.name" class="w-6 h-6" />
@@ -18,6 +42,8 @@ import { SERVICES } from '../../../constants/dictionaries'
         </span>
       </div>
     </div>
+
+    <p v-else class="text-[#6a7581] text-base">No services included.</p>
   </div>
 </template>
 

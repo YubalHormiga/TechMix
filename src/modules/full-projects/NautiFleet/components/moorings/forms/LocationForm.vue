@@ -18,9 +18,10 @@ defineEmits(['update:latitude', 'update:longitude', 'update:address', 'update:do
         <div class="col-span-2 grid grid-cols-subgrid border-t border-t-[#dde0e3] py-5">
           <label class="text-[#6a7581] text-base md:text-lg font-normal">Latitud</label>
           <input
-            type="number"
-            step="0.000001"
-            @input="$emit('update:latitude', Number($event.target.value))"
+            type="text"
+            inputmode="decimal"
+            pattern="-?\d*\.?\d+"
+            @input="$emit('update:latitude', parseFloat($event.target.value) || 0)"
             :value="latitude"
             class="text-[#121416] text-base md:text-lg font-normal bg-transparent outline-none"
             placeholder="Ej: 41.385063"
@@ -31,9 +32,10 @@ defineEmits(['update:latitude', 'update:longitude', 'update:address', 'update:do
         <div class="col-span-2 grid grid-cols-subgrid border-t border-t-[#dde0e3] py-5">
           <label class="text-[#6a7581] text-base md:text-lg font-normal">Longitud</label>
           <input
-            type="number"
-            step="0.000001"
-            @input="$emit('update:longitude', Number($event.target.value))"
+            type="text"
+            inputmode="decimal"
+            pattern="-?\d*\.?\d+"
+            @input="$emit('update:longitude', parseFloat($event.target.value) || 0)"
             :value="longitude"
             class="text-[#121416] text-base md:text-lg font-normal bg-transparent outline-none"
             placeholder="Ej: 2.173404"

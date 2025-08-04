@@ -1,8 +1,15 @@
-<script setup></script>
+<script setup>
+const props = defineProps({
+  mooring: {
+    type: Object,
+    required: true
+  }
+})
+</script>
 
 <template>
   <!-- Imagen principal -->
-  <div class="flex flex-col gap-3 overflow-hidden rounded-lg">
+  <div class="flex flex-col gap-3 mt-6 overflow-hidden rounded-lg">
     <div
       class="bg-cover bg-center flex flex-col justify-end min-h-[318px] w-full"
       style="
@@ -16,12 +23,11 @@
   <!-- Título y descripción -->
   <div class="flex flex-col gap-4 mt-6">
     <h1 class="text-3xl md:text-4xl font-bold text-[#121416]">
-      Mooring in the heart of the harbor
+      {{ props.mooring.title }}
     </h1>
 
     <p class="text-[#121416] text-base md:text-lg font-normal leading-normal">
-      This prime mooring spot offers unparalleled access to the harbor's vibrant scene. Enjoy
-      stunning views and easy access to all amenities. Perfect for vessels up to 45 feet.
+      {{ props.mooring.description }}
     </p>
   </div>
 </template>

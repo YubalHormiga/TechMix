@@ -1,50 +1,36 @@
 <script setup>
 import 'leaflet/dist/leaflet.css'
-import { ref, computed } from 'vue'
+import { ref, computed, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import { LMap, LTileLayer, LMarker, LPopup } from '@vue-leaflet/vue-leaflet'
 import useLocationMap from '../../compasables/useLocationMap'
 import MooringCard from './display/MooringCard.vue'
+import { useMooringsStore } from '../../stores/moorings'
 
+const mooringsStore = useMooringsStore()
 const { zoom, getAnchorIcon, getAnchorIconSelected } = useLocationMap()
 const route = useRoute()
 
-const moorings = [
-  {
-    id: 1,
-    name: 'Puerto, Cádiz',
-    lat: 36.009256,
-    lng: -5.6054603,
-    price: 120,
-    rating: 4.8,
-    reviews: 24
-  },
-  {
-    id: 2,
-    name: 'Aguadulce, Almería',
-    lat: 36.8153426,
-    lng: -2.5750896,
-    price: 130,
-    rating: 4.6,
-    reviews: 18
-  },
-  {
-    id: 3,
-    name: 'Puerto Banús, Marbella',
-    lat: 36.4854,
-    lng: -4.9525,
-    price: 150,
-    rating: 4.9,
-    reviews: 35
-  }
-]
+const moorings = mooringsStore.moorinsCollection
 
-const selectedMooring = ref(moorings[0])
-const center = ref([selectedMooring.value.lat, selectedMooring.value.lng])
+const selectedMooring = ref(null)
+
+const center = ref(null)
+
+watch(
+  moorings,
+  (newVal) => {
+    if (newVal?.length && !selectedMooring.value) {
+      selectedMooring.value = newVal[0]
+      center.value = [newVal[0].location.latitude, newVal[0].location.longitude]
+    }
+  },
+  { immediate: true }
+)
 
 const selectMooring = (mooring) => {
   selectedMooring.value = mooring
-  center.value = [mooring.lat, mooring.lng]
+  center.value = [mooring.location.latitude, mooring.location.longitude]
 }
 
 const showCard = computed(() => route.name === 'moorings-map')
@@ -63,15 +49,21 @@ const showCard = computed(() => route.name === 'moorings-map')
         <LMarker
           v-for="mooring in moorings"
           :key="mooring.id"
-          :lat-lng="[mooring.lat, mooring.lng]"
-          :icon="mooring.id === selectedMooring.id ? getAnchorIconSelected() : getAnchorIcon()"
+          :lat-lng="[mooring.location.latitude, mooring.location.longitude]"
+          :icon="mooring.id === selectedMooring?.id ? getAnchorIconSelected() : getAnchorIcon()"
           @click="selectMooring(mooring)"
         >
           <LPopup>
-            <p class="text-base md:text-lg font-bold text-[#121416]">{{ mooring.name }}</p>
-            <p class="text-base md:text-lg font-normal text-[#6a7581]">
-              Precio: {{ mooring.price }} €
+            <p class="text-base md:text-lg font-bold text-[#121416]">
+              {{ mooring.location.address }}
             </p>
+
+            <router-link
+              :to="{ name: 'mooring-detail', params: { id: mooring.id } }"
+              class="h-10 md:h-12 px-4 mt-5 md:px-5 rounded-sm text-sm md:text-base flex items-center justify-center bg-[#dce7f3] hover:bg-[#c8d8eb] transition-colors duration-200 font-bold"
+            >
+              Ver Detalles
+            </router-link>
           </LPopup>
         </LMarker>
       </LMap>

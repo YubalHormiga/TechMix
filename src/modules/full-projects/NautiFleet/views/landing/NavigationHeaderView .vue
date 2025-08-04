@@ -32,6 +32,7 @@ const isActive = (name) =>
         />
       </svg>
       <span>NautiFleet</span>
+      <span class="text-red-500">EN CONSTRUCCIÓN !!!!</span>
     </RouterLink>
 
     <!-- Navegación principal -->

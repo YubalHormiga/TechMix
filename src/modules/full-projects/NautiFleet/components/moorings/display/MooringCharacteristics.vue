@@ -1,15 +1,37 @@
 <script setup>
+import { computed } from 'vue'
 import { FEATURES } from '../../../constants/dictionaries'
-</script>
+const props = defineProps({
+  mooring: {
+    type: Object,
+    required: true
+  }
+})
+const displayedFeatures = computed(() => {
+  return Object.entries(FEATURES)
+    .map(([key, feature]) => {
+      const value = props.mooring?.[key]
+      if (value === undefined || value === null || value === '') {
+        return null
+      }
 
+      return {
+        key,
+        ...feature,
+        value
+      }
+    })
+    .filter(Boolean)
+})
+</script>
 <template>
   <div class="flex flex-col gap-4 mt-6">
-    <h2 class="text-3xl md:text-4xl font-bold text-[#121416]">Mooring Characteristics</h2>
+    <h2 class="text-3xl md:text-4xl font-bold text-[#121416]">Características del amarre</h2>
 
     <div class="flex flex-col gap-3 p-4">
       <div class="grid grid-cols-[20%_1fr] gap-x-6">
         <div
-          v-for="(feature, index) in FEATURES"
+          v-for="(feature, index) in displayedFeatures"
           :key="index"
           class="col-span-2 grid grid-cols-subgrid border-t border-t-[#dde0e3] py-5"
         >
@@ -19,7 +41,9 @@ import { FEATURES } from '../../../constants/dictionaries'
               {{ feature.name }}
             </p>
           </div>
-          <p class="text-[#121416] text-base md:text-lg font-normal">333</p>
+          <p class="text-[#121416] text-base md:text-lg font-normal">
+            {{ feature.value }}
+          </p>
         </div>
       </div>
     </div>

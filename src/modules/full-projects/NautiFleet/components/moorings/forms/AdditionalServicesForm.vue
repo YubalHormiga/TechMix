@@ -30,7 +30,7 @@ defineEmits(['update:additional-services'])
               :checked="additionalServices[key]"
               @change="
                 $emit('update:additional-services', {
-                  ...additionalServices, // Cambiado de 'services' a 'additionalServices'
+                  ...additionalServices,
                   [key]: $event.target.checked
                 })
               "
